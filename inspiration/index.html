@@ -1,0 +1,432 @@
+<title>Tin's Portfolio Moodboard</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a drafting-table spec sheet. A faint graph grid ground, a brief up top, then pinned reference cards grouped by what they teach. */
+:root {
+  --paper: #eef1f0;
+  --sheet: #fbfcfc;
+  --ink: #17201f;
+  --ink-2: #4a5654;
+  --rule: #cdd6d4;
+  --grid: rgba(23, 32, 31, 0.045);
+  --accent: #1f47d6;
+  --accent-soft: #e2e8fd;
+  --award: #f5d13b;
+  --award-ink: #3a2f00;
+  --ok: #1d7a4f;
+  --warn: #9a5b00;
+  --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --body: "IBM Plex Sans", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0f1514; --sheet: #161e1d; --ink: #e6eceb; --ink-2: #9fadab; --rule: #2b3836;
+    --grid: rgba(230, 236, 235, 0.04); --accent: #8ea6ff; --accent-soft: #1d2747;
+    --award: #e8c22c; --award-ink: #2a2200; --ok: #5fcf98; --warn: #f0b45a; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0f1514; --sheet: #161e1d; --ink: #e6eceb; --ink-2: #9fadab; --rule: #2b3836;
+  --grid: rgba(230, 236, 235, 0.04); --accent: #8ea6ff; --accent-soft: #1d2747;
+  --award: #e8c22c; --award-ink: #2a2200; --ok: #5fcf98; --warn: #f0b45a; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 24px 24px;
+  color: var(--ink);
+  font: 400 15px/1.6 var(--body);
+}
+.wrap {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding-block: 48px 80px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid;
+  gap: 64px;
+}
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; }
+.label {
+  font: 500 11px/1.3 var(--mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+/* Brief */
+.brief { display: grid; gap: 28px; }
+.brief h1 {
+  font-size: clamp(40px, 7vw, 76px);
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+}
+.brief h1 span { color: var(--accent); }
+.brief .lede { max-width: 62ch; font-size: 17px; color: var(--ink-2); margin: 0; }
+.spec {
+  background: var(--sheet);
+  border: 1px solid var(--rule);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+.spec > div { padding: 18px 20px; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); display: grid; gap: 6px; align-content: start; min-width: 0; }
+.spec p { margin: 0; font-size: 14px; }
+.spec strong { font-weight: 600; }
+
+/* Section heads */
+section { display: grid; gap: 24px; }
+.sec-head { display: grid; gap: 8px; max-width: 70ch; }
+.sec-head h2 { font-size: clamp(26px, 3.6vw, 36px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; }
+.sec-head p { margin: 0; color: var(--ink-2); }
+
+/* Filters */
+.filters { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.chip {
+  font: 500 13px/1 var(--body);
+  padding: 9px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--rule);
+  background: var(--sheet);
+  color: var(--ink);
+  cursor: pointer;
+}
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--sheet); border-color: var(--ink); }
+.chip .n { font-family: var(--mono); font-size: 11px; opacity: 0.7; margin-left: 4px; }
+
+/* Cards */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+.card {
+  background: var(--sheet);
+  border: 1px solid var(--rule);
+  padding: 20px;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  gap: 12px;
+  min-width: 0;
+  position: relative;
+}
+.card-top { display: flex; justify-content: space-between; gap: 12px; align-items: start; }
+.card h3 { font-size: 21px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.2; }
+.card h3 a { color: var(--ink); text-decoration: none; }
+.card h3 a:hover { color: var(--accent); text-decoration: underline; }
+.who { font-size: 13px; color: var(--ink-2); margin: 2px 0 0; }
+.badges { display: flex; flex-wrap: wrap; gap: 6px; }
+.badge {
+  font: 500 11px/1 var(--mono);
+  letter-spacing: 0.03em;
+  padding: 6px 8px;
+  border-radius: 3px;
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+.badge.award { background: var(--award); color: var(--award-ink); }
+.card p { margin: 0; font-size: 14px; }
+.steal { border-top: 1px dashed var(--rule); padding-top: 12px; display: grid; gap: 4px; }
+.steal p { font-size: 14px; }
+.verify { font: 400 11px/1.4 var(--mono); color: var(--ink-2); display: flex; gap: 6px; align-items: baseline; }
+.verify .dot { width: 7px; height: 7px; border-radius: 50%; flex: none; transform: translateY(-1px); }
+.verify .dot.ok { background: var(--ok); }
+.verify .dot.warn { background: var(--warn); }
+.star {
+  border: 1px solid var(--rule);
+  background: transparent;
+  color: var(--ink-2);
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  font-size: 16px;
+  cursor: pointer;
+  flex: none;
+}
+.star[aria-pressed="true"] { background: var(--award); color: var(--award-ink); border-color: var(--award); }
+
+/* Mapping table */
+.map-wrap { overflow-x: auto; border: 1px solid var(--rule); background: var(--sheet); }
+table { border-collapse: collapse; width: 100%; min-width: 760px; font-size: 14px; }
+th, td { text-align: left; vertical-align: top; padding: 14px 16px; border-bottom: 1px solid var(--rule); }
+th { font: 500 11px/1.3 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); background: var(--paper); }
+td:first-child { font-weight: 600; width: 24%; }
+td .metric { display: inline-block; font: 500 12px/1 var(--mono); background: var(--accent-soft); padding: 4px 6px; border-radius: 3px; margin-top: 6px; }
+tr:last-child td { border-bottom: 0; }
+
+/* Awards calendar */
+.cal { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 0; border: 1px solid var(--rule); background: var(--sheet); }
+.cal > div { padding: 20px; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); display: grid; gap: 8px; align-content: start; min-width: 0; }
+.cal h3 { font-size: 18px; font-weight: 700; }
+.cal .when { font: 500 12px/1.4 var(--mono); color: var(--accent); }
+.cal p { margin: 0; font-size: 14px; }
+
+.recog { display: flex; flex-wrap: wrap; gap: 8px; }
+.recog span { font: 500 12px/1 var(--mono); border: 1px solid var(--rule); background: var(--sheet); padding: 8px 10px; }
+
+.links { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px 24px; padding: 0; margin: 0; list-style: none; font-size: 14px; }
+.sources { font-size: 12px; color: var(--ink-2); columns: 2 280px; column-gap: 32px; padding-left: 18px; margin: 0; }
+.sources li { break-inside: avoid; margin-bottom: 4px; }
+.sources a { color: var(--ink-2); word-break: break-word; }
+footer { border-top: 1px solid var(--rule); padding-top: 24px; display: grid; gap: 16px; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .card { transition: border-color .15s ease, transform .15s ease; }
+  .card:hover { border-color: var(--ink-2); transform: translateY(-2px); }
+}
+</style>
+
+<div class="wrap">
+
+  <header class="brief">
+    <div class="label">Portfolio research · Oct 2026 · for Tin Le</div>
+    <h1>Industrial designer.<br>Enterprise UX.<br><span>Show both.</span></h1>
+    <p class="lede">An inspiration board for your interview portfolio. It has award-winning personal sites, portfolios hiring managers rate highly, and a map from your own projects to the patterns worth borrowing. Star the ones you like. Your picks stay saved in this browser.</p>
+
+    <div class="spec" aria-label="What I found about you">
+      <div><span class="label">Role</span><p><strong>Product Designer, Salesforce</strong> since 2017: intern, then associate, then designer, based in Portland, OR.</p></div>
+      <div><span class="label">Rare combo</span><p><strong>BS Industrial Design, UO</strong> with a business minor. CAD, rendering and hardware prototyping for Luxium Lighting.</p></div>
+      <div><span class="label">Proof points</span><p>Help search redesign <strong>−60% support cases</strong>. Back-to-work app for <strong>75k employees</strong>. C360 design system across <strong>12 teams</strong>.</p></div>
+      <div><span class="label">Teacher + builder</span><p>2U bootcamp instructor and <strong>PD 460 UX/UI at UO</strong>. Built your own Figma plugin. Works in Webflow, HTML and CSS.</p></div>
+    </div>
+    <p class="label" style="text-transform:none;letter-spacing:0">From your Drive: resumes (latest 2022), the Portfolio folder and the PD 460 syllabus. Your 2022–2026 work isn't in there yet.</p>
+  </header>
+
+  <section id="inspo">
+    <div class="sec-head">
+      <div class="label">01 · Reference wall</div>
+      <h2>Portfolios to study</h2>
+      <p>Each card says what it won, what to borrow for your own site, and how firmly I could confirm the award. A green dot means an Awwwards or Webby listing confirmed it. Amber means a second-hand report, so check it before you cite it.</p>
+    </div>
+    <div class="filters" role="group" aria-label="Filter references">
+      <button class="chip" data-f="all" aria-pressed="true" id="f-all">All<span class="n"></span></button>
+      <button class="chip" data-f="award" aria-pressed="false" id="f-award">Award winners<span class="n"></span></button>
+      <button class="chip" data-f="hire" aria-pressed="false" id="f-hire">Hiring-manager favorites<span class="n"></span></button>
+      <button class="chip" data-f="hybrid" aria-pressed="false" id="f-hybrid">ID + UX hybrids<span class="n"></span></button>
+      <button class="chip" data-f="starred" aria-pressed="false" id="f-starred">★ My shortlist<span class="n"></span></button>
+    </div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <div class="label">02 · Your projects × their patterns</div>
+      <h2>Which project borrows from which site</h2>
+      <p>The award sites win on craft. The hiring favorites win on clear stories with real numbers. Your portfolio can do both: one memorable interactive moment, and case studies that open with the result.</p>
+    </div>
+    <div class="map-wrap">
+      <table>
+        <thead><tr><th>Your project</th><th>Pattern to borrow</th><th>From</th><th>Make it concrete</th></tr></thead>
+        <tbody>
+          <tr><td>Salesforce Help search &amp; content redesign<br><span class="metric">−60% support cases / mo</span></td><td>Put the number in the title, ahead of any wireframe</td><td>Jessica Goldman, Simon Pan</td><td>Title it something like “Cutting support cases 60% by fixing how people search Help.” Then cover the problem, the research, the key decisions and the result.</td></tr>
+          <tr><td>Back-to-work app (COVID-19)<br><span class="metric">75k employees</span></td><td>A narrative case study with a time constraint</td><td>Simon Pan (Uber pickup)</td><td>Open with the stakes and the deadline. Show 2–3 decisions you made under pressure and what you cut.</td></tr>
+          <tr><td>C360 design system<br><span class="metric">12 product teams</span></td><td>An index or archive view of the system</td><td>Pentagram Archive (Webby 2026)</td><td>Show the anatomy of one component, its adoption across teams, and the governance. Systems work earns trust at senior levels.</td></tr>
+          <tr><td>Design-ops template + your Figma plugin<br><span class="metric">−80% prep time</span></td><td>Working demos instead of screenshots</td><td>Rauno Freiberg</td><td>Embed a short screen recording of the plugin generating pages. It shows you can build tools, not only screens.</td></tr>
+          <tr><td>Luxium Lighting LED product</td><td>One interactive 3D moment</td><td>Bruno Simon</td><td>Export your CAD model and let visitors rotate the light on your About or Work page. Keep it to one moment so it doesn't take over the site.</td></tr>
+          <tr><td>Teaching (2U, UO PD 460)</td><td>Strategic or leadership framing</td><td>Arin Bhowmick (IBM)</td><td>Add a “How I lead” block: mentoring, critique and curriculum design. It signals senior or lead readiness.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="label" style="text-transform:none;letter-spacing:0">Check what you can show publicly before you publish Salesforce work. Interviewers expect a password-protected or slide version for internal tools.</p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <div class="label">03 · Awards</div>
+      <h2>Show the awards you have. Go after new ones.</h2>
+      <p>Put your existing wins on a small Recognition strip on your About page. Then aim the finished portfolio and your strongest project at these programs.</p>
+    </div>
+    <div class="recog" aria-label="Your existing awards">
+      <span>🏆 2nd · KIVA Hackathon 2021</span>
+      <span>🏆 3rd · Salesforce Hackathon 2020</span>
+      <span>🏆 1st · Quackhatch @ UO 2018</span>
+      <span>🏆 1st · UO Lighting Design Competition</span>
+      <span>🏆 3rd · OSU vs UO Shark Tank</span>
+    </div>
+    <div class="cal">
+      <div><span class="label">For the portfolio site</span><h3>Awwwards</h3><p class="when">Rolling submissions</p><p>Daily jury: Honorable Mention, Site of the Day, Developer Award, and a Portfolio Honors category. It favors craft and motion.</p></div>
+      <div><span class="label">For the portfolio site</span><h3>CSS Design Awards</h3><p class="when">Rolling submissions</p><p>Website of the Day, then Month, then Year. Scored by judges plus public votes. A good second place to submit.</p></div>
+      <div><span class="label">Site or app</span><h3>Webby Awards (31st)</h3><p class="when">Entries open now · final deadline likely Dec 2026</p><p>Websites &amp; Mobile Sites, and Apps. A personal portfolio won Best Home Page in 2025. The deadline is based on past cycles, so confirm it at webbyawards.com.</p></div>
+      <div><span class="label">Your ID + UX work</span><h3>Core77 Design Awards 2027</h3><p class="when">Final deadline likely late Mar 2027 · early bird ~Jan 30</p><p>Apps &amp; Platforms and Consumer Technology categories. 2025 professional fees ran $150–200. A natural fit for a combined hardware and digital project.</p></div>
+      <div><span class="label">Through Salesforce</span><h3>Fast Company Innovation by Design</h3><p class="when">2026 entries closed · 2025 deadline was Apr 11</p><p>The UX Design category is usually entered by the company. Pitch the Help redesign to your design leadership for the 2027 cycle.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <div class="label">04 · Keep browsing</div>
+      <h2>Galleries to mine</h2>
+    </div>
+    <ul class="links">
+      <li><a href="https://www.awwwards.com/websites/winner_category_portfolio/" target="_blank" rel="noopener">Awwwards · Portfolio winners</a></li>
+      <li><a href="https://winners.webbyawards.com/" target="_blank" rel="noopener">Webby winners gallery</a></li>
+      <li><a href="https://muz.li/blog/top-100-most-creative-and-unique-portfolio-websites-of-2025/" target="_blank" rel="noopener">Muzli · 100 best designer portfolios</a></li>
+      <li><a href="https://www.casestudy.club/journal/ux-designer-portfolio" target="_blank" rel="noopener">Case Study Club · top 20 UX portfolios</a></li>
+      <li><a href="https://www.uxpin.com/studio/blog/ux-portfolio-examples/" target="_blank" rel="noopener">UXPin · 16 recruiter-tested portfolios</a></li>
+      <li><a href="https://colorlib.com/wp/ux-portfolio-examples/" target="_blank" rel="noopener">Colorlib · 23 real case studies</a></li>
+      <li><a href="https://designerup.co/blog/10-exceptional-product-design-portfolios-with-case-study-breakdowns/amp/" target="_blank" rel="noopener">DesignerUp · case study breakdowns</a></li>
+      <li><a href="https://www.core77.com/posts/119652/Potential-Career-Paths-for-Industrial-Designers-Interested-in-UX" target="_blank" rel="noopener">Core77 · ID → UX career paths</a></li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="label">Sources</div>
+    <ol class="sources">
+      <li><a href="https://www.awwwards.com/sites/leo-parpeix-portfolio-2026" target="_blank" rel="noopener">Awwwards · Léo Parpeix Portfolio 2026 (SOTD)</a></li>
+      <li><a href="https://www.awwwards.com/sites/product-designer-portfolio-5" target="_blank" rel="noopener">Awwwards · Product Designer Portfolio (Pleurat)</a></li>
+      <li><a href="https://www.awwwards.com/sites/portfolio-2025" target="_blank" rel="noopener">Awwwards · Portfolio 2025 (Rauno Freiberg, HM)</a></li>
+      <li><a href="https://www.awwwards.com/sites/brunos-portfolio" target="_blank" rel="noopener">Awwwards · Bruno's Portfolio</a></li>
+      <li><a href="https://awwwards.com/annual-awards-2019" target="_blank" rel="noopener">Awwwards · Annual Awards 2019</a></li>
+      <li><a href="https://www.awwwards.com/annual-awards-2025/independent-of-the-year" target="_blank" rel="noopener">Awwwards · Independent of the Year 2025</a></li>
+      <li><a href="https://www.awwwards.com/annual-awards/winners" target="_blank" rel="noopener">Awwwards · Annual Awards winners</a></li>
+      <li><a href="https://www.creativebloq.com/news/3d-car-portfolio" target="_blank" rel="noopener">Creative Bloq · Bruno Simon 3D car portfolio</a></li>
+      <li><a href="https://elements.envato.com/learn/webby-awards" target="_blank" rel="noopener">Envato · Winners of the 29th Webby Awards</a></li>
+      <li><a href="https://www.webbyawards.com/press/press-releases/30th-annual-webby-awards-announce-2026-winners/" target="_blank" rel="noopener">Webby · 2026 winners announcement</a></li>
+      <li><a href="https://winners.webbyawards.com/winners/websites-and-mobile-sites/features-design/best-user-experience" target="_blank" rel="noopener">Webby · Best User Experience</a></li>
+      <li><a href="https://www.webbyawards.com/how-to-find-the-right-category/" target="_blank" rel="noopener">Webby · finding the right category</a></li>
+      <li><a href="https://uiuxshowcase.com/portfolio/rauno-freiberg/" target="_blank" rel="noopener">UI/UX Showcase · Rauno Freiberg</a></li>
+      <li><a href="https://colorlib.com/wp/ux-portfolio-examples/" target="_blank" rel="noopener">Colorlib · UX portfolio examples</a></li>
+      <li><a href="https://www.uxpin.com/studio/blog/ux-portfolio-examples/" target="_blank" rel="noopener">UXPin · UX portfolio examples</a></li>
+      <li><a href="https://designerup.co/blog/10-exceptional-product-design-portfolios-with-case-study-breakdowns/amp/" target="_blank" rel="noopener">DesignerUp · product design portfolios</a></li>
+      <li><a href="https://lovable.dev/guides/11-ux-portfolio-examples" target="_blank" rel="noopener">Lovable · 11 UX portfolio examples</a></li>
+      <li><a href="https://www.coroflot.com/ycyang05/profile" target="_blank" rel="noopener">Coroflot · Yu-Cheng Yang</a></li>
+      <li><a href="https://safe-crawdad-600.notion.site/Steven-Kulicke-CV-2f647c36a6b4805d977af3f0457f1001" target="_blank" rel="noopener">Notion · Steven Kulicke</a></li>
+      <li><a href="https://www.core77.com/posts/33117/Your-How-To-for-Entering-the-Core77-Design-Awards" target="_blank" rel="noopener">Core77 · entering the Design Awards</a></li>
+      <li><a href="https://archup.net/core77-design-awards-2025/" target="_blank" rel="noopener">ArchUp · Core77 Design Awards 2025</a></li>
+      <li><a href="https://www.fastcompany.com/91593051/methodology-innovation-by-design-2026" target="_blank" rel="noopener">Fast Company · IBD 2026 methodology</a></li>
+      <li><a href="https://lbbonline.com/news/Instrument-Receives-Recognition-in-Fast-Companys-2026-Innovation-by-Design-Awards" target="_blank" rel="noopener">LBB · IBD 2026 UX Design category</a></li>
+    </ol>
+  </footer>
+</div>
+
+<script>
+const refs = [
+  { id: "bruno", name: "Bruno Simon", url: "https://bruno-simon.com", who: "Creative developer, France", tags: ["award"],
+    badges: [["award", "Awwwards Portfolio Honors · Dec 2025"], ["award", "Developer Award"], ["", "Dev Site of the Year 2019"]],
+    what: "You drive a small 3D car around a world built in Three.js and Blender to reach each project. It's one of the most-shared portfolios on the web, with more than 400k visits.",
+    steal: "You already model in Blender and Rhino. One interactive 3D object, like your Luxium light, sets you apart from screen-only UX designers.",
+    v: ["ok", "Awwwards listing"] },
+  { id: "rauno", name: "Rauno Freiberg", url: "https://rauno.me", who: "Design engineer (Vercel, ex-Arc)", tags: ["award", "hire"],
+    badges: [["award", "Awwwards Honorable Mention · Sep 2025"]],
+    what: "A portfolio built like a desktop OS, with a dock, interface sounds and horizontal galleries. Every detail is a small demo of interaction craft.",
+    steal: "Show your Figma plugin and prototypes running, not as static screenshots. Hiring managers read live demos as proof that you build.",
+    v: ["ok", "Awwwards listing (Portfolio 2025)"] },
+  { id: "leo", name: "Léo Parpeix", url: "https://www.awwwards.com/sites/leo-parpeix-portfolio-2026", who: "Art director & interactive designer", tags: ["award"],
+    badges: [["award", "Awwwards Site of the Day · Sep 14 2026"], ["", "Score 7.69"]],
+    what: "A recent portfolio with strong art direction and confident type in the hero.",
+    steal: "Use it as a reference for your homepage hero. Lead with a big typographic statement of who you are before any project thumbnails.",
+    v: ["ok", "Awwwards listing"] },
+  { id: "louis", name: "Louis Paquet", url: "https://www.awwwards.com/annual-awards-2025/independent-of-the-year", who: "Independent interactive designer", tags: ["award"],
+    badges: [["award", "Awwwards Independent of the Year 2025"]],
+    what: "Interactive work built to make users feel something. He won the top annual award for solo designers.",
+    steal: "Study his transitions between pages. Smooth, purposeful motion makes a case study feel finished.",
+    v: ["ok", "Awwwards Annual Awards page"] },
+  { id: "pentagram", name: "Pentagram Archive", url: "https://winners.webbyawards.com/winners/websites-and-mobile-sites/features-design/best-user-experience", who: "Pentagram (studio)", tags: ["award"],
+    badges: [["award", "Webby 2026 · Best User Experience"]],
+    what: "A searchable index of decades of studio work. It isn't a personal site, but it's the best current model for browsing many projects.",
+    steal: "You have ID, UX and systems work. Add an Index or Archive view under your 3–4 headline case studies so the range doesn't clutter the homepage.",
+    v: ["ok", "Webby gallery"] },
+  { id: "wodniack", name: "Antoine Wodniack", url: "https://wodniack.dev", who: "Creative developer, France", tags: ["award"],
+    badges: [["award", "Webby · Best Home Page (29th)"], ["", "Reportedly 16× Awwwards SOTD"]],
+    what: "A 3D portfolio that keeps changing, with scroll-triggered animation. It's a rare case of a personal site winning a Webby.",
+    steal: "Proof that a personal portfolio can win a Webby. Worth entering your own site in the 31st Webbys.",
+    v: ["warn", "Reported by Envato and his own site, not seen on the Webby gallery"] },
+  { id: "pleurat", name: "Product Designer Portfolio (Pleurat)", url: "https://www.awwwards.com/sites/product-designer-portfolio-5", who: "Product designer", tags: ["award", "hire"],
+    badges: [["", "Awwwards Nominee · Aug 2026"]],
+    what: "A product designer's portfolio covering products, systems and experiences, with a section on how AI speeds up designing, prototyping and building.",
+    steal: "The closest award-gallery peer to you. Adding an “AI in my workflow” section is quickly becoming expected in 2026 interviews.",
+    v: ["ok", "Awwwards listing (nominee, not a winner)"] },
+  { id: "olha", name: "Olha Lazarieva", url: "https://www.olhalazarieva.com", who: "Independent designer", tags: ["award"],
+    badges: [["", "Awwwards Independent of the Year 2025 · nominee"]],
+    what: "A personal site with care in every page, including the About, gallery, 404 and thank-you pages.",
+    steal: "Design the small pages too. A considered 404 or contact confirmation shows the attention to detail interviewers look for.",
+    v: ["warn", "Nomination reported by an Awwwards juror on LinkedIn"] },
+  { id: "simon", name: "Simon Pan", url: "https://simonpan.com", who: "Product designer (Uber, Amazon)", tags: ["hire"],
+    badges: [["", "Widely cited as the benchmark"]],
+    what: "Long, rigorous case studies on the Uber pickup redesign, Uber Magic 2.0 and Amazon Prime Music. Each moves from the problem to decisions to measured outcomes.",
+    steal: "The model for your Help redesign write-up. Show the decisions and trade-offs, not only the final screens.",
+    v: ["ok", "Featured on several recruiter-focused lists"] },
+  { id: "goldman", name: "Jessica Goldman", url: "https://colorlib.com/wp/ux-portfolio-examples/", who: "Freelance UX, growth & conversion", tags: ["hire"],
+    badges: [["", "Metric-first case studies"]],
+    what: "Every case study title opens with the business result, such as $580K in revenue or a 15% lift in signups. The number comes before any wireframe.",
+    steal: "You have strong numbers: −60% support cases, 75k users, −80% prep time. Put each one in a title.",
+    v: ["ok", "Colorlib review"] },
+  { id: "arin", name: "Arin Bhowmick", url: "https://www.uxpin.com/studio/blog/ux-portfolio-examples/", who: "VP Design, IBM", tags: ["hire"],
+    badges: [["", "Senior/leadership framing"]],
+    what: "A portfolio about strategic impact: building teams, design culture and influence across the organization.",
+    steal: "Your teaching, hiring-process work and design-ops templates fit here. Add a short leadership section if you're aiming for senior or lead roles.",
+    v: ["ok", "UXPin list"] },
+  { id: "yang", name: "Yu-Cheng Yang", url: "https://www.coroflot.com/ycyang05/profile", who: "Product Designer (UX + ID)", tags: ["hybrid"],
+    badges: [["", "10+ yrs physical product"]],
+    what: "Positions himself as a UX + ID product designer, with physical products taken from concept to production next to digital work.",
+    steal: "Copy the positioning line. “Product designer (UX + Industrial)” in your headline makes your background a strength from the start.",
+    v: ["ok", "Coroflot profile"] },
+  { id: "kulicke", name: "Steven Kulicke", url: "https://safe-crawdad-600.notion.site/Steven-Kulicke-CV-2f647c36a6b4805d977af3f0457f1001", who: "Industrial & UX/UI, Stockholm", tags: ["hybrid"],
+    badges: [["", "Medical devices · UX → ID → HMI"]],
+    what: "Puts sketches and CAD next to interface work for products where the hardware and the screen are designed together.",
+    steal: "If you have any project where physical and digital meet, lead with it. Hybrid roles at hardware companies hire for exactly that.",
+    v: ["ok", "Notion portfolio"] },
+];
+
+const KEY = "tin-inspo-stars";
+let stars = new Set();
+try { stars = new Set(JSON.parse(localStorage.getItem(KEY) || "[]")); } catch (e) {}
+let filter = "all";
+
+const grid = document.getElementById("grid");
+const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+function matches(r, f) {
+  if (f === "all") return true;
+  if (f === "starred") return stars.has(r.id);
+  return r.tags.includes(f);
+}
+
+function render() {
+  const list = refs.filter(r => matches(r, filter));
+  grid.innerHTML = list.length ? list.map(r => `
+    <article class="card">
+      <div class="card-top">
+        <div>
+          <h3><a href="${r.url}" target="_blank" rel="noopener">${esc(r.name)}</a></h3>
+          <p class="who">${esc(r.who)}</p>
+        </div>
+        <button class="star" id="star-${r.id}" data-id="${r.id}" aria-pressed="${stars.has(r.id)}" aria-label="Add ${esc(r.name)} to shortlist">★</button>
+      </div>
+      <div class="badges">${r.badges.map(([k, t]) => `<span class="badge ${k}">${esc(t)}</span>`).join("")}</div>
+      <p>${esc(r.what)}</p>
+      <div class="steal">
+        <span class="label">Borrow for your portfolio</span>
+        <p>${esc(r.steal)}</p>
+        <span class="verify"><span class="dot ${r.v[0]}"></span>${esc(r.v[1])}</span>
+      </div>
+    </article>`).join("")
+    : `<p style="color:var(--ink-2)">No starred references yet. Tap ★ on any card to build your shortlist.</p>`;
+  document.querySelectorAll(".chip").forEach(c => {
+    const f = c.dataset.f;
+    c.setAttribute("aria-pressed", String(f === filter));
+    c.querySelector(".n").textContent = refs.filter(r => matches(r, f)).length;
+  });
+}
+
+document.querySelector(".filters").addEventListener("click", e => {
+  const b = e.target.closest(".chip");
+  if (!b) return;
+  filter = b.dataset.f;
+  render();
+});
+grid.addEventListener("click", e => {
+  const b = e.target.closest(".star");
+  if (!b) return;
+  const id = b.dataset.id;
+  stars.has(id) ? stars.delete(id) : stars.add(id);
+  try { localStorage.setItem(KEY, JSON.stringify([...stars])); } catch (err) {}
+  render();
+});
+render();
+</script>
