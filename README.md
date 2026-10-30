@@ -7,6 +7,7 @@ Working repo for Tin Le's 2026 design portfolio and interview prep. Start with `
 | Path | What it is |
 |---|---|
 | `CONTEXT.md` | Background on Tin's career, positioning, the case study plan, and open to-dos |
+| `case-studies/` | Case study outlines, starting with Bing Real Estate |
 | `resume/resume-2026.md` | Draft 2026 resume (the editable copy lives in Claude Docs, linked below) |
 | `research/award-portfolios.md` | Award-winning and hiring-favorite portfolios, awards to enter, sources |
 | `inspiration/index.html` | Interactive inspiration board (open in a browser) |

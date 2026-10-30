@@ -49,7 +49,10 @@ Tell it in two phases (2-week MVP to stop the cases, then the MVP+ redesign). Op
 - [ ] Find Back to Work source files (only one screenshot in Drive)
 - [ ] Connect the local wiki in `~/…/Vibecode` (Remote Control refused it: probably not a Git repo root, or the desktop app needs an update)
 - [ ] Screenshot the reference portfolios (blocked by the cloud network policy)
-- [ ] Update the canvas Brief and Homepage concept: they still say "Salesforce since 2017"
+- [x] Update the canvas Brief, project mapping and Homepage concept for the Microsoft era (done Oct 30)
+- [x] Outline the Bing Real Estate case study (`case-studies/bing-real-estate.md`, canvas board "Case study 1")
+- [ ] Fill the Bing Real Estate open questions and gather approved assets
+- [ ] Outline case studies 2–5
 
 ## Source material in Google Drive
 
