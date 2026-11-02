@@ -1,1 +1,213 @@
-{"v":3,"createdOnFiles":{"v":1,"at":"2026-10-27T05:10:00Z"},"title":"Tin's Portfolio Moodboard","launch":{"view":"canvas"},"pages":[],"boards":{"Main.dc.html":{"x":0,"y":0,"w":1200,"h":760,"title":"Brief: what I know about you"},"Mapping.dc.html":{"x":1280,"y":0,"w":1440,"h":900,"title":"Your projects × their patterns"},"HomepageConcept.dc.html":{"x":2800,"y":0,"w":1280,"h":2400,"title":"Homepage concept (first draft)","expand":"fill"},"BingRealEstate.dc.html":{"x":4160,"y":0,"w":1200,"h":1640,"title":"Case study 1 · Bing Real Estate (outline)"},"AwardWall.dc.html":{"x":0,"y":1020,"w":1440,"h":1300,"title":"Award-winning portfolios"},"Hiring.dc.html":{"x":1520,"y":1020,"w":1200,"h":1060,"title":"Hiring favorites + ID/UX hybrids"},"AwardsPlan.dc.html":{"x":1520,"y":2200,"w":1200,"h":860,"title":"Awards: show + enter"},"PrevHelp.dc.html":{"x":0,"y":3560,"w":1440,"h":2640,"title":"2021 portfolio · Salesforce Help"},"PrevManageUsers.dc.html":{"x":1520,"y":3560,"w":1440,"h":2860,"title":"2021 portfolio · Manage Users"},"PrevAbout.dc.html":{"x":3040,"y":3560,"w":1200,"h":1460,"title":"2021 portfolio · Demos + About me"},"CaseStudies2to5.dc.html":{"x":5440,"y":0,"w":1200,"h":1500,"title":"Case studies 2–5 (outlines)"}},"order":["Main.dc.html","Mapping.dc.html","HomepageConcept.dc.html","BingRealEstate.dc.html","CaseStudies2to5.dc.html","AwardWall.dc.html","Hiring.dc.html","AwardsPlan.dc.html","PrevHelp.dc.html","PrevManageUsers.dc.html","PrevAbout.dc.html"],"notes":{"boardTitle":{"x":0,"y":-320,"text":"Tin Le · Portfolio moodboard","kind":"title1","maxW":6640},"refsTitle":{"x":0,"y":800,"text":"References","kind":"title1","maxW":2720},"prevTitle":{"x":0,"y":3300,"text":"Your previous portfolio (2021–22)","kind":"title1","maxW":4240}},"designSystems":[]}
+{
+  "v": 3,
+  "attachments": {},
+  "boards": {
+    "Artboard-wcqg.dc.html": {
+      "expand": "fill",
+      "h": 3600,
+      "page": "page-vmnxsd",
+      "title": "Portfolio homepage v1",
+      "w": 1440,
+      "x": 0,
+      "y": 0
+    },
+    "AwardWall.dc.html": {
+      "h": 1300,
+      "title": "Award-winning portfolios",
+      "w": 1440,
+      "x": 0,
+      "y": 1020
+    },
+    "AwardsPlan.dc.html": {
+      "h": 860,
+      "title": "Awards: show + enter",
+      "w": 1200,
+      "x": 1520,
+      "y": 2200
+    },
+    "BingRealEstate.dc.html": {
+      "h": 1640,
+      "title": "Case study 1 · Bing Real Estate (outline)",
+      "w": 1200,
+      "x": 4160,
+      "y": 0
+    },
+    "CaseStudies2to5.dc.html": {
+      "h": 1500,
+      "title": "Case studies 2–5 (outlines)",
+      "w": 1200,
+      "x": 5440,
+      "y": 0
+    },
+    "CurrentPortfolio.dc.html": {
+      "h": 1900,
+      "page": "page-vmnxsd",
+      "title": "Your current portfolio (live, in progress)",
+      "w": 1440,
+      "x": 1520,
+      "y": 0
+    },
+    "Hiring.dc.html": {
+      "h": 1060,
+      "title": "Hiring favorites + ID/UX hybrids",
+      "w": 1200,
+      "x": 1520,
+      "y": 1020
+    },
+    "HomepageConcept.dc.html": {
+      "expand": "fill",
+      "h": 2400,
+      "title": "Homepage concept (first draft)",
+      "w": 1280,
+      "x": 2800,
+      "y": 0
+    },
+    "Main.dc.html": {
+      "h": 760,
+      "title": "Brief: what I know about you",
+      "w": 1200,
+      "x": 0,
+      "y": 0
+    },
+    "Mapping.dc.html": {
+      "h": 900,
+      "title": "Your projects × their patterns",
+      "w": 1440,
+      "x": 1280,
+      "y": 0
+    },
+    "Piece-u7ks.dc.html": {
+      "frameless": true,
+      "h": 1084,
+      "page": "page-vmnxsd",
+      "title": "Image",
+      "w": 864,
+      "x": 3342,
+      "y": 961
+    },
+    "PrevAbout.dc.html": {
+      "h": 1460,
+      "title": "2021 portfolio · Demos + About me",
+      "w": 1200,
+      "x": 3040,
+      "y": 3560
+    },
+    "PrevHelp.dc.html": {
+      "h": 2640,
+      "title": "2021 portfolio · Salesforce Help",
+      "w": 1440,
+      "x": 0,
+      "y": 3560
+    },
+    "PrevManageUsers.dc.html": {
+      "h": 2860,
+      "title": "2021 portfolio · Manage Users",
+      "w": 1440,
+      "x": 1520,
+      "y": 3560
+    },
+    "TinPortfolio-1-Hero.dc.html": {
+      "h": 900,
+      "page": "page-vmnxsd",
+      "title": "Tin Le Portfolio · 1 Hero",
+      "w": 1440,
+      "x": 3040,
+      "y": -33
+    },
+    "TinPortfolio-2-Intro.dc.html": {
+      "h": 900,
+      "page": "page-vmnxsd",
+      "title": "Tin Le Portfolio · 2 Intro (after the zoom)",
+      "w": 1440,
+      "x": 4560,
+      "y": 0
+    },
+    "TinPortfolio-3-Work.dc.html": {
+      "h": 2520,
+      "page": "page-vmnxsd",
+      "title": "Tin Le Portfolio · 3 My work",
+      "w": 1440,
+      "x": 6080,
+      "y": 0
+    }
+  },
+  "createdOnFiles": {
+    "at": "2026-10-27T05:10:00Z",
+    "v": 1
+  },
+  "designSystems": [],
+  "launch": {
+    "view": "canvas"
+  },
+  "noteOrder": [
+    "boardTitle",
+    "refsTitle",
+    "prevTitle",
+    "portfolioTitle"
+  ],
+  "notes": {
+    "boardTitle": {
+      "kind": "title1",
+      "maxW": 6640,
+      "text": "Tin Le · Portfolio moodboard",
+      "w": 240,
+      "x": 0,
+      "y": -320
+    },
+    "portfolioTitle": {
+      "kind": "title1",
+      "maxW": 4480,
+      "page": "page-vmnxsd",
+      "text": "Tin Le Portfolio · editable",
+      "w": 240,
+      "x": 3040,
+      "y": -300
+    },
+    "prevTitle": {
+      "kind": "title1",
+      "maxW": 4240,
+      "text": "Your previous portfolio (2021–22)",
+      "w": 240,
+      "x": 0,
+      "y": 3300
+    },
+    "refsTitle": {
+      "kind": "title1",
+      "maxW": 2720,
+      "text": "References",
+      "w": 240,
+      "x": 0,
+      "y": 800
+    }
+  },
+  "order": [
+    "Main.dc.html",
+    "Mapping.dc.html",
+    "HomepageConcept.dc.html",
+    "BingRealEstate.dc.html",
+    "CaseStudies2to5.dc.html",
+    "AwardWall.dc.html",
+    "Hiring.dc.html",
+    "AwardsPlan.dc.html",
+    "PrevHelp.dc.html",
+    "PrevManageUsers.dc.html",
+    "PrevAbout.dc.html",
+    "Artboard-wcqg.dc.html",
+    "CurrentPortfolio.dc.html",
+    "TinPortfolio-1-Hero.dc.html",
+    "TinPortfolio-2-Intro.dc.html",
+    "TinPortfolio-3-Work.dc.html",
+    "Piece-u7ks.dc.html"
+  ],
+  "pages": [
+    {
+      "id": "page-1",
+      "name": "Page 1"
+    },
+    {
+      "id": "page-vmnxsd",
+      "name": "Portfolio"
+    }
+  ],
+  "title": "Tin's Portfolio Moodboard"
+}

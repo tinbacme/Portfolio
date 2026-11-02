@@ -10,12 +10,14 @@ Working repo for Tin Le's 2026 design portfolio and interview prep. Start with `
 | `case-studies/` | Case study outlines, starting with Bing Real Estate |
 | `resume/resume-2026.md` | Draft 2026 resume (the editable copy lives in Claude Docs, linked below) |
 | `research/award-portfolios.md` | Award-winning and hiring-favorite portfolios, awards to enter, sources |
+| `site/` | Code for the live portfolio page: `index.html` plus `assets/`. Open `site/index.html` in a browser |
 | `inspiration/index.html` | Interactive inspiration board (open in a browser) |
-| `canvas/project/` | Source files of the Claude Design canvas (moodboard, homepage concept, 2021 portfolio boards) |
+| `canvas/project/` | Source files of the Claude Design canvas (moodboard, homepage concept, 2021 portfolio boards, and the editable `TinPortfolio-*` boards the site is built from) |
 | `previous-portfolio/` | Slides from the 2021–22 portfolio: `help/` (Salesforce Help), `mup/` (Manage Users), `about/`, `btw/` |
 
 ## Live links (private to Tin)
 
+- Live portfolio page: https://claude.ai/artifact/8EnjTeDiBFuYvKGKePpbUi
 - Design canvas: https://claude.ai/artifact/B9x5UzNH5VkRekoAhZ4vxa
 - Resume doc: https://claude.ai/artifact/QvroU8wjSQBtRgFWwEpYZX
 - Inspiration board: https://claude.ai/artifact/TwjpLj7y82PskqGRtqzQa4
@@ -23,3 +25,11 @@ Working repo for Tin Le's 2026 design portfolio and interview prep. Start with `
 The canvas `.dc.html` files reference images as `/_blob/<id>`, which only resolve inside the canvas. The same images are in `previous-portfolio/`.
 
 Keep this repo private. The 2021 slides include research participants' faces and internal Salesforce figures.
+
+## Site controls
+
+Settings in `site/index.html` you may want to change:
+
+- Planes: the `PLANES` object in the script sets how many planes fly at once, the first delay, the gap between planes, plane size, how long contrails last, and overlap avoidance.
+- Matcha swirl: `data-swirl` on the `.matcha` button takes `spiral`, `rings` or `vortex`.
+- Whisk duration: `WHISK_SECONDS` in the script.
