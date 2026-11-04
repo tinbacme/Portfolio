@@ -287,7 +287,11 @@ body.is-loaded .scroll-hint { animation: fade-in 0.8s var(--ease-out) 0.9s both;
 .hero-copy p:last-child { font-size: clamp(15px, 1.25vw, 18px); line-height: 1.75; color: #1b2930; }
 body.is-loaded .hero-copy { animation: fade-in 0.9s var(--ease-out) 0.4s both; }
 .hero-copy { opacity: 0; }
-.window-light { position: absolute; left: 64%; top: 22%; width: 48vw; height: 80vh; background: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0) 0px, rgba(255, 255, 255, 0) 70px, rgba(255, 255, 255, 0.6) 110px, rgba(255, 255, 255, 0) 170px, rgba(255, 255, 255, 0) 240px); filter: blur(10px); pointer-events: none; }
+/* Sunlight on the wall behind the window: soft streaks plus a plant's shadow that sways a little. It sits under the window and only drifts slightly on scroll. */
+.wall-light { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.light-streaks { position: absolute; left: 58%; top: 14%; width: 52vw; height: 88vh; background: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0) 0px, rgba(255, 255, 255, 0) 70px, rgba(255, 255, 255, 0.7) 110px, rgba(255, 255, 255, 0) 170px, rgba(255, 255, 255, 0) 240px); filter: blur(12px); }
+.leaf-shadow { position: absolute; right: -3vw; top: -6vh; height: 82vh; width: auto; max-width: none; opacity: 0.12; filter: blur(5px); mix-blend-mode: multiply; transform-origin: 90% 0%; animation: leaf-sway 6.5s ease-in-out infinite alternate; }
+@keyframes leaf-sway { from { rotate: -1.6deg; translate: 0 0; } to { rotate: 2deg; translate: -6px 4px; } }
 @media (max-width: 1000px) { .hero-copy { display: none; } }
 
 /* ---------- Work ---------- */
@@ -428,6 +432,10 @@ a.case-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px -24px r
     <!-- Hero → zoom through the window: Figma 2019:96382 → 2019:96508 -->
     <section class="journey" aria-label="Introduction">
       <div class="stage">
+        <div class="wall-light" aria-hidden="true">
+          <div class="light-streaks"></div>
+          <img class="leaf-shadow" src="assets/leaf-shadow.webp" alt="" draggable="false" />
+        </div>
         <div class="window" aria-hidden="true">
           <div class="window-in">
             <div class="glass"><img class="glass-sky" src="assets/gen-sky.webp" alt="" draggable="false" /><img class="glass-clouds" src="assets/gen-clouds.webp" alt="" draggable="false" /></div>
@@ -444,7 +452,6 @@ a.case-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px -24px r
         </div>
 
         <div class="out out-copy">
-          <div class="window-light" aria-hidden="true"></div>
           <div class="hero-copy">
             <p class="eyebrow">HELLO, I’M TIN</p>
             <p class="headline" role="heading" aria-level="1">Designing for a kinder, clearer web.</p>
@@ -582,9 +589,10 @@ a.case-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px -24px r
       trailLife: 2.6,       // seconds a contrail lasts
       avoidOverlap: true,   // keep each new plane's path clear of planes already flying
       minGap: 0.18,         // smallest vertical gap between paths, as a share of the glass height
+      zoomGrow: 0.3,        // how much planes grow while the window zooms in (0 = same size, 1 = double)
     };
     const MAX_PLANES = PLANES.max, TRAIL_LIFE = PLANES.trailLife;
-    let planes = [], active = false, raf = 0, last = 0, nextSpawn = 0, dir = 1, w = 0, h = 0, dpr = 1;
+    let planes = [], active = false, raf = 0, last = 0, nextSpawn = 0, dir = 1, w = 0, h = 0, dpr = 1, zoom = 0, baseW = 0;
 
     const rand = (a, b) => a + Math.random() * (b - a);
 
@@ -665,6 +673,7 @@ a.case-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px -24px r
       }
 
       const cw = canvas.width, ch = canvas.height;
+      if (!baseW || zoom < 0.02) baseW = cw;   // glass width before the zoom starts
       ctx.clearRect(0, 0, cw, ch);
       ctx.lineCap = "round";
       ctx.lineJoin = "round";
@@ -676,7 +685,8 @@ a.case-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px -24px r
         const x = u * cw, y = v * ch;
         const heading = Math.atan2(y - pv * ch, x - pu * cw);
         // Figma: plane is ~36% of the glass width; capped so it stays plane-sized when zoomed in.
-        const size = Math.min(cw * PLANES.size, 210 * dpr) * pl.depth;
+        // The planes are far away, so leaning into the window barely changes their size.
+        const size = Math.min(cw * PLANES.size, baseW * PLANES.size * (1 + PLANES.zoomGrow * zoom)) * pl.depth;
         const offscreen = u < -0.3 || u > 1.3;
 
         if (!offscreen) {
@@ -721,6 +731,7 @@ a.case-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px -24px r
     }
 
     return {
+      setZoom(z) { zoom = z; },
       setActive(on) {
         if (reduceMotion) return;
         if (on === active) return;
@@ -741,6 +752,7 @@ a.case-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px -24px r
   const outMatcha = document.querySelector(".out-matcha");
   const outHint = document.querySelector(".out-hint");
   const outCopy = document.querySelector(".out-copy");
+  const wallLight = document.querySelector(".wall-light");
   const intro = document.querySelector(".intro");
   const cover = document.querySelector(".sky-cover");
 
@@ -797,6 +809,7 @@ a.case-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px -24px r
     // Softer behind the intro copy so it stays readable.
     const flightAlpha = (1 - 0.6 * easeOut(seg(p, 0.3, 0.46))) * (1 - seg(p, 0.6, 0.75));
     flight.style.opacity = flightAlpha;
+    traffic.setZoom(zA);
     traffic.setActive(flightAlpha > 0 && p < 0.999);
 
     // Props drift off as the window grows.
@@ -807,6 +820,9 @@ a.case-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px -24px r
     outMatcha.style.opacity = 1 - out;
     outHint.style.opacity = 1 - seg(p, 0, 0.06);
     outCopy.style.transform = `translate(${-out * 20}vw, 0)`;
+    // Light drifts only a touch as we lean toward the window, then fades as the glass fills the view.
+    wallLight.style.transform = `translate(${-zA * 3}vw, ${zA * 2}vh)`;
+    wallLight.style.opacity = 1 - seg(p, 0.2, 0.42);
     outCopy.style.opacity = 1 - out;
     outHint.style.visibility = p > 0.06 ? "hidden" : "";
 
