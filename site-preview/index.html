@@ -3,7 +3,7 @@
 <meta name="description" content="Tin Le, Senior Product Designer at Microsoft." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400&family=Google+Sans+Flex:wght@400&family=Instrument+Sans:wght@400&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400&family=Google+Sans+Flex:wght@400&family=Instrument+Sans:wght@400&family=Caveat:wght@500&display=swap" rel="stylesheet" />
 <style>
 @font-face {
   font-family: "Geist Serif";
@@ -177,6 +177,21 @@ body.is-loaded .site-header { opacity: 1; transform: none; }
 /* The stamp is a sticker: drag it anywhere */
 .sticker { cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none; filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.08)); transition: scale 0.2s, rotate 0.2s, filter 0.2s; }
 .sticker.is-dragging { cursor: grabbing; scale: 1.06; rotate: -3deg; filter: drop-shadow(0 14px 18px rgba(0, 0, 0, 0.22)); }
+button.sticker { display: block; width: 100%; padding: 0; border: 0; background: none; font: inherit; color: inherit; text-align: left; }
+button.sticker:focus-visible { outline: 2px solid #3078e7; outline-offset: 6px; border-radius: 12px; }
+.sticker:hover:not(.is-dragging) { filter: drop-shadow(0 8px 10px rgba(0, 0, 0, 0.14)); }
+/* Click the stamp: it flips over to a postcard back, and a postmark with today's date thunks on */
+.stamp-card { position: relative; display: block; transform-style: preserve-3d; transform: perspective(1000px) rotateY(0deg); transition: transform 0.8s cubic-bezier(0.3, 1.35, 0.5, 1); }
+.stamp-card .stamp-art { display: block; }
+.sticker.is-flipped .stamp-card { transform: perspective(1000px) rotateY(180deg); }
+.stamp-card .stamp-art { backface-visibility: hidden; }
+.stamp-back { position: absolute; inset: 0; display: block; transform: rotateY(180deg); backface-visibility: hidden; }
+.stamp-back-paper { display: block; }
+.stamp-back-paper { width: 100%; transform: scaleX(-1); filter: brightness(0) invert(0.98) sepia(0.22); }
+.stamp-note { position: absolute; left: 33%; top: 20%; width: 52%; height: 56%; display: grid; align-content: center; gap: 0.3em; text-align: center; rotate: 10deg; font-family: "Caveat", "Bradley Hand", cursive; font-weight: 500; color: #2b3a55; font-size: clamp(15px, 1.7vw, 28px); line-height: 1.05; }
+.stamp-note .sig { font-size: 0.8em; color: #4a5a78; }
+.stamp-postmark { position: absolute; left: 58%; top: 60%; width: 33%; color: #3d5a8a; opacity: 0; scale: 1.5; rotate: -14deg; transition: opacity 0.12s, scale 0.12s; }
+.sticker.is-flipped .stamp-postmark { opacity: 0.82; scale: 1; transition: opacity 0.1s 0.75s, scale 0.28s cubic-bezier(0.2, 1.6, 0.4, 1) 0.75s; }
 
 /* Matcha: everything inside is laid out on the 206×189 bowl artboard, in --u units */
 .matcha {
@@ -290,9 +305,9 @@ body.is-loaded .hero-copy { animation: fade-in 0.9s var(--ease-out) 0.4s both; }
 /* Sunlight on the wall behind the window: soft streaks plus a plant's shadow that sways a little. It sits under the window and only drifts slightly on scroll. */
 .wall-light {
   /* Tunable from the "Light & shadow" panel */
-  --leaf-opacity: 0.12; --leaf-blur: 5px; --leaf-height: 82vh; --leaf-right: -3vw; --leaf-top: -6vh; --leaf-rot: 0deg;
-  --sway: 1.8deg; --sway-speed: 6.5s;
-  --streak-alpha: 0.7; --streak-angle: 135deg; --streak-blur: 12px; --streak-left: 58%;
+  --leaf-opacity: 0.09; --leaf-blur: 12.5px; --leaf-height: 82vh; --leaf-right: -6vw; --leaf-top: -9vh; --leaf-rot: 13deg;
+  --sway: 3.7deg; --sway-speed: 3s;
+  --streak-alpha: 0.95; --streak-angle: 147deg; --streak-blur: 12px; --streak-left: 69%;
   position: absolute; inset: 0; overflow: hidden; pointer-events: none;
 }
 .light-streaks { position: absolute; left: var(--streak-left); top: 14%; width: 52vw; height: 88vh; background: repeating-linear-gradient(var(--streak-angle), rgba(255, 255, 255, 0) 0px, rgba(255, 255, 255, 0) 70px, rgba(255, 255, 255, var(--streak-alpha)) 110px, rgba(255, 255, 255, 0) 170px, rgba(255, 255, 255, 0) 240px); filter: blur(var(--streak-blur)); }
@@ -479,9 +494,25 @@ a.case-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px -24px r
             <p>I’m a product designer focused on simple, useful and human experiences.</p>
           </div>
         </div>
-        <div class="out out-stamp" aria-hidden="true">
+        <div class="out out-stamp">
           <div class="prop stamp">
-            <div class="sticker"><img class="stamp-art" src="assets/gen-stamp.webp" alt="" draggable="false" /></div>
+            <button class="sticker" type="button" aria-pressed="false" aria-label="Postage stamp. Click to flip it over, drag to move it.">
+              <span class="stamp-card">
+                <img class="stamp-art" src="assets/gen-stamp.webp" alt="" draggable="false" />
+                <span class="stamp-back" aria-hidden="true">
+                  <img class="stamp-back-paper" src="assets/gen-stamp.webp" alt="" draggable="false" />
+                  <span class="stamp-note"><span>Thanks for<br>flying by!</span><span class="sig">— Tin</span></span>
+                  <svg class="stamp-postmark" viewBox="0 0 120 120" fill="none" stroke="currentColor">
+                    <circle cx="60" cy="60" r="55" stroke-width="3"></circle>
+                    <circle cx="60" cy="60" r="43" stroke-width="1.5"></circle>
+                    <defs><path id="pm-arc" d="M 18 60 A 42 42 0 0 1 102 60"></path></defs>
+                    <text font-family="Geist Mono, ui-monospace, monospace" font-size="10.5" letter-spacing="2" fill="currentColor" stroke="none"><textPath href="#pm-arc" startOffset="50%" text-anchor="middle">TIN LE · PORTFOLIO</textPath></text>
+                    <text class="pm-day" x="60" y="72" text-anchor="middle" font-family="Geist Mono, ui-monospace, monospace" font-size="17" fill="currentColor" stroke="none">NOV 04</text>
+                    <text class="pm-year" x="60" y="88" text-anchor="middle" font-family="Geist Mono, ui-monospace, monospace" font-size="10" letter-spacing="2" fill="currentColor" stroke="none">2026</text>
+                  </svg>
+                </span>
+              </span>
+            </button>
           </div>
         </div>
         <div class="out out-matcha">
@@ -777,7 +808,7 @@ a.case-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px -24px r
   const outHint = document.querySelector(".out-hint");
   const outCopy = document.querySelector(".out-copy");
   const wallLight = document.querySelector(".wall-light");
-  let lightDrift = 3;   // how far the light slides (vw) while we lean toward the window
+  let lightDrift = 1;   // how far the light slides (vw) while we lean toward the window
   const intro = document.querySelector(".intro");
   const cover = document.querySelector(".sky-cover");
 
@@ -899,7 +930,20 @@ a.case-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px -24px r
     sx = e.clientX - drag.x; sy = e.clientY - drag.y;
     sticker.style.translate = `${sx}px ${sy}px`;
   });
+  let dragged = false;
+  sticker.addEventListener("pointerdown", () => { dragged = false; });
+  sticker.addEventListener("pointermove", (e) => { if (drag && (Math.abs(e.movementX) + Math.abs(e.movementY)) > 0) dragged = true; });
   const drop = () => { drag = null; sticker.classList.remove("is-dragging"); };
+  // A click (not a drag) flips the stamp; today's date goes on the postmark.
+  const today = new Date();
+  sticker.querySelector(".pm-day").textContent = today.toLocaleDateString("en-US", { month: "short", day: "2-digit" }).toUpperCase();
+  sticker.querySelector(".pm-year").textContent = String(today.getFullYear());
+  sticker.addEventListener("click", () => {
+    if (dragged) { dragged = false; return; }
+    const on = !sticker.classList.contains("is-flipped");
+    sticker.classList.toggle("is-flipped", on);
+    sticker.setAttribute("aria-pressed", String(on));
+  });
   sticker.addEventListener("pointerup", drop);
   sticker.addEventListener("pointercancel", drop);
 
@@ -916,25 +960,25 @@ a.case-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px -24px r
   // ---------- Light & shadow controls (preview only) ----------
   const TUNE = [
     { group: "Plant shadow" },
-    { key: "--leaf-opacity", label: "Strength", min: 0, max: 0.4, step: 0.01, value: 0.12, unit: "" },
-    { key: "--leaf-blur", label: "Softness (blur)", min: 0, max: 20, step: 0.5, value: 5, unit: "px" },
+    { key: "--leaf-opacity", label: "Strength", min: 0, max: 0.4, step: 0.01, value: 0.09, unit: "" },
+    { key: "--leaf-blur", label: "Softness (blur)", min: 0, max: 20, step: 0.5, value: 12.5, unit: "px" },
     { key: "--leaf-height", label: "Size", min: 30, max: 140, step: 1, value: 82, unit: "vh" },
-    { key: "--leaf-right", label: "Position · from right", min: -30, max: 40, step: 1, value: -3, unit: "vw" },
-    { key: "--leaf-top", label: "Position · from top", min: -40, max: 40, step: 1, value: -6, unit: "vh" },
-    { key: "--leaf-rot", label: "Angle", min: -45, max: 45, step: 1, value: 0, unit: "deg" },
-    { key: "--sway", label: "Sway amount", min: 0, max: 8, step: 0.1, value: 1.8, unit: "deg" },
-    { key: "--sway-speed", label: "Sway speed (seconds per swing)", min: 1, max: 20, step: 0.5, value: 6.5, unit: "s" },
+    { key: "--leaf-right", label: "Position · from right", min: -30, max: 40, step: 1, value: -6, unit: "vw" },
+    { key: "--leaf-top", label: "Position · from top", min: -40, max: 40, step: 1, value: -9, unit: "vh" },
+    { key: "--leaf-rot", label: "Angle", min: -45, max: 45, step: 1, value: 13, unit: "deg" },
+    { key: "--sway", label: "Sway amount", min: 0, max: 8, step: 0.1, value: 3.7, unit: "deg" },
+    { key: "--sway-speed", label: "Sway speed (seconds per swing)", min: 1, max: 20, step: 0.5, value: 3, unit: "s" },
     { group: "Light streaks" },
-    { key: "--streak-alpha", label: "Brightness", min: 0, max: 1, step: 0.05, value: 0.7, unit: "" },
-    { key: "--streak-angle", label: "Angle", min: 90, max: 180, step: 1, value: 135, unit: "deg" },
+    { key: "--streak-alpha", label: "Brightness", min: 0, max: 1, step: 0.05, value: 0.95, unit: "" },
+    { key: "--streak-angle", label: "Angle", min: 90, max: 180, step: 1, value: 147, unit: "deg" },
     { key: "--streak-blur", label: "Softness (blur)", min: 0, max: 40, step: 1, value: 12, unit: "px" },
-    { key: "--streak-left", label: "Position · from left", min: 30, max: 90, step: 1, value: 58, unit: "%" },
+    { key: "--streak-left", label: "Position · from left", min: 30, max: 90, step: 1, value: 69, unit: "%" },
     { group: "On scroll" },
-    { key: "drift", label: "Drift while zooming", min: 0, max: 12, step: 0.5, value: 3, unit: "vw" },
+    { key: "drift", label: "Drift while zooming", min: 0, max: 12, step: 0.5, value: 1, unit: "vw" },
   ];
   const tuneForm = document.querySelector(".tune");
   const tuneToggle = document.querySelector(".tune-toggle");
-  const STORE = "tin-preview-light";
+  const STORE = "tin-preview-light-v2";
   let saved = {};
   try { saved = JSON.parse(localStorage.getItem(STORE) || "{}"); } catch (e) { saved = {}; }
   const apply = (c, v) => {
