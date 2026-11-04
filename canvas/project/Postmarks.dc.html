@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Postmark designs</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&amp;family=Instrument+Sans:wght@400;600&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#1b2930}a:hover{color:#000}
+</style>
+</helmet>
+<div style="width: 1440px; height: 1120px; box-sizing: border-box; padding: 52px 64px; display: flex; flex-direction: column; gap: 28px; background: #fbf9f4; color: #1b2930; font-family: 'Instrument Sans', system-ui, sans-serif;">
+  <div style="display: flex; flex-direction: column; gap: 6px;">
+    <h2 style="margin: 0; font-size: 34px; font-weight: 600;">Postmark designs for the stamp back</h2>
+    <p style="margin: 0; font-size: 16px; color: #5c6670;">Each shows the visitor's location when we know it (otherwise "You visited Tin") and today's date. Try the Tweaks: turn location off, change the ink, texture and tilt.</p>
+  </div>
+  <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 24px;">
+    <figure style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
+      <div style="position: relative; height: 360px; border-radius: 16px; background: #f7f5ef; border: 1px solid #e3ddd0; overflow: hidden;">
+        <img src="/_blob/42a15cf87574831206b4ff60be31084f" alt="" style="position: absolute; left: 70px; top: 46px; height: 268px; width: auto;">
+        <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" role="img" aria-label="Postmark design 1: Classic round" style="{{ m1 }}">
+          <defs><filter id="ink1" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3" result="n"></feTurbulence><feDisplacementMap in="SourceGraphic" in2="n" scale="{{ disp }}" result="d"></feDisplacementMap><feComponentTransfer in="n" result="s"><feFuncA type="discrete" tableValues="{{ speck }}"></feFuncA></feComponentTransfer><feComposite in="d" in2="s" operator="in"></feComposite></filter><path id="t1" d="M 27 100 A 73 73 0 0 1 173 100"></path><path id="b1" d="M 14 100 A 86 86 0 0 0 186 100"></path></defs>
+<g filter="url(#ink1)"><circle cx="100" cy="100" r="92" stroke-width="4"></circle><circle cx="100" cy="100" r="66" stroke-width="2"></circle>
+<text font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="17" font-weight="600" letter-spacing="2.5" fill="currentColor" stroke="none"><textPath href="#t1" startOffset="50%" text-anchor="middle">{{ loc }}</textPath></text>
+<text font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="14" font-weight="600" letter-spacing="3" fill="currentColor" stroke="none"><textPath href="#b1" startOffset="50%" text-anchor="middle">{{ sub }}</textPath></text>
+<path d="M21 94l1.74 3.60 3.96 0.60-2.88 2.76 0.72 3.96-3.54-1.86-3.54 1.86 0.72-3.96-2.88-2.76 3.96-0.60z" fill="currentColor" stroke="none"></path><path d="M179 94l1.74 3.60 3.96 0.60-2.88 2.76 0.72 3.96-3.54-1.86-3.54 1.86 0.72-3.96-2.88-2.76 3.96-0.60z" fill="currentColor" stroke="none"></path><line x1="52" y1="76" x2="148" y2="76" stroke-width="2"></line><line x1="52" y1="130" x2="148" y2="130" stroke-width="2"></line>
+<text x="100" y="108" text-anchor="middle" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="34" font-weight="700" letter-spacing="1" fill="currentColor" stroke="none">{{ day }}</text>
+<text x="100" y="124" text-anchor="middle" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="14" font-weight="600" letter-spacing="4" fill="currentColor" stroke="none">{{ year }}</text></g>
+        </svg>
+      </div>
+      <figcaption style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 17px; font-weight: 600;">1 · Classic round</span><span style="font-size: 14px; color: #5c6670;">The everyday post-office cancel: location on top, date between two bars.</span></figcaption>
+    </figure>
+    <figure style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
+      <div style="position: relative; height: 360px; border-radius: 16px; background: #f7f5ef; border: 1px solid #e3ddd0; overflow: hidden;">
+        <img src="/_blob/42a15cf87574831206b4ff60be31084f" alt="" style="position: absolute; left: 70px; top: 46px; height: 268px; width: auto;">
+        <svg viewBox="0 0 330 180" fill="none" stroke="currentColor" role="img" aria-label="Postmark design 2: Machine cancel" style="{{ m2 }}">
+          <defs><filter id="ink2" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="6" result="n"></feTurbulence><feDisplacementMap in="SourceGraphic" in2="n" scale="{{ disp }}" result="d"></feDisplacementMap><feComponentTransfer in="n" result="s"><feFuncA type="discrete" tableValues="{{ speck }}"></feFuncA></feComponentTransfer><feComposite in="d" in2="s" operator="in"></feComposite></filter><path id="t2" d="M 32 90 A 58 58 0 0 1 148 90"></path><path id="b2" d="M 22 90 A 68 68 0 0 0 158 90"></path></defs>
+<g filter="url(#ink2)"><circle cx="90" cy="90" r="74" stroke-width="3.5"></circle>
+<text font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="14" font-weight="600" letter-spacing="2" fill="currentColor" stroke="none"><textPath href="#t2" startOffset="50%" text-anchor="middle">{{ loc }}</textPath></text>
+<text font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="12" font-weight="600" letter-spacing="2.5" fill="currentColor" stroke="none"><textPath href="#b2" startOffset="50%" text-anchor="middle">{{ sub }}</textPath></text>
+<text x="90" y="92" text-anchor="middle" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="28" font-weight="700" fill="currentColor" stroke="none">{{ day }}</text>
+<text x="90" y="112" text-anchor="middle" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="15" font-weight="600" letter-spacing="3" fill="currentColor" stroke="none">{{ year }}</text>
+<g stroke-width="5" stroke-linecap="round"><path d="M170 50 C 192 36, 214 36, 236 50 S 280 64, 322 50"></path><path d="M170 75 C 192 61, 214 61, 236 75 S 280 89, 322 75"></path><path d="M170 100 C 192 86, 214 86, 236 100 S 280 114, 322 100"></path><path d="M170 125 C 192 111, 214 111, 236 125 S 280 139, 322 125"></path></g></g>
+        </svg>
+      </div>
+      <figcaption style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 17px; font-weight: 600;">2 · Machine cancel</span><span style="font-size: 14px; color: #5c6670;">Round date stamp with wavy cancel bars, the same "wind" lines that blow past on hover.</span></figcaption>
+    </figure>
+    <figure style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
+      <div style="position: relative; height: 360px; border-radius: 16px; background: #f7f5ef; border: 1px solid #e3ddd0; overflow: hidden;">
+        <img src="/_blob/42a15cf87574831206b4ff60be31084f" alt="" style="position: absolute; left: 70px; top: 46px; height: 268px; width: auto;">
+        <svg viewBox="0 0 250 160" fill="none" stroke="currentColor" role="img" aria-label="Postmark design 3: Passport arrival" style="{{ m3 }}">
+          <defs><filter id="ink3" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="9" result="n"></feTurbulence><feDisplacementMap in="SourceGraphic" in2="n" scale="{{ disp }}" result="d"></feDisplacementMap><feComponentTransfer in="n" result="s"><feFuncA type="discrete" tableValues="{{ speck }}"></feFuncA></feComponentTransfer><feComposite in="d" in2="s" operator="in"></feComposite></filter></defs>
+<g filter="url(#ink3)"><rect x="5" y="5" width="240" height="150" rx="16" stroke-width="4"></rect><rect x="15" y="15" width="220" height="130" rx="9" stroke-width="1.5"></rect>
+<text x="125" y="40" text-anchor="middle" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="15" font-weight="600" letter-spacing="5" fill="currentColor" stroke="none">ARRIVED · {{ subShort }}</text>
+<path d="M44 84l18-4 8-12h5l-3 11 10-2 3-4h3l-1 6 1 6h-3l-3-4-10-2 3 11h-5l-8-12-18-4z" fill="currentColor" stroke="none" transform="translate(-16 2) scale(0.85)"></path>
+<text x="150" y="96" text-anchor="middle" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="31" font-weight="700" letter-spacing="1" fill="currentColor" stroke="none">{{ dmy }}</text>
+<line x1="30" y1="108" x2="220" y2="108" stroke-width="1.5"></line>
+<text x="125" y="132" text-anchor="middle" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="16" font-weight="600" letter-spacing="3" fill="currentColor" stroke="none">{{ loc }}</text></g>
+        </svg>
+      </div>
+      <figcaption style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 17px; font-weight: 600;">3 · Passport arrival</span><span style="font-size: 14px; color: #5c6670;">Boxed entry stamp, like the one at border control: "Arrived" with a little plane.</span></figcaption>
+    </figure>
+    <figure style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
+      <div style="position: relative; height: 360px; border-radius: 16px; background: #f7f5ef; border: 1px solid #e3ddd0; overflow: hidden;">
+        <img src="/_blob/42a15cf87574831206b4ff60be31084f" alt="" style="position: absolute; left: 70px; top: 46px; height: 268px; width: auto;">
+        <svg viewBox="0 0 250 170" fill="none" stroke="currentColor" role="img" aria-label="Postmark design 4: Air mail oval" style="{{ m4 }}">
+          <defs><filter id="ink4" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="12" result="n"></feTurbulence><feDisplacementMap in="SourceGraphic" in2="n" scale="{{ disp }}" result="d"></feDisplacementMap><feComponentTransfer in="n" result="s"><feFuncA type="discrete" tableValues="{{ speck }}"></feFuncA></feComponentTransfer><feComposite in="d" in2="s" operator="in"></feComposite></filter><path id="t4" d="M 33 85 A 92 60 0 0 1 217 85"></path><path id="b4" d="M 19 85 A 106 72 0 0 0 231 85"></path></defs>
+<g filter="url(#ink4)"><ellipse cx="125" cy="85" rx="118" ry="80" stroke-width="4"></ellipse><ellipse cx="125" cy="85" rx="86" ry="52" stroke-width="1.5"></ellipse>
+<text font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="14" font-weight="600" letter-spacing="3" fill="currentColor" stroke="none"><textPath href="#t4" startOffset="50%" text-anchor="middle">PAR AVION · AIR MAIL</textPath></text>
+<text font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="14" font-weight="600" letter-spacing="2.5" fill="currentColor" stroke="none"><textPath href="#b4" startOffset="50%" text-anchor="middle">{{ loc }}</textPath></text>
+<path d="M96 70c-10-4-20-4-30 0 8 1 14 3 20 7m68-7c10-4 20-4 30 0-8 1-14 3-20 7" stroke-width="2" stroke-linecap="round" transform="translate(0 -8)"></path>
+<text x="125" y="92" text-anchor="middle" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="28" font-weight="700" fill="currentColor" stroke="none">{{ day }}</text>
+<text x="125" y="110" text-anchor="middle" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="14" font-weight="600" letter-spacing="4" fill="currentColor" stroke="none">{{ year }}</text></g>
+        </svg>
+      </div>
+      <figcaption style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 17px; font-weight: 600;">4 · Air mail oval</span><span style="font-size: 14px; color: #5c6670;">Oval "par avion" mark with wings: a nod to the plane window.</span></figcaption>
+    </figure>
+    <figure style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
+      <div style="position: relative; height: 360px; border-radius: 16px; background: #f7f5ef; border: 1px solid #e3ddd0; overflow: hidden;">
+        <img src="/_blob/42a15cf87574831206b4ff60be31084f" alt="" style="position: absolute; left: 70px; top: 46px; height: 268px; width: auto;">
+        <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" role="img" aria-label="Postmark design 5: Visa octagon" style="{{ m5 }}">
+          <defs><filter id="ink5" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="15" result="n"></feTurbulence><feDisplacementMap in="SourceGraphic" in2="n" scale="{{ disp }}" result="d"></feDisplacementMap><feComponentTransfer in="n" result="s"><feFuncA type="discrete" tableValues="{{ speck }}"></feFuncA></feComponentTransfer><feComposite in="d" in2="s" operator="in"></feComposite></filter></defs>
+<g filter="url(#ink5)"><path d="M62 6h76l56 56v76l-56 56H62L6 138V62z" stroke-width="3.5" stroke-dasharray="10 5"></path><path d="M67 18h66l49 49v66l-49 49H67l-49-49V67z" stroke-width="1.5"></path>
+<text x="100" y="52" text-anchor="middle" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="15" font-weight="700" letter-spacing="5" fill="currentColor" stroke="none">TIN LE</text>
+<text x="100" y="70" text-anchor="middle" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="11" font-weight="600" letter-spacing="4" fill="currentColor" stroke="none">VISITOR · ENTRY</text>
+<text x="100" y="110" text-anchor="middle" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="32" font-weight="700" fill="currentColor" stroke="none">{{ day }}</text>
+<text x="100" y="128" text-anchor="middle" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="14" font-weight="600" letter-spacing="4" fill="currentColor" stroke="none">{{ year }}</text>
+<text x="100" y="156" text-anchor="middle" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="13" font-weight="600" letter-spacing="2.5" fill="currentColor" stroke="none">{{ locShort }}</text></g>
+        </svg>
+      </div>
+      <figcaption style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 17px; font-weight: 600;">5 · Visa octagon</span><span style="font-size: 14px; color: #5c6670;">Dashed octagon visa stamp with your name across the top.</span></figcaption>
+    </figure>
+    <figure style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
+      <div style="position: relative; height: 360px; border-radius: 16px; background: #f7f5ef; border: 1px solid #e3ddd0; overflow: hidden;">
+        <img src="/_blob/42a15cf87574831206b4ff60be31084f" alt="" style="position: absolute; left: 70px; top: 46px; height: 268px; width: auto;">
+        <svg viewBox="0 0 270 120" fill="none" stroke="currentColor" role="img" aria-label="Postmark design 6: Received date stamp" style="{{ m6 }}">
+          <defs><filter id="ink6" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="18" result="n"></feTurbulence><feDisplacementMap in="SourceGraphic" in2="n" scale="{{ disp }}" result="d"></feDisplacementMap><feComponentTransfer in="n" result="s"><feFuncA type="discrete" tableValues="{{ speck }}"></feFuncA></feComponentTransfer><feComposite in="d" in2="s" operator="in"></feComposite></filter></defs>
+<g filter="url(#ink6)"><rect x="4" y="4" width="262" height="112" rx="6" stroke-width="3.5"></rect>
+<text x="135" y="34" text-anchor="middle" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="19" font-weight="700" letter-spacing="8" fill="currentColor" stroke="none">RECEIVED</text>
+<text x="135" y="78" text-anchor="middle" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="38" font-weight="700" letter-spacing="2" fill="currentColor" stroke="none">{{ full }}</text>
+<text x="135" y="104" text-anchor="middle" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="14" font-weight="600" letter-spacing="3" fill="currentColor" stroke="none">{{ fromLoc }}</text></g>
+        </svg>
+      </div>
+      <figcaption style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 17px; font-weight: 600;">6 · Received date stamp</span><span style="font-size: 14px; color: #5c6670;">The office "received" stamp: plain, bold, a little crooked.</span></figcaption>
+    </figure>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"knowLocation": {"editor": "boolean", "default": true, "section": "Visitor"}, "location": {"editor": "text", "default": "United States", "section": "Visitor"}, "ink": {"editor": "enum", "default": "each design", "options": ["each design", "slate blue", "postal red", "forest green", "violet", "black"], "section": "Ink"}, "texture": {"editor": "range", "default": 0.7, "min": 0, "max": 2, "step": 0.1, "section": "Ink"}, "opacity": {"editor": "range", "default": 0.85, "min": 0.4, "max": 1, "step": 0.05, "section": "Ink"}, "tilt": {"editor": "range", "default": -10, "min": -25, "max": 25, "step": 1, "unit": "°", "section": "Ink"}, "$preview": {"width": 1440, "height": 1120}}'>
+const DESIGN_INK = {"1": "#3d5a8a", "2": "#2a2f36", "3": "#b23a3a", "4": "#2f6b4f", "5": "#5b4a8a", "6": "#c2552d"};
+const INKS = { 'slate blue': '#3d5a8a', 'postal red': '#b23a3a', 'forest green': '#2f6b4f', 'violet': '#5b4a8a', 'black': '#2a2f36' };
+const WIDTHS = {"1": 230, "2": 300, "3": 250, "4": 250, "5": 220, "6": 270};
+class Component extends DCLogic {
+  renderVals() {
+    const p = this.props;
+    const known = p.knowLocation ?? true;
+    const place = String(p.location ?? 'United States').trim().toUpperCase();
+    const now = new Date();
+    const mon = now.toLocaleDateString('en-US', { month: 'short' }).toUpperCase();
+    const dd = String(now.getDate()).padStart(2, '0');
+    const yyyy = String(now.getFullYear());
+    const tex = p.texture ?? 0.7;
+    const tilt = p.tilt ?? -10;
+    const out = {
+      loc: known && place ? place : 'YOU VISITED TIN',
+      sub: known && place ? 'VISITED TIN' : 'TIN LE · PORTFOLIO',
+      subShort: 'TIN LE',
+      locShort: known && place ? place : 'YOU VISITED TIN',
+      fromLoc: known && place ? `FROM ${place} · TO TIN` : 'YOU VISITED TIN',
+      day: `${mon} ${dd}`, year: yyyy, dmy: `${dd} ${mon} ${yyyy}`, full: `${mon} ${dd} ${yyyy}`,
+      disp: (1.8 * tex).toFixed(2),
+      speck: tex < 0.3 ? '1 1' : (tex >= 1.3 ? '1 1 0.25 1 0.4 1' : '1 1 1 1 0.5 1 1 1'),
+    };
+    for (let i = 1; i <= 6; i++) {
+      const color = (p.ink ?? 'each design') === 'each design' ? DESIGN_INK[i] : INKS[p.ink];
+      const w = WIDTHS[i];
+      out['m' + i] = `position: absolute; left: ${230 - w / 2 + 40}px; top: ${150 - w * 0.3}px; width: ${w}px; height: auto; overflow: visible; color: ${color}; opacity: ${p.opacity ?? 0.85}; transform: rotate(${tilt + (i % 2 ? 0 : 4)}deg); mix-blend-mode: multiply;`;
+    }
+    return out;
+  }
+}
+</script>
+</body>
+</html>
