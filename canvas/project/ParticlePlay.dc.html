@@ -41,19 +41,89 @@ a{color:#1b2930}a:hover{color:#000}
       <figcaption style="display: flex; flex-direction: column; gap: 3px;"><span style="font-size: 17px; font-weight: 600;">5 · Contrail sparkles</span><span style="font-size: 14px; line-height: 1.45; color: #5c6670;">Your pointer leaves a soft contrail of sky-and-matcha sparkles. Click for a burst.</span></figcaption>
     </figure>
     <figure style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
-      <canvas ref="{{ r6 }}" role="img" aria-label="Prototype 6: Space dot grid. Move your mouse or finger over it." style="display: block; width: 100%; height: 300px; border-radius: 16px; background: #05060d; border: 1px solid #1d2127; touch-action: none; cursor: crosshair;"></canvas>
-      <figcaption style="display: flex; flex-direction: column; gap: 3px;"><span style="font-size: 17px; font-weight: 600;">6 · Space dot grid</span><span style="font-size: 14px; line-height: 1.45; color: #5c6670;">The magnetic grid as a star field: your cursor is a little black hole that pulls stars in, stretches them and lights them up. Click for a supernova.</span></figcaption>
+      <canvas ref="{{ r6 }}" role="img" aria-label="Prototype 6: Space dot grid · Who am I?. Move your mouse or finger over it." style="display: block; width: 100%; height: 300px; border-radius: 16px; background: #05060d; border: 1px solid #1d2127; touch-action: none; cursor: crosshair;"></canvas>
+      <figcaption style="display: flex; flex-direction: column; gap: 3px;"><span style="font-size: 17px; font-weight: 600;">6 · Space dot grid · Who am I?</span><span style="font-size: 14px; line-height: 1.45; color: #5c6670;">Hover: your cursor is a little black hole and "Who am I?" glows in. Click: the stars answer with a picture (travel, matcha, ID lighting, search, real estate, teaching, the logo). Hover the picture to scatter it. Speed and feel are in Tweaks.</span></figcaption>
     </figure>
   </div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"density": {"editor": "range", "default": 1, "min": 0.3, "max": 2, "step": 0.1, "unit": "×", "section": "Particles"}, "glow": {"editor": "range", "default": 1, "min": 0, "max": 2, "step": 0.1, "unit": "×", "section": "Particles"}, "$preview": {"width": 1440, "height": 1020}}'>
+<script type="text/x-dc" data-dc-script data-props="{&quot;density&quot;: {&quot;editor&quot;: &quot;range&quot;, &quot;default&quot;: 1, &quot;min&quot;: 0.3, &quot;max&quot;: 2, &quot;step&quot;: 0.1, &quot;unit&quot;: &quot;×&quot;, &quot;section&quot;: &quot;Particles&quot;}, &quot;glow&quot;: {&quot;editor&quot;: &quot;range&quot;, &quot;default&quot;: 1, &quot;min&quot;: 0, &quot;max&quot;: 2, &quot;step&quot;: 0.1, &quot;unit&quot;: &quot;×&quot;, &quot;section&quot;: &quot;Particles&quot;}, &quot;prompt&quot;: {&quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;HI I am Tin&quot;, &quot;section&quot;: &quot;6 · Space grid&quot;}, &quot;pullDuration&quot;: {&quot;editor&quot;: &quot;range&quot;, &quot;default&quot;: 0.8, &quot;min&quot;: 0.2, &quot;max&quot;: 2, &quot;step&quot;: 0.05, &quot;unit&quot;: &quot;s&quot;, &quot;section&quot;: &quot;6 · Space grid&quot;}, &quot;pullStrength&quot;: {&quot;editor&quot;: &quot;range&quot;, &quot;default&quot;: 0.4, &quot;min&quot;: 0, &quot;max&quot;: 1.5, &quot;step&quot;: 0.05, &quot;section&quot;: &quot;6 · Space grid&quot;}, &quot;pullRadius&quot;: {&quot;editor&quot;: &quot;range&quot;, &quot;default&quot;: 170, &quot;min&quot;: 60, &quot;max&quot;: 240, &quot;step&quot;: 5, &quot;unit&quot;: &quot;px&quot;, &quot;section&quot;: &quot;6 · Space grid&quot;}, &quot;returnDuration&quot;: {&quot;editor&quot;: &quot;range&quot;, &quot;default&quot;: 0.6, &quot;min&quot;: 0.2, &quot;max&quot;: 2, &quot;step&quot;: 0.05, &quot;unit&quot;: &quot;s&quot;, &quot;section&quot;: &quot;6 · Space grid&quot;}, &quot;formDuration&quot;: {&quot;editor&quot;: &quot;range&quot;, &quot;default&quot;: 0.8, &quot;min&quot;: 0.2, &quot;max&quot;: 2, &quot;step&quot;: 0.05, &quot;unit&quot;: &quot;s&quot;, &quot;section&quot;: &quot;6 · Space grid&quot;}, &quot;holdSeconds&quot;: {&quot;editor&quot;: &quot;range&quot;, &quot;default&quot;: 12, &quot;min&quot;: 1, &quot;max&quot;: 12, &quot;step&quot;: 0.5, &quot;unit&quot;: &quot;s&quot;, &quot;section&quot;: &quot;6 · Space grid&quot;}, &quot;scatterRadius&quot;: {&quot;editor&quot;: &quot;range&quot;, &quot;default&quot;: 160, &quot;min&quot;: 0, &quot;max&quot;: 160, &quot;step&quot;: 5, &quot;unit&quot;: &quot;px&quot;, &quot;section&quot;: &quot;6 · Space grid&quot;}, &quot;scatterForce&quot;: {&quot;editor&quot;: &quot;range&quot;, &quot;default&quot;: 41, &quot;min&quot;: 0, &quot;max&quot;: 60, &quot;step&quot;: 1, &quot;unit&quot;: &quot;px&quot;, &quot;section&quot;: &quot;6 · Space grid&quot;}, &quot;scatterDuration&quot;: {&quot;editor&quot;: &quot;range&quot;, &quot;default&quot;: 0.5, &quot;min&quot;: 0.2, &quot;max&quot;: 2, &quot;step&quot;: 0.05, &quot;unit&quot;: &quot;s&quot;, &quot;section&quot;: &quot;6 · Space grid&quot;}, &quot;twinkle&quot;: {&quot;editor&quot;: &quot;range&quot;, &quot;default&quot;: 2.6, &quot;min&quot;: 0, &quot;max&quot;: 3, &quot;step&quot;: 0.1, &quot;unit&quot;: &quot;×&quot;, &quot;section&quot;: &quot;6 · Space grid&quot;}, &quot;$preview&quot;: {&quot;width&quot;: 1440, &quot;height&quot;: 1020}}">
 
 const PAL = ['#3078e7', '#65a3ee', '#c1dff9', '#a9c46a', '#6f8a3e', '#e6b88a', '#f4f1dc'];
 const rnd = (a, b) => a + Math.random() * (b - a);
 // tiny smooth noise for the flow field
 const NZ = Array.from({ length: 512 }, () => Math.random());
 const noise = (x, y) => { const xi = Math.floor(x), yi = Math.floor(y), xf = x - xi, yf = y - yi; const h = (i, j) => NZ[((i * 57 + j * 131) & 511 + 512) % 512]; const s = (t) => t * t * (3 - 2 * t); const a = h(xi, yi), b = h(xi + 1, yi), c = h(xi, yi + 1), d = h(xi + 1, yi + 1); return a + (b - a) * s(xf) + (c - a) * s(yf) + (a - b - c + d) * s(xf) * s(yf); };
+
+
+// Pictures the star field can form (100×100 design box): things about Tin.
+const TIN_LOGO = ['M11.7891 40.2597V29.7451H8.02393V24.4721H11.7891V18.603H13.6266C14.7138 18.603 15.7565 19.0349 16.5252 19.8037C17.294 20.5724 17.7259 21.6151 17.7259 22.7023V24.4585H23.8342V29.7451H17.7259V38.1559C17.7259 39.8083 17.5047 42.7608 19.6627 42.7608C20.4363 42.7269 21.1786 42.4452 21.78 41.9572L23.8026 46.5215C22.1367 47.6818 20.7416 48.3274 18.6739 48.3274C13.8117 48.3048 11.7891 44.7292 11.7891 40.2597Z', 'M30.6692 22.1201C29.751 22.1335 28.8646 21.7839 28.2026 21.1473C27.5407 20.5108 27.1568 19.6387 27.1343 18.7206C27.1801 17.814 27.5725 16.9596 28.2305 16.3341C28.8884 15.7087 29.7614 15.3599 30.6692 15.3599C31.577 15.3599 32.4501 15.7087 33.108 16.3341C33.7659 16.9596 34.1584 17.814 34.2042 18.7206C34.1817 19.6387 33.7977 20.5108 33.1358 21.1473C32.4739 21.7839 31.5875 22.1335 30.6692 22.1201V22.1201Z', 'M33.202 24.8921H28.0192C27.7873 24.8921 27.5994 25.0801 27.5994 25.312V47.8987C27.5994 48.1305 27.7873 48.3185 28.0192 48.3185H33.202C33.4339 48.3185 33.6219 48.1305 33.6219 47.8987V25.312C33.6219 25.0801 33.4339 24.8921 33.202 24.8921Z', 'M56.213 33.3163V47.8986C56.213 47.9537 56.2021 48.0083 56.181 48.0592C56.1599 48.1102 56.129 48.1565 56.09 48.1955C56.051 48.2344 56.0047 48.2654 55.9538 48.2865C55.9029 48.3076 55.8483 48.3184 55.7931 48.3184H50.6058C50.4945 48.3184 50.3877 48.2742 50.3089 48.1955C50.2302 48.1167 50.1859 48.0099 50.1859 47.8986V35.9709C50.1859 33.6459 49.7345 31.4563 47.0573 31.4563C44.3124 31.4563 43.4095 33.7407 43.4095 35.9709V47.8986C43.4101 47.9535 43.3998 48.008 43.3792 48.0589C43.3586 48.1098 43.3281 48.1561 43.2894 48.1952C43.2508 48.2342 43.2048 48.2652 43.1541 48.2864C43.1034 48.3075 43.0491 48.3184 42.9941 48.3184H37.8068C37.6955 48.3184 37.5887 48.2742 37.5099 48.1955C37.4312 48.1167 37.387 48.0099 37.387 47.8986V25.3254C37.387 25.214 37.4312 25.1073 37.5099 25.0285C37.5887 24.9498 37.6955 24.9055 37.8068 24.9055H42.9941C43.1047 24.9067 43.2103 24.9515 43.2881 25.0301C43.3659 25.1087 43.4095 25.2148 43.4095 25.3254V27.9619C43.4095 27.9727 43.4138 27.9831 43.4214 27.9907C43.429 27.9983 43.4393 28.0026 43.4501 28.0026C43.4609 28.0026 43.4712 27.9983 43.4788 27.9907C43.4865 27.9831 43.4907 27.9727 43.4907 27.9619C44.3937 25.8717 46.958 24.3999 49.8112 24.3999C54.5832 24.3999 56.213 28.4766 56.213 33.3163Z'];
+// Pictures form out of lots of stars (dense dots, no lines). Shapes are drawn on a 100 × 100 box:
+// fill = solid area, cut = hole, otherwise a thick stroke (w = width).
+const SHAPES = [
+  { label: 'I love exploring the world', parts: [
+    { w: 5, pts: [[86.0, 47.0], [85.6, 52.6], [84.2, 58.1], [82.1, 63.3], [79.1, 68.2], [75.5, 72.5], [71.2, 76.1], [66.3, 79.1], [61.1, 81.2], [55.6, 82.6], [50.0, 83.0], [44.4, 82.6], [38.9, 81.2], [33.7, 79.1], [28.8, 76.1], [24.5, 72.5], [20.9, 68.2], [17.9, 63.3], [15.8, 58.1], [14.4, 52.6], [14.0, 47.0], [14.4, 41.4], [15.8, 35.9], [17.9, 30.7], [20.9, 25.8], [24.5, 21.5], [28.8, 17.9], [33.7, 14.9], [38.9, 12.8], [44.4, 11.4], [50.0, 11.0], [55.6, 11.4], [61.1, 12.8], [66.3, 14.9], [71.2, 17.9], [75.5, 21.5], [79.1, 25.8], [82.1, 30.7], [84.2, 35.9], [85.6, 41.4], [86.0, 47.0]] },
+    { w: 3, pts: [[67.0, 47.0], [66.8, 52.6], [66.2, 58.1], [65.1, 63.3], [63.8, 68.2], [62.0, 72.5], [60.0, 76.1], [57.7, 79.1], [55.3, 81.2], [52.7, 82.6], [50.0, 83.0], [47.3, 82.6], [44.7, 81.2], [42.3, 79.1], [40.0, 76.1], [38.0, 72.5], [36.2, 68.2], [34.9, 63.3], [33.8, 58.1], [33.2, 52.6], [33.0, 47.0], [33.2, 41.4], [33.8, 35.9], [34.9, 30.7], [36.2, 25.8], [38.0, 21.5], [40.0, 17.9], [42.3, 14.9], [44.7, 12.8], [47.3, 11.4], [50.0, 11.0], [52.7, 11.4], [55.3, 12.8], [57.7, 14.9], [60.0, 17.9], [62.0, 21.5], [63.8, 25.8], [65.1, 30.7], [66.2, 35.9], [66.8, 41.4], [67.0, 47.0]] }, { w: 3, pts: [[50, 11], [50, 83]] },
+    { w: 3, pts: [[17, 33], [83, 33]] }, { w: 3, pts: [[14, 47], [86, 47]] }, { w: 3, pts: [[17, 61], [83, 61]] },
+    { w: 3, pts: [[58, 92], [70, 90], [80, 86]] }, { fill: [[82, 80], [92, 84], [84, 90]] } ] },
+  { label: 'Enjoying great food', parts: [
+    { fill: [[8, 52], [92, 52], [86, 68], [72, 80], [50, 84], [28, 80], [14, 68]] },
+    { fill: [[38, 82], [38, 89], [62, 89], [62, 82]] },
+    { w: 4, pts: [[62, 6], [48, 52]] }, { w: 4, pts: [[76, 9], [55, 52]] },
+    { w: 2.5, pts: [[52, 34], [50, 40], [53, 46], [51, 52]] },
+    { w: 3, pts: [[24, 46], [20, 38], [26, 30], [22, 22]] }, { w: 3, pts: [[34, 46], [30, 38], [36, 30]] } ] },
+  { label: 'Matcha is my go-to drink', parts: [
+    { fill: [[4, 50], [70, 50], [65, 69], [52, 80], [22, 80], [9, 69]] },
+    { fill: [[27, 79], [27, 86], [47, 86], [47, 79]] },
+    { w: 3, pts: [[28, 44], [24, 35], [30, 27]] }, { w: 3, pts: [[42, 44], [38, 35], [44, 27]] },
+    { fill: [[82, 14], [88, 14], [88, 44], [82, 44]] },
+    { fill: [[79, 44], [91, 44], [96, 60], [93, 78], [77, 78], [74, 60]] },
+    { cut: [[84.3, 48], [85.7, 48], [85.7, 76], [84.3, 76]] } ] },
+  { label: 'Studied industrial design at the University of Oregon', parts: [
+    { fill: [[50, 17], [93, 36], [50, 55], [7, 36]] },
+    { fill: [[25, 44], [25, 64], [38, 71], [50, 74], [62, 71], [75, 64], [75, 44], [50, 56]] },
+    { w: 3, pts: [[92, 36], [92, 58]] }, { fill: [[89, 57], [95, 57], [94, 66], [90, 66]] } ] },
+  { label: 'Designing for search', parts: [
+    { w: 10, pts: Array.from({ length: 41 }, (_, i) => [42 + 25 * Math.cos(i / 40 * 6.2832), 40 + 25 * Math.sin(i / 40 * 6.2832)]) },
+    { w: 13, pts: [[60, 58], [85, 83]] } ] },
+  { label: 'From Vietnam', parts: [
+    { fill: [[50, 12], [86, 62], [14, 62]] },
+    { fill: [[94.0, 63.0], [93.5, 64.3], [91.8, 65.5], [89.2, 66.6], [85.6, 67.7], [81.1, 68.7], [75.9, 69.5], [70.0, 70.1], [63.6, 70.6], [56.9, 70.9], [50.0, 71.0], [43.1, 70.9], [36.4, 70.6], [30.0, 70.1], [24.1, 69.5], [18.9, 68.7], [14.4, 67.7], [10.8, 66.6], [8.2, 65.5], [6.5, 64.3], [6.0, 63.0], [6.5, 61.7], [8.2, 60.5], [10.8, 59.4], [14.4, 58.3], [18.9, 57.3], [24.1, 56.5], [30.0, 55.9], [36.4, 55.4], [43.1, 55.1], [50.0, 55.0], [56.9, 55.1], [63.6, 55.4], [70.0, 55.9], [75.9, 56.5], [81.1, 57.3], [85.6, 58.3], [89.2, 59.4], [91.8, 60.5], [93.5, 61.7], [94.0, 63.0]] },
+    { cutStroke: [[34, 36], [50, 39], [66, 36]], w: 1.6 }, { cutStroke: [[25, 50], [50, 54], [75, 50]], w: 1.6 },
+    { w: 2, pts: [[30, 68], [44, 84], [56, 84], [70, 68]] } ] },
+  { label: 'Located in Washington · Multnomah Falls', parts: [
+    { faint: true, fill: [[2, 92], [2, 14], [14, 11], [28, 11], [44, 6], [43, 40], [41, 92]] },
+    { faint: true, fill: [[59, 92], [57, 40], [56, 6], [70, 10], [84, 9], [98, 13], [98, 92]] },
+    { fill: [[5.5, 12], [9, 3], [12.5, 12]] }, { fill: [[15.5, 10], [19, 1], [22.5, 10]] }, { fill: [[27.5, 10], [31, 1], [34.5, 10]] }, { fill: [[64.5, 9], [68, 0], [71.5, 9]] }, { fill: [[76.5, 9], [80, 0], [83.5, 9]] }, { fill: [[87.5, 11], [91, 2], [94.5, 11]] },
+    { glow: true, fill: [[45.5, 4], [54.5, 4], [55, 54], [45, 54]] },
+    { w: 3.5, pts: [[36, 57], [64, 57]] }, { w: 3.5, pts: [[40, 64], [45, 60.5], [50, 59.5], [55, 60.5], [60, 64]] },
+    { glow: true, fill: [[45.5, 64], [54.5, 64], [57, 82], [43, 82]] },
+    { glow: true, fill: [[67.0, 86.0], [66.6, 87.0], [65.5, 88.0], [63.8, 88.9], [61.4, 89.7], [58.5, 90.3], [55.3, 90.8], [51.8, 91.0], [48.2, 91.0], [44.7, 90.8], [41.5, 90.3], [38.6, 89.7], [36.2, 88.9], [34.5, 88.0], [33.4, 87.0], [33.0, 86.0], [33.4, 85.0], [34.5, 84.0], [36.2, 83.1], [38.6, 82.3], [41.5, 81.7], [44.7, 81.2], [48.2, 81.0], [51.8, 81.0], [55.3, 81.2], [58.5, 81.7], [61.4, 82.3], [63.8, 83.1], [65.5, 84.0], [66.6, 85.0], [67.0, 86.0]] } ] },
+];
+function sampleShape(shape, w, h, maxPts) {
+  const oc = document.createElement('canvas'); oc.width = w; oc.height = h;
+  const c = oc.getContext('2d'); const size = Math.min(w, h) * 0.74;
+  c.save(); c.translate((w - size) / 2, (h - size) / 2 - 10); c.scale(size / 100, size / 100); c.fillStyle = '#fff'; c.strokeStyle = '#fff'; c.lineCap = 'round'; c.lineJoin = 'round';
+  const poly = (pts) => { c.beginPath(); pts.forEach(([x, y], i) => (i ? c.lineTo(x, y) : c.moveTo(x, y))); };
+  if (shape.logo) { c.translate(-2, -2); c.scale(1.62, 1.62); for (const d of TIN_LOGO) c.fill(new Path2D(d)); }
+  else for (const part of shape.parts) {
+    // glow parts are drawn bright-blue, faint parts red, so the sampler can tell them apart
+    c.fillStyle = part.glow ? '#00f' : part.faint ? '#f00' : '#fff';
+    if (part.fill) { poly(part.fill); c.closePath(); c.fill(); }
+    else if (part.cut) { c.globalCompositeOperation = 'destination-out'; poly(part.cut); c.closePath(); c.fill(); c.globalCompositeOperation = 'source-over'; }
+    else if (part.cutStroke) { c.globalCompositeOperation = 'destination-out'; c.lineWidth = part.w || 2; poly(part.cutStroke); c.stroke(); c.globalCompositeOperation = 'source-over'; }
+    else { c.lineWidth = part.w || 5; poly(part.pts); c.stroke(); }
+  }
+  c.restore();
+  const data = c.getImageData(0, 0, w, h).data;
+  // the densest even grid that the available stars can fill, with a little jitter so it reads as stars, not pixels
+  for (let step = 3; step < 20; step += 0.25) {
+    const pts = [];
+    for (let y = step / 2; y < h; y += step) for (let x = step / 2; x < w; x += step) { const o = (Math.floor(y) * w + Math.floor(x)) * 4; if (data[o + 3] > 128) pts.push({ x: x + rnd(-0.6, 0.6) * step * 0.3, y: y + rnd(-0.6, 0.6) * step * 0.3, g: data[o] < 80 && data[o + 2] > 200, f: data[o] > 200 && data[o + 2] < 80 }); }
+    if (pts.length <= maxPts) return pts;
+  }
+  return [];
+}
 
 function setup(cv, kind, self) {
   const ctx = cv.getContext('2d');
@@ -79,7 +149,7 @@ function init(st, props) {
   if (st.kind === 5) st.parts = [];
   if (st.kind === 6) {
     st.parts = []; const g = 16;
-    const tints = ['#ffffff', '#dfe9ff', '#c1dff9', '#ffe7cf', '#e6dcff'];
+    const tints = ['#ffffff', '#dfe9ff', '#c1dff9', '#ffe7cf', '#f2f6ff'];
     for (let y = g / 2; y < h; y += g) for (let x = g / 2; x < w; x += g) st.parts.push({ x, y, ox: x, oy: y, vx: 0, vy: 0, s: 0, ph: rnd(0, 6.28), tw: rnd(0.6, 1.6), c: tints[Math.floor(rnd(0, tints.length))] });
     st.waves = [];
   }
@@ -170,36 +240,96 @@ function frame(st, props) {
     ctx.globalAlpha = 1;
   }
   if (st.kind === 6) {
+    const now = performance.now(), dt = Math.min(0.05, st.last ? (now - st.last) / 1000 : 1 / 60); st.last = now;
     ctx.fillStyle = '#05060d'; ctx.fillRect(0, 0, w, h);
     // faint nebula
     const neb = (x, y, r, c) => { const g = ctx.createRadialGradient(x, y, 0, x, y, r); g.addColorStop(0, c); g.addColorStop(1, 'rgba(5, 6, 13, 0)'); ctx.fillStyle = g; ctx.fillRect(0, 0, w, h); };
-    neb(w * 0.25, h * 0.3, w * 0.45, 'rgba(91, 74, 138, 0.22)'); neb(w * 0.8, h * 0.75, w * 0.4, 'rgba(48, 120, 231, 0.18)');
-    if (st.click) { st.waves.push({ x: st.click.x, y: st.click.y, r: 0 }); st.click = null; }
-    st.waves = st.waves.filter((v) => v.r < 260); for (const v of st.waves) v.r += 5;
+    neb(w * 0.25, h * 0.3, w * 0.45, 'rgba(60, 82, 140, 0.2)'); neb(w * 0.8, h * 0.75, w * 0.4, 'rgba(48, 120, 231, 0.18)');
+    if (st.click) {
+      st.waves.push({ x: st.click.x, y: st.click.y, r: 0 }); st.click = null;
+      st.shapeIx = ((st.shapeIx ?? -1) + 1) % SHAPES.length;
+      const pts = sampleShape(SHAPES[st.shapeIx], Math.round(w), Math.round(h), st.parts.length);
+      const order = st.parts.map((q, i) => i).sort(() => Math.random() - 0.5);
+      st.parts.forEach((q) => { q.tx = undefined; q.role = null; });
+      // about one in fourteen becomes a bright star with a soft halo; the rest are the fine dust that gives the shape its body
+      pts.forEach((pt, k) => { const q = st.parts[order[k]]; q.tx = pt.x; q.ty = pt.y; q.role = pt.g ? (Math.random() < 0.45 ? 'star' : 'dust') : pt.f ? 'faint' : Math.random() < 0.07 ? 'star' : 'dust'; });
+      st.form = { age: 0, label: SHAPES[st.shapeIx].label };
+    }
+    if (st.form) st.form.age += dt;
+    const HOLD = props.holdSeconds ?? 4, forming = st.form && st.form.age < HOLD;   // hold (seconds), then back to the grid
+    if (st.form && !forming) { st.form = null; st.parts.forEach((q) => { q.tx = undefined; }); }
+    st.waves = st.waves.filter((v) => v.r < 260); for (const v of st.waves) v.r += 290 * dt;
     ctx.globalCompositeOperation = 'lighter';
     for (const q of st.parts) {
-      const dx = p.x - q.ox, dy = p.y - q.oy, d = Math.hypot(dx, dy), R = 130;
+      const dx = p.x - q.ox, dy = p.y - q.oy, d = Math.hypot(dx, dy), R = props.pullRadius ?? 130;
       let tx = q.ox, ty = q.oy, pull = 0;
-      if (p.on && d < R) { pull = 1 - d / R; const k = pull * pull * 0.55; tx += dx * k; ty += dy * k; }
+      if (forming) {
+        if (q.tx !== undefined) {
+          tx = q.tx; ty = q.ty; pull = 0.75;
+          // hovering a formed picture scatters its stars away from the cursor; they settle back when you move on
+          // soft scatter: measured from each star's home spot (not where it is now), smooth falloff, eased
+          const sx = q.tx - p.x, sy = q.ty - p.y, sd = Math.hypot(sx, sy), SR = props.scatterRadius ?? 70;
+          if (p.on && sd < SR && SR > 0) { const u = 1 - sd / SR, f = u * u * (3 - 2 * u) * (props.scatterForce ?? 16); tx = q.tx + sx / (sd || 1) * f; ty = q.ty + sy / (sd || 1) * f; q.scat = true; } else q.scat = false;
+        } else { pull = -0.6; }
+      }
+      else if (p.on && d < R) { pull = 1 - d / R; const k = pull * pull * (props.pullStrength ?? 0.55); tx += dx * k; ty += dy * k; }
       for (const v of st.waves) { const dw = Math.hypot(q.ox - v.x, q.oy - v.y), band = Math.max(0, 1 - Math.abs(dw - v.r) / 24); if (band > 0) { tx += (q.ox - v.x) / (dw || 1) * band * 18; ty += (q.oy - v.y) / (dw || 1) * band * 18; pull = Math.max(pull, band * 0.8); } }
-      q.vx = (q.vx + (tx - q.x) * 0.1) * 0.8; q.vy = (q.vy + (ty - q.y) * 0.1) * 0.8;
-      const px = q.x, py = q.y; q.x += q.vx; q.y += q.vy;
-      q.s += (pull - q.s) * 0.12;
-      const tw = 0.55 + 0.45 * Math.sin(st.t * 0.04 * q.tw + q.ph);
-      const a = Math.min(1, 0.18 + tw * 0.25 + q.s * 0.9 * glow);
-      const col = q.s > 0.15 ? `hsla(${265 + q.s * 60}, 90%, ${70 + q.s * 15}%, ${a})` : q.c;
+      // the black hole pulls with its own (slow) speed; returning and forming keep theirs
+      // time-based, critically damped easing: each move settles in about its Duration (seconds), with a soft start and a soft landing
+      const D = forming ? (q.scat ? (props.scatterDuration ?? 0.5) : (props.formDuration ?? 0.8)) : (pull > 0 ? (props.pullDuration ?? 0.8) : (props.returnDuration ?? 0.6));
+      const om = 5 / Math.max(0.1, D), steps = Math.max(1, Math.ceil(om * dt / 0.25)), hs = dt / steps;
+      const px = q.x, py = q.y;
+      for (let k = 0; k < steps; k++) {
+        q.vx += (om * om * (tx - q.x) - 2 * om * q.vx) * hs; q.vy += (om * om * (ty - q.y) - 2 * om * q.vy) * hs;
+        q.x += q.vx * hs; q.y += q.vy * hs;
+      }
+      q.s += (Math.max(0, pull) - q.s) * (1 - Math.exp(-dt / 0.18));
+      const dim = pull < 0 ? 0.25 : 1;
+      const tw = 0.55 + 0.45 * Math.sin(st.t * 0.04 * q.tw * (props.twinkle ?? 1) + q.ph);
+      const role = forming ? q.role : null;
+      // starlight: cool white with a hint of blue, brighter the closer the star is to the black hole
+      let a = Math.min(1, (0.18 + tw * 0.25 + q.s * 0.9 * glow) * dim);
+      if (role === 'dust') a = Math.min(1, 0.5 + tw * 0.35);
+      if (role === 'faint') a = 0.3 + tw * 0.15;
+      const col = q.s > 0.15 ? `hsla(${214 - q.s * 6}, ${70 - q.s * 30}%, ${80 + q.s * 16}%, ${a})` : q.c;
       const sp = Math.hypot(q.x - px, q.y - py);
       ctx.globalAlpha = a; ctx.strokeStyle = col; ctx.fillStyle = col;
-      if (sp > 0.6) { ctx.lineWidth = 1 + q.s * 1.5; ctx.beginPath(); ctx.moveTo(px - (q.x - px) * 2, py - (q.y - py) * 2); ctx.lineTo(q.x, q.y); ctx.stroke(); }
-      else { ctx.beginPath(); ctx.arc(q.x, q.y, 0.7 + q.s * 2.2 + tw * 0.3, 0, 6.29); ctx.fill(); }
+      if (sp > 0.6) { ctx.lineWidth = role === 'dust' ? 0.8 : 1 + q.s * 1.5; ctx.beginPath(); ctx.moveTo(px - (q.x - px) * 2, py - (q.y - py) * 2); ctx.lineTo(q.x, q.y); ctx.stroke(); }
+      else if (role === 'star') {
+        // a bright star: soft halo, small cross-flare, crisp core
+        const R = 6 + tw * 3;
+        const g = ctx.createRadialGradient(q.x, q.y, 0, q.x, q.y, R); g.addColorStop(0, `rgba(235, 243, 255, ${0.55 * glow})`); g.addColorStop(1, 'rgba(235, 243, 255, 0)');
+        ctx.globalAlpha = 1; ctx.fillStyle = g; ctx.beginPath(); ctx.arc(q.x, q.y, R, 0, 6.29); ctx.fill();
+        ctx.strokeStyle = `rgba(225, 236, 255, ${0.35 + 0.25 * tw})`; ctx.lineWidth = 0.7; ctx.beginPath(); ctx.moveTo(q.x - R * 0.8, q.y); ctx.lineTo(q.x + R * 0.8, q.y); ctx.moveTo(q.x, q.y - R * 0.8); ctx.lineTo(q.x, q.y + R * 0.8); ctx.stroke();
+        ctx.fillStyle = '#f7fbff'; ctx.beginPath(); ctx.arc(q.x, q.y, 1.4 + tw * 0.4, 0, 6.29); ctx.fill();
+      }
+      else { ctx.beginPath(); ctx.arc(q.x, q.y, role === 'dust' ? 1 + tw * 0.25 : role === 'faint' ? 1 : 0.7 + q.s * 2.2 + tw * 0.3, 0, 6.29); ctx.fill(); }
     }
     ctx.globalAlpha = 1;
     if (p.on) {
-      const ring = ctx.createRadialGradient(p.x, p.y, 6, p.x, p.y, 34); ring.addColorStop(0, 'rgba(0, 0, 0, 0)'); ring.addColorStop(0.35, `rgba(214, 190, 255, ${0.55 * glow})`); ring.addColorStop(1, 'rgba(0, 0, 0, 0)');
+      const ring = ctx.createRadialGradient(p.x, p.y, 6, p.x, p.y, 34); ring.addColorStop(0, 'rgba(0, 0, 0, 0)'); ring.addColorStop(0.35, `rgba(200, 220, 255, ${0.5 * glow})`); ring.addColorStop(1, 'rgba(0, 0, 0, 0)');
       ctx.fillStyle = ring; ctx.beginPath(); ctx.arc(p.x, p.y, 34, 0, 6.29); ctx.fill();
     }
     ctx.globalCompositeOperation = 'source-over';
-    if (p.on) { ctx.fillStyle = '#000'; ctx.beginPath(); ctx.arc(p.x, p.y, 7, 0, 6.29); ctx.fill(); }
+    if (p.on && !forming) { ctx.fillStyle = '#000'; ctx.beginPath(); ctx.arc(p.x, p.y, 7, 0, 6.29); ctx.fill(); }
+    if (st.form) {
+      const age = st.form.age, fade = Math.min(1, age / 0.7) * Math.min(1, (HOLD - age) / 0.5);
+      ctx.globalAlpha = Math.max(0, fade); ctx.fillStyle = '#e3ecff'; ctx.font = "500 13px 'Geist Mono', ui-monospace, monospace"; ctx.textAlign = 'center';
+      ctx.fillText(st.form.label, w / 2, h - 18); ctx.globalAlpha = 1; ctx.textAlign = 'start';
+    } else {
+      // the question floats in while you play with the stars; clicking answers it
+      st.ask = Math.max(0, Math.min(1, (st.ask || 0) + (p.on ? dt / 0.5 : -dt / 0.6)));
+      const q = props.prompt ?? 'Who am I?';
+      if (st.ask > 0 && q) {
+        ctx.globalAlpha = st.ask; ctx.textAlign = 'center';
+        ctx.fillStyle = '#f2f7ff'; ctx.shadowColor = 'rgba(170, 200, 255, 0.85)'; ctx.shadowBlur = 18;
+        ctx.font = "italic 400 34px 'Iowan Old Style', Georgia, serif"; ctx.fillText(q, w / 2, h / 2 - 6 - (1 - st.ask) * 8);
+        ctx.shadowBlur = 0; ctx.fillStyle = 'rgba(220, 232, 255, 0.6)'; ctx.font = "500 12px 'Geist Mono', ui-monospace, monospace"; ctx.fillText('click to find out', w / 2, h / 2 + 22);
+        ctx.globalAlpha = 1; ctx.textAlign = 'start';
+      } else if (st.t % 600 < 300) {
+        ctx.fillStyle = 'rgba(220, 232, 255, 0.45)'; ctx.font = "500 12px 'Geist Mono', ui-monospace, monospace"; ctx.textAlign = 'center'; ctx.fillText('hover the stars', w / 2, h - 18); ctx.textAlign = 'start';
+      }
+    }
     for (const v of st.waves) { ctx.strokeStyle = `rgba(255, 231, 207, ${(1 - v.r / 260) * 0.5})`; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(v.x, v.y, v.r, 0, 6.29); ctx.stroke(); }
   }
   if (!p.on) { p.vx = 0; p.vy = 0; }

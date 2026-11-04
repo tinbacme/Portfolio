@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>My work carousels: researched patterns</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&amp;family=Instrument+Sans:wght@400;500&amp;display=swap">
+<style>
+@font-face { font-family: "Geist Serif"; src: url("/_blob/7e30fdbbbab8996f8ff56a6dbd54e97f") format("woff2"); font-weight: 400; font-display: swap; }
+body{margin:0}
+.cv { --ease: cubic-bezier(0.22, 1, 0.36, 1); --serif: "Geist Serif", "Iowan Old Style", Georgia, serif; --mono: "Geist Mono", ui-monospace, Menlo, monospace; width: 1440px; box-sizing: border-box; padding: 56px 0 72px; background: #fefdf9; color: #1b2930; font-family: "Instrument Sans", system-ui, sans-serif; }
+.cv h1, .cv h2, .cv h3, .cv p { margin: 0; font-weight: 400; }
+.cv a { color: inherit; text-decoration: none; }
+.cv button { font: inherit; color: inherit; }
+.cv-intro { padding: 0 96px 24px; display: grid; gap: 8px; }
+.cv-intro h1 { font-family: var(--serif); font-size: 44px; }
+.cv-intro p { max-width: 900px; font-size: 16px; line-height: 1.55; color: #5c6670; }
+.cv-sec { padding: 40px 0 8px; border-top: 1px solid #ece7dc; }
+.cv-head { display: flex; gap: 20px; padding: 0 96px 20px; }
+.cv-num { font-family: var(--mono); font-size: 14px; color: #3078e7; padding-top: 8px; }
+.cv-head h2 { font-family: var(--serif); font-size: 30px; }
+.cv-head p { margin-top: 6px; max-width: 900px; font-size: 15px; line-height: 1.5; color: #3d4a52; }
+.cv-head .cv-src { font-family: var(--mono); font-size: 12px; color: #8a9297; }
+.cv-demo { position: relative; overflow: hidden; }
+.cv-img { display: block; width: 100%; height: 100%; object-fit: cover; user-select: none; -webkit-user-drag: none; }
+.cv-ph { display: flex; align-items: flex-end; width: 100%; height: 100%; box-sizing: border-box; padding: 16px; color: #fff; font: 13px var(--mono); }
+.cv-ctrls { position: absolute; left: 0; right: 0; bottom: 18px; display: flex; justify-content: center; align-items: center; gap: 18px; }
+.cv-btn { width: 44px; height: 44px; border-radius: 50%; border: 1px solid #1b2930; background: #fefdf9; cursor: pointer; font-size: 18px; transition: background 0.2s, color 0.2s; }
+.cv-btn:hover { background: #1b2930; color: #fefdf9; }
+.cv-count { font-family: var(--mono); font-size: 15px; letter-spacing: 0.06em; min-width: 92px; text-align: center; }
+.cv :focus-visible { outline: 2px solid #3078e7; outline-offset: 4px; }
+
+/* 1 · cabin-window accordion */
+.acc { position: absolute; left: 100px; right: 100px; top: 10px; height: 420px; display: flex; gap: 16px; }
+.acc-item { position: relative; flex: 1 1 0; min-width: 0; padding: 0; border: 0; background: #f3efe6; border-radius: 110px / 90px; box-shadow: 0 0 0 1px #d6cfbf, inset 0 0 0 10px #f3efe6, 0 18px 30px -22px rgba(27, 41, 48, 0.45); cursor: pointer; transition: flex-grow 0.75s var(--ease), border-radius 0.75s var(--ease); }
+.acc-item.is-on { flex-grow: 5.2; border-radius: 36px; }
+.acc-glass { position: absolute; inset: 10px; overflow: hidden; border-radius: inherit; background: linear-gradient(180deg, #3078e7, #c1dff9); }
+.acc-item .cv-img, .acc-item .cv-ph { position: absolute; inset: 0; transition: transform 0.9s var(--ease), filter 0.6s; }
+.acc-item:not(.is-on) .cv-img, .acc-item:not(.is-on) .cv-ph { transform: scale(1.12); filter: saturate(0.7); }
+.acc-shade { position: absolute; left: 0; right: 0; top: 0; height: 100%; background: repeating-linear-gradient(180deg, #ece6d9 0 10px, #e2dbcc 10px 11px); box-shadow: 0 6px 10px -6px rgba(0, 0, 0, 0.25); transform: translateY(-58%); transition: transform 0.85s var(--ease); }
+.acc-shade::after { content: ""; position: absolute; left: 50%; bottom: 10px; width: 34px; height: 6px; margin-left: -17px; border-radius: 3px; background: #c9c1af; }
+.acc-item.is-on .acc-shade { transform: translateY(-101%); }
+.acc-item:not(.is-on) .cv-ph span { opacity: 0; }
+.acc-item .cv-ph span { transition: opacity 0.4s; }
+.acc-tag { position: absolute; left: 50%; bottom: -30px; translate: -50% 0; font: 12px var(--mono); letter-spacing: 0.12em; color: #8a9297; transition: color 0.3s; }
+.acc-item.is-on .acc-tag { color: #1b2930; }
+.acc-cap { position: absolute; left: 0; right: 0; top: 478px; text-align: center; display: grid; gap: 2px; }
+.acc-cap h3 { font-family: var(--serif); font-size: 19px; }
+.acc-cap p { font-family: var(--mono); font-size: 16px; letter-spacing: -0.02em; }
+
+/* 2 · porthole shelf */
+.sh-track { position: absolute; left: 0; right: 0; top: 0; height: 470px; display: flex; gap: 36px; overflow-x: auto; overflow-y: hidden; padding: 10px 420px; box-sizing: border-box; scroll-snap-type: x mandatory; scrollbar-width: none; cursor: grab; }
+.sh-track::-webkit-scrollbar { display: none; }
+.sh-track.is-drag { scroll-snap-type: none; cursor: grabbing; }
+.sh-card { flex: 0 0 600px; scroll-snap-align: center; display: grid; gap: 14px; user-select: none; }
+.sh-frame { position: relative; height: 360px; border-radius: 48px; padding: 12px; background: #f3efe6; box-shadow: 0 0 0 1px #d6cfbf, 0 20px 34px -24px rgba(27, 41, 48, 0.5); }
+.sh-par { position: absolute; inset: 12px; overflow: hidden; border-radius: 38px; }
+.sh-par .cv-img, .sh-par .cv-ph { position: absolute; top: 0; left: -12%; width: 124%; height: 100%; will-change: transform; }
+.sh-meta { display: grid; gap: 2px; padding: 0 12px; }
+.sh-meta b { font-family: var(--serif); font-weight: 400; font-size: 18px; }
+.sh-meta span { font-family: var(--mono); font-size: 14px; color: #3d4a52; }
+
+/* 3 · stamp deck */
+.st-deck { position: absolute; left: 50%; top: 230px; width: 0; height: 0; }
+.st-stamp { position: absolute; left: -190px; top: -150px; width: 380px; height: 300px; padding: 0; border: 0; background: none; cursor: pointer; transition: transform 0.7s var(--ease), opacity 0.4s; filter: drop-shadow(0 1px 1px rgba(40, 32, 20, 0.16)) drop-shadow(0 10px 14px rgba(40, 32, 20, 0.14)); }
+.st-paper { position: absolute; inset: 0; padding: 16px; box-sizing: border-box; display: grid; grid-template-rows: 1fr auto; gap: 10px; background: radial-gradient(circle at 50% 50%, transparent 5.5px, #fbf8f1 6px) -9px -9px / 18px 18px; }
+.st-paper::before { content: ""; position: absolute; inset: 9px; background: #fbf8f1; z-index: 0; }
+.st-art { position: relative; z-index: 1; overflow: hidden; border: 1px solid #d9d0bd; }
+.st-row { position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: baseline; gap: 8px; padding: 0 2px; text-align: left; }
+.st-row b { font-family: var(--serif); font-weight: 400; font-size: 16px; }
+.st-row span { font: 12px var(--mono); color: #5c6670; white-space: nowrap; }
+.st-pm { position: absolute; right: -26px; top: -22px; width: 124px; height: 124px; color: #3d5a8a; font-family: var(--mono); mix-blend-mode: multiply; opacity: 0; scale: 1.5; transition: opacity 0.12s, scale 0.12s; pointer-events: none; z-index: 2; }
+.st-stamp.is-marked .st-pm { opacity: 0.8; scale: 1; transition: opacity 0.1s 0.35s, scale 0.28s cubic-bezier(0.2, 1.6, 0.4, 1) 0.35s; }
+.st-hint { position: absolute; left: 0; right: 0; bottom: 22px; text-align: center; font: 13px var(--mono); color: #8a9297; }
+
+/* 4 · inertial strip */
+.in-view { position: absolute; left: 0; right: 0; top: 0; height: 450px; overflow: hidden; cursor: none; touch-action: pan-y; }
+.in-track { position: absolute; left: 0; top: 14px; display: flex; gap: 32px; will-change: transform; }
+.in-card { flex: 0 0 540px; display: grid; gap: 14px; user-select: none; }
+.in-img { display: block; height: 340px; border-radius: 22px; overflow: hidden; box-shadow: 0 20px 34px -24px rgba(27, 41, 48, 0.5); transition: filter 0.5s; }
+.in-meta { display: grid; gap: 2px; padding: 0 4px; }
+.in-meta b { font-family: var(--serif); font-weight: 400; font-size: 18px; }
+.in-meta span { font: 14px var(--mono); color: #3d4a52; }
+.in-pass { position: absolute; left: 0; top: 0; display: flex; align-items: center; gap: 6px; padding: 7px 12px 7px 14px; border-radius: 6px; background: #1b2930; color: #fefdf9; font: 600 12px var(--mono); letter-spacing: 0.14em; pointer-events: none; opacity: 0; transition: opacity 0.3s, scale 0.25s var(--ease); -webkit-mask: radial-gradient(circle 5px at 0 50%, transparent 98%, #000) , radial-gradient(circle 5px at 100% 50%, transparent 98%, #000); -webkit-mask-composite: source-in; mask-composite: intersect; }
+.in-pass.is-on { opacity: 1; }
+.in-pass.is-down { scale: 0.9; }
+.in-flap { display: inline-flex; gap: 2px; }
+.fl { position: relative; display: inline-block; width: 18px; height: 26px; line-height: 26px; border-radius: 3px; background: #1b2930; color: #fefdf9; text-align: center; overflow: hidden; perspective: 80px; }
+.fl.is-flip span { animation: flap 0.42s var(--ease); }
+@keyframes flap { 0% { transform: rotateX(0); } 45% { transform: rotateX(-90deg); opacity: 0.4; } 55% { transform: rotateX(90deg); opacity: 0.4; } 100% { transform: rotateX(0); } }
+.in-count { display: inline-flex; align-items: center; gap: 8px; justify-content: center; }
+
+/* 5 · departure board */
+.db { position: absolute; left: 96px; right: 96px; top: 0; padding: 22px 26px 18px; border-radius: 18px; background: #16191c; color: #f4d35e; font-family: var(--mono); box-shadow: 0 24px 40px -26px rgba(0, 0, 0, 0.6); }
+.db-top { display: flex; justify-content: space-between; font-size: 13px; letter-spacing: 0.18em; color: #e8e2cf; padding-bottom: 14px; }
+.db-cols, .db-row { display: grid; grid-template-columns: 90px 110px 1fr 160px 190px; gap: 16px; align-items: center; }
+.db-cols { font-size: 11px; letter-spacing: 0.16em; color: #8b8f93; padding: 8px 12px; border-bottom: 1px solid #2c3136; }
+.db-row { position: relative; padding: 16px 12px; font-size: 17px; letter-spacing: 0.06em; border-bottom: 1px solid #23272b; text-transform: uppercase; transition: background 0.3s, color 0.3s; }
+.db-row:hover, .db-row:focus-visible { background: #20252a; color: #fff6c8; }
+.db-dest { font-size: 18px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.db-status { height: 22px; overflow: hidden; }
+.db-roll { display: grid; transition: transform 0.45s var(--ease); }
+.db-roll span { height: 22px; line-height: 22px; }
+.db-roll span:last-child { color: #7fd1a4; }
+.db-row:hover .db-roll, .db-row:focus-visible .db-roll { transform: translateY(-22px); }
+.db-float { position: absolute; left: 0; top: 0; width: 300px; height: 190px; pointer-events: none; z-index: 5; opacity: 0; transition: opacity 0.3s; }
+.db-float.is-on { opacity: 1; }
+.db-pv { position: absolute; inset: 0; border-radius: 14px; overflow: hidden; opacity: 0; scale: 0.92; transition: opacity 0.3s, scale 0.45s var(--ease); box-shadow: 0 24px 40px -20px rgba(0, 0, 0, 0.6); }
+.db-pv.is-on { opacity: 1; scale: 1; }
+@media (prefers-reduced-motion: reduce) { .cv * { transition-duration: 0.01ms !important; animation: none !important; } }
+</style>
+</helmet>
+<div class="cv" ref="{{ root }}">
+  <div class="cv-intro"><h1>My work · 5 carousels, rebuilt from research</h1><p>Patterns that keep showing up in award-winning portfolios and in posts from interaction designers, adapted to your window, sky, stamp and paper theme. The recurring craft: respond from the first pixel of a drag, snap after momentum, keep neighbours readable, always offer buttons and keyboard, and drop the motion under reduced-motion. With only five projects, bounded tracks and decks beat infinite loops.</p></div>
+
+  <section class="cv-sec" aria-labelledby="cv-h1">
+    <header class="cv-head"><span class="cv-num">01</span><div><h2 id="cv-h1">Cabin-window accordion</h2><p>A row of portholes with the shades half down. Hover, focus or tap one: it widens into the full cover and its shade slides up. The others stay as narrow windows, so you always see every project.</p><p class="cv-src">Pattern: accordion / expanding gallery (Framer "Accordion Gallery", 21st.dev hover-expand)</p></div></header>
+    <div class="cv-demo" style="height: 560px;"><div class="acc"><button class="acc-item is-on" type="button" data-i="0" aria-label="Window Search Box"><span class="acc-glass"><img class="cv-img" src="/_blob/2a4b16aaf0284c63e51aa51dc7ad5996" alt="" draggable="false" style=""><span class="acc-shade" aria-hidden="true"></span></span><span class="acc-tag">WIN</span></button><button class="acc-item" type="button" data-i="1" aria-label="Imagining an agentic Bing"><span class="acc-glass"><span class="cv-ph" style="background: linear-gradient(160deg, #3078e7, #c1dff9);"><span>[Cover · agent layer concept]</span></span><span class="acc-shade" aria-hidden="true"></span></span><span class="acc-tag">BNG</span></button><button class="acc-item" type="button" data-i="2" aria-label="Delight that drives growth"><span class="acc-glass"><span class="cv-ph" style="background: linear-gradient(160deg, #6f8a3e, #cfdca6);"><span>[Cover · World Cup campaign]</span></span><span class="acc-shade" aria-hidden="true"></span></span><span class="acc-tag">CUP</span></button><button class="acc-item" type="button" data-i="3" aria-label="Bing Real Estate"><span class="acc-glass"><span class="cv-ph" style="background: linear-gradient(160deg, #b8754a, #f1d9c1);"><span>[Cover · rental flows]</span></span><span class="acc-shade" aria-hidden="true"></span></span><span class="acc-tag">HOM</span></button><button class="acc-item" type="button" data-i="4" aria-label="Salesforce Manage Users"><span class="acc-glass"><img class="cv-img" src="/_blob/f931dcc4cb51782b134276f3c1c53d8a" alt="" draggable="false" style=""><span class="acc-shade" aria-hidden="true"></span></span><span class="acc-tag">SFD</span></button></div><div class="acc-cap" aria-live="polite"><h3>Window Search Box</h3><p>A new way of interacting with your computer</p></div></div>
+  </section>
+  <section class="cv-sec" aria-labelledby="cv-h2">
+    <header class="cv-head"><span class="cv-num">02</span><div><h2 id="cv-h2">Porthole shelf with parallax</h2><p>A native scroll-snap shelf (trackpad, touch, mouse drag or arrows). Each cover is overscaled inside its window frame and drifts slower than the frame, like the ground sliding past while you taxi.</p><p class="cv-src">Pattern: Apple-style shelf + Codrops "scrollable and draggable parallax slider"</p></div></header>
+    <div class="cv-demo" style="height: 560px;"><div class="sh-track" tabindex="0" aria-label="Projects, scroll or drag sideways"><a class="sh-card" href="#work" draggable="false" aria-label="Window Search Box case study"><span class="sh-frame"><span class="sh-par"><img class="cv-img" src="/_blob/2a4b16aaf0284c63e51aa51dc7ad5996" alt="" draggable="false" style=""></span></span><span class="sh-meta"><b>Window Search Box</b><span>A new way of interacting with your computer</span></span></a><a class="sh-card" href="#work" draggable="false" aria-label="Imagining an agentic Bing case study"><span class="sh-frame"><span class="sh-par"><span class="cv-ph" style="background: linear-gradient(160deg, #3078e7, #c1dff9);"><span>[Cover · agent layer concept]</span></span></span></span><span class="sh-meta"><b>Imagining an agentic Bing</b><span>What an agent layer on top of search could look like</span></span></a><a class="sh-card" href="#work" draggable="false" aria-label="Delight that drives growth case study"><span class="sh-frame"><span class="sh-par"><span class="cv-ph" style="background: linear-gradient(160deg, #6f8a3e, #cfdca6);"><span>[Cover · World Cup campaign]</span></span></span></span><span class="sh-meta"><b>Delight that drives growth</b><span>Holidays, events and the World Cup on Bing</span></span></a><a class="sh-card" href="#work" draggable="false" aria-label="Bing Real Estate case study"><span class="sh-frame"><span class="sh-par"><span class="cv-ph" style="background: linear-gradient(160deg, #b8754a, #f1d9c1);"><span>[Cover · rental flows]</span></span></span></span><span class="sh-meta"><b>Bing Real Estate</b><span>Growing a rental marketplace 15% as its only designer</span></span></a><a class="sh-card" href="#work" draggable="false" aria-label="Salesforce Manage Users case study"><span class="sh-frame"><span class="sh-par"><img class="cv-img" src="/_blob/f931dcc4cb51782b134276f3c1c53d8a" alt="" draggable="false" style=""></span></span><span class="sh-meta"><b>Salesforce Manage Users</b><span>A 2-week MVP that cut partner support cases 32%</span></span></a></div><div class="cv-ctrls"><button class="cv-btn sh-prev" type="button" aria-label="Previous project">←</button><span class="cv-count sh-count">01 / 05</span><button class="cv-btn sh-next" type="button" aria-label="Next project">→</button></div></div>
+  </section>
+  <section class="cv-sec" aria-labelledby="cv-h3">
+    <header class="cv-head"><span class="cv-num">03</span><div><h2 id="cv-h3">Postage-stamp deck</h2><p>Your projects as stamps in a loose stack. Hover fans them out like a hand of cards; click the top stamp and it is posted to the back as the next one gets a postmark thunked on.</p><p class="cv-src">Pattern: stacked deck (Swiper "cards stack", Emil Kowalski stacked toasts)</p></div></header>
+    <div class="cv-demo" style="height: 560px;"><div class="st-deck" aria-label="Project stamps. Click the top stamp to see the next."><button class="st-stamp" type="button" data-i="0" aria-label="Window Search Box"><span class="st-paper"><span class="st-art"><img class="cv-img" src="/_blob/2a4b16aaf0284c63e51aa51dc7ad5996" alt="" draggable="false" style=""></span><span class="st-row"><b>Window Search Box</b><span>Microsoft · 2024</span></span></span><svg class="st-pm" viewBox="0 0 120 120" aria-hidden="true"><g fill="none" stroke="currentColor"><circle cx="60" cy="60" r="44" stroke-width="3"/><circle cx="60" cy="60" r="34" stroke-width="1.5"/><path d="M6 46c8-6 16-6 24 0s16 6 24 0" stroke-width="3"/><path d="M6 74c8-6 16-6 24 0s16 6 24 0" stroke-width="3"/></g><text x="60" y="56" text-anchor="middle" font-size="12" font-weight="700" letter-spacing="2" fill="currentColor">WIN</text><text x="60" y="73" text-anchor="middle" font-size="11" letter-spacing="2" fill="currentColor">2024</text></svg></button><button class="st-stamp" type="button" data-i="1" aria-label="Imagining an agentic Bing"><span class="st-paper"><span class="st-art"><span class="cv-ph" style="background: linear-gradient(160deg, #3078e7, #c1dff9);"><span>[Cover · agent layer concept]</span></span></span><span class="st-row"><b>Imagining an agentic Bing</b><span>Microsoft · 2025</span></span></span><svg class="st-pm" viewBox="0 0 120 120" aria-hidden="true"><g fill="none" stroke="currentColor"><circle cx="60" cy="60" r="44" stroke-width="3"/><circle cx="60" cy="60" r="34" stroke-width="1.5"/><path d="M6 46c8-6 16-6 24 0s16 6 24 0" stroke-width="3"/><path d="M6 74c8-6 16-6 24 0s16 6 24 0" stroke-width="3"/></g><text x="60" y="56" text-anchor="middle" font-size="12" font-weight="700" letter-spacing="2" fill="currentColor">BNG</text><text x="60" y="73" text-anchor="middle" font-size="11" letter-spacing="2" fill="currentColor">2025</text></svg></button><button class="st-stamp" type="button" data-i="2" aria-label="Delight that drives growth"><span class="st-paper"><span class="st-art"><span class="cv-ph" style="background: linear-gradient(160deg, #6f8a3e, #cfdca6);"><span>[Cover · World Cup campaign]</span></span></span><span class="st-row"><b>Delight that drives growth</b><span>Microsoft · 2023</span></span></span><svg class="st-pm" viewBox="0 0 120 120" aria-hidden="true"><g fill="none" stroke="currentColor"><circle cx="60" cy="60" r="44" stroke-width="3"/><circle cx="60" cy="60" r="34" stroke-width="1.5"/><path d="M6 46c8-6 16-6 24 0s16 6 24 0" stroke-width="3"/><path d="M6 74c8-6 16-6 24 0s16 6 24 0" stroke-width="3"/></g><text x="60" y="56" text-anchor="middle" font-size="12" font-weight="700" letter-spacing="2" fill="currentColor">CUP</text><text x="60" y="73" text-anchor="middle" font-size="11" letter-spacing="2" fill="currentColor">2023</text></svg></button><button class="st-stamp" type="button" data-i="3" aria-label="Bing Real Estate"><span class="st-paper"><span class="st-art"><span class="cv-ph" style="background: linear-gradient(160deg, #b8754a, #f1d9c1);"><span>[Cover · rental flows]</span></span></span><span class="st-row"><b>Bing Real Estate</b><span>Microsoft · 2022</span></span></span><svg class="st-pm" viewBox="0 0 120 120" aria-hidden="true"><g fill="none" stroke="currentColor"><circle cx="60" cy="60" r="44" stroke-width="3"/><circle cx="60" cy="60" r="34" stroke-width="1.5"/><path d="M6 46c8-6 16-6 24 0s16 6 24 0" stroke-width="3"/><path d="M6 74c8-6 16-6 24 0s16 6 24 0" stroke-width="3"/></g><text x="60" y="56" text-anchor="middle" font-size="12" font-weight="700" letter-spacing="2" fill="currentColor">HOM</text><text x="60" y="73" text-anchor="middle" font-size="11" letter-spacing="2" fill="currentColor">2022</text></svg></button><button class="st-stamp" type="button" data-i="4" aria-label="Salesforce Manage Users"><span class="st-paper"><span class="st-art"><img class="cv-img" src="/_blob/f931dcc4cb51782b134276f3c1c53d8a" alt="" draggable="false" style=""></span><span class="st-row"><b>Salesforce Manage Users</b><span>Salesforce · 2021</span></span></span><svg class="st-pm" viewBox="0 0 120 120" aria-hidden="true"><g fill="none" stroke="currentColor"><circle cx="60" cy="60" r="44" stroke-width="3"/><circle cx="60" cy="60" r="34" stroke-width="1.5"/><path d="M6 46c8-6 16-6 24 0s16 6 24 0" stroke-width="3"/><path d="M6 74c8-6 16-6 24 0s16 6 24 0" stroke-width="3"/></g><text x="60" y="56" text-anchor="middle" font-size="12" font-weight="700" letter-spacing="2" fill="currentColor">SFD</text><text x="60" y="73" text-anchor="middle" font-size="11" letter-spacing="2" fill="currentColor">2021</text></svg></button></div><p class="st-hint">Hover to fan the stamps · click the top one to post it to the back</p></div>
+  </section>
+  <section class="cv-sec" aria-labelledby="cv-h4">
+    <header class="cv-head"><span class="cv-num">04</span><div><h2 id="cv-h4">Inertial strip with travel cues</h2><p>Throw it: drag with momentum and a gentle skew from speed, then it snaps to the nearest card. A boarding-pass tag follows your cursor and a split-flap counter flips to the current project.</p><p class="cv-src">Pattern: inertial drag strip (GSAP Draggable inertia, Codrops 3D infinite carousel), toned down</p></div></header>
+    <div class="cv-demo" style="height: 560px;"><div class="in-view" tabindex="0" aria-label="Projects. Drag, or use the arrow keys."><div class="in-track"><a class="in-card" href="#work" draggable="false" aria-label="Window Search Box case study"><span class="in-img"><img class="cv-img" src="/_blob/2a4b16aaf0284c63e51aa51dc7ad5996" alt="" draggable="false" style=""></span><span class="in-meta"><b>Window Search Box</b><span>A new way of interacting with your computer</span></span></a><a class="in-card" href="#work" draggable="false" aria-label="Imagining an agentic Bing case study"><span class="in-img"><span class="cv-ph" style="background: linear-gradient(160deg, #3078e7, #c1dff9);"><span>[Cover · agent layer concept]</span></span></span><span class="in-meta"><b>Imagining an agentic Bing</b><span>What an agent layer on top of search could look like</span></span></a><a class="in-card" href="#work" draggable="false" aria-label="Delight that drives growth case study"><span class="in-img"><span class="cv-ph" style="background: linear-gradient(160deg, #6f8a3e, #cfdca6);"><span>[Cover · World Cup campaign]</span></span></span><span class="in-meta"><b>Delight that drives growth</b><span>Holidays, events and the World Cup on Bing</span></span></a><a class="in-card" href="#work" draggable="false" aria-label="Bing Real Estate case study"><span class="in-img"><span class="cv-ph" style="background: linear-gradient(160deg, #b8754a, #f1d9c1);"><span>[Cover · rental flows]</span></span></span><span class="in-meta"><b>Bing Real Estate</b><span>Growing a rental marketplace 15% as its only designer</span></span></a><a class="in-card" href="#work" draggable="false" aria-label="Salesforce Manage Users case study"><span class="in-img"><img class="cv-img" src="/_blob/f931dcc4cb51782b134276f3c1c53d8a" alt="" draggable="false" style=""></span><span class="in-meta"><b>Salesforce Manage Users</b><span>A 2-week MVP that cut partner support cases 32%</span></span></a></div></div><div class="in-pass" aria-hidden="true"><span>DRAG</span><svg viewBox="0 0 24 24" width="14" height="14"><path d="M2 13l8-1 5-7h2l-2 7 5-1 2-2h1l-1 3 1 3h-1l-2-2-5-1 2 7h-2l-5-7-8-1z" fill="currentColor"/></svg></div><div class="cv-ctrls"><button class="cv-btn in-prev" type="button" aria-label="Previous project">←</button><span class="cv-count in-count"><span class="in-flap"><span class="fl"><span>0</span></span><span class="fl"><span>0</span></span></span> / 05</span><button class="cv-btn in-next" type="button" aria-label="Next project">→</button></div></div>
+  </section>
+  <section class="cv-sec" aria-labelledby="cv-h5">
+    <header class="cv-head"><span class="cv-num">05</span><div><h2 id="cv-h5">Departure board index</h2><p>A typographic list of projects styled as a departures board. Hover a row and its cover follows your cursor on a spring, and the status rolls over to "View case". Lightest to build and great on mobile.</p><p class="cv-src">Pattern: index list with cursor-following preview (Framer "Project Hover List", Awwwards follow-cursor)</p></div></header>
+    <div class="cv-demo" style="height: 560px;"><div class="db"><div class="db-top"><span>DEPARTURES · SELECTED WORK</span><span class="db-clock">PDX</span></div><div class="db-cols"><span>YEAR</span><span>FLIGHT</span><span>DESTINATION</span><span>VIA</span><span>STATUS</span></div><a class="db-row" href="#work" data-i="0"><span>2024</span><span>TL 01</span><span class="db-dest">Window Search Box</span><span>Microsoft</span><span class="db-status"><span class="db-roll"><span>ON TIME</span><span>VIEW CASE →</span></span></span></a><a class="db-row" href="#work" data-i="1"><span>2025</span><span>TL 02</span><span class="db-dest">Imagining an agentic Bing</span><span>Microsoft</span><span class="db-status"><span class="db-roll"><span>NDA · ASK ME</span><span>VIEW CASE →</span></span></span></a><a class="db-row" href="#work" data-i="2"><span>2023</span><span>TL 03</span><span class="db-dest">Delight that drives growth</span><span>Microsoft</span><span class="db-status"><span class="db-roll"><span>BOARDING</span><span>VIEW CASE →</span></span></span></a><a class="db-row" href="#work" data-i="3"><span>2022</span><span>TL 04</span><span class="db-dest">Bing Real Estate</span><span>Microsoft</span><span class="db-status"><span class="db-roll"><span>ON TIME</span><span>VIEW CASE →</span></span></span></a><a class="db-row" href="#work" data-i="4"><span>2021</span><span>TL 05</span><span class="db-dest">Salesforce Manage Users</span><span>Salesforce</span><span class="db-status"><span class="db-roll"><span>LANDED</span><span>VIEW CASE →</span></span></span></a></div><div class="db-float" aria-hidden="true"><span class="db-pv" data-i="0"><img class="cv-img" src="/_blob/2a4b16aaf0284c63e51aa51dc7ad5996" alt="" draggable="false" style=""></span><span class="db-pv" data-i="1"><span class="cv-ph" style="background: linear-gradient(160deg, #3078e7, #c1dff9);"><span>[Cover · agent layer concept]</span></span></span><span class="db-pv" data-i="2"><span class="cv-ph" style="background: linear-gradient(160deg, #6f8a3e, #cfdca6);"><span>[Cover · World Cup campaign]</span></span></span><span class="db-pv" data-i="3"><span class="cv-ph" style="background: linear-gradient(160deg, #b8754a, #f1d9c1);"><span>[Cover · rental flows]</span></span></span><span class="db-pv" data-i="4"><img class="cv-img" src="/_blob/f931dcc4cb51782b134276f3c1c53d8a" alt="" draggable="false" style=""></span></div></div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":3640}}'>
+const CAPS = [
+  { title: 'Window Search Box', sub: 'A new way of interacting with your computer' },
+  { title: 'Imagining an agentic Bing', sub: 'What an agent layer on top of search could look like' },
+  { title: 'Delight that drives growth', sub: 'Holidays, events and the World Cup on Bing' },
+  { title: 'Bing Real Estate', sub: 'Growing a rental marketplace 15% as its only designer' },
+  { title: 'Salesforce Manage Users', sub: 'A 2-week MVP that cut partner support cases 32%' },
+];
+const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+const zoomK = (el) => (el.offsetWidth ? el.getBoundingClientRect().width / el.offsetWidth : 1) || 1;
+const reduce = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function setup(root) {
+  const offs = [], on = (el, ev, fn, opt) => { el.addEventListener(ev, fn, opt); offs.push(() => el.removeEventListener(ev, fn, opt)); };
+  const n = CAPS.length;
+
+  // 1 · cabin-window accordion: hover, focus or tap widens a window and lifts its shade
+  const acc = [...root.querySelectorAll('.acc-item')], cap = root.querySelector('.acc-cap');
+  const setAcc = (i) => {
+    acc.forEach((b, j) => { b.classList.toggle('is-on', i === j); b.setAttribute('aria-pressed', String(i === j)); });
+    cap.querySelector('h3').textContent = CAPS[i].title; cap.querySelector('p').textContent = CAPS[i].sub;
+  };
+  acc.forEach((b, i) => { on(b, 'mouseenter', () => setAcc(i)); on(b, 'focus', () => setAcc(i)); on(b, 'click', () => setAcc(i)); });
+  setAcc(0);
+
+  // 2 · porthole shelf: native scroll-snap, mouse drag, and parallax inside each frame
+  const tr = root.querySelector('.sh-track'), cards = [...tr.querySelectorAll('.sh-card')], cnt = root.querySelector('.sh-count');
+  const shelf = { idx: 0 };
+  const shelfPaint = () => {
+    const r = tr.getBoundingClientRect(), mid = r.left + r.width / 2; let best = 0, bd = 1e9;
+    cards.forEach((c, i) => {
+      const cr = c.getBoundingClientRect(), off = (cr.left + cr.width / 2 - mid) / cr.width;
+      c.querySelector('.cv-img, .cv-ph').style.transform = `translateX(${clamp(-off * 9, -11, 11)}%)`;
+      if (Math.abs(off) < bd) { bd = Math.abs(off); best = i; }
+    });
+    shelf.idx = best; cnt.textContent = `0${best + 1} / 0${n}`;
+  };
+  const goShelf = (d) => { const c = cards[clamp(shelf.idx + d, 0, n - 1)]; tr.scrollTo({ left: c.offsetLeft - (tr.clientWidth - c.offsetWidth) / 2, behavior: reduce() ? 'auto' : 'smooth' }); };
+  on(tr, 'scroll', () => requestAnimationFrame(shelfPaint), { passive: true });
+  on(root.querySelector('.sh-prev'), 'click', () => goShelf(-1)); on(root.querySelector('.sh-next'), 'click', () => goShelf(1));
+  on(tr, 'keydown', (e) => { if (e.key === 'ArrowRight') { goShelf(1); e.preventDefault(); } if (e.key === 'ArrowLeft') { goShelf(-1); e.preventDefault(); } });
+  let sd = null;
+  on(tr, 'pointerdown', (e) => { if (e.pointerType !== 'mouse') return; sd = { x: e.clientX, s: tr.scrollLeft, k: zoomK(tr), moved: false }; tr.setPointerCapture(e.pointerId); tr.classList.add('is-drag'); });
+  on(tr, 'pointermove', (e) => { if (!sd) return; const dx = (e.clientX - sd.x) / sd.k; if (Math.abs(dx) > 4) sd.moved = true; tr.scrollLeft = sd.s - dx; });
+  const endShelf = () => { if (!sd) return; tr._moved = sd.moved; sd = null; tr.classList.remove('is-drag'); shelfPaint(); goShelf(0); setTimeout(() => { tr._moved = false; }, 0); };
+  on(tr, 'pointerup', endShelf); on(tr, 'pointercancel', endShelf);
+  on(tr, 'click', (e) => { if (tr._moved) { e.preventDefault(); e.stopPropagation(); } }, true);
+  shelfPaint();
+
+  // 3 · postage-stamp deck: fan on hover, click the top stamp to post it to the back
+  const deckDemo = root.querySelector('.st-deck').parentElement, stamps = [...root.querySelectorAll('.st-stamp')];
+  const ROT = [-2, 3, -4, 2.5, -1.5], SLOT = [0, -1, 1, -2, 2];
+  let order = stamps.map((_, i) => i), fan = false, busy = false;
+  const layoutDeck = () => order.forEach((si, k) => {
+    const el = stamps[si], s = SLOT[k];
+    el.style.zIndex = String(10 - k);
+    el.style.transform = fan ? `translate(${s * 190}px, ${Math.abs(s) * 18 + 10}px) rotate(${s * 6}deg)` : `translate(${k * 10}px, ${-k * 9}px) rotate(${ROT[si]}deg)`;
+    el.setAttribute('aria-label', `${CAPS[si].title}${k === 0 ? '. Click for the next project.' : ''}`);
+  });
+  const mark = () => stamps.forEach((el, i) => el.classList.toggle('is-marked', i === order[0]));
+  on(deckDemo, 'mouseenter', () => { fan = true; layoutDeck(); }); on(deckDemo, 'mouseleave', () => { fan = false; layoutDeck(); });
+  stamps.forEach((el, si) => on(el, 'click', () => {
+    if (busy) return;
+    if (order[0] !== si) { order = [si, ...order.filter((x) => x !== si)]; layoutDeck(); mark(); return; }
+    busy = true; el.style.transform = `translate(40px, -70px) rotate(9deg) scale(1.03)`;
+    setTimeout(() => { order.push(order.shift()); layoutDeck(); mark(); busy = false; }, reduce() ? 0 : 320);
+  }));
+  layoutDeck(); mark();
+
+  // 4 · inertial strip: drag with momentum, projected snap, speed skew, boarding-pass cursor, split-flap counter
+  const view = root.querySelector('.in-view'), track = root.querySelector('.in-track'), icards = [...track.children], pass = root.querySelector('.in-pass'), flaps = [...root.querySelectorAll('.in-flap .fl')], demo4 = view.parentElement;
+  const CW = 540 + 32, base = (1440 - 540) / 2, minX = base - (n - 1) * CW, maxX = base;
+  const S = { x: base, v: 0, to: base, drag: null, idx: -1, skew: 0, px: 0, py: 0, tx: 0, ty: 0, moved: false };
+  const setIdx = (i) => {
+    if (i === S.idx) return; const first = S.idx < 0; S.idx = i; const txt = String(i + 1).padStart(2, '0');
+    flaps.forEach((f, j) => { if (first) { f.firstChild.textContent = txt[j]; return; } if (f.firstChild.textContent === txt[j]) return; f.classList.remove('is-flip'); void f.offsetWidth; f.classList.add('is-flip'); setTimeout(() => { f.firstChild.textContent = txt[j]; }, 190); });
+  };
+  const snapIndex = (x) => clamp(Math.round((base - x) / CW), 0, n - 1);
+  const goStrip = (i) => { S.to = base - clamp(i, 0, n - 1) * CW; };
+  on(root.querySelector('.in-prev'), 'click', () => goStrip(snapIndex(S.to) - 1)); on(root.querySelector('.in-next'), 'click', () => goStrip(snapIndex(S.to) + 1));
+  on(view, 'keydown', (e) => { if (e.key === 'ArrowRight') { goStrip(snapIndex(S.to) + 1); e.preventDefault(); } if (e.key === 'ArrowLeft') { goStrip(snapIndex(S.to) - 1); e.preventDefault(); } });
+  const local = (e, el) => { const r = el.getBoundingClientRect(), k = zoomK(el); return { x: (e.clientX - r.left) / k, y: (e.clientY - r.top) / k }; };
+  on(view, 'pointerdown', (e) => { S.drag = { x0: e.clientX, xs: S.x, k: zoomK(view), lx: S.x, lt: performance.now(), vel: 0 }; S.v = 0; S.moved = false; view.setPointerCapture(e.pointerId); pass.classList.add('is-down'); });
+  on(view, 'pointermove', (e) => {
+    const p = local(e, demo4); S.tx = p.x + 16; S.ty = p.y + 18; pass.classList.add('is-on');
+    const d = S.drag; if (!d) return;
+    let nx = d.xs + (e.clientX - d.x0) / d.k; if (Math.abs(nx - d.xs) > 5) S.moved = true;
+    if (nx > maxX) nx = maxX + (nx - maxX) * 0.35; if (nx < minX) nx = minX + (nx - minX) * 0.35;   // rubber-band at the ends
+    const now = performance.now(), dt = Math.max(1, now - d.lt); d.vel = d.vel * 0.6 + ((nx - d.lx) / dt * 1000) * 0.4; d.lx = nx; d.lt = now;
+    S.x = nx; S.to = nx;
+  });
+  const release = () => { const d = S.drag; if (!d) return; S.drag = null; pass.classList.remove('is-down'); S.v = clamp(d.vel, -4200, 4200); const projected = S.x + S.v / 4; S.to = base - snapIndex(projected) * CW; };
+  on(view, 'pointerup', release); on(view, 'pointercancel', release);
+  on(view, 'pointerleave', () => pass.classList.remove('is-on'));
+  on(view, 'click', (e) => { if (S.moved) { e.preventDefault(); e.stopPropagation(); } }, true);
+
+  // 5 · departure board: the hovered row's cover follows the cursor on a spring
+  const db = root.querySelector('.db'), demo5 = db.parentElement, fl = root.querySelector('.db-float'), pvs = [...fl.children];
+  const F = { x: 0, y: 0, tx: 0, ty: 0, live: false };
+  root.querySelectorAll('.db-row').forEach((row) => {
+    const i = +row.dataset.i;
+    const show = () => { pvs.forEach((p, j) => p.classList.toggle('is-on', i === j)); fl.classList.add('is-on'); };
+    on(row, 'mouseenter', show); on(row, 'focus', () => { show(); const r = row.getBoundingClientRect(), d = demo5.getBoundingClientRect(), k = zoomK(demo5); F.tx = (r.right - d.left) / k - 340; F.ty = (r.top - d.top) / k; if (!F.live) { F.x = F.tx; F.y = F.ty; F.live = true; } });
+  });
+  on(db, 'mouseleave', () => fl.classList.remove('is-on'));
+  on(root.querySelector('.db'), 'focusout', () => fl.classList.remove('is-on'));
+  on(demo5, 'pointermove', (e) => { const p = local(e, demo5); F.tx = p.x + 24; F.ty = p.y - 214; if (!F.live) { F.x = F.tx; F.y = F.ty; F.live = true; } });
+
+  // one loop for the physics in 4 and 5
+  let raf = 0, last = 0;
+  const loop = (now) => {
+    const dt = Math.min(0.05, last ? (now - last) / 1000 : 1 / 60); last = now;
+    if (!S.drag) {
+      if (reduce()) { S.x = S.to; S.v = 0; }
+      else { const om = 7; S.v += (om * om * (S.to - S.x) - 2 * om * S.v) * dt; S.x += S.v * dt; }
+    }
+    const vNow = S.drag ? S.drag.vel : S.v, sk = reduce() ? 0 : clamp(-vNow / 320, -5, 5);
+    S.skew += (sk - S.skew) * (1 - Math.exp(-dt / 0.12));
+    track.style.transform = `translateX(${S.x.toFixed(1)}px)`;
+    icards.forEach((c) => { c.style.transform = `skewX(${S.skew.toFixed(2)}deg)`; });
+    setIdx(snapIndex(S.x));
+    const a = 1 - Math.exp(-dt / 0.09); S.px += (S.tx - S.px) * a; S.py += (S.ty - S.py) * a;
+    pass.style.transform = `translate(${S.px.toFixed(1)}px, ${S.py.toFixed(1)}px)`;
+    const b = 1 - Math.exp(-dt / 0.14), ox = F.x; F.x += (F.tx - F.x) * b; F.y += (F.ty - F.y) * b;
+    const rot = reduce() ? 0 : clamp((F.x - ox) * 0.6, -8, 8);
+    fl.style.transform = `translate(${F.x.toFixed(1)}px, ${F.y.toFixed(1)}px) rotate(${rot.toFixed(2)}deg)`;
+    raf = requestAnimationFrame(loop);
+  };
+  raf = requestAnimationFrame(loop);
+  return () => { cancelAnimationFrame(raf); offs.forEach((f) => f()); };
+}
+
+class Component extends DCLogic {
+  renderVals() {
+    if (!this._v) this._v = { root: (el) => { if (el && !this._off) this._off = setup(el); } };
+    return this._v;
+  }
+  componentWillUnmount() { if (this._off) this._off(); }
+}
+</script>
+</body>
+</html>

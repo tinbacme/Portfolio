@@ -1,0 +1,7 @@
+cd /tmp/claude-0/-home-user/ab4b1994-dd78-54cb-abb4-90a167a3ba6b/scratchpad
+BASE="Wide hero illustration for a designer portfolio: a soft bank of cumulus clouds on the left and right, with a small flock of four simple birds, lots of open empty space in the middle for a headline. Transparent background, no paper, no text, no letters, no numbers, no signature, no frame."
+python3 tools/gen_new.py sk-idsketch "$BASE Style: industrial design concept sketch, like a product designer's ideation page: confident black fineliner and ballpoint lines, perspective construction lines and ellipse guides through the clouds, cross-section contour lines across the cloud forms, a few cool-grey marker shadow strokes, small callout arrows and circled details, loose and energetic." 1536x1024 transparent &
+python3 tools/gen_new.py sk-cad "$BASE Style: 3D CAD wireframe render, the clouds are smooth volumetric forms shown as clean wireframe mesh topology with quad grid lines following the curvature, thin dark grey lines with lighter hidden lines, like a Rhino or Fusion 360 viewport, birds as tiny low-poly wireframes." 1536x1024 transparent &
+wait
+python3 tools/gen_new.py sk-uxwire "$BASE Style: low-fidelity UX wireframe, the clouds are built from light grey rounded rectangles and circles with thin mid-grey outlines like a Figma wireframe kit, a few placeholder boxes with an X through them tucked into the clouds, dashed spacing guides, birds as simple grey chevrons, flat with no shading." 1536x1024 transparent
+echo ALLDONE

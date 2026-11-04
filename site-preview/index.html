@@ -281,7 +281,10 @@ button.sticker:focus-visible { outline: 2px solid #3078e7; outline-offset: 6px; 
 .intro p { font-family: var(--mono); font-size: var(--body); line-height: 1.17; }
 #about { scroll-margin-top: 0; }
 
-.sky-cover { position: absolute; inset: 0; opacity: 0; pointer-events: none; background: var(--paper); }
+.sky-cover { position: absolute; inset: 0; opacity: 0; pointer-events: none; }
+/* The window's sky stays: the page is drawn on top of it, then its own sky settles in underneath */
+.sky-cover .sky { opacity: 0; }
+.cover-ground { position: absolute; left: 0; right: 0; bottom: 0; background: #fefdf9; opacity: 0; }
 
 /* Hero entrance (runs once the loader leaves) */
 .window-in, .prop, .scroll-hint { opacity: 0; }
@@ -347,6 +350,7 @@ body.is-loaded .hero-copy { animation: fade-in 0.9s var(--ease-out) 0.4s both; }
 .work {
   position: relative;
   z-index: 1;
+  background: #fefdf9;   /* same white as the clouds, so they melt into the page */
   margin-top: -100vh;
   margin-top: -100svh;
   padding-bottom: clamp(120px, 12vw, 240px);
@@ -415,12 +419,14 @@ a.case-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px -24px r
   width: calc(256 / 1071 * 100%);
   pointer-events: none;
   translate: 0 -10%;
-  transition: translate 0.9s var(--ease-out) 0.35s;
+  opacity: 0;
+  transition: translate 0.9s var(--ease-out) 0.25s, opacity 0.4s var(--ease-out) 0.15s;
 }
-.case-1.is-visible .astronaut { translate: 0 -77.7%; }
+/* He only peeks up once the card, its image and its title have all finished drawing */
+.case-1.is-drawn .astronaut { translate: 0 -77.7%; opacity: 1; }
 /* Hover: he pops up a little higher and waves */
-.case-1.is-visible .astronaut { pointer-events: auto; transform-origin: 50% 80%; }
-.case-1.is-visible .astronaut:hover {
+.case-1.is-drawn .astronaut { pointer-events: auto; transform-origin: 50% 80%; }
+.case-1.is-drawn .astronaut:hover {
   translate: 0 -88%;
   transition-delay: 0s;
   transition-duration: 0.35s;
@@ -436,6 +442,28 @@ a.case-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px -24px r
 /* Scroll reveal */
 .case { opacity: 0; translate: 0 40px; transition: opacity 0.8s var(--ease-out), translate 0.8s var(--ease-out); }
 .case.is-visible { opacity: 1; translate: 0 0; }
+.case-2, .case-3 { opacity: 1; translate: none; }
+
+
+/* ---------- Pen draw: teammates' cursors sketch "My work" in as you scroll ---------- */
+.clouds { display: block; overflow: visible; }
+.pen-cloud-line { stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.ink { display: inline-block; position: relative; white-space: nowrap; }
+/* Typed like a Figma text field: a teammate drops a text box (selection in their colour) and types into it */
+.tf-rest { opacity: 0; }
+.tf-caret { display: inline-block; width: 0; height: 1em; border-left: 1.5px solid currentColor; vertical-align: -0.12em; opacity: 0; }
+.tf-box { position: absolute; inset: -4px -8px; border: 1.5px solid var(--tf, #0d99ff); pointer-events: none; opacity: 0; transition: opacity 0.25s var(--ease-out); }
+.tf-box i { position: absolute; width: 7px; height: 7px; background: #fff; border: 1.5px solid var(--tf, #0d99ff); box-sizing: border-box; }
+.tf-box i:nth-child(1) { left: -4px; top: -4px; } .tf-box i:nth-child(2) { right: -4px; top: -4px; } .tf-box i:nth-child(3) { left: -4px; bottom: -4px; } .tf-box i:nth-child(4) { right: -4px; bottom: -4px; }
+.ink.is-typing .tf-box { opacity: 1; }
+.ink.is-typing .tf-caret { opacity: 1; animation: tf-blink 1s steps(1) infinite; }
+@keyframes tf-blink { 50% { opacity: 0; } }
+.pen-frame { position: absolute; z-index: 2; pointer-events: none; overflow: visible; }
+.pen-cursors { position: fixed; inset: 0; z-index: 40; pointer-events: none; }
+.pen-cursor { position: absolute; left: 0; top: 0; display: flex; align-items: flex-start; gap: 2px; opacity: 0; transition: opacity 0.8s var(--ease-out); will-change: transform; }
+.pen-cursor svg { width: 20px; height: 22px; }
+.pen-cursor span { margin-top: 14px; padding: 2px 9px; border-radius: 10px; color: #fff; font: 600 13px var(--sans); white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) { .pen-cursors { display: none; } }
 
 @media (max-width: 760px) {
   .case, .case-1, .case-2, .case-3 { width: 100%; margin-left: 0; }
@@ -572,10 +600,10 @@ a.case-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px -24px r
     <section class="work" id="work" aria-labelledby="work-title">
       <div class="work-head">
         <div class="sky"></div>
-        <img class="clouds" src="assets/clouds.svg" alt="" />
+        <svg class="clouds" viewBox="0 0 1728 304" fill="none" aria-hidden="true"><path class="pen-cloud" d="M0 0.0915893C23.625 -1.59591 38.8125 20.3416 37.125 40.5916C72.5625 32.1541 101.25 52.4041 99.5625 82.7791C131.625 62.5291 175.5 72.6541 185.625 104.717C214.312 79.4041 258.187 96.2791 263.25 126.654C307.125 114.842 344.25 143.529 339.187 177.279C393.187 163.779 430.312 197.529 425.25 236.342C469.125 224.529 506.25 254.904 506.25 303.842H0V0.0915893Z" fill="#FEFDF9"/><path class="pen-cloud-line" d="M0 0.0915893C23.625 -1.59591 38.8125 20.3416 37.125 40.5916C72.5625 32.1541 101.25 52.4041 99.5625 82.7791C131.625 62.5291 175.5 72.6541 185.625 104.717C214.312 79.4041 258.187 96.2791 263.25 126.654C307.125 114.842 344.25 143.529 339.187 177.279C393.187 163.779 430.312 197.529 425.25 236.342C469.125 224.529 506.25 254.904 506.25 303.842" fill="none"/><path class="pen-cloud" d="M1728 37.2168C1689.19 38.9043 1657.12 65.9043 1658.81 99.6543C1614.94 94.5918 1581.19 121.592 1584.56 155.342C1535.62 143.529 1498.5 172.217 1498.5 209.342C1454.62 189.092 1405.69 209.342 1402.31 248.154C1346.62 238.029 1317.94 268.404 1316.25 303.842H1728V37.2168Z" fill="#FEFDF9"/><path class="pen-cloud-line" d="M1728 37.2168C1689.19 38.9043 1657.12 65.9043 1658.81 99.6543C1614.94 94.5918 1581.19 121.592 1584.56 155.342C1535.62 143.529 1498.5 172.217 1498.5 209.342C1454.62 189.092 1405.69 209.342 1402.31 248.154C1346.62 238.029 1317.94 268.404 1316.25 303.842" fill="none"/><path class="pen-cloud" d="M1014.19 232.967C1056.37 180.655 1112.06 170.53 1155.94 195.842C1194.75 160.405 1252.12 168.842 1270.69 200.905C1321.31 172.217 1370.25 204.28 1373.62 246.467L1419.19 303.842H977.062L1014.19 232.967Z" fill="#FEFDF9"/><path class="pen-cloud-line" d="M1014.19 232.967C1056.37 180.655 1112.06 170.53 1155.94 195.842C1194.75 160.405 1252.12 168.842 1270.69 200.905C1321.31 172.217 1370.25 204.28 1373.62 246.467L1419.19 303.842" fill="none"/></svg>
         <div class="work-title">
-          <h2 id="work-title">My work</h2>
-          <p>Select work</p>
+          <h2 id="work-title"><span class="ink" data-who="Tin">My work</span></h2>
+          <p><span class="ink" data-who="PM">Select work</span></p>
         </div>
       </div>
 
@@ -585,8 +613,8 @@ a.case-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px -24px r
           <a class="case-card" href="#" aria-label="Window Search Box case study">
             <img src="assets/windows-search.webp" alt="Windows taskbar with a Copilot 'Ask Anything' search box" />
           </a>
-          <h3>Window Search Box</h3>
-          <p>A new ways of interacting with your computer</p>
+          <h3><span class="ink" data-who="PM">Window Search Box</span></h3>
+          <p><span class="ink" data-who="Tin">A new ways of interacting with your computer</span></p>
         </article>
 
         <article class="case case-2">
@@ -832,6 +860,10 @@ a.case-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px -24px r
   cover.append(coverList);
   cover.querySelectorAll("[id]").forEach((el) => el.removeAttribute("id"));
   cover.querySelectorAll("a").forEach((el) => el.setAttribute("tabindex", "-1"));
+  const coverSky = cover.querySelector(".sky");
+  const coverGround = document.createElement("div"); coverGround.className = "cover-ground"; cover.prepend(coverGround);
+  const placeGround = () => { coverGround.style.top = `${cover.querySelector(".work-head").offsetHeight}px`; };
+  placeGround(); addEventListener("resize", placeGround);
 
   // Window artboard is 550×690; glass centre sits at (269.3, 332).
   const W = 550, H = 777, GX = 272.3, GY = 398.4;
@@ -901,7 +933,10 @@ a.case-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px -24px r
 
     // Crossfade into the "My work" sky, then hand off to the real section.
     const coverAlpha = easeInOut(seg(p, 0.74, 0.92));
-    cover.style.opacity = coverAlpha;
+    // The cover has no background of its own: strokes, fills and type land on top of the window's sky,
+    // and the "My work" sky only settles in underneath once the drawing is done.
+    cover.style.opacity = p > 0.74 ? 1 : 0;
+    coverSky.style.opacity = easeInOut(seg(p, 0.9, 1));
     // First card rises in with the sky, in the cover and the real section together.
     if (coverAlpha > 0.4 && !firstCase.classList.contains("is-visible")) {
       firstCase.classList.add("is-visible");
@@ -1078,6 +1113,192 @@ a.case-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px -24px r
     tuneToggle.setAttribute("aria-expanded", String(open));
     tuneToggle.textContent = open ? "Close" : "Light & shadow";
   });
+
+
+  // ---------- Pen draw: "My work" is sketched in by Tin and teammates as you scroll ----------
+  // Same design as before; strokes are construction lines that fade once the real fill/image lands.
+  (() => {
+    const WHO = { Tin: "#3078e7", PM: "#e0457b", Eng: "#7a5af8", Research: "#2bb673" };
+    const layer = document.createElement("div"); layer.className = "pen-cursors"; layer.setAttribute("aria-hidden", "true");
+    const cursors = {};
+    for (const [name, col] of Object.entries(WHO)) {
+      const c = document.createElement("div"); c.className = "pen-cursor";
+      c.innerHTML = `<svg viewBox="0 0 18 20"><path d="M2 2l13 6.5-6 1.6-2.6 6.4z" fill="${col}" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/></svg><span style="background:${col}">${name}</span>`;
+      layer.append(c); cursors[name] = c;
+    }
+    document.body.append(layer);
+
+    const head = work.querySelector(".work-head"), coverHead = cover.querySelector(".work-head");
+    const items = [];   // { els: [real, twin?], anchor, from, to, kind, who }
+    const add = (kind, els, anchor, from, to, who, extra = {}) => items.push({ kind, els: els.filter(Boolean), anchor, from, to, who, t: reduceMotion ? 1 : 0, ...extra });
+
+    // Sky clouds: Research traces each cloud, then they fill in
+    const clouds = [...head.querySelectorAll(".pen-cloud")], cClouds = [...coverHead.querySelectorAll(".pen-cloud")];
+    const cloudSpans = [[0.72, 0.52], [0.56, 0.42], [0.46, 0.32]];
+    // Once you're through the glass, "My work" plays as one timeline (seconds from the moment it starts)
+    const cloudSeq = [[0, 1.0], [0.4, 0.9], [0.7, 0.9]];
+    clouds.forEach((el, i) => add("cloud", [el, cClouds[i]], head, cloudSpans[i][0], cloudSpans[i][1], "Research", { fillFrom: 0.4, fillTo: 0.18, seq: cloudSeq[i], fillSeq: [1.3, 0.8] }));
+    const inks = [...head.querySelectorAll(".ink")], cInks = [...coverHead.querySelectorAll(".ink")];
+    add("ink", [inks[0], cInks[0]], head, 0.5, 0.24, inks[0].dataset.who, { seq: [1.0, 1.0] });
+    add("ink", [inks[1], cInks[1]], head, 0.26, 0.08, inks[1].dataset.who, { seq: [1.9, 0.7] });
+
+    // Cards: an outline is drawn, then the project image loads in from blurry to sharp, then its title is written
+    const frameFor = (kase) => {
+      const card = kase.querySelector(".case-card");
+      const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg"); svg.setAttribute("class", "pen-frame");
+      const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect"); rect.setAttribute("fill", "none"); rect.setAttribute("stroke-width", "2.4");
+      svg.append(rect); kase.append(svg);
+      return { card, svg, rect };
+    };
+    const plan = [["Eng", 1.15, 0.62], ["Research", 1.0, 0.55], ["Tin", 1.0, 0.55]];
+    cases.forEach((kase, i) => {
+      const [who, from, to] = plan[i] || plan[2];
+      const real = frameFor(kase), twin = i === 0 ? frameFor(coverCase) : null;
+      const empty = real.card.classList.contains("is-empty");
+      // the first card is scrubbed by the zoom; the ones below start drawing on their own once they're in view
+      add("frame", [real, twin], real.card, from, to, who, { empty, color: WHO[who], timed: i > 0 ? { at: 0.82, dur: 1.4 } : null, seq: i === 0 ? [2.2, 1.2] : null, group: i });
+      if (!empty) {
+        add("img", [real.card.querySelector("img"), twin && twin.card.querySelector("img")], real.card, 0.78, 0.5, null, { group: i, seq: [3.0, 0.9] });
+        const ki = [...kase.querySelectorAll(".ink")], ti = twin ? [...coverCase.querySelectorAll(".ink")] : [];
+        ki.forEach((el, k) => add("ink", [el, ti[k]], real.card, 0.56 - k * 0.1, 0.38 - k * 0.1, el.dataset.who, { group: i, seq: k === 0 ? [3.7, 0.7] : [4.3, 1.1] }));
+      }
+    });
+
+    // Each written line becomes a text field: typed part, caret, the not-yet-typed rest (kept for layout and screen readers), and a selection box
+    for (const it of items) if (it.kind === "ink") for (const el of it.els) {
+      const full = el.textContent; el.dataset.full = full; el.style.setProperty("--tf", WHO[it.who]);
+      el.innerHTML = `<span class="tf-typed"></span><span class="tf-caret" aria-hidden="true"></span><span class="tf-rest"></span><span class="tf-box" aria-hidden="true"><i></i><i></i><i></i><i></i></span>`;
+      el._typed = el.firstChild; el._caret = el.children[1]; el._rest = el.children[2];
+      el._typed.textContent = ""; el._rest.textContent = full;
+    }
+    const layout = () => {
+      for (const it of items) if (it.kind === "frame") for (const f of it.els) {
+        const w = f.card.offsetWidth, h = f.card.offsetHeight, r = parseFloat(getComputedStyle(f.card).borderTopLeftRadius) || 20;
+        f.svg.style.left = `${f.card.offsetLeft}px`; f.svg.style.top = `${f.card.offsetTop}px`;
+        f.svg.setAttribute("width", w); f.svg.setAttribute("height", h); f.svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
+        Object.entries({ x: 1, y: 1, width: w - 2, height: h - 2, rx: r, ry: r }).forEach(([k, v]) => f.rect.setAttribute(k, v));
+        f.len = f.rect.getTotalLength();
+      }
+      for (const it of items) if (it.kind === "cloud") for (const el of it.els) el._len = el.nextElementSibling.getTotalLength();
+    };
+
+    const clamp = (v) => Math.min(1, Math.max(0, v));
+    const ease = (t) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
+    const paint = (it) => {
+      const t = ease(it.t);
+      for (const el of it.els) {
+        if (it.kind === "cloud") {
+          const f = ease(it.fill || 0);
+          const ln = el.nextElementSibling;
+          ln.style.stroke = WHO.Research; ln.style.strokeDasharray = `${el._len} ${el._len}`; ln.style.strokeDashoffset = el._len * (1 - t);
+          ln.style.strokeOpacity = t > 0 ? 1 - f : 0; el.style.fillOpacity = f;
+          if (el.closest(".sky-cover")) { const g = el.closest(".sky-cover").querySelector(".cover-ground"); if (g && el === el.parentNode.querySelector(".pen-cloud")) g.style.opacity = f; }
+        } else if (it.kind === "ink") {
+          const full = el.dataset.full, n = Math.round(it.t * full.length);   // typing is even-paced, not eased
+          if (el._n !== n) { el._typed.textContent = full.slice(0, n); el._rest.textContent = full.slice(n); el._n = n; }
+          el.classList.toggle("is-typing", it.t > 0.005 && it.t < 0.995);
+        } else if (it.kind === "img") {
+          el.style.opacity = t; el.style.filter = t >= 1 ? "" : `blur(${(1 - t) * 14}px) saturate(${0.3 + 0.7 * t})`;
+        } else if (it.kind === "frame") {
+          const done = ease(it.done || 0);
+          el.rect.style.stroke = it.color; el.rect.style.strokeDasharray = `${el.len} ${el.len}`; el.rect.style.strokeDashoffset = el.len * (1 - t);
+          el.rect.style.strokeOpacity = t > 0 ? 1 - done : 0;
+          if (it.empty) { el.card.style.borderColor = `rgba(162, 161, 161, ${done})`; el.card.style.backgroundColor = `rgba(255, 255, 255, ${done})`; }
+        }
+      }
+    };
+    // Which copy is on screen: the cover twin while the window journey is still pinned, the real section after.
+    const tip = (it) => {
+      const onCover = !stage.classList.contains("is-done") && parseFloat(cover.style.opacity || 0) > 0.5;
+      const el = onCover && it.els[1] ? it.els[1] : it.els[0];
+      const t = ease(it.t);
+      if (it.kind === "cloud" || it.kind === "frame") {
+        const g = it.kind === "cloud" ? el.nextElementSibling : el.rect, len = it.kind === "cloud" ? el._len : el.len;
+        const pt = g.getPointAtLength(len * t), m = g.getScreenCTM(); if (!m) return null;
+        return new DOMPoint(pt.x, pt.y).matrixTransform(m);
+      }
+      const r = (el._caret || el).getBoundingClientRect(); return { x: r.left + 2, y: r.top + r.height * 0.8 };
+    };
+
+    let raf = 0, last = 0, seqT0 = 0;
+    const glides = [];
+    const glide = (to, dur, at) => { if (reduceMotion) { if (to > scrollY) scrollTo(0, to); return; } glides.push({ to, dur, at }); };
+    // any input of their own hands the scroll straight back to the visitor
+    for (const ev of ["wheel", "touchstart", "keydown", "pointerdown"]) addEventListener(ev, () => { glides.length = 0; }, { passive: true });
+    const cur = {};   // each teammate's cursor glides in, follows its pen, and drifts off when done
+    const step = (now) => {
+      raf = 0;
+      const dt = Math.min(0.05, last ? (now - last) / 1000 : 1 / 60); last = now;
+      const vh = innerHeight; let moving = false; const tips = {};
+      // Through the glass → play the whole "My work" drawing and glide down to where the page sits fully in view
+      if (!seqT0 && target > 0.8) {
+        seqT0 = now;
+        // 1) settle at the end of the zoom while the sky gets drawn on, 2) once the card is in, ease down so the whole section is in view
+        const endZoom = journey.offsetTop + (journey.offsetHeight - innerHeight);
+        glide(endZoom, 1.8, 0);
+        glide(endZoom + innerHeight * 0.14, 1.1, 4.4);
+      } else if (seqT0 && target < 0.6) {   // scrolled back up: rewind so it plays again next time
+        seqT0 = 0; glides.length = 0; for (const it of items) if (it.seq) { it.t = 0; it.fill = 0; it.done = 0; }
+      }
+      if (glides.length && seqT0) {
+        const g = glides[0], tg = (now - seqT0) / 1000 - g.at;
+        if (tg >= 0) {
+          if (g.from === undefined) g.from = scrollY;
+          const k = Math.min(1, tg / g.dur), e = k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+          if (g.to > g.from) scrollTo(0, g.from + (g.to - g.from) * e);   // never pull someone back up
+          if (k >= 1) glides.shift();
+        }
+        moving = true;
+      }
+      const tl = seqT0 ? (now - seqT0) / 1000 : -1;
+      for (const it of items) {
+        const y = it.anchor.getBoundingClientRect().top / vh;
+        if (it.seq) {
+          const tt = reduceMotion && seqT0 ? 1e3 : tl;
+          it.t = tt < 0 ? 0 : clamp((tt - it.seq[0]) / it.seq[1]);
+          if (it.fillSeq) it.fill = tt < 0 ? 0 : clamp((tt - it.fillSeq[0]) / it.fillSeq[1]);
+          if (it.kind === "frame") it.done = tt < 0 ? 0 : clamp((tt - it.seq[0] - it.seq[1]) / 0.5);
+          if (seqT0 && tl < 6) moving = true;
+        } else if (it.timed) {
+          // starts once the box is in view, then plays at its own pace
+          if (!it.go && (reduceMotion || y < it.timed.at)) it.go = true;
+          if (it.go && it.t < 1) { it.t = reduceMotion ? 1 : Math.min(1, it.t + dt / it.timed.dur); moving = true; }
+          if (it.t >= 1 && (it.done || 0) < 1) { it.done = reduceMotion ? 1 : Math.min(1, (it.done || 0) + dt / 0.6); moving = true; }
+        } else {
+          const goal = reduceMotion ? 1 : clamp((it.from - y) / (it.from - it.to));
+          // ease toward the scroll position over ~0.4s so fast scrolls still draw gracefully
+          const k = reduceMotion ? 1 : 0.09;
+          it.t += (goal - it.t) * k; if (Math.abs(goal - it.t) < 0.002) it.t = goal; else moving = true;
+          if (it.kind === "cloud") { const fg = reduceMotion ? 1 : clamp((it.fillFrom - y) / (it.fillFrom - it.fillTo)); it.fill = (it.fill || 0) + (fg - (it.fill || 0)) * k; if (Math.abs(fg - it.fill) < 0.002) it.fill = fg; else moving = true; }
+          if (it.kind === "frame") { const dg = reduceMotion ? 1 : clamp((it.to - y) / 0.14); it.done = (it.done || 0) + (dg - (it.done || 0)) * k; if (Math.abs(dg - it.done) < 0.002) it.done = dg; else moving = true; }
+        }
+        paint(it);
+        if (it.who && it.t > 0.01 && it.t < 0.99) { const p = tip(it); if (p) tips[it.who] = p; }
+      }
+      // the astronaut waits until the first card, its image and both lines of text are done
+      const first = items.filter((it) => it.group === 0), drawn = first.length && first.every((it) => it.t >= 0.99);
+      firstCase.classList.toggle("is-drawn", drawn); coverCase.classList.toggle("is-drawn", drawn);
+      for (const [name, c] of Object.entries(cursors)) {
+        const p = tips[name], s = cur[name] || (cur[name] = { on: false });
+        if (p) {
+          if (!s.on) { s.on = true; s.age = 0; if (s.x === undefined || c.style.opacity === "0" || !c.style.opacity) { s.x = p.x + 150; s.y = p.y + 110; } }
+          s.age += dt;
+          // first ~0.8s: a slow glide in from off to the side; after that it keeps close to the pen
+          const tau = reduceMotion ? 0.001 : s.age < 0.8 ? 0.2 : 0.07, a = 1 - Math.exp(-dt / tau);
+          s.x += (p.x - s.x) * a; s.y += (p.y - s.y) * a; s.tx = p.x; s.ty = p.y;
+          c.style.opacity = 1; moving = true;
+        } else if (s.on) { s.on = false; s.leave = 0; c.style.opacity = 0; }
+        if (!p && s.leave !== undefined && s.leave < 0.8) { s.leave += dt; const a = 1 - Math.exp(-dt / 0.3); s.x += (s.tx + 40 - s.x) * a; s.y += (s.ty + 30 - s.y) * a; moving = true; }
+        if (s.x !== undefined) c.style.transform = `translate(${s.x - 3}px, ${s.y - 3}px)`;
+      }
+      if (moving) raf = requestAnimationFrame(step);
+    };
+    const kick = () => { if (!raf) raf = requestAnimationFrame(step); };
+    layout(); items.forEach(paint); kick();
+    addEventListener("scroll", kick, { passive: true });
+    addEventListener("resize", () => { layout(); kick(); });
+    addEventListener("load", () => { layout(); kick(); });
+  })();
 
   // "About" lands where the intro is fully visible.
   document.querySelector('a[href="#about"]').addEventListener("click", (e) => {

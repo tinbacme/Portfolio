@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Prototype: window to drawn work</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400&amp;family=Google+Sans+Flex:wght@400;500;600&amp;family=Instrument+Sans:wght@400;600&amp;display=swap">
+<style>
+@font-face { font-family: "Geist Serif"; src: url("/_blob/7e30fdbbbab8996f8ff56a6dbd54e97f") format("woff2"); font-weight: 400; font-display: swap; }
+body{margin:0}
+sc-for, sc-if { display: contents; }
+.pz { --serif: "Geist Serif", "Iowan Old Style", Georgia, serif; --mono: "Geist Mono", ui-monospace, Menlo, monospace; --sans: "Instrument Sans", system-ui, sans-serif; --display: "Google Sans Flex", "Instrument Sans", system-ui, sans-serif; --ease-out: cubic-bezier(0.22, 1, 0.36, 1); }
+.pz h1, .pz h2, .pz h3, .pz p { margin: 0; font-weight: 400; }
+.pz-scroll { scrollbar-width: none; }
+.pz-scroll::-webkit-scrollbar { width: 0; }
+.pz-leaf { animation: pz-sway 3s ease-in-out infinite alternate; transform-origin: 90% 0%; }
+@keyframes pz-sway { from { rotate: -3.3deg; translate: 0 0; } to { rotate: 3.7deg; translate: -6px 4px; } }
+.pz-wheel { animation: pz-wheel 1.8s var(--ease-out) infinite; }
+@keyframes pz-wheel { 0% { transform: translateY(0); opacity: 1; } 60% { transform: translateY(9px); opacity: 0; } 61% { transform: translateY(0); opacity: 0; } 100% { opacity: 1; } }
+.pz-steam { position: absolute; opacity: 0; transform-origin: 50% 100%; animation: pz-steam 3.4s ease-in-out infinite both; }
+@keyframes pz-steam { 0% { opacity: 0; translate: 0 8px; scale: 1 0.9; } 25% { opacity: 0.9; } 60% { translate: 2px -6px; } 100% { opacity: 0; translate: -2px -18px; scale: 1.05 1.1; } }
+.pz-plane { position: absolute; width: 110px; animation: pz-fly 7s linear infinite; }
+@keyframes pz-fly { from { left: -60%; top: 62%; } to { left: 110%; top: 8%; } }
+.pz-stamp img { transition: rotate 0.5s var(--ease-out); }
+.pz-stamp:hover img { rotate: 4deg; }
+.pz-case { position: relative; width: 873px; opacity: 0; translate: 0 40px; transition: opacity 0.8s var(--ease-out), translate 0.8s var(--ease-out); }
+.pz-case.is-visible { opacity: 1; translate: 0 0; }
+.pz-astro { position: absolute; z-index: 0; left: 0; top: 0; width: 27.6%; pointer-events: none; translate: 0 -10%; transition: translate 0.9s var(--ease-out) 0.35s; }
+.pz-case.is-visible .pz-astro { translate: 0 -77.7%; }
+.pz-card { display: block; position: relative; z-index: 1; border-radius: 20px; overflow: hidden; aspect-ratio: 1071 / 535; }
+.pz-card img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.pz-card.is-empty { aspect-ratio: 1071 / 620; background: #fff; border: 1px solid rgba(162, 161, 161, 0); }
+.pz-case h3 { margin-top: 27px; font-family: var(--serif); font-size: 17px; }
+.pz-case h3 + p { margin-top: 2px; font-family: var(--mono); font-size: 20px; letter-spacing: -0.03em; }
+.ink { display: inline-block; position: relative; white-space: nowrap; }
+.tf-rest { opacity: 0; }
+.tf-caret { display: inline-block; width: 0; height: 1em; border-left: 1.5px solid currentColor; vertical-align: -0.12em; opacity: 0; }
+.tf-box { position: absolute; inset: -4px -8px; border: 1.5px solid var(--tf, #0d99ff); pointer-events: none; opacity: 0; transition: opacity 0.25s var(--ease-out); }
+.tf-box i { position: absolute; width: 7px; height: 7px; background: #fff; border: 1.5px solid var(--tf, #0d99ff); box-sizing: border-box; }
+.tf-box i:nth-child(1) { left: -4px; top: -4px; } .tf-box i:nth-child(2) { right: -4px; top: -4px; } .tf-box i:nth-child(3) { left: -4px; bottom: -4px; } .tf-box i:nth-child(4) { right: -4px; bottom: -4px; }
+.ink.is-typing .tf-box { opacity: 1; }
+.ink.is-typing .tf-caret { opacity: 1; animation: tf-blink 1s steps(1) infinite; }
+@keyframes tf-blink { 50% { opacity: 0; } }
+.pz-cover .pz-sky { opacity: 0; }
+.pen-cloud-line { stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.pen-frame { position: absolute; z-index: 2; pointer-events: none; overflow: visible; }
+.pen-cursor { position: absolute; left: 0; top: 0; display: flex; align-items: flex-start; gap: 2px; opacity: 0; transition: opacity 0.35s var(--ease-out); }
+.pen-cursor span { margin-top: 14px; padding: 2px 9px; border-radius: 10px; color: #fff; font: 600 13px var(--sans); white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) { .pz-leaf, .pz-wheel, .pz-plane { animation: none; } .pz-steam { animation: none; opacity: 0.8; } .pen-cursors { display: none; } }
+</style>
+</helmet>
+<div class="pz" style="position: relative; width: 1440px; height: 900px; overflow: hidden; background: #f7f5ef; color: #000; font-family: var(--sans);">
+<div ref="{{ root }}" onScroll="{{ onScroll }}" class="pz-scroll" tabindex="0" role="region" aria-label="Portfolio prototype. Scroll to fly through the window into My work." style="position: absolute; inset: 0; overflow-y: auto; overscroll-behavior: contain;">
+
+  <section class="pz-journey" style="position: relative; height: 4140px; z-index: 2;">
+    <div class="pz-stage" style="position: sticky; top: 0; height: 900px; overflow: hidden; background: #f7f5ef;">
+      <div class="pz-light" aria-hidden="true" style="position: absolute; inset: 0; overflow: hidden; pointer-events: none;">
+        <div style="position: absolute; left: 69%; top: 14%; width: 749px; height: 792px; background: repeating-linear-gradient(147deg, rgba(255,255,255,0) 0px, rgba(255,255,255,0) 70px, rgba(255,255,255,0.95) 110px, rgba(255,255,255,0) 170px, rgba(255,255,255,0) 240px); filter: blur(12px);"></div>
+        <div style="position: absolute; right: -86px; top: -81px; height: 738px; transform-origin: 90% 0%; transform: rotate(13deg);"><img class="pz-leaf" src="/_blob/6183413a12564d8d3de310f2001b5cdf" alt="" style="display: block; height: 100%; width: auto; max-width: none; opacity: 0.09; filter: blur(12.5px); mix-blend-mode: multiply;"></div>
+      </div>
+      <div class="pz-window" aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 550px; aspect-ratio: 809 / 1143;">
+        <div class="pz-glass" style="position: absolute; left: 16.81%; top: 16.01%; width: 65.39%; height: 70.52%; border-radius: 24% / 16%; overflow: hidden; background: #8cc4f2;">
+          <img src="/_blob/72689660588a90a9527c9831ba59df51" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;">
+          <img src="/_blob/9117a00e453f4a3c0ce733f75f4f207d" alt="" style="position: absolute; left: -45%; bottom: -5%; width: 190%; max-width: none;">
+          <div class="pz-flight" style="position: absolute; inset: 0;">
+            <div class="pz-plane"><div style="position: absolute; right: 99%; top: 60%; width: 120%; height: 3px; border-radius: 2px; background: linear-gradient(to left, rgba(255,255,255,0.95), rgba(255,255,255,0.55) 45%, rgba(255,255,255,0)); transform-origin: 100% 50%; rotate: -14deg;"></div><img src="/_blob/873faef20891bfc5fcb4e8ce70db4732" alt="" style="position: relative; display: block; width: 100%;"></div>
+          </div>
+        </div>
+        <img src="/_blob/0b65d8397cbadbb8bded5f3e698b0403" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;">
+      </div>
+      <div class="pz-out-copy" style="position: absolute; inset: 0; pointer-events: none;">
+        <div style="position: absolute; left: 86px; top: 29%; width: 340px; display: grid; gap: 20px;">
+          <p style="font-family: var(--display); font-size: 17px; font-weight: 500; letter-spacing: 0.1em; color: #5c6670;">HELLO, I’M TIN</p>
+          <p style="font-family: var(--display); font-size: 52px; font-weight: 600; line-height: 1.15; letter-spacing: -0.01em; color: #1b2930;">Designing for a kinder, clearer web.</p>
+          <p style="font-size: 18px; line-height: 1.75; color: #1b2930;">I’m a product designer focused on simple, useful and human experiences.</p>
+        </div>
+      </div>
+      <div class="pz-out-stamp" style="position: absolute; inset: 0; pointer-events: none;">
+        <div class="pz-stamp" style="position: absolute; left: 1100px; top: 522px; width: 210px; pointer-events: auto;"><img src="{{ stampSrc }}" alt="Postage stamp from a place Tin has visited" style="display: block; width: 100%; filter: drop-shadow(0 1px 1px rgba(40,32,20,0.16)) drop-shadow(0 8px 12px rgba(40,32,20,0.14));"></div>
+      </div>
+      <div class="pz-out-matcha" style="position: absolute; inset: 0; pointer-events: none;">
+        <div style="position: absolute; left: 1010px; top: 660px; width: 144px; aspect-ratio: 564 / 640;">
+          <img src="/_blob/b87cee741b28406d3c016845683bf9f9" alt="Bowl of matcha" style="position: absolute; inset: 0; width: 100%; height: 100%;">
+          <img class="pz-steam" src="/_blob/274051c5b2a3d397c903682481abeaa4" alt="" style="left: 52.4px; top: -20.3px; width: 16.1px; height: 52.4px;">
+          <img class="pz-steam" src="/_blob/bf91ffdab357c9ec089367649b39ae28" alt="" style="left: 73.4px; top: -42.6px; width: 16.8px; height: 79.0px; animation-delay: 1.1s;">
+          <img class="pz-steam" src="/_blob/5d3c155907b6836e8485958413fea7c3" alt="" style="left: 95.1px; top: -9.8px; width: 14.7px; height: 43.3px; animation-delay: 2.1s;">
+        </div>
+      </div>
+      <div class="pz-out-hint" style="position: absolute; left: 50%; bottom: 40px; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 22px; width: max-content; font-family: var(--display); font-size: 20px; text-align: center;">
+        <svg viewBox="0 0 32 50" fill="none" stroke="#454C48" stroke-width="2.13" aria-hidden="true" style="width: 27px; height: auto;"><rect x="1.07" y="1.07" width="29.86" height="47.86" rx="14.93"></rect><line class="pz-wheel" x1="16" y1="6" x2="16" y2="21" stroke-linecap="round"></line></svg>
+        <p>Explore the world of design with me</p>
+      </div>
+      <div class="pz-intro" style="position: absolute; left: 50%; top: 50%; width: 759px; translate: -50% -50%; display: grid; gap: 20px; text-align: center; opacity: 0; pointer-events: none;">
+        <h1 style="font-family: var(--serif); font-size: 53px; line-height: 1.3;">I am Tin Le</h1>
+        <p style="font-family: var(--mono); font-size: 20px; line-height: 1.17;">Currently Senior Product designer at Microsoft. I make complex products feel intuitive, useful, and a little delightful. Crafting thoughtful experiences for people and businesses.</p>
+      </div>
+      <div class="pz-cover" aria-hidden="true" style="position: absolute; inset: 0; opacity: 0; pointer-events: none;"><div class="pz-ground" style="position: absolute; left: 0; right: 0; top: 439px; bottom: 0; background: #fefdf9; opacity: 0;"></div></div>
+    </div>
+  </section>
+
+  <section class="pz-work" style="position: relative; z-index: 1; margin-top: -900px; padding-bottom: 173px; background: #fefdf9;">
+    <div class="pz-head" style="position: relative; height: 439px;">
+      <div class="pz-sky" style="position: absolute; inset: 0; background: radial-gradient(140% 135% at 50% 100%, #ffffff 0%, #fdfdfe 19%, #c1dff9 41%, #65a3ee 70%, #3078e7 100%);"></div>
+      <svg viewBox="0 0 1728 304" fill="none" aria-hidden="true" style="position: absolute; left: 0; bottom: -32.5px; display: block; width: 100%; height: auto; overflow: visible;"><path class="pen-cloud" d="M0 0.0915893C23.625 -1.59591 38.8125 20.3416 37.125 40.5916C72.5625 32.1541 101.25 52.4041 99.5625 82.7791C131.625 62.5291 175.5 72.6541 185.625 104.717C214.312 79.4041 258.187 96.2791 263.25 126.654C307.125 114.842 344.25 143.529 339.187 177.279C393.187 163.779 430.312 197.529 425.25 236.342C469.125 224.529 506.25 254.904 506.25 303.842H0V0.0915893Z" fill="#FEFDF9"></path><path class="pen-cloud-line" d="M0 0.0915893C23.625 -1.59591 38.8125 20.3416 37.125 40.5916C72.5625 32.1541 101.25 52.4041 99.5625 82.7791C131.625 62.5291 175.5 72.6541 185.625 104.717C214.312 79.4041 258.187 96.2791 263.25 126.654C307.125 114.842 344.25 143.529 339.187 177.279C393.187 163.779 430.312 197.529 425.25 236.342C469.125 224.529 506.25 254.904 506.25 303.842" fill="none"></path><path class="pen-cloud" d="M1728 37.2168C1689.19 38.9043 1657.12 65.9043 1658.81 99.6543C1614.94 94.5918 1581.19 121.592 1584.56 155.342C1535.62 143.529 1498.5 172.217 1498.5 209.342C1454.62 189.092 1405.69 209.342 1402.31 248.154C1346.62 238.029 1317.94 268.404 1316.25 303.842H1728V37.2168Z" fill="#FEFDF9"></path><path class="pen-cloud-line" d="M1728 37.2168C1689.19 38.9043 1657.12 65.9043 1658.81 99.6543C1614.94 94.5918 1581.19 121.592 1584.56 155.342C1535.62 143.529 1498.5 172.217 1498.5 209.342C1454.62 189.092 1405.69 209.342 1402.31 248.154C1346.62 238.029 1317.94 268.404 1316.25 303.842" fill="none"></path><path class="pen-cloud" d="M1014.19 232.967C1056.37 180.655 1112.06 170.53 1155.94 195.842C1194.75 160.405 1252.12 168.842 1270.69 200.905C1321.31 172.217 1370.25 204.28 1373.62 246.467L1419.19 303.842H977.062L1014.19 232.967Z" fill="#FEFDF9"></path><path class="pen-cloud-line" d="M1014.19 232.967C1056.37 180.655 1112.06 170.53 1155.94 195.842C1194.75 160.405 1252.12 168.842 1270.69 200.905C1321.31 172.217 1370.25 204.28 1373.62 246.467L1419.19 303.842" fill="none"></path></svg>
+      <div style="position: absolute; left: 16px; right: 16px; top: 174px; text-align: center; display: grid; gap: 12px;">
+        <h2 style="font-family: var(--serif); font-size: 53px; line-height: 1.3;"><span class="ink" data-who="Tin">My work</span></h2>
+        <p style="font-family: var(--mono); font-size: 20px;"><span class="ink" data-who="PM">Select work</span></p>
+      </div>
+    </div>
+    <div style="position: relative; padding: 0 16px; display: grid; gap: 184px;">
+      <article class="pz-case" style="margin-left: 141px;">
+        <img class="pz-astro" src="/_blob/35675eb949b8998332809e29f72a5001" alt="" aria-hidden="true">
+        <div class="pz-card"><img src="/_blob/2a4b16aaf0284c63e51aa51dc7ad5996" alt="Windows taskbar with a Copilot 'Ask Anything' search box"></div>
+        <h3><span class="ink" data-who="PM">Window Search Box</span></h3>
+        <p><span class="ink" data-who="Tin">A new ways of interacting with your computer</span></p>
+      </article>
+      <article class="pz-case" style="margin-left: 460px;"><div class="pz-card is-empty"></div></article>
+      <article class="pz-case" style="margin-left: 219px;"><div class="pz-card is-empty"></div></article>
+    </div>
+  </section>
+</div>
+<div class="pen-cursors" aria-hidden="true" style="position: absolute; inset: 0; z-index: 40; pointer-events: none; overflow: hidden;"><div class="pen-cursor" data-who="Tin"><svg viewBox="0 0 18 20" width="20" height="22"><path d="M2 2l13 6.5-6 1.6-2.6 6.4z" fill="#3078e7" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"></path></svg><span style="background: #3078e7;">Tin</span></div><div class="pen-cursor" data-who="PM"><svg viewBox="0 0 18 20" width="20" height="22"><path d="M2 2l13 6.5-6 1.6-2.6 6.4z" fill="#e0457b" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"></path></svg><span style="background: #e0457b;">PM</span></div><div class="pen-cursor" data-who="Eng"><svg viewBox="0 0 18 20" width="20" height="22"><path d="M2 2l13 6.5-6 1.6-2.6 6.4z" fill="#7a5af8" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"></path></svg><span style="background: #7a5af8;">Eng</span></div><div class="pen-cursor" data-who="Research"><svg viewBox="0 0 18 20" width="20" height="22"><path d="M2 2l13 6.5-6 1.6-2.6 6.4z" fill="#2bb673" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"></path></svg><span style="background: #2bb673;">Research</span></div></div>
+<div class="pz-progress" aria-hidden="true" style="position: absolute; left: 0; top: 0; height: 3px; width: 0; z-index: 41; background: #3078e7;"></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+const WHO = { Tin: "#3078e7", PM: "#e0457b", Eng: "#7a5af8", Research: "#2bb673" };
+const STAMPS = ["/_blob/f12c7dbaca27f2809f2f668b42419520", "/_blob/6883b06db8c06cdc2e6bd23b5ed13b4f", "/_blob/76e36a6f5886b41f9bb1dbac8e421c13", "/_blob/71791373d1180eab7453821a626b986a", "/_blob/b16051c52958e9a94a44eea6f538df40"];
+const clamp01 = (v) => Math.min(1, Math.max(0, v));
+const seg = (p, a, b) => clamp01((p - a) / (b - a));
+const lerp = (a, b, t) => a + (b - a) * t;
+const easeInOut = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+const easeIn = (t) => t * t * t, easeOut = (t) => 1 - Math.pow(1 - t, 3);
+const ease2 = (t) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
+
+// Same scroll journey as the preview site, at 1440 × 900.
+function setup(root) {
+  const host = root.parentElement, q = (s) => host.querySelector(s);
+  const S = { root, host, journey: q(".pz-journey"), stage: q(".pz-stage"), win: q(".pz-window"), flight: q(".pz-flight"), plane: q(".pz-plane"), light: q(".pz-light"),
+    copy: q(".pz-out-copy"), stamp: q(".pz-out-stamp"), matcha: q(".pz-out-matcha"), hint: q(".pz-out-hint"), intro: q(".pz-intro"), cover: q(".pz-cover"),
+    work: q(".pz-work"), progress: q(".pz-progress"), current: 0, target: 0, items: [], cursors: {} };
+  host.querySelectorAll(".pen-cursor").forEach((c) => { S.cursors[c.dataset.who] = c; });
+  // the cover is a twin of the top of "My work", so the first card shows during the crossfade
+  const head = S.work.querySelector(".pz-head"), cases = [...S.work.querySelectorAll(".pz-case")];
+  const coverHead = head.cloneNode(true), coverList = cases[0].parentElement.cloneNode(false), coverCase = cases[0].cloneNode(true);
+  coverList.append(coverCase); S.cover.append(coverHead, coverList);
+  S.firstCase = cases[0]; S.coverCase = coverCase; S.coverSky = coverHead.querySelector(".pz-sky"); S.ground = S.cover.querySelector(".pz-ground");
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("is-visible"); io.unobserve(e.target); } }), { root, threshold: 0.2 });
+  cases.forEach((c, i) => { if (i > 0) io.observe(c); }); S.io = io;
+
+  const add = (kind, els, anchor, from, to, who, extra = {}) => S.items.push({ kind, els: els.filter(Boolean), anchor, from, to, who, t: 0, ...extra });
+  const cl = [...head.querySelectorAll(".pen-cloud")], ccl = [...coverHead.querySelectorAll(".pen-cloud")];
+  [[0.72, 0.52], [0.56, 0.42], [0.46, 0.32]].forEach(([a, b], i) => add("cloud", [cl[i], ccl[i]], head, a, b, "Research", { fillFrom: 0.4, fillTo: 0.18 }));
+  const ink = [...head.querySelectorAll(".ink")], cink = [...coverHead.querySelectorAll(".ink")];
+  add("ink", [ink[0], cink[0]], head, 0.5, 0.24, "Tin"); add("ink", [ink[1], cink[1]], head, 0.26, 0.08, "PM");
+  const frameFor = (kase) => {
+    const card = kase.querySelector(".pz-card"), svg = document.createElementNS("http://www.w3.org/2000/svg", "svg"), rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    svg.setAttribute("class", "pen-frame"); rect.setAttribute("fill", "none"); rect.setAttribute("stroke-width", "2.4"); svg.append(rect); kase.append(svg);
+    return { card, svg, rect };
+  };
+  const plan = [["Eng", 1.15, 0.62], ["Research", 1.0, 0.55], ["Tin", 1.0, 0.55]];
+  cases.forEach((kase, i) => {
+    const [who, from, to] = plan[i], real = frameFor(kase), twin = i === 0 ? frameFor(coverCase) : null, empty = real.card.classList.contains("is-empty");
+    add("frame", [real, twin], real.card, from, to, who, { empty, color: WHO[who] });
+    if (!empty) {
+      add("img", [real.card.querySelector("img"), twin && twin.card.querySelector("img")], real.card, 0.78, 0.5, null);
+      const ki = [...kase.querySelectorAll(".ink")], ti = twin ? [...coverCase.querySelectorAll(".ink")] : [];
+      ki.forEach((el, k) => add("ink", [el, ti[k]], real.card, 0.56 - k * 0.1, 0.38 - k * 0.1, el.dataset.who));
+    }
+  });
+  S.items.forEach((it) => { if (it.kind === "ink") it.els.forEach((el) => {
+    const full = el.textContent; el.dataset.full = full; el.style.setProperty("--tf", WHO[it.who]);
+    el.innerHTML = '<span class="tf-typed"></span><span class="tf-caret" aria-hidden="true"></span><span class="tf-rest"></span><span class="tf-box" aria-hidden="true"><i></i><i></i><i></i><i></i></span>';
+    el._typed = el.children[0]; el._caret = el.children[1]; el._rest = el.children[2]; el._rest.textContent = full;
+  }); });
+  S.items.forEach((it) => {
+    if (it.kind === "frame") it.els.forEach((f) => {
+      const w = f.card.offsetWidth, h = f.card.offsetHeight;
+      f.svg.style.left = `${f.card.offsetLeft}px`; f.svg.style.top = `${f.card.offsetTop}px`;
+      f.svg.setAttribute("width", w); f.svg.setAttribute("height", h); f.svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
+      Object.entries({ x: 1, y: 1, width: w - 2, height: h - 2, rx: 20, ry: 20 }).forEach(([k, v]) => f.rect.setAttribute(k, v));
+      f.len = f.rect.getTotalLength();
+    });
+    if (it.kind === "cloud") it.els.forEach((el) => { el._len = el.nextElementSibling.getTotalLength(); });
+  });
+  return S;
+}
+
+function journey(S, p) {
+  const vw = 1440, vh = 900, W = 550, H = 777, GX = 272.3, GY = 398.4;
+  const s0 = Math.min((vh * 0.72) / H, (vw * 0.8) / W), s1 = Math.max(s0 * 2.853, (vw * 0.96) / 540, (vh * 1.25) / 544), s2 = s1 * 4.5;
+  const zA = easeInOut(seg(p, 0, 0.42)), zB = easeIn(seg(p, 0.58, 0.9));
+  let s = lerp(s0, s1, zA), cx = vw * 0.5, cy = lerp(vh * 0.47, vh * 0.5, zA);
+  s = lerp(s, s2, zB); cy = lerp(cy, vh * 0.62, zB);
+  S.win.style.width = `${W * s}px`; S.win.style.transform = `translate3d(${cx - GX * s}px, ${cy - GY * s}px, 0)`;
+  S.plane.style.width = `${110 * (1 + 0.3 * zA)}px`;   // distant planes barely grow while the frame rushes at you
+  S.flight.style.opacity = (1 - 0.6 * easeOut(seg(p, 0.3, 0.46))) * (1 - seg(p, 0.6, 0.75));
+  const out = easeOut(seg(p, 0, 0.2));
+  S.stamp.style.transform = `translate(${out * 22}vw, ${-out * 18}vh) rotate(${out * 12}deg)`; S.stamp.style.opacity = 1 - out;
+  S.matcha.style.transform = `translate(${-out * 18}vw, ${out * 22}vh) rotate(${-out * 10}deg)`; S.matcha.style.opacity = 1 - out;
+  S.hint.style.opacity = 1 - seg(p, 0, 0.06);
+  S.copy.style.transform = `translate(${-out * 20}vw, 0)`; S.copy.style.opacity = 1 - out;
+  S.light.style.transform = `translate(${-zA * 14.4}px, ${zA * 6}px)`; S.light.style.opacity = 1 - seg(p, 0.2, 0.42);
+  const tIn = easeOut(seg(p, 0.3, 0.46)), tOut = easeIn(seg(p, 0.6, 0.74));
+  S.intro.style.opacity = tIn * (1 - tOut); S.intro.style.transform = `translateY(${(1 - tIn) * 32 - tOut * 48}px)`;
+  const coverAlpha = easeInOut(seg(p, 0.74, 0.92)); S.cover.style.opacity = p > 0.74 ? 1 : 0; S.coverSky.style.opacity = easeInOut(seg(p, 0.9, 1));
+  if (coverAlpha > 0.4) { S.firstCase.classList.add("is-visible"); S.coverCase.classList.add("is-visible"); }
+  S.stage.style.visibility = p >= 0.999 ? "hidden" : "visible";
+}
+
+function pens(S) {
+  const k = S.host.getBoundingClientRect().width / 1440 || 1, top0 = S.root.getBoundingClientRect().top, left0 = S.root.getBoundingClientRect().left;
+  const onCover = S.stage.style.visibility !== "hidden" && S.cover.style.opacity === "1";
+  let moving = false; const tips = {};
+  for (const it of S.items) {
+    const y = (it.anchor.getBoundingClientRect().top - top0) / (900 * k);
+    const goal = clamp01((it.from - y) / (it.from - it.to));
+    it.t += (goal - it.t) * 0.09; if (Math.abs(goal - it.t) < 0.002) it.t = goal; else moving = true;
+    if (it.kind === "cloud") { const g = clamp01((it.fillFrom - y) / (it.fillFrom - it.fillTo)); it.fill = (it.fill || 0) + (g - (it.fill || 0)) * 0.09; if (Math.abs(g - it.fill) < 0.002) it.fill = g; else moving = true; }
+    if (it.kind === "frame") { const g = clamp01((it.to - y) / 0.14); it.done = (it.done || 0) + (g - (it.done || 0)) * 0.09; if (Math.abs(g - it.done) < 0.002) it.done = g; else moving = true; }
+    const t = ease2(it.t);
+    for (const el of it.els) {
+      if (it.kind === "cloud") { const ln = el.nextElementSibling, f = ease2(it.fill || 0); ln.style.stroke = WHO.Research; ln.style.strokeDasharray = `${el._len} ${el._len}`; ln.style.strokeDashoffset = el._len * (1 - t); ln.style.strokeOpacity = t > 0 ? 1 - f : 0; el.style.fillOpacity = f; if (el === it.els[1] && it === S.items[0]) S.ground.style.opacity = f; }
+      else if (it.kind === "ink") { const full = el.dataset.full, n = Math.round(it.t * full.length); if (el._n !== n) { el._typed.textContent = full.slice(0, n); el._rest.textContent = full.slice(n); el._n = n; } el.classList.toggle("is-typing", it.t > 0.005 && it.t < 0.995); }
+      else if (it.kind === "img") { el.style.opacity = t; el.style.filter = t >= 1 ? "" : `blur(${(1 - t) * 14}px) saturate(${0.3 + 0.7 * t})`; }
+      else if (it.kind === "frame") { const d = ease2(it.done || 0); el.rect.style.stroke = it.color; el.rect.style.strokeDasharray = `${el.len} ${el.len}`; el.rect.style.strokeDashoffset = el.len * (1 - t); el.rect.style.strokeOpacity = t > 0 ? 1 - d : 0; if (it.empty) el.card.style.borderColor = `rgba(162, 161, 161, ${d})`; }
+    }
+    if (it.who && it.t > 0.01 && it.t < 0.99) {
+      const el = onCover && it.els[1] ? it.els[1] : it.els[0];
+      let pt;
+      if (it.kind === "cloud" || it.kind === "frame") { const g = it.kind === "cloud" ? el.nextElementSibling : el.rect, len = it.kind === "cloud" ? el._len : el.len, a = g.getPointAtLength(len * t), m = g.getScreenCTM(); if (m) pt = new DOMPoint(a.x, a.y).matrixTransform(m); }
+      else { const r = el._caret.getBoundingClientRect(); pt = { x: r.left + 2, y: r.top + r.height * 0.8 }; }
+      if (pt) tips[it.who] = { x: (pt.x - left0) / k, y: (pt.y - top0) / k };
+    }
+  }
+  for (const [name, c] of Object.entries(S.cursors)) { const p = tips[name]; if (p) { c.style.opacity = 1; c.style.transform = `translate(${p.x - 3}px, ${p.y - 3}px)`; } else c.style.opacity = 0; }
+  return moving;
+}
+
+class Component extends DCLogic {
+  renderVals() {
+    if (!this._v) {
+      this._stamp = STAMPS[Math.floor(Math.random() * STAMPS.length)];
+      const tick = () => {
+        const S = this._S; if (!S) return;
+        const d = S.target - S.current; S.current = Math.abs(d) < 0.0005 ? S.target : S.current + d * 0.14;
+        journey(S, S.current);
+        const moving = pens(S);
+        this._raf = S.current !== S.target || moving ? requestAnimationFrame(tick) : 0;
+      };
+      const read = () => {
+        const S = this._S; if (!S) return;
+        S.target = clamp01(S.root.scrollTop / (S.journey.offsetHeight - 900));
+        const max = S.root.scrollHeight - S.root.clientHeight; S.progress.style.width = `${max > 0 ? (S.root.scrollTop / max) * 100 : 0}%`;
+        if (!this._raf) this._raf = requestAnimationFrame(tick);
+      };
+      this._v = {
+        root: (el) => { if (el && !this._S) requestAnimationFrame(() => { this._S = setup(el); read(); }); },
+        onScroll: read,
+      };
+    }
+    return { ...this._v, stampSrc: this._stamp };
+  }
+  componentWillUnmount() { cancelAnimationFrame(this._raf); if (this._S) this._S.io.disconnect(); }
+}
+</script>
+</body>
+</html>
