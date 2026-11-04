@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Variation: pixel contrail</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800;900&amp;family=Geist+Mono:wght@400;500&amp;family=Caveat:wght@500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}a:hover{opacity:0.75}
+sc-for, sc-if { display: contents; }
+button:focus-visible { outline: 2px solid #3078e7; outline-offset: 3px; }
+@keyframes vv-pixA { 0% { opacity: 0; transform: scale(0); } 18% { opacity: 1; transform: scale(1.15); } 30% { transform: scale(1); } 70% { opacity: 1; } 100% { opacity: 0.0; transform: scale(0.6); } }
+@keyframes vv-pixB { 0% { opacity: 0; transform: scale(0); } 18% { opacity: 1; transform: scale(1.15); } 30% { transform: scale(1); } 70% { opacity: 1; } 100% { opacity: 0.0; transform: scale(0.6); } }
+@media (prefers-reduced-motion: reduce) { [style*="vv-"], .vv-anim { animation: none !important; } }
+</style>
+</helmet>
+<div style="position: relative; width: 1440px; height: 900px; overflow: hidden; background: #f7f5ef; color: #14161a; font-family: 'Inter Tight', system-ui, sans-serif;">
+  <header style="position: absolute; z-index: 5; left: 0; right: 0; top: 0; display: flex; justify-content: space-between; align-items: center; padding: 36px 72px 0;">
+      <a href="#top" aria-label="Tin Le, home"><img src="/_blob/3ca00abc7d7968429b8d83395785269e" alt="tin" style="display: block; width: 52px; height: 52px; "></a>
+      <nav aria-label="Primary" style="display: flex; gap: 8px; padding: 6px; border-radius: 999px; background: rgba(0,0,0,0.05); font: 600 15px 'Inter Tight', system-ui, sans-serif;">
+        <a href="#work" style="padding: 10px 16px; border-radius: 999px; background: #fff;">Work</a><a href="#about" style="padding: 10px 16px;">About</a><a href="#contact" style="padding: 10px 16px;">Contact</a>
+      </nav>
+    </header>
+  <div aria-hidden="true" style="position: absolute; left: 1030px; top: 140px; width: 330px; height: 466px; ">
+      <div style="position: absolute; left: 54px; top: 74px; width: 221px; height: 336px; overflow: hidden; border-radius: 24% / 16%;">
+        <img src="/_blob/72689660588a90a9527c9831ba59df51" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;">
+        <img src="/_blob/873faef20891bfc5fcb4e8ce70db4732" alt="" style="position: absolute; left: 34%; top: 28%; width: 56%; transform: rotate(-4deg);">
+        <img src="/_blob/9117a00e453f4a3c0ce733f75f4f207d" alt="" style="position: absolute; left: -45%; bottom: -6%; width: 190%; max-width: none;">
+      </div>
+      <img src="/_blob/0b65d8397cbadbb8bded5f3e698b0403" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%;">
+    </div>
+  <div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;">
+    <sc-for list="{{ pixels }}" as="q" hint-placeholder-count="20"><span style="{{ q.style }}"></span></sc-for>
+  </div>
+  <div style="position: absolute; left: 72px; top: 520px; width: 760px; display: flex; flex-direction: column; gap: 18px;">
+    <p style="margin: 0; font: 500 15px 'Geist Mono', ui-monospace, monospace; opacity: 0.6;">HELLO, I’M TIN</p>
+    <h1 style="margin: 0; font: 800 78px/1.02 'Inter Tight', system-ui, sans-serif; letter-spacing: -0.035em;">Designing for a kinder, clearer web.</h1>
+    <p style="margin: 0; max-width: 520px; font: 500 20px/1.5 'Inter Tight', system-ui, sans-serif; opacity: 0.72;">Product designer at Microsoft. Search, AI agents and growth, made simple.</p>
+  </div>
+  <button type="button" onClick="{{ replay }}" style="position: absolute; right: 72px; bottom: 48px; min-height: 44px; padding: 0 18px; border-radius: 999px; border: 1px solid #14161a; background: #f7f5ef; font: 600 14px 'Inter Tight', system-ui, sans-serif; cursor: pointer;">Replay trail</button>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"trailSeconds": {"editor": "range", "default": 3.2, "min": 1.5, "max": 8, "step": 0.1, "unit": "s", "section": "Trail"}, "loop": {"editor": "boolean", "default": true, "section": "Trail"}, "$preview": {"width": 1440, "height": 900}}'>
+const PIX = [{"x": 1005, "y": 282, "s": 17, "c": "#65a3ee", "d": 0.33}, {"x": 987, "y": 308, "s": 21, "c": "#3078e7", "d": 0.06}, {"x": 984, "y": 295, "s": 31, "c": "#3078e7", "d": 0.38}, {"x": 964, "y": 298, "s": 16, "c": "#e6b88a", "d": 0.09}, {"x": 955, "y": 319, "s": 21, "c": "#a9c46a", "d": 0.26}, {"x": 952, "y": 324, "s": 21, "c": "#65a3ee", "d": 0.35}, {"x": 943, "y": 317, "s": 16, "c": "#3078e7", "d": 0.39}, {"x": 927, "y": 329, "s": 25, "c": "#5b4a8a", "d": 0.4}, {"x": 914, "y": 321, "s": 20, "c": "#6f8a3e", "d": 0.22}, {"x": 897, "y": 335, "s": 25, "c": "#5b4a8a", "d": 0.32}, {"x": 905, "y": 319, "s": 29, "c": "#c1dff9", "d": 0.53}, {"x": 870, "y": 341, "s": 15, "c": "#65a3ee", "d": 0.56}, {"x": 869, "y": 365, "s": 24, "c": "#b8754a", "d": 0.56}, {"x": 858, "y": 352, "s": 28, "c": "#65a3ee", "d": 0.64}, {"x": 856, "y": 350, "s": 15, "c": "#3078e7", "d": 0.62}, {"x": 826, "y": 358, "s": 28, "c": "#a9c46a", "d": 0.63}, {"x": 831, "y": 348, "s": 28, "c": "#b8754a", "d": 0.44}, {"x": 797, "y": 336, "s": 23, "c": "#c1dff9", "d": 0.69}, {"x": 793, "y": 383, "s": 27, "c": "#65a3ee", "d": 0.48}, {"x": 781, "y": 352, "s": 19, "c": "#e6b88a", "d": 0.79}, {"x": 766, "y": 361, "s": 23, "c": "#e6b88a", "d": 0.85}, {"x": 751, "y": 350, "s": 18, "c": "#6f8a3e", "d": 0.49}, {"x": 758, "y": 352, "s": 22, "c": "#3078e7", "d": 0.57}, {"x": 738, "y": 376, "s": 22, "c": "#c1dff9", "d": 0.81}, {"x": 725, "y": 377, "s": 14, "c": "#5b4a8a", "d": 0.92}, {"x": 721, "y": 392, "s": 26, "c": "#e6b88a", "d": 0.74}, {"x": 690, "y": 380, "s": 14, "c": "#6f8a3e", "d": 0.63}, {"x": 681, "y": 357, "s": 21, "c": "#3078e7", "d": 0.67}, {"x": 679, "y": 377, "s": 21, "c": "#3078e7", "d": 0.68}, {"x": 657, "y": 369, "s": 21, "c": "#b8754a", "d": 0.91}, {"x": 653, "y": 356, "s": 24, "c": "#5b4a8a", "d": 0.89}, {"x": 636, "y": 358, "s": 20, "c": "#a9c46a", "d": 0.91}, {"x": 635, "y": 378, "s": 17, "c": "#b8754a", "d": 0.8}, {"x": 619, "y": 353, "s": 20, "c": "#65a3ee", "d": 1.04}, {"x": 599, "y": 371, "s": 16, "c": "#b8754a", "d": 1.1}, {"x": 595, "y": 393, "s": 20, "c": "#6f8a3e", "d": 1.06}, {"x": 590, "y": 392, "s": 16, "c": "#6f8a3e", "d": 1.16}, {"x": 577, "y": 365, "s": 23, "c": "#b8754a", "d": 1.15}, {"x": 572, "y": 394, "s": 23, "c": "#a9c46a", "d": 0.96}, {"x": 549, "y": 371, "s": 19, "c": "#b8754a", "d": 0.94}, {"x": 523, "y": 378, "s": 19, "c": "#6f8a3e", "d": 1.12}, {"x": 536, "y": 386, "s": 12, "c": "#5b4a8a", "d": 1.31}, {"x": 507, "y": 388, "s": 12, "c": "#e6b88a", "d": 1.29}, {"x": 506, "y": 380, "s": 15, "c": "#e6b88a", "d": 1.31}, {"x": 482, "y": 397, "s": 21, "c": "#5b4a8a", "d": 1.18}, {"x": 488, "y": 394, "s": 15, "c": "#c1dff9", "d": 1.05}, {"x": 466, "y": 382, "s": 14, "c": "#5b4a8a", "d": 1.33}, {"x": 447, "y": 387, "s": 14, "c": "#3078e7", "d": 1.1}, {"x": 453, "y": 393, "s": 14, "c": "#e6b88a", "d": 1.51}, {"x": 419, "y": 406, "s": 11, "c": "#a9c46a", "d": 1.22}, {"x": 416, "y": 402, "s": 17, "c": "#a9c46a", "d": 1.38}, {"x": 413, "y": 367, "s": 17, "c": "#5b4a8a", "d": 1.45}, {"x": 401, "y": 392, "s": 13, "c": "#c1dff9", "d": 1.42}, {"x": 367, "y": 390, "s": 13, "c": "#3078e7", "d": 1.54}, {"x": 358, "y": 377, "s": 10, "c": "#3078e7", "d": 1.38}, {"x": 357, "y": 401, "s": 10, "c": "#3078e7", "d": 1.37}, {"x": 338, "y": 414, "s": 19, "c": "#3078e7", "d": 1.6}, {"x": 344, "y": 400, "s": 13, "c": "#a9c46a", "d": 1.5}, {"x": 322, "y": 404, "s": 13, "c": "#a9c46a", "d": 1.71}, {"x": 320, "y": 393, "s": 18, "c": "#c1dff9", "d": 1.53}, {"x": 294, "y": 402, "s": 12, "c": "#e6b88a", "d": 1.42}, {"x": 290, "y": 429, "s": 12, "c": "#b8754a", "d": 1.47}, {"x": 284, "y": 442, "s": 12, "c": "#65a3ee", "d": 1.6}, {"x": 261, "y": 447, "s": 12, "c": "#c1dff9", "d": 1.74}, {"x": 263, "y": 420, "s": 17, "c": "#6f8a3e", "d": 1.63}, {"x": 226, "y": 421, "s": 14, "c": "#5b4a8a", "d": 1.68}, {"x": 212, "y": 423, "s": 14, "c": "#65a3ee", "d": 1.58}, {"x": 225, "y": 422, "s": 9, "c": "#65a3ee", "d": 1.66}, {"x": 189, "y": 454, "s": 13, "c": "#c1dff9", "d": 1.9}, {"x": 200, "y": 453, "s": 13, "c": "#e6b88a", "d": 1.66}];
+class Component extends DCLogic {
+  renderVals() {
+    const s = this.state || {}, p = this.props;
+    const loop = p.loop ?? true, dur = p.trailSeconds ?? 3.2;
+    const name = s.k ? 'vv-pixA' : 'vv-pixB';
+    return {
+      pixels: PIX.map((q) => ({ style: `position: absolute; left: ${q.x}px; top: ${q.y}px; width: ${q.s}px; height: ${q.s}px; background: ${q.c}; border-radius: 3px; animation: ${name} ${dur}s ease-out ${q.d}s ${loop ? 'infinite' : '1'} both;` })),
+      replay: () => this.setState({ k: !s.k }),
+    };
+  }
+}
+</script>
+</body>
+</html>

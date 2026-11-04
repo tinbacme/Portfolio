@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Particle play prototypes</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#1b2930}a:hover{color:#000}
+</style>
+</helmet>
+<div style="width: 1440px; height: 1020px; box-sizing: border-box; padding: 52px 64px; display: flex; flex-direction: column; gap: 28px; background: #fbf9f4; color: #1b2930; font-family: 'Instrument Sans', system-ui, sans-serif;">
+  <div style="display: flex; flex-direction: column; gap: 6px;">
+    <h2 style="margin: 0; font-size: 34px; font-weight: 600;">Play: particle prototypes</h2>
+    <p style="margin: 0; font-size: 16px; color: #5c6670;">Press Play on this board, then move your mouse or drag a finger across each one. Tweaks: density and glow.</p>
+  </div>
+  <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 24px;">
+    <figure style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
+      <canvas ref="{{ r1 }}" role="img" aria-label="Prototype 1: Matcha fireflies. Move your mouse or finger over it." style="display: block; width: 100%; height: 300px; border-radius: 16px; background: #0d0f12; border: 1px solid #1d2127; touch-action: none; cursor: crosshair;"></canvas>
+      <figcaption style="display: flex; flex-direction: column; gap: 3px;"><span style="font-size: 17px; font-weight: 600;">1 · Matcha fireflies</span><span style="font-size: 14px; line-height: 1.45; color: #5c6670;">Glowing specks drift in the dark. Your cursor shoos them away; they drift back and settle.</span></figcaption>
+    </figure>
+    <figure style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
+      <canvas ref="{{ r2 }}" role="img" aria-label="Prototype 2: Wind flow field. Move your mouse or finger over it." style="display: block; width: 100%; height: 300px; border-radius: 16px; background: #0d0f12; border: 1px solid #1d2127; touch-action: none; cursor: crosshair;"></canvas>
+      <figcaption style="display: flex; flex-direction: column; gap: 3px;"><span style="font-size: 17px; font-weight: 600;">2 · Wind flow field</span><span style="font-size: 14px; line-height: 1.45; color: #5c6670;">Thousands of threads follow an invisible wind. Moving through it stirs a swirl that slowly calms.</span></figcaption>
+    </figure>
+    <figure style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
+      <canvas ref="{{ r3 }}" role="img" aria-label="Prototype 3: Constellation. Move your mouse or finger over it." style="display: block; width: 100%; height: 300px; border-radius: 16px; background: #0d0f12; border: 1px solid #1d2127; touch-action: none; cursor: crosshair;"></canvas>
+      <figcaption style="display: flex; flex-direction: column; gap: 3px;"><span style="font-size: 17px; font-weight: 600;">3 · Constellation</span><span style="font-size: 14px; line-height: 1.45; color: #5c6670;">Stars link up near your cursor like a flight map. Click to place a new star.</span></figcaption>
+    </figure>
+    <figure style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
+      <canvas ref="{{ r4 }}" role="img" aria-label="Prototype 4: Magnetic dot grid. Move your mouse or finger over it." style="display: block; width: 100%; height: 300px; border-radius: 16px; background: #f7f5ef; border: 1px solid #e3ddd0; touch-action: none; cursor: crosshair;"></canvas>
+      <figcaption style="display: flex; flex-direction: column; gap: 3px;"><span style="font-size: 17px; font-weight: 600;">4 · Magnetic dot grid</span><span style="font-size: 14px; line-height: 1.45; color: #5c6670;">A calm grid of dots lifts, grows and warms in colour wherever you pass, then springs back.</span></figcaption>
+    </figure>
+    <figure style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
+      <canvas ref="{{ r5 }}" role="img" aria-label="Prototype 5: Contrail sparkles. Move your mouse or finger over it." style="display: block; width: 100%; height: 300px; border-radius: 16px; background: #f7f5ef; border: 1px solid #e3ddd0; touch-action: none; cursor: crosshair;"></canvas>
+      <figcaption style="display: flex; flex-direction: column; gap: 3px;"><span style="font-size: 17px; font-weight: 600;">5 · Contrail sparkles</span><span style="font-size: 14px; line-height: 1.45; color: #5c6670;">Your pointer leaves a soft contrail of sky-and-matcha sparkles. Click for a burst.</span></figcaption>
+    </figure>
+    <figure style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
+      <canvas ref="{{ r6 }}" role="img" aria-label="Prototype 6: Space dot grid. Move your mouse or finger over it." style="display: block; width: 100%; height: 300px; border-radius: 16px; background: #05060d; border: 1px solid #1d2127; touch-action: none; cursor: crosshair;"></canvas>
+      <figcaption style="display: flex; flex-direction: column; gap: 3px;"><span style="font-size: 17px; font-weight: 600;">6 · Space dot grid</span><span style="font-size: 14px; line-height: 1.45; color: #5c6670;">The magnetic grid as a star field: your cursor is a little black hole that pulls stars in, stretches them and lights them up. Click for a supernova.</span></figcaption>
+    </figure>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"density": {"editor": "range", "default": 1, "min": 0.3, "max": 2, "step": 0.1, "unit": "×", "section": "Particles"}, "glow": {"editor": "range", "default": 1, "min": 0, "max": 2, "step": 0.1, "unit": "×", "section": "Particles"}, "$preview": {"width": 1440, "height": 1020}}'>
+
+const PAL = ['#3078e7', '#65a3ee', '#c1dff9', '#a9c46a', '#6f8a3e', '#e6b88a', '#f4f1dc'];
+const rnd = (a, b) => a + Math.random() * (b - a);
+// tiny smooth noise for the flow field
+const NZ = Array.from({ length: 512 }, () => Math.random());
+const noise = (x, y) => { const xi = Math.floor(x), yi = Math.floor(y), xf = x - xi, yf = y - yi; const h = (i, j) => NZ[((i * 57 + j * 131) & 511 + 512) % 512]; const s = (t) => t * t * (3 - 2 * t); const a = h(xi, yi), b = h(xi + 1, yi), c = h(xi, yi + 1), d = h(xi + 1, yi + 1); return a + (b - a) * s(xf) + (c - a) * s(yf) + (a - b - c + d) * s(xf) * s(yf); };
+
+function setup(cv, kind, self) {
+  const ctx = cv.getContext('2d');
+  const st = { kind, ctx, cv, w: 0, h: 0, dpr: 1, p: { x: -999, y: -999, on: false, vx: 0, vy: 0 }, parts: [], t: 0 };
+  const resize = () => { const r = cv.getBoundingClientRect(); const k = cv.offsetWidth ? r.width / cv.offsetWidth : 1; st.dpr = Math.min(2, (window.devicePixelRatio || 1) * k); st.w = cv.offsetWidth; st.h = cv.offsetHeight; cv.width = Math.round(st.w * st.dpr); cv.height = Math.round(st.h * st.dpr); };
+  resize();
+  const local = (e) => { const r = cv.getBoundingClientRect(); return { x: (e.clientX - r.left) / r.width * st.w, y: (e.clientY - r.top) / r.height * st.h }; };
+  cv.addEventListener('pointermove', (e) => { const q = local(e); st.p.vx = q.x - (st.p.on ? st.p.x : q.x); st.p.vy = q.y - (st.p.on ? st.p.y : q.y); st.p.x = q.x; st.p.y = q.y; st.p.on = true; });
+  cv.addEventListener('pointerleave', () => { st.p.on = false; st.p.x = st.p.y = -999; });
+  cv.addEventListener('pointerdown', (e) => { const q = local(e); st.p.x = q.x; st.p.y = q.y; st.p.on = true; st.click = { x: q.x, y: q.y }; });
+  init(st, self.props);
+  return st;
+}
+
+function init(st, props) {
+  const n = (base) => Math.round(base * (props.density ?? 1));
+  const { w, h } = st;
+  if (st.kind === 1) st.parts = Array.from({ length: n(140) }, () => ({ x: rnd(0, w), y: rnd(0, h), hx: 0, hy: 0, vx: 0, vy: 0, r: rnd(0.8, 2.4), ph: rnd(0, 6.28), c: Math.random() < 0.7 ? '#c9e27a' : '#f2d98a' }));
+  if (st.kind === 1) st.parts.forEach((q) => { q.hx = q.x; q.hy = q.y; });
+  if (st.kind === 2) { st.parts = Array.from({ length: n(900) }, () => ({ x: rnd(0, w), y: rnd(0, h), life: rnd(40, 200), c: PAL[Math.floor(rnd(0, 3))] })); st.swirl = 0; }
+  if (st.kind === 3) st.parts = Array.from({ length: n(70) }, () => ({ x: rnd(0, w), y: rnd(0, h), vx: rnd(-0.15, 0.15), vy: rnd(-0.15, 0.15), r: rnd(0.8, 1.8) }));
+  if (st.kind === 4) { st.parts = []; const g = 18; for (let y = g / 2; y < h; y += g) for (let x = g / 2; x < w; x += g) st.parts.push({ x, y, ox: x, oy: y, vx: 0, vy: 0, s: 0 }); }
+  if (st.kind === 5) st.parts = [];
+  if (st.kind === 6) {
+    st.parts = []; const g = 16;
+    const tints = ['#ffffff', '#dfe9ff', '#c1dff9', '#ffe7cf', '#e6dcff'];
+    for (let y = g / 2; y < h; y += g) for (let x = g / 2; x < w; x += g) st.parts.push({ x, y, ox: x, oy: y, vx: 0, vy: 0, s: 0, ph: rnd(0, 6.28), tw: rnd(0.6, 1.6), c: tints[Math.floor(rnd(0, tints.length))] });
+    st.waves = [];
+  }
+}
+
+function frame(st, props) {
+  const { ctx, w, h, dpr, p } = st; st.t += 1;
+  const glow = props.glow ?? 1;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  if (st.kind === 1) {
+    ctx.fillStyle = 'rgba(13, 15, 18, 0.35)'; ctx.fillRect(0, 0, w, h);
+    ctx.globalCompositeOperation = 'lighter';
+    for (const q of st.parts) {
+      const dx = q.x - p.x, dy = q.y - p.y, d2 = dx * dx + dy * dy;
+      if (d2 < 9000) { const f = (9000 - d2) / 9000 * 1.6; const d = Math.sqrt(d2) || 1; q.vx += dx / d * f; q.vy += dy / d * f; }
+      q.vx += (q.hx - q.x) * 0.004 + Math.cos(st.t * 0.01 + q.ph) * 0.02; q.vy += (q.hy - q.y) * 0.004 + Math.sin(st.t * 0.013 + q.ph) * 0.02;
+      q.vx *= 0.92; q.vy *= 0.92; q.x += q.vx; q.y += q.vy;
+      const tw = 0.5 + 0.5 * Math.sin(st.t * 0.05 + q.ph), sp = Math.min(1, Math.hypot(q.vx, q.vy) / 3);
+      const R = q.r * (3 + 5 * tw * glow + 6 * sp);
+      const gr = ctx.createRadialGradient(q.x, q.y, 0, q.x, q.y, R); gr.addColorStop(0, q.c); gr.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.globalAlpha = 0.25 + 0.6 * tw; ctx.fillStyle = gr; ctx.beginPath(); ctx.arc(q.x, q.y, R, 0, 6.29); ctx.fill();
+    }
+    ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
+  }
+  if (st.kind === 2) {
+    ctx.fillStyle = 'rgba(13, 15, 18, 0.08)'; ctx.fillRect(0, 0, w, h);
+    st.swirl = Math.max(0, st.swirl * 0.985 + (p.on ? Math.min(1, Math.hypot(p.vx, p.vy) / 20) * 0.1 : 0));
+    ctx.lineWidth = 1;
+    for (const q of st.parts) {
+      let a = noise(q.x * 0.006, q.y * 0.006 + st.t * 0.002) * 6.28 * 2;
+      const dx = q.x - p.x, dy = q.y - p.y, d = Math.hypot(dx, dy);
+      if (p.on && d < 120) a = a * (d / 120) + (Math.atan2(dy, dx) + 1.7) * (1 - d / 120) * (0.5 + st.swirl);
+      const nx = q.x + Math.cos(a) * 1.4, ny = q.y + Math.sin(a) * 1.4;
+      ctx.strokeStyle = q.c; ctx.globalAlpha = 0.5 * glow + 0.15; ctx.beginPath(); ctx.moveTo(q.x, q.y); ctx.lineTo(nx, ny); ctx.stroke();
+      q.x = nx; q.y = ny; q.life -= 1;
+      if (q.life < 0 || q.x < 0 || q.x > w || q.y < 0 || q.y > h) { q.x = rnd(0, w); q.y = rnd(0, h); q.life = rnd(60, 220); }
+    }
+    ctx.globalAlpha = 1;
+  }
+  if (st.kind === 3) {
+    ctx.fillStyle = '#0d0f12'; ctx.fillRect(0, 0, w, h);
+    if (st.click) { st.parts.push({ x: st.click.x, y: st.click.y, vx: 0, vy: 0, r: 2.4, born: st.t }); st.click = null; if (st.parts.length > 140) st.parts.shift(); }
+    const pts = st.parts;
+    for (const q of pts) { q.x += q.vx; q.y += q.vy; if (q.x < 0 || q.x > w) q.vx *= -1; if (q.y < 0 || q.y > h) q.vy *= -1; }
+    for (let i = 0; i < pts.length; i++) {
+      const a = pts[i], da = Math.hypot(a.x - p.x, a.y - p.y);
+      if (da > 150) continue;
+      for (let j = i + 1; j < pts.length; j++) {
+        const b = pts[j], d = Math.hypot(a.x - b.x, a.y - b.y);
+        if (d < 80) { ctx.strokeStyle = `rgba(193, 223, 249, ${((1 - d / 80) * (1 - da / 150) * 0.9 * glow).toFixed(3)})`; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); }
+      }
+    }
+    for (const q of pts) {
+      const d = Math.hypot(q.x - p.x, q.y - p.y), near = Math.max(0, 1 - d / 150);
+      const fresh = q.born !== undefined ? Math.max(0, 1 - (st.t - q.born) / 60) : 0;
+      ctx.fillStyle = `rgba(255, 255, 255, ${(0.35 + 0.65 * near).toFixed(3)})`;
+      ctx.beginPath(); ctx.arc(q.x, q.y, q.r * (1 + near * 1.2 * glow + fresh * 3), 0, 6.29); ctx.fill();
+    }
+    if (p.on) { ctx.strokeStyle = 'rgba(48, 120, 231, 0.5)'; ctx.setLineDash([3, 5]); ctx.beginPath(); ctx.arc(p.x, p.y, 150, 0, 6.29); ctx.stroke(); ctx.setLineDash([]); }
+  }
+  if (st.kind === 4) {
+    ctx.fillStyle = '#f7f5ef'; ctx.fillRect(0, 0, w, h);
+    for (const q of st.parts) {
+      const dx = q.x - p.x, dy = q.y - p.y, d = Math.hypot(dx, dy), R = 90;
+      let tx = q.ox, ty = q.oy, ts = 0;
+      if (d < R) { const f = 1 - d / R; tx += dx / (d || 1) * f * 14; ty += dy / (d || 1) * f * 14; ts = f; }
+      q.vx = (q.vx + (tx - q.x) * 0.12) * 0.78; q.vy = (q.vy + (ty - q.y) * 0.12) * 0.78; q.x += q.vx; q.y += q.vy;
+      q.s += (ts - q.s) * 0.15;
+      const r = 1.6 + q.s * 5.5 * glow;
+      ctx.fillStyle = q.s > 0.02 ? `hsl(${215 - q.s * 140}, ${50 + q.s * 30}%, ${55 - q.s * 8}%)` : '#c9c3b6';
+      ctx.beginPath(); ctx.arc(q.x, q.y, r, 0, 6.29); ctx.fill();
+    }
+  }
+  if (st.kind === 5) {
+    ctx.fillStyle = 'rgba(247, 245, 239, 0.28)'; ctx.fillRect(0, 0, w, h);
+    const add = (x, y, vx, vy, n) => { for (let i = 0; i < n; i++) st.parts.push({ x, y, vx: vx + rnd(-0.8, 0.8), vy: vy + rnd(-0.8, 0.8), life: 1, r: rnd(1.5, 4.5), c: PAL[Math.floor(rnd(0, PAL.length))], spin: rnd(0, 6.28) }); };
+    if (p.on) add(p.x, p.y, -p.vx * 0.05, -p.vy * 0.05, Math.min(6, 1 + Math.round(Math.hypot(p.vx, p.vy) / 4)));
+    if (st.click) { for (let i = 0; i < 60; i++) { const a = rnd(0, 6.28), s = rnd(1, 5); add(st.click.x, st.click.y, Math.cos(a) * s, Math.sin(a) * s, 1); } st.click = null; }
+    p.vx *= 0.5; p.vy *= 0.5;
+    st.parts = st.parts.filter((q) => q.life > 0).slice(-700);
+    for (const q of st.parts) {
+      q.x += q.vx; q.y += q.vy; q.vy += 0.03; q.vx *= 0.98; q.life -= 0.012; q.spin += 0.1;
+      ctx.globalAlpha = Math.max(0, q.life);
+      ctx.fillStyle = q.c; ctx.save(); ctx.translate(q.x, q.y); ctx.rotate(q.spin);
+      if (q.r > 3.5) { ctx.fillRect(-q.r / 2, -q.r / 2, q.r, q.r); } else { ctx.beginPath(); ctx.arc(0, 0, q.r * (0.6 + 0.4 * glow), 0, 6.29); ctx.fill(); }
+      ctx.restore();
+    }
+    ctx.globalAlpha = 1;
+  }
+  if (st.kind === 6) {
+    ctx.fillStyle = '#05060d'; ctx.fillRect(0, 0, w, h);
+    // faint nebula
+    const neb = (x, y, r, c) => { const g = ctx.createRadialGradient(x, y, 0, x, y, r); g.addColorStop(0, c); g.addColorStop(1, 'rgba(5, 6, 13, 0)'); ctx.fillStyle = g; ctx.fillRect(0, 0, w, h); };
+    neb(w * 0.25, h * 0.3, w * 0.45, 'rgba(91, 74, 138, 0.22)'); neb(w * 0.8, h * 0.75, w * 0.4, 'rgba(48, 120, 231, 0.18)');
+    if (st.click) { st.waves.push({ x: st.click.x, y: st.click.y, r: 0 }); st.click = null; }
+    st.waves = st.waves.filter((v) => v.r < 260); for (const v of st.waves) v.r += 5;
+    ctx.globalCompositeOperation = 'lighter';
+    for (const q of st.parts) {
+      const dx = p.x - q.ox, dy = p.y - q.oy, d = Math.hypot(dx, dy), R = 130;
+      let tx = q.ox, ty = q.oy, pull = 0;
+      if (p.on && d < R) { pull = 1 - d / R; const k = pull * pull * 0.55; tx += dx * k; ty += dy * k; }
+      for (const v of st.waves) { const dw = Math.hypot(q.ox - v.x, q.oy - v.y), band = Math.max(0, 1 - Math.abs(dw - v.r) / 24); if (band > 0) { tx += (q.ox - v.x) / (dw || 1) * band * 18; ty += (q.oy - v.y) / (dw || 1) * band * 18; pull = Math.max(pull, band * 0.8); } }
+      q.vx = (q.vx + (tx - q.x) * 0.1) * 0.8; q.vy = (q.vy + (ty - q.y) * 0.1) * 0.8;
+      const px = q.x, py = q.y; q.x += q.vx; q.y += q.vy;
+      q.s += (pull - q.s) * 0.12;
+      const tw = 0.55 + 0.45 * Math.sin(st.t * 0.04 * q.tw + q.ph);
+      const a = Math.min(1, 0.18 + tw * 0.25 + q.s * 0.9 * glow);
+      const col = q.s > 0.15 ? `hsla(${265 + q.s * 60}, 90%, ${70 + q.s * 15}%, ${a})` : q.c;
+      const sp = Math.hypot(q.x - px, q.y - py);
+      ctx.globalAlpha = a; ctx.strokeStyle = col; ctx.fillStyle = col;
+      if (sp > 0.6) { ctx.lineWidth = 1 + q.s * 1.5; ctx.beginPath(); ctx.moveTo(px - (q.x - px) * 2, py - (q.y - py) * 2); ctx.lineTo(q.x, q.y); ctx.stroke(); }
+      else { ctx.beginPath(); ctx.arc(q.x, q.y, 0.7 + q.s * 2.2 + tw * 0.3, 0, 6.29); ctx.fill(); }
+    }
+    ctx.globalAlpha = 1;
+    if (p.on) {
+      const ring = ctx.createRadialGradient(p.x, p.y, 6, p.x, p.y, 34); ring.addColorStop(0, 'rgba(0, 0, 0, 0)'); ring.addColorStop(0.35, `rgba(214, 190, 255, ${0.55 * glow})`); ring.addColorStop(1, 'rgba(0, 0, 0, 0)');
+      ctx.fillStyle = ring; ctx.beginPath(); ctx.arc(p.x, p.y, 34, 0, 6.29); ctx.fill();
+    }
+    ctx.globalCompositeOperation = 'source-over';
+    if (p.on) { ctx.fillStyle = '#000'; ctx.beginPath(); ctx.arc(p.x, p.y, 7, 0, 6.29); ctx.fill(); }
+    for (const v of st.waves) { ctx.strokeStyle = `rgba(255, 231, 207, ${(1 - v.r / 260) * 0.5})`; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(v.x, v.y, v.r, 0, 6.29); ctx.stroke(); }
+  }
+  if (!p.on) { p.vx = 0; p.vy = 0; }
+}
+
+class Component extends DCLogic {
+  componentDidMount() {
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const loop = () => {
+      for (const st of Object.values(this._st || {})) frame(st, this.props);
+      this._raf = requestAnimationFrame(loop);
+    };
+    if (reduce) { for (const st of Object.values(this._st || {})) for (let i = 0; i < 60; i++) frame(st, this.props); }
+    else this._raf = requestAnimationFrame(loop);
+  }
+  componentDidUpdate(prev) {
+    if (prev.density !== this.props.density) for (const st of Object.values(this._st || {})) init(st, this.props);
+  }
+  componentWillUnmount() { cancelAnimationFrame(this._raf); }
+  renderVals() {
+    if (!this._refs) {
+      this._st = {};
+      this._refs = {};
+      for (let i = 1; i <= 6; i++) this._refs['r' + i] = (el) => { if (el && !this._st[i]) this._st[i] = setup(el, i, this); };
+    }
+    return { ...this._refs };
+  }
+}
+
+</script>
+</body>
+</html>

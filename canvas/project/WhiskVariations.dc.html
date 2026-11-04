@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Matcha whisk interactions</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400&amp;family=Instrument+Sans:wght@400;600&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#1b2930}a:hover{color:#000}
+sc-for, sc-if { display: contents; }
+@keyframes mz-zigA { 0% { transform: translate(0, -70px); opacity: 0; } 12% { transform: translate(0, 0); opacity: 1; } 20% { transform: translate(-22px, 2px) rotate(-6deg); } 28% { transform: translate(22px, -1px) rotate(6deg); } 36% { transform: translate(-22px, 2px) rotate(-6deg); } 44% { transform: translate(22px, -1px) rotate(6deg); } 52% { transform: translate(-22px, 2px) rotate(-6deg); } 60% { transform: translate(22px, -1px) rotate(6deg); } 68% { transform: translate(0, 0) rotate(0deg); opacity: 1; } 100% { transform: translate(0, -80px); opacity: 0; } }
+@keyframes mz-zigB { 0% { transform: translate(0, -70px); opacity: 0; } 12% { transform: translate(0, 0); opacity: 1; } 20% { transform: translate(-22px, 2px) rotate(-6deg); } 28% { transform: translate(22px, -1px) rotate(6deg); } 36% { transform: translate(-22px, 2px) rotate(-6deg); } 44% { transform: translate(22px, -1px) rotate(6deg); } 52% { transform: translate(-22px, 2px) rotate(-6deg); } 60% { transform: translate(22px, -1px) rotate(6deg); } 68% { transform: translate(0, 0) rotate(0deg); opacity: 1; } 100% { transform: translate(0, -80px); opacity: 0; } }
+@keyframes mz-rip { from { transform: translate(-50%, -50%) scale(0.2); opacity: 0.8; } to { transform: translate(-50%, -50%) scale(1.7); opacity: 0; } }
+@keyframes mz-rise { 0% { opacity: 0; transform: translateY(8px); } 30% { opacity: 0.85; } 100% { opacity: 0; transform: translateY(-20px); } }
+@keyframes mz-blowA { 0% { opacity: 0.85; transform: translate(0, 0) skewX(0deg); } 100% { opacity: 0; transform: translate(46px, -10px) skewX(-28deg); } }
+@keyframes mz-blowB { 0% { opacity: 0.85; transform: translate(0, 0) skewX(0deg); } 100% { opacity: 0; transform: translate(46px, -10px) skewX(-28deg); } }
+@keyframes mz-pop { from { transform: translate(-50%, -50%) scale(0.4); opacity: 0; } to { transform: translate(-50%, -50%) scale(1); opacity: 1; } }
+button:focus-visible { outline: 2px solid #3078e7; outline-offset: 4px; }
+@media (prefers-reduced-motion: reduce) { [style*="mz-"] { animation-duration: 0.01ms !important; } }
+</style>
+</helmet>
+<div style="width: 1440px; height: 720px; box-sizing: border-box; padding: 52px 64px; display: flex; flex-direction: column; gap: 28px; background: #fbf9f4; color: #1b2930; font-family: 'Instrument Sans', system-ui, sans-serif;">
+  <div style="display: flex; flex-direction: column; gap: 6px;">
+    <h2 style="margin: 0; font-size: 34px; font-weight: 600;">Matcha whisk: 5 interaction ideas</h2>
+    <p style="margin: 0; font-size: 16px; color: #5c6670;">Press Play on this board and try each bowl. They build foam, so they reward a second visit.</p>
+  </div>
+  <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 24px;">
+    <figure style="margin: 0; display: flex; flex-direction: column; gap: 12px;">
+      <button type="button" aria-label="Variation 1: Tap: three zigzag strokes. Click the bowl." onClick="{{ click1 }}" onPointerDown="{{ down1 }}" onPointerMove="{{ move1 }}" onPointerUp="{{ up1 }}" onPointerLeave="{{ leave1 }}" style="{{ stage1 }}">
+        
+        <span style="position: absolute; left: 28px; top: 70px; width: 200px; height: 227px; display: block;">
+          
+          <img src="/_blob/b87cee741b28406d3c016845683bf9f9" alt="" draggable="false" style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;">
+          <span style="position: absolute; left: 40px; top: 50px; width: 135px; height: 58px; border-radius: 50%; overflow: hidden; pointer-events: none;">
+            <span style="{{ foam1 }}"></span>
+            <sc-for list="{{ rip1 }}" as="r" hint-placeholder-count="0"><span style="{{ r.style }}"></span></sc-for>
+            <svg viewBox="0 0 60 40" aria-hidden="true" style="{{ art1 }}"><path d="{{ art1Path }}" fill="#f4f1dc" fill-opacity="0.92"></path></svg>
+          </span>
+          <span style="{{ whisk1 }}"><img src="/_blob/bc7e591bfd848294df58c730e8bb56d1" alt="" draggable="false" style="display: block; width: 100%; height: 100%; transform: rotate(180deg);"></span>
+        </span>
+        <span style="position: absolute; left: 0; right: 0; bottom: 14px; text-align: center; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; color: #5c6670; pointer-events: none;">{{ status1 }}</span>
+      </button>
+      <figcaption style="display: flex; flex-direction: column; gap: 4px;"><span style="font-size: 17px; font-weight: 600;">1 · Tap: three zigzag strokes</span><span style="font-size: 14px; line-height: 1.45; color: #5c6670;">Click the bowl. The whisk drops in, does the fast back-and-forth "W" stroke real matcha uses, and lifts out. Each tap builds more foam; three taps and it's perfect.</span></figcaption>
+    </figure>
+    <figure style="margin: 0; display: flex; flex-direction: column; gap: 12px;">
+      <button type="button" aria-label="Variation 2: Drag to whisk. Drag across the bowl." onClick="{{ click2 }}" onPointerDown="{{ down2 }}" onPointerMove="{{ move2 }}" onPointerUp="{{ up2 }}" onPointerLeave="{{ leave2 }}" style="{{ stage2 }}">
+        
+        <span style="position: absolute; left: 28px; top: 70px; width: 200px; height: 227px; display: block;">
+          
+          <img src="/_blob/b87cee741b28406d3c016845683bf9f9" alt="" draggable="false" style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;">
+          <span style="position: absolute; left: 40px; top: 50px; width: 135px; height: 58px; border-radius: 50%; overflow: hidden; pointer-events: none;">
+            <span style="{{ foam2 }}"></span>
+            <sc-for list="{{ rip2 }}" as="r" hint-placeholder-count="0"><span style="{{ r.style }}"></span></sc-for>
+            <svg viewBox="0 0 60 40" aria-hidden="true" style="{{ art2 }}"><path d="{{ art2Path }}" fill="#f4f1dc" fill-opacity="0.92"></path></svg>
+          </span>
+          <span style="{{ whisk2 }}"><img src="/_blob/bc7e591bfd848294df58c730e8bb56d1" alt="" draggable="false" style="display: block; width: 100%; height: 100%; transform: rotate(180deg);"></span>
+        </span>
+        <span style="position: absolute; left: 0; right: 0; bottom: 14px; text-align: center; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; color: #5c6670; pointer-events: none;">{{ status2 }}</span>
+      </button>
+      <figcaption style="display: flex; flex-direction: column; gap: 4px;"><span style="font-size: 17px; font-weight: 600;">2 · Drag to whisk</span><span style="font-size: 14px; line-height: 1.45; color: #5c6670;">Press and drag across the bowl: the whisk follows your hand. The more you whisk, the frothier it gets, until a leaf of foam art appears.</span></figcaption>
+    </figure>
+    <figure style="margin: 0; display: flex; flex-direction: column; gap: 12px;">
+      <button type="button" aria-label="Variation 3: Hold to brew. Press and hold." onClick="{{ click3 }}" onPointerDown="{{ down3 }}" onPointerMove="{{ move3 }}" onPointerUp="{{ up3 }}" onPointerLeave="{{ leave3 }}" style="{{ stage3 }}">
+        <svg viewBox="0 0 240 240" aria-hidden="true" style="position: absolute; left: 8px; top: 30px; width: 240px; height: 240px; pointer-events: none; transform: rotate(-90deg);"><circle cx="120" cy="120" r="110" fill="none" stroke="#e3ddd0" stroke-width="4"></circle><circle cx="120" cy="120" r="110" fill="none" stroke="#6f8a3e" stroke-width="4" stroke-linecap="round" pathLength="1" style="{{ ring3 }}"></circle></svg>
+        <span style="position: absolute; left: 28px; top: 70px; width: 200px; height: 227px; display: block;">
+          
+          <img src="/_blob/b87cee741b28406d3c016845683bf9f9" alt="" draggable="false" style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;">
+          <span style="position: absolute; left: 40px; top: 50px; width: 135px; height: 58px; border-radius: 50%; overflow: hidden; pointer-events: none;">
+            <span style="{{ foam3 }}"></span>
+            <sc-for list="{{ rip3 }}" as="r" hint-placeholder-count="0"><span style="{{ r.style }}"></span></sc-for>
+            <svg viewBox="0 0 60 40" aria-hidden="true" style="{{ art3 }}"><path d="{{ art3Path }}" fill="#f4f1dc" fill-opacity="0.92"></path></svg>
+          </span>
+          <span style="{{ whisk3 }}"><img src="/_blob/bc7e591bfd848294df58c730e8bb56d1" alt="" draggable="false" style="display: block; width: 100%; height: 100%; transform: rotate(180deg);"></span>
+        </span>
+        <span style="position: absolute; left: 0; right: 0; bottom: 14px; text-align: center; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; color: #5c6670; pointer-events: none;">{{ status3 }}</span>
+      </button>
+      <figcaption style="display: flex; flex-direction: column; gap: 4px;"><span style="font-size: 17px; font-weight: 600;">3 · Hold to brew</span><span style="font-size: 14px; line-height: 1.45; color: #5c6670;">Press and hold. The whisk starts slow and speeds up while a ring fills around the bowl. Let go when it's full to get a foam heart.</span></figcaption>
+    </figure>
+    <figure style="margin: 0; display: flex; flex-direction: column; gap: 12px;">
+      <button type="button" aria-label="Variation 4: Your cursor is the whisk. Move over the bowl." onClick="{{ click4 }}" onPointerDown="{{ down4 }}" onPointerMove="{{ move4 }}" onPointerUp="{{ up4 }}" onPointerLeave="{{ leave4 }}" style="{{ stage4 }}">
+        
+        <span style="position: absolute; left: 28px; top: 70px; width: 200px; height: 227px; display: block;">
+          
+          <img src="/_blob/b87cee741b28406d3c016845683bf9f9" alt="" draggable="false" style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;">
+          <span style="position: absolute; left: 40px; top: 50px; width: 135px; height: 58px; border-radius: 50%; overflow: hidden; pointer-events: none;">
+            <span style="{{ foam4 }}"></span>
+            <sc-for list="{{ rip4 }}" as="r" hint-placeholder-count="0"><span style="{{ r.style }}"></span></sc-for>
+            <svg viewBox="0 0 60 40" aria-hidden="true" style="{{ art4 }}"><path d="{{ art4Path }}" fill="#f4f1dc" fill-opacity="0.92"></path></svg>
+          </span>
+          <span style="{{ whisk4 }}"><img src="/_blob/bc7e591bfd848294df58c730e8bb56d1" alt="" draggable="false" style="display: block; width: 100%; height: 100%; transform: rotate(180deg);"></span>
+        </span>
+        <span style="position: absolute; left: 0; right: 0; bottom: 14px; text-align: center; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; color: #5c6670; pointer-events: none;">{{ status4 }}</span>
+      </button>
+      <figcaption style="display: flex; flex-direction: column; gap: 4px;"><span style="font-size: 17px; font-weight: 600;">4 · Your cursor is the whisk</span><span style="font-size: 14px; line-height: 1.45; color: #5c6670;">Hover the bowl and the whisk becomes your pointer. Moving through the matcha leaves little ripples behind it.</span></figcaption>
+    </figure>
+    <figure style="margin: 0; display: flex; flex-direction: column; gap: 12px;">
+      <button type="button" aria-label="Variation 5: Blow to cool it down. Click to blow." onClick="{{ click5 }}" onPointerDown="{{ down5 }}" onPointerMove="{{ move5 }}" onPointerUp="{{ up5 }}" onPointerLeave="{{ leave5 }}" style="{{ stage5 }}">
+        
+        <span style="position: absolute; left: 28px; top: 70px; width: 200px; height: 227px; display: block;">
+          <img src="/_blob/274051c5b2a3d397c903682481abeaa4" alt="" draggable="false" style="{{ steam0 }}"><img src="/_blob/bf91ffdab357c9ec089367649b39ae28" alt="" draggable="false" style="{{ steam1 }}"><img src="/_blob/5d3c155907b6836e8485958413fea7c3" alt="" draggable="false" style="{{ steam2 }}">
+          <img src="/_blob/b87cee741b28406d3c016845683bf9f9" alt="" draggable="false" style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;">
+          <span style="position: absolute; left: 40px; top: 50px; width: 135px; height: 58px; border-radius: 50%; overflow: hidden; pointer-events: none;">
+            <span style="{{ foam5 }}"></span>
+            <sc-for list="{{ rip5 }}" as="r" hint-placeholder-count="0"><span style="{{ r.style }}"></span></sc-for>
+            <svg viewBox="0 0 60 40" aria-hidden="true" style="{{ art5 }}"><path d="{{ art5Path }}" fill="#f4f1dc" fill-opacity="0.92"></path></svg>
+          </span>
+          <span style="{{ whisk5 }}"><img src="/_blob/bc7e591bfd848294df58c730e8bb56d1" alt="" draggable="false" style="display: block; width: 100%; height: 100%; transform: rotate(180deg);"></span>
+        </span>
+        <span style="position: absolute; left: 0; right: 0; bottom: 14px; text-align: center; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; color: #5c6670; pointer-events: none;">{{ status5 }}</span>
+      </button>
+      <figcaption style="display: flex; flex-direction: column; gap: 4px;"><span style="font-size: 17px; font-weight: 600;">5 · Blow to cool it down</span><span style="font-size: 14px; line-height: 1.45; color: #5c6670;">Click to blow on the tea. The steam bends away, ripples spread across the surface, and it goes from hot to just right.</span></figcaption>
+    </figure>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"foamColor": {"editor": "color", "default": "#d6e39a", "options": ["#d6e39a", "#e8efc4", "#c9d98a"], "section": "Foam"}, "speed": {"editor": "range", "default": 1, "min": 0.5, "max": 2, "step": 0.1, "unit": "×", "section": "Motion"}, "$preview": {"width": 1440, "height": 720}}'>
+const HEART = 'M30 36 C 6 22, 6 6, 18 6 C 25 6, 29 11, 30 15 C 31 11, 35 6, 42 6 C 54 6, 54 22, 30 36 Z';
+const LEAF = 'M30 4 C 44 12, 46 28, 30 37 C 14 28, 16 12, 30 4 Z M30 8 L30 34';
+const LIQ = { w: 135, h: 58 };                       // liquid ellipse (bowl coords 40,50)
+const TIP = { x: 108, y: 84 };                        // where the whisk tips touch the matcha
+const whiskBox = (x, y, extra) => `position: absolute; left: ${x - 36}px; top: ${y - 134}px; width: 72px; height: 133px; pointer-events: none; ${extra || ''}`;   // illustrated whisk, 521×963
+const local = (e) => {
+  const el = e.currentTarget, r = el.getBoundingClientRect(), k = el.offsetWidth ? r.width / el.offsetWidth : 1;
+  return { x: (e.clientX - r.left) / k - 28, y: (e.clientY - r.top) / k - 70 };  // bowl coordinates
+};
+const inLiquid = (p) => { const nx = (p.x - 40 - LIQ.w / 2) / (LIQ.w / 2), ny = (p.y - 50 - LIQ.h / 2) / (LIQ.h / 2); return nx * nx + ny * ny <= 1; };
+
+class Component extends DCLogic {
+  componentDidMount() {
+    this._t0 = Date.now();
+    this._tick = setInterval(() => {
+      const s = this.state || {}, now = Date.now(), sp = this.props.speed ?? 1, next = {};
+      // 3 · hold to brew
+      if (s.h3) { next.p3 = Math.min(1, (s.p3 || 0) + 0.025 * sp); this._ph = (this._ph || 0) + (0.35 + 1.4 * (s.p3 || 0)) * sp; if (next.p3 >= 1) { next.d3 = true; next.h3 = false; } }
+      else if (!s.d3 && (s.p3 || 0) > 0) next.p3 = Math.max(0, s.p3 - 0.03);
+      // ripples fade out
+      for (const key of ['r4', 'r5']) { const list = s[key] || []; const kept = list.filter((r) => now - r.t < 900); if (kept.length !== list.length) next[key] = kept; }
+      if (Object.keys(next).length || s.h3) this.setState(next);
+    }, 50);
+  }
+  componentWillUnmount() { clearInterval(this._tick); }
+
+  renderVals() {
+    const p = this.props, s = this.state || {}, now = Date.now(), sp = p.speed ?? 1;
+    const foamC = p.foamColor ?? '#d6e39a';
+    const stage = (extra) => `position: relative; display: block; width: 100%; height: 330px; padding: 0; border: 1px solid #e3ddd0; border-radius: 16px; background: #f7f5ef; cursor: pointer; overflow: hidden; touch-action: none; user-select: none; ${extra || ''}`;
+    const foam = (level) => `position: absolute; inset: 0; border-radius: 50%; opacity: ${Math.min(1, level).toFixed(2)}; transition: opacity 1s; background: radial-gradient(circle at 30% 40%, rgba(255, 255, 240, 0.75) 0 1.5px, rgba(0, 0, 0, 0) 2.5px) 0 0 / 11px 8px, radial-gradient(circle at 70% 60%, rgba(255, 255, 240, 0.6) 0 1px, rgba(0, 0, 0, 0) 2px) 4px 3px / 9px 7px, radial-gradient(ellipse closest-side, ${foamC} 0%, ${foamC} 70%, rgba(0, 0, 0, 0) 100%);`;
+    const art = (show) => `position: absolute; left: 50%; top: 50%; width: 46px; height: 30px; transform: translate(-50%, -50%) scale(${show ? 1 : 0.4}); opacity: ${show ? 1 : 0}; transition: opacity 0.6s, transform 0.6s cubic-bezier(0.2, 1.6, 0.4, 1);`;
+    const ripple = (r, i) => ({ style: `position: absolute; left: ${r.x}px; top: ${r.y}px; width: 34px; height: 13px; border-radius: 50%; border: 1.5px solid rgba(255, 255, 240, 0.85); animation: mz-rip 0.9s ease-out ${(r.d || 0)}s both;` });
+    const out = {};
+
+    // 1 · Tap: zigzag
+    const lvl1 = s.l1 || 0;
+    out.stage1 = stage();
+    out.whisk1 = whiskBox(TIP.x, TIP.y, s.z1 === undefined ? 'opacity: 0;' : `animation: ${s.z1 ? 'mz-zigA' : 'mz-zigB'} ${(1.5 / sp).toFixed(2)}s ease-in-out both;`);
+    out.foam1 = foam(lvl1 / 3); out.art1 = art(lvl1 >= 3); out.art1Path = HEART; out.rip1 = [];
+    out.status1 = lvl1 >= 3 ? 'perfect foam · tap to start over' : `foam ${lvl1} / 3 · tap the bowl`;
+    out.click1 = () => this.setState({ z1: !s.z1, l1: lvl1 >= 3 ? 0 : lvl1 + 1 });
+    out.down1 = out.move1 = out.up1 = out.leave1 = undefined;
+
+    // 2 · Drag to whisk
+    const fr2 = s.f2 || 0;
+    out.stage2 = stage(s.g2 ? 'cursor: grabbing;' : 'cursor: grab;');
+    out.whisk2 = whiskBox(s.x2 ?? TIP.x, TIP.y + (s.g2 ? 0 : -40), `opacity: ${s.g2 ? 1 : 0.35}; transition: top 0.25s, opacity 0.25s; transform: rotate(${((s.x2 ?? TIP.x) - TIP.x) * 0.12}deg);`);
+    out.foam2 = foam(fr2); out.art2 = art(fr2 >= 1); out.art2Path = LEAF; out.rip2 = [];
+    out.status2 = fr2 >= 1 ? 'leaf! · drag again to restart' : `froth ${Math.round(fr2 * 100)}% · drag across`;
+    out.down2 = (e) => { e.currentTarget.setPointerCapture && e.currentTarget.setPointerCapture(e.pointerId); const q = local(e); this._lx = q.x; this.setState({ g2: true, x2: Math.max(60, Math.min(156, q.x)), f2: fr2 >= 1 ? 0 : fr2 }); };
+    out.move2 = (e) => { if (!s.g2) return; const q = local(e); const d = Math.abs(q.x - (this._lx ?? q.x)); this._lx = q.x; this.setState({ x2: Math.max(60, Math.min(156, q.x)), f2: Math.min(1, fr2 + d / 900 * sp) }); };
+    out.up2 = out.leave2 = () => { if (s.g2) this.setState({ g2: false }); };
+    out.click2 = undefined;
+
+    // 3 · Hold to brew
+    const p3 = s.p3 || 0, ph = this._ph || 0;
+    out.stage3 = stage();
+    out.ring3 = `stroke-dasharray: 1 1; stroke-dashoffset: ${(1 - p3).toFixed(3)}; transition: stroke-dashoffset 0.1s linear;`;
+    const holdX = s.h3 ? Math.sin(ph) * (10 + 14 * p3) : 0;
+    out.whisk3 = whiskBox(TIP.x + holdX, TIP.y + (s.h3 ? 0 : -42), `opacity: ${s.h3 ? 1 : (s.d3 ? 0 : 0.35)}; transition: top 0.3s, opacity 0.3s; transform: rotate(${holdX * 0.3}deg); ${s.h3 && p3 > 0.5 ? 'filter: blur(' + ((p3 - 0.5) * 1.2).toFixed(2) + 'px);' : ''}`);
+    out.foam3 = foam(p3); out.art3 = art(!!s.d3); out.art3Path = HEART; out.rip3 = [];
+    out.status3 = s.d3 ? 'foam heart · press to brew again' : (s.h3 ? `brewing ${Math.round(p3 * 100)}%` : 'press and hold');
+    out.down3 = () => { this._ph = 0; this.setState(s.d3 ? { d3: false, p3: 0, h3: true } : { h3: true }); };
+    out.up3 = out.leave3 = () => { if (s.h3) this.setState({ h3: false }); };
+    out.move3 = out.click3 = undefined;
+
+    // 4 · Cursor whisk with ripples
+    out.stage4 = stage('cursor: none;');
+    const in4 = s.c4 !== undefined;
+    out.whisk4 = whiskBox(in4 ? s.c4.x : TIP.x, in4 ? s.c4.y : TIP.y - 40, `opacity: ${in4 ? 1 : 0.35}; transition: opacity 0.2s;`);
+    out.rip4 = (s.r4 || []).map(ripple);
+    out.foam4 = foam(0); out.art4 = art(false); out.art4Path = LEAF;
+    out.status4 = in4 ? 'stir around' : 'move over the bowl';
+    out.move4 = (e) => {
+      const q = local(e); const next = { c4: q };
+      if (inLiquid(q) && now - (this._last4 || 0) > 90) { this._last4 = now; next.r4 = [...(s.r4 || []).slice(-10), { x: q.x - 40, y: q.y - 50, t: now, id: now }]; }
+      this.setState(next);
+    };
+    out.leave4 = () => this.setState({ c4: undefined });
+    out.down4 = out.up4 = out.click4 = undefined;
+
+    // 5 · Blow to cool
+    const cool = s.k5 || 0;
+    out.stage5 = stage();
+    out.whisk5 = 'display: none;';
+    out.rip5 = (s.r5 || []).map(ripple);
+    out.foam5 = foam(0); out.art5 = art(false); out.art5Path = HEART;
+    const blowing = s.b5 !== undefined;
+    const STEAM_POS = [[67, -29, 23, 75, 0], [97, -61, 24, 113, 0.6], [128, -14, 21, 62, 1.2]];
+    STEAM_POS.forEach(([x, y, w, h, d], k) => {
+      const fade = cool >= 2 ? 0.25 : 1;
+      out['steam' + k] = `position: absolute; left: ${x + 8}px; top: ${y}px; width: ${w}px; height: ${h}px; pointer-events: none; transform-origin: 50% 100%; opacity: ${fade}; animation: ${blowing ? (s.b5 ? 'mz-blowA' : 'mz-blowB') + ' 0.9s ease-out ' + (k * 0.08) + 's both' : 'mz-rise 3.2s ease-in-out ' + d + 's infinite both'};`;
+    });
+    out.status5 = ['hot · click to blow', 'warm · blow again', 'just right · click to reheat'][cool];
+    out.click5 = () => {
+      if (cool >= 2) { this.setState({ k5: 0, b5: undefined }); return; }
+      const t = Date.now();
+      this.setState({ b5: !s.b5, k5: cool + 1, r5: [{ x: 67, y: 29, t, id: t }, { x: 67, y: 29, t, id: t + 1, d: 0.18 }, { x: 67, y: 29, t, id: t + 2, d: 0.36 }] });
+      clearTimeout(this._b5); this._b5 = setTimeout(() => this.setState({ b5: undefined }), 1400);
+    };
+    out.down5 = out.move5 = out.up5 = out.leave5 = undefined;
+    return out;
+  }
+}
+</script>
+</body>
+</html>

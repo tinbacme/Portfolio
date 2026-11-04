@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Hero composed from parts</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&amp;family=Google+Sans+Flex:wght@400;500;600&amp;family=Instrument+Sans:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#1b2930;text-decoration:none}a:hover{color:#000}
+</style>
+</helmet>
+<div style="position: relative; width: 1440px; height: 900px; overflow: hidden; background: #f7f5ef; color: #1b2930; font-family: 'Google Sans Flex', 'Instrument Sans', system-ui, sans-serif;">
+
+  <div aria-hidden="true" style="position: absolute; right: -120px; top: 180px; width: 760px; height: 760px; background: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0) 0px, rgba(255, 255, 255, 0) 70px, rgba(255, 255, 255, 0.55) 110px, rgba(255, 255, 255, 0) 170px, rgba(255, 255, 255, 0) 240px); filter: blur(10px); pointer-events: none;"></div>
+
+  <header style="position: absolute; left: 0; right: 0; top: 0; display: flex; justify-content: space-between; align-items: center; padding: 40px 86px 0;">
+    <a href="#top" aria-label="Tin Le, home"><img src="/_blob/3ca00abc7d7968429b8d83395785269e" alt="tin" style="display: block; width: 56px; height: 56px;"></a>
+    <nav aria-label="Primary" style="display: flex; gap: 40px; font-size: 20px;">
+      <a href="#work" style="padding-bottom: 6px; border-bottom: 2px solid #1b2930;">Work</a>
+      <a href="#about" style="padding-bottom: 6px;">About</a>
+      <a href="#contact" style="padding-bottom: 6px;">Contact</a>
+    </nav>
+  </header>
+
+  <div style="position: absolute; left: 86px; top: 262px; width: 340px; display: flex; flex-direction: column; gap: 20px;">
+    <p style="margin: 0; font-size: 17px; font-weight: 500; letter-spacing: 0.1em; color: #5c6670;">HELLO, I’M TIN</p>
+    <h1 style="margin: 0; font-size: 52px; font-weight: 600; line-height: 1.15; letter-spacing: -0.01em;">Designing for a kinder, clearer web.</h1>
+    <p style="margin: 0; font-family: 'Instrument Sans', system-ui, sans-serif; font-size: 18px; line-height: 1.75;">I’m a product designer focused on simple, useful and human experiences.</p>
+  </div>
+
+  <div style="position: absolute; left: 500px; top: 112px; width: 440px; height: 622px;">
+    <div aria-hidden="true" style="position: absolute; left: 71.6px; top: 97.2px; width: 292.4px; height: 443.1px; overflow: hidden; border-radius: 24% / 16%;">
+      <img src="/_blob/72689660588a90a9527c9831ba59df51" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;">
+      <div style="position: absolute; left: 30%; top: 30%; width: 58%; transform: rotate(-4deg);">
+        <div style="position: absolute; right: 99%; top: 80%; width: 150%; height: 3px; margin-top: -1.5px; border-radius: 2px; background: linear-gradient(to left, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.55) 45%, rgba(255, 255, 255, 0)); transform-origin: 100% 50%; rotate: -10deg;"></div>
+        <img src="/_blob/873faef20891bfc5fcb4e8ce70db4732" alt="" style="position: relative; display: block; width: 100%;">
+      </div>
+      <img src="/_blob/9117a00e453f4a3c0ce733f75f4f207d" alt="" style="position: absolute; left: -45%; bottom: -6%; width: 190%; max-width: none;">
+    </div>
+    <img src="/_blob/0b65d8397cbadbb8bded5f3e698b0403" alt="Airplane window looking out at the sky with a plane passing" style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;">
+  </div>
+
+  <img src="/_blob/f12c7dbaca27f2809f2f668b42419520" alt="Postage stamp of the Da Lat highlands: pine hills, mist and a lake" style="position: absolute; left: 1108px; top: 500px; width: 220px; filter: drop-shadow(0 1px 1px rgba(40, 32, 20, 0.16)) drop-shadow(0 8px 12px rgba(40, 32, 20, 0.14));">
+  <img src="/_blob/b87cee741b28406d3c016845683bf9f9" alt="Bowl of matcha" style="position: absolute; left: 1060px; top: 680px; width: 130px;">
+
+  <div style="position: absolute; left: 50%; bottom: 44px; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 22px; width: max-content; font-size: 20px; text-align: center;">
+    <svg viewBox="0 0 32 50" fill="none" stroke="#454C48" stroke-width="2.13" aria-hidden="true" style="width: 27px; height: auto;"><rect x="1.07" y="1.07" width="29.86" height="47.86" rx="14.93"></rect><line x1="16" y1="6" x2="16" y2="21" stroke-linecap="round"></line></svg>
+    <p style="margin: 0;">Explore the world of design with me</p>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

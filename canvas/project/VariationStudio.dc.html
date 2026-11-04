@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Variation: studio energy</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}a:hover{opacity:0.75}
+sc-for, sc-if { display: contents; }
+@keyframes ww-blink { 50% { opacity: 0; } }
+@keyframes ww-sheen { to { background-position: 200% 0; } }
+@keyframes ww-cursor { 0% { transform: translate(160px, 120px); } 60% { transform: translate(0, 0); } 70% { transform: translate(0, 0) scale(0.92); } 80%, 100% { transform: translate(0, 0) scale(1); } }
+@keyframes ww-pop { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
+@keyframes ww-drift1 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(40px, -18px); } }
+@keyframes ww-drift2 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-36px, 22px); } }
+@keyframes ww-drift3 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(26px, 30px); } }
+@keyframes ww-fold { 0% { transform: none; opacity: 1; } 35% { transform: scale(0.55, 0.3) rotate(-4deg); border-radius: 40px; } 60% { transform: scale(0.18, 0.12) translate(0, 0) rotate(-12deg); opacity: 1; } 100% { transform: scale(0.12, 0.08) translate(2600px, -2200px) rotate(-30deg); opacity: 0; } }
+@keyframes ww-plane { 0% { opacity: 0; transform: translate(0, 0) rotate(-12deg) scale(0.6); } 20% { opacity: 1; transform: translate(10px, -6px) rotate(-14deg) scale(1); } 100% { opacity: 0; transform: translate(560px, -300px) rotate(-22deg) scale(0.7); } }
+.ww-tab:hover { background: rgba(0, 0, 0, 0.06); }
+.ww-btn:hover { filter: brightness(1.08); }
+button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px solid #3078e7; outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { [style*="ww-"] { animation: none !important; } }
+</style>
+</helmet>
+<div style="{{ root }}">
+
+  <section style="position: relative; height: 900px; overflow: hidden;">
+    <header style="position: absolute; left: 0; right: 0; top: 0; display: flex; justify-content: space-between; align-items: center; padding: 36px 72px 0;">
+      <a href="#top" aria-label="Tin Le, home"><img src="/_blob/3ca00abc7d7968429b8d83395785269e" alt="tin" style="{{ logo }}"></a>
+      <nav aria-label="Primary" style="display: flex; gap: 8px; padding: 6px; border-radius: 999px; background: {{ pill }}; font: 600 15px 'Inter Tight', system-ui, sans-serif;">
+        <a href="#work" style="padding: 10px 16px; border-radius: 999px; background: {{ pillOn }};">Work</a>
+        <a href="#about" style="padding: 10px 16px; border-radius: 999px;">About</a>
+        <a href="#contact" style="padding: 10px 16px; border-radius: 999px;">Contact</a>
+      </nav>
+    </header>
+
+    <div style="position: absolute; left: 72px; top: 210px; width: 820px;">
+      <p style="margin: 0 0 18px; font: 500 15px 'Geist Mono', ui-monospace, monospace; letter-spacing: 0.04em; opacity: 0.6;">tin.design / home.fig</p>
+      <h1 aria-label="Hi, I'm Tin. I design kinder products that feel clear." style="position: relative; margin: 0; font: 800 88px/1.02 'Inter Tight', system-ui, sans-serif; letter-spacing: -0.035em;">
+        <span aria-hidden="true">{{ typed1 }}</span><span aria-hidden="true" style="{{ kinderStyle }}">{{ typedWord }}<sc-if value="{{ showSelect }}" hint-placeholder-val="{{ true }}"><span style="{{ selBox }}"><span style="{{ handle }} left: -5px; top: -5px;"></span><span style="{{ handle }} right: -5px; top: -5px;"></span><span style="{{ handle }} left: -5px; bottom: -5px;"></span><span style="{{ handle }} right: -5px; bottom: -5px;"></span><span style="{{ sizeTag }}">312 × 92</span></span></sc-if></span><span aria-hidden="true">{{ typed2 }}</span><span aria-hidden="true" style="{{ caret }}"></span>
+      </h1>
+      <sc-if value="{{ showSelect }}" hint-placeholder-val="{{ true }}">
+        <span style="position: absolute; left: 520px; top: 252px; animation: ww-cursor 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) both;"><span aria-hidden="true" style="position: absolute; left: 0; top: 0; display: flex; align-items: flex-start; gap: 2px; pointer-events: none;"><svg width="18" height="20" viewBox="0 0 18 20"><path d="M2 2l13 6.5-6 1.6-2.6 6.4z" fill="{{ accent }}" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"></path></svg><span style="margin-top: 14px; padding: 2px 8px; border-radius: 10px; background: {{ accent }}; color: #fff; font: 600 12px 'Inter Tight', system-ui, sans-serif;">Tin</span></span></span>
+      </sc-if>
+      <p style="margin: 34px 0 0; max-width: 520px; font: 500 21px/1.5 'Inter Tight', system-ui, sans-serif; opacity: 0.72;">Senior product designer at Microsoft. I turn complex things (search, AI agents, growth) into products people find simple and a little delightful.</p>
+      <div style="display: flex; gap: 12px; margin-top: 30px;">
+        <a class="ww-btn" href="#work" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; border-radius: 999px; background: {{ ink }}; color: {{ paper }}; font: 600 16px 'Inter Tight', system-ui, sans-serif;">See the work</a>
+        <a class="ww-btn" href="#contact" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; border-radius: 999px; border: 1.5px solid currentColor; font: 600 16px 'Inter Tight', system-ui, sans-serif;">Say hello</a>
+      </div>
+    </div>
+
+    <div aria-hidden="true" style="position: absolute; right: 90px; top: 170px; width: 360px; height: 508px;">
+      <div style="position: absolute; left: 59px; top: 81px; width: 241px; height: 366px; overflow: hidden; border-radius: 24% / 16%;">
+        <img src="/_blob/72689660588a90a9527c9831ba59df51" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;">
+        <img src="/_blob/873faef20891bfc5fcb4e8ce70db4732" alt="" style="position: absolute; left: 34%; top: 28%; width: 56%; transform: rotate(-4deg);">
+        <img src="/_blob/9117a00e453f4a3c0ce733f75f4f207d" alt="" style="position: absolute; left: -45%; bottom: -6%; width: 190%; max-width: none;">
+      </div>
+      <img src="/_blob/0b65d8397cbadbb8bded5f3e698b0403" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%;">
+      <span aria-hidden="true" style="position: absolute; left: -40px; top: 420px; animation: ww-drift2 7s ease-in-out infinite; display: flex; align-items: flex-start; gap: 2px; pointer-events: none;"><svg width="18" height="20" viewBox="0 0 18 20"><path d="M2 2l13 6.5-6 1.6-2.6 6.4z" fill="#b8754a" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"></path></svg><span style="margin-top: 14px; padding: 2px 8px; border-radius: 10px; background: #b8754a; color: #fff; font: 600 12px 'Inter Tight', system-ui, sans-serif;">Research</span></span>
+    </div>
+  </section>
+
+  <section id="work" style="position: relative; padding: 40px 72px 110px; display: flex; flex-direction: column; gap: 36px;">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+      <h2 style="margin: 0; font: 800 64px/1 'Inter Tight', system-ui, sans-serif; letter-spacing: -0.03em;">Selected work</h2>
+      <p style="margin: 0; font: 500 14px 'Geist Mono', ui-monospace, monospace; opacity: 0.6;">Click the tabs: each case opens like a file</p>
+    </div>
+    <div style="display: flex; gap: 40px; align-items: center;">
+      <div style="flex: 0 0 820px; border-radius: 18px; overflow: hidden; background: {{ card }}; box-shadow: 0 30px 60px -30px rgba(10, 20, 40, 0.35), 0 0 0 1px {{ hair }};">
+        <div style="display: flex; align-items: center; gap: 14px; padding: 12px 16px; border-bottom: 1px solid {{ hair }};">
+          <span aria-hidden="true" style="display: flex; gap: 7px;"><span style="width: 12px; height: 12px; border-radius: 50%; background: #ff5f57;"></span><span style="width: 12px; height: 12px; border-radius: 50%; background: #febc2e;"></span><span style="width: 12px; height: 12px; border-radius: 50%; background: #28c840;"></span></span>
+          <div role="tablist" aria-label="Window Search Box case study sections" style="display: flex; gap: 4px;">
+            <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="4"><button class="ww-tab" type="button" role="tab" aria-selected="{{ t.on }}" onClick="{{ t.pick }}" style="{{ t.style }}">{{ t.label }}</button></sc-for>
+          </div>
+        </div>
+        <div style="position: relative; height: 430px;">
+          <sc-if value="{{ tabOverview }}" hint-placeholder-val="{{ true }}"><img src="/_blob/2a4b16aaf0284c63e51aa51dc7ad5996" alt="Windows taskbar with a Copilot Ask Anything search box" style="display: block; width: 100%; height: 100%; object-fit: cover; animation: ww-pop 0.35s ease-out both;"></sc-if>
+          <sc-if value="{{ tabOther }}" hint-placeholder-val="{{ false }}"><div style="position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; gap: 14px; padding: 0 64px; animation: ww-pop 0.35s ease-out both;"><span style="font: 500 14px 'Geist Mono', ui-monospace, monospace; opacity: 0.6;">{{ tabKicker }}</span><span style="font: 700 40px/1.15 'Inter Tight', system-ui, sans-serif; letter-spacing: -0.02em;">{{ tabTitle }}</span><span style="font: 500 18px/1.5 'Inter Tight', system-ui, sans-serif; opacity: 0.7;">{{ tabBody }}</span></div></sc-if>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <span style="align-self: flex-start; padding: 6px 12px; border-radius: 999px; background: {{ pill }}; font: 600 13px 'Inter Tight', system-ui, sans-serif;">Windows + Copilot</span>
+        <h3 style="margin: 0; font: 700 32px/1.1 'Inter Tight', system-ui, sans-serif; letter-spacing: -0.02em;">Window Search Box</h3>
+        <p style="margin: 0; font: 500 17px/1.5 'Inter Tight', system-ui, sans-serif; opacity: 0.7;">A new way of interacting with your computer: redesigned web results inside Windows search, tested over 10 rounds of A/B tests.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" style="position: relative; height: 840px; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; text-align: center; background: {{ band }}; color: {{ bandInk }};">
+    <span aria-hidden="true" style="position: absolute; left: 18%; top: 22%; animation: ww-drift1 8s ease-in-out infinite; display: flex; align-items: flex-start; gap: 2px; pointer-events: none;"><svg width="18" height="20" viewBox="0 0 18 20"><path d="M2 2l13 6.5-6 1.6-2.6 6.4z" fill="#e0457b" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"></path></svg><span style="margin-top: 14px; padding: 2px 8px; border-radius: 10px; background: #e0457b; color: #fff; font: 600 12px 'Inter Tight', system-ui, sans-serif;">PM</span></span>
+    <span aria-hidden="true" style="position: absolute; left: 72%; top: 18%; animation: ww-drift2 9s ease-in-out infinite; display: flex; align-items: flex-start; gap: 2px; pointer-events: none;"><svg width="18" height="20" viewBox="0 0 18 20"><path d="M2 2l13 6.5-6 1.6-2.6 6.4z" fill="#7a5af8" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"></path></svg><span style="margin-top: 14px; padding: 2px 8px; border-radius: 10px; background: #7a5af8; color: #fff; font: 600 12px 'Inter Tight', system-ui, sans-serif;">Eng</span></span>
+    <span aria-hidden="true" style="position: absolute; left: 14%; top: 70%; animation: ww-drift3 7.5s ease-in-out infinite; display: flex; align-items: flex-start; gap: 2px; pointer-events: none;"><svg width="18" height="20" viewBox="0 0 18 20"><path d="M2 2l13 6.5-6 1.6-2.6 6.4z" fill="#2bb673" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"></path></svg><span style="margin-top: 14px; padding: 2px 8px; border-radius: 10px; background: #2bb673; color: #fff; font: 600 12px 'Inter Tight', system-ui, sans-serif;">Research</span></span>
+    <span aria-hidden="true" style="position: absolute; left: 76%; top: 66%; animation: ww-drift1 6.5s ease-in-out infinite; display: flex; align-items: flex-start; gap: 2px; pointer-events: none;"><svg width="18" height="20" viewBox="0 0 18 20"><path d="M2 2l13 6.5-6 1.6-2.6 6.4z" fill="{{ accent }}" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"></path></svg><span style="margin-top: 14px; padding: 2px 8px; border-radius: 10px; background: {{ accent }}; color: #fff; font: 600 12px 'Inter Tight', system-ui, sans-serif;">You</span></span>
+    <p style="margin: 0; font: 500 16px 'Inter Tight', system-ui, sans-serif; opacity: 0.6;">Got a problem worth simplifying?</p>
+    <h2 style="margin: 0; font: 800 96px/1 'Inter Tight', system-ui, sans-serif; letter-spacing: -0.04em;">Let’s make it kind.</h2>
+    <div style="position: relative; width: 460px; margin-top: 18px;">
+      <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+        <div style="{{ letter }}">
+          <label for="ww-msg" style="font: 600 13px 'Inter Tight', system-ui, sans-serif; opacity: 0.7; text-align: left;">Tell me about it</label>
+          <textarea id="ww-msg" rows="3" placeholder="A role, a project, or just hi" style="width: 100%; box-sizing: border-box; resize: none; border: 0; border-radius: 12px; padding: 12px 14px; background: {{ field }}; color: inherit; font: 500 15px 'Inter Tight', system-ui, sans-serif;"></textarea>
+          <button class="ww-btn" type="button" onClick="{{ send }}" style="min-height: 48px; border: 0; border-radius: 999px; background: {{ accent }}; color: #fff; font: 600 16px 'Inter Tight', system-ui, sans-serif; cursor: pointer;">Fold &amp; send</button>
+        </div>
+      </sc-if>
+      <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+        <svg aria-hidden="true" viewBox="0 0 64 40" style="position: absolute; left: 190px; top: 40px; width: 80px; animation: ww-plane 1.6s cubic-bezier(0.3, 0.6, 0.3, 1) both;"><path d="M2 20 62 2 40 38 30 24z" fill="#fff" stroke="{{ bandInk }}" stroke-width="1.5" stroke-linejoin="round"></path><path d="M30 24 62 2" stroke="{{ bandInk }}" stroke-width="1.5"></path></svg>
+        <p style="margin: 120px 0 0; font: 600 18px 'Inter Tight', system-ui, sans-serif;">Folded and on its way. <button type="button" onClick="{{ reset }}" style="border: 0; background: none; color: inherit; font: inherit; text-decoration: underline; cursor: pointer;">Write another</button></p>
+      </sc-if>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent": {"editor": "color", "default": "#3078e7", "options": ["#3078e7", "#6f8a3e", "#b8754a", "#5b4a8a"], "section": "Look"}, "dark": {"editor": "boolean", "default": false, "section": "Look"}, "typing": {"editor": "boolean", "default": true, "section": "Motion"}, "$preview": {"width": 1440, "height": 2640}}'>
+const LINE1 = "Hi, I’m Tin. I design ";
+const WORD = "kinder";
+const LINE2 = " products that feel clear.";
+const FULL = LINE1.length + WORD.length + LINE2.length;
+const TABS = [
+  { id: 'overview', label: 'Overview' },
+  { id: 'research', label: 'Research', kicker: 'RESEARCH', title: '10 rounds of A/B tests', body: '1,380 votes from about 470 people, plus 6+ months of moderated sessions with a research agency.' },
+  { id: 'design', label: 'Design', kicker: 'DESIGN', title: 'A mini results page inside Windows search', body: '[Add the key screens and the decisions behind them]' },
+  { id: 'impact', label: 'Impact', kicker: 'IMPACT', title: '[Your headline result]', body: '[Add the shipped outcome or metric you can share]' },
+];
+class Component extends DCLogic {
+  componentDidMount() {
+    this._t = setInterval(() => {
+      const s = this.state || {};
+      if ((s.n || 0) < FULL) this.setState({ n: (s.n || 0) + 1 });
+      else { clearInterval(this._t); }
+    }, 55);
+  }
+  componentWillUnmount() { clearInterval(this._t); }
+  renderVals() {
+    const p = this.props, s = this.state || {};
+    const dark = p.dark ?? false, accent = p.accent ?? '#3078e7';
+    const typing = p.typing ?? true;
+    const n = typing ? (s.n || 0) : FULL;
+    const t1 = LINE1.slice(0, n), tw = WORD.slice(0, Math.max(0, n - LINE1.length)), t2 = LINE2.slice(0, Math.max(0, n - LINE1.length - WORD.length));
+    const done = n >= FULL;
+    const ink = dark ? '#f5f5f7' : '#14161a', paper = dark ? '#0e0f11' : '#fbf9f4';
+    const tab = s.tab || 'overview';
+    const cur = TABS.find((t) => t.id === tab) || TABS[0];
+    return {
+      accent, ink, paper,
+      root: `width: 1440px; min-height: 2640px; background: ${paper}; color: ${ink}; font-family: 'Inter Tight', system-ui, sans-serif;`,
+      logo: `display: block; width: 52px; height: 52px; ${dark ? 'filter: invert(1);' : ''}`,
+      pill: dark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.05)', pillOn: dark ? 'rgba(255, 255, 255, 0.14)' : '#fff',
+      card: dark ? '#17191c' : '#fff', hair: dark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.08)',
+      band: dark ? '#000' : '#14161a', bandInk: '#f5f5f7', field: 'rgba(255, 255, 255, 0.1)',
+      typed1: t1, typedWord: tw, typed2: t2,
+      kinderStyle: `position: relative; display: inline-block; ${tw ? `background: linear-gradient(90deg, ${accent}, #e0457b, #f5a524, #2bb673, ${accent}); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: ww-sheen 4s linear infinite;` : ''}`,
+      showSelect: done && tw.length === WORD.length,
+      selBox: `position: absolute; left: -8px; right: -8px; top: 4px; bottom: -6px; border: 1.5px solid ${accent}; pointer-events: none; animation: ww-pop 0.25s ease-out both;`,
+      handle: `position: absolute; width: 8px; height: 8px; background: #fff; border: 1.5px solid ${accent};`,
+      sizeTag: `position: absolute; left: 50%; bottom: -30px; transform: translateX(-50%); padding: 2px 6px; border-radius: 4px; background: ${accent}; color: #fff; font: 500 12px 'Geist Mono', ui-monospace, monospace; letter-spacing: 0; white-space: nowrap;`,
+      caret: `display: inline-block; width: 4px; height: 0.9em; margin-left: 4px; vertical-align: -0.08em; background: ${accent}; animation: ww-blink 1s steps(1) infinite;`,
+      tabs: TABS.map((t) => ({ label: t.label, on: String(t.id === tab), pick: () => this.setState({ tab: t.id }), style: `padding: 6px 12px; border: 0; border-radius: 8px; background: ${t.id === tab ? (dark ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.07)') : 'transparent'}; color: inherit; font: 600 13px 'Inter Tight', system-ui, sans-serif; cursor: pointer; min-height: 32px;` })),
+      tabOverview: tab === 'overview', tabOther: tab !== 'overview',
+      tabKicker: cur.kicker || '', tabTitle: cur.title || '', tabBody: cur.body || '',
+      notSent: !s.sent, sent: !!s.sent,
+      letter: `display: flex; flex-direction: column; gap: 10px; padding: 18px; border-radius: 20px; background: rgba(255, 255, 255, 0.06); box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12); text-align: left; ${s.folding ? 'animation: ww-fold 0.9s cubic-bezier(0.5, 0, 0.3, 1) both;' : ''}`,
+      send: () => { this.setState({ folding: true }); clearTimeout(this._f); this._f = setTimeout(() => this.setState({ sent: true, folding: false }), 650); },
+      reset: () => this.setState({ sent: false }),
+    };
+  }
+}
+</script>
+</body>
+</html>

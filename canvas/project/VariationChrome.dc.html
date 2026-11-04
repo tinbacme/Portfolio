@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Variation: chrome type</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800;900&amp;family=Geist+Mono:wght@400;500&amp;family=Caveat:wght@500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}a:hover{opacity:0.75}
+sc-for, sc-if { display: contents; }
+button:focus-visible { outline: 2px solid #3078e7; outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) { [style*="vv-"], .vv-anim { animation: none !important; } }
+</style>
+</helmet>
+<div style="position: relative; width: 1440px; height: 900px; overflow: hidden; background: radial-gradient(120% 90% at 50% 10%, #22262c 0%, #0d0e10 60%); color: #f5f5f7; font-family: 'Inter Tight', system-ui, sans-serif;" onPointerMove="{{ tilt }}" onPointerLeave="{{ untilt }}">
+  <header style="position: absolute; z-index: 5; left: 0; right: 0; top: 0; display: flex; justify-content: space-between; align-items: center; padding: 36px 72px 0;">
+      <a href="#top" aria-label="Tin Le, home"><img src="/_blob/3ca00abc7d7968429b8d83395785269e" alt="tin" style="display: block; width: 52px; height: 52px; filter: invert(1);"></a>
+      <nav aria-label="Primary" style="display: flex; gap: 8px; padding: 6px; border-radius: 999px; background: rgba(255,255,255,0.08); font: 600 15px 'Inter Tight', system-ui, sans-serif;">
+        <a href="#work" style="padding: 10px 16px; border-radius: 999px; background: rgba(255,255,255,0.14);">Work</a><a href="#about" style="padding: 10px 16px;">About</a><a href="#contact" style="padding: 10px 16px;">Contact</a>
+      </nav>
+    </header>
+  <div style="position: absolute; left: 0; right: 0; top: 150px; display: flex; justify-content: center; perspective: 1200px;">
+    <h1 aria-label="tin" style="{{ chrome }}">tin</h1>
+  </div>
+  <div aria-hidden="true" style="position: absolute; left: 1040px; top: 420px; width: 230px; height: 325px; transform: rotate(6deg);">
+      <div style="position: absolute; left: 38px; top: 52px; width: 154px; height: 234px; overflow: hidden; border-radius: 24% / 16%;">
+        <img src="/_blob/72689660588a90a9527c9831ba59df51" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;">
+        <img src="/_blob/873faef20891bfc5fcb4e8ce70db4732" alt="" style="position: absolute; left: 34%; top: 28%; width: 56%; transform: rotate(-4deg);">
+        <img src="/_blob/9117a00e453f4a3c0ce733f75f4f207d" alt="" style="position: absolute; left: -45%; bottom: -6%; width: 190%; max-width: none;">
+      </div>
+      <img src="/_blob/0b65d8397cbadbb8bded5f3e698b0403" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%;">
+    </div>
+  <img src="/_blob/add72c5f2f2ae62e98c2eb3e17898e11" alt="" aria-hidden="true" style="position: absolute; left: 190px; top: 470px; width: 150px; transform: rotate(-10deg);">
+  <div style="position: absolute; left: 0; right: 0; top: 640px; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center;">
+    <p style="margin: 0; font: 700 40px/1.15 'Inter Tight', system-ui, sans-serif; letter-spacing: -0.02em;">Senior product designer making complex things feel kind.</p>
+    <p style="margin: 0; font: 500 15px 'Geist Mono', ui-monospace, monospace; opacity: 0.6;">Microsoft · Bing · Windows · Copilot</p>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"shine": {"editor": "range", "default": 1, "min": 0, "max": 2, "step": 0.1, "section": "Look"}, "$preview": {"width": 1440, "height": 900}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const s = this.state || {}, p = this.props;
+    const rx = s.ry ?? 0, ry = s.rx ?? 0, shine = p.shine ?? 1;
+    return {
+      chrome: `margin: 0; font: 900 360px/0.9 'Inter Tight', system-ui, sans-serif; letter-spacing: -0.06em; background: linear-gradient(${170 + ry * 2}deg, #ffffff 0%, #c9d1da 30%, #7d8794 46%, #f4f7fa ${52 + rx}%, #8c96a3 70%, #e6ebf0 88%, #ffffff 100%); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 1px 0 hsl(215 10% 59%), 0 2px 0 hsl(215 10% 57%), 0 3px 0 hsl(215 10% 54%), 0 4px 0 hsl(215 10% 52%), 0 5px 0 hsl(215 10% 49%), 0 6px 0 hsl(215 10% 46%), 0 7px 0 hsl(215 10% 44%), 0 8px 0 hsl(215 10% 41%), 0 9px 0 hsl(215 10% 39%), 0 10px 0 hsl(215 10% 36%), 0 11px 0 hsl(215 10% 33%), 0 12px 0 hsl(215 10% 31%), 0 13px 0 hsl(215 10% 28%), 0 14px 0 hsl(215 10% 26%), 0 30px 60px rgba(0, 0, 0, 0.6); transform: rotateX(${rx}deg) rotateY(${ry}deg); transition: transform 0.15s ease-out; filter: saturate(${shine});`,
+      tilt: (e) => { const r = e.currentTarget.getBoundingClientRect(); const x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5; this.setState({ rx: Math.round(x * 24), ry: Math.round(-y * 18) }); },
+      untilt: () => this.setState({ rx: 0, ry: 0 }),
+    };
+  }
+}
+</script>
+</body>
+</html>

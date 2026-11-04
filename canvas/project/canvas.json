@@ -129,6 +129,138 @@
       "w": 1440,
       "x": 6080,
       "y": 0
+    },
+    "WorkCarousel-A.dc.html": {
+      "x": 7600,
+      "y": 0,
+      "w": 1440,
+      "h": 900,
+      "page": "page-vmnxsd",
+      "title": "My work carousel · A Baggage carousel",
+      "is_interactive": true
+    },
+    "WorkCarousel-B.dc.html": {
+      "x": 9120,
+      "y": 0,
+      "w": 1440,
+      "h": 900,
+      "page": "page-vmnxsd",
+      "title": "My work carousel · B Coverflow",
+      "is_interactive": true
+    },
+    "WorkCarousel-C.dc.html": {
+      "x": 10640,
+      "y": 0,
+      "w": 1440,
+      "h": 900,
+      "page": "page-vmnxsd",
+      "title": "My work carousel · C Window row",
+      "is_interactive": true
+    },
+    "WorkCarousel-D.dc.html": {
+      "x": 12160,
+      "y": 0,
+      "w": 1440,
+      "h": 900,
+      "page": "page-vmnxsd",
+      "title": "My work carousel · D Boarding passes",
+      "is_interactive": true
+    },
+    "LogoLoader.dc.html": {
+      "x": 4560,
+      "y": 1020,
+      "w": 1440,
+      "h": 1240,
+      "page": "page-vmnxsd",
+      "title": "tin logo · loader animation lab",
+      "is_interactive": true
+    },
+    "GenParts-Kit.dc.html": {
+      "x": 7600,
+      "y": 1400,
+      "w": 1440,
+      "h": 1000,
+      "page": "page-vmnxsd",
+      "title": "Generated parts · kit"
+    },
+    "GenParts-Hero.dc.html": {
+      "x": 9120,
+      "y": 1400,
+      "w": 1440,
+      "h": 900,
+      "page": "page-vmnxsd",
+      "title": "Generated parts · hero composed"
+    },
+    "Postmarks.dc.html": {
+      "x": 10640,
+      "y": 1400,
+      "w": 1440,
+      "h": 1160,
+      "page": "page-vmnxsd",
+      "title": "Stamp · postmark designs",
+      "is_interactive": true
+    },
+    "StampCollection.dc.html": {
+      "x": 12160,
+      "y": 1400,
+      "w": 1440,
+      "h": 640,
+      "page": "page-vmnxsd",
+      "title": "Stamp collection · places"
+    },
+    "WhiskVariations.dc.html": {
+      "x": 7600,
+      "y": 2680,
+      "w": 1440,
+      "h": 720,
+      "page": "page-vmnxsd",
+      "title": "Matcha whisk · 5 interaction ideas",
+      "is_interactive": true
+    },
+    "VariationStudio.dc.html": {
+      "x": 9120,
+      "y": 2840,
+      "w": 1440,
+      "h": 2640,
+      "page": "page-vmnxsd",
+      "title": "Variation A · studio energy",
+      "is_interactive": true
+    },
+    "VariationChrome.dc.html": {
+      "x": 10640,
+      "y": 2840,
+      "w": 1440,
+      "h": 900,
+      "page": "page-vmnxsd",
+      "title": "Variation B · chrome type",
+      "is_interactive": true
+    },
+    "VariationPixel.dc.html": {
+      "x": 12160,
+      "y": 2840,
+      "w": 1440,
+      "h": 900,
+      "page": "page-vmnxsd",
+      "title": "Variation C · pixel contrail",
+      "is_interactive": true
+    },
+    "VariationKind.dc.html": {
+      "x": 13680,
+      "y": 2840,
+      "w": 1440,
+      "h": 1400,
+      "page": "page-vmnxsd",
+      "title": "Variation D · kind words + play",
+      "is_interactive": true
+    },
+    "ParticlePlay.dc.html": {
+      "x": 13680,
+      "y": 4360,
+      "w": 1440,
+      "h": 1020,
+      "page": "page-vmnxsd",
+      "title": "Play · 5 particle prototypes",
+      "is_interactive": true
     }
   },
   "createdOnFiles": {
@@ -143,7 +275,10 @@
     "boardTitle",
     "refsTitle",
     "prevTitle",
-    "portfolioTitle"
+    "portfolioTitle",
+    "carouselTitle",
+    "partsTitle",
+    "variationsTitle"
   ],
   "notes": {
     "boardTitle": {
@@ -178,6 +313,33 @@
       "w": 240,
       "x": 0,
       "y": 800
+    },
+    "carouselTitle": {
+      "kind": "title1",
+      "maxW": 5980,
+      "page": "page-vmnxsd",
+      "text": "My work · carousel explorations",
+      "w": 240,
+      "x": 7600,
+      "y": -300
+    },
+    "partsTitle": {
+      "kind": "title1",
+      "maxW": 6000,
+      "page": "page-vmnxsd",
+      "text": "Generated parts",
+      "w": 240,
+      "x": 7600,
+      "y": 1110
+    },
+    "variationsTitle": {
+      "kind": "title1",
+      "maxW": 5960,
+      "page": "page-vmnxsd",
+      "text": "Design variations · inspired by wowww.art",
+      "w": 240,
+      "x": 9120,
+      "y": 2600
     }
   },
   "order": [
@@ -197,7 +359,22 @@
     "TinPortfolio-1-Hero.dc.html",
     "TinPortfolio-2-Intro.dc.html",
     "TinPortfolio-3-Work.dc.html",
-    "Piece-u7ks.dc.html"
+    "Piece-u7ks.dc.html",
+    "WorkCarousel-A.dc.html",
+    "WorkCarousel-B.dc.html",
+    "WorkCarousel-C.dc.html",
+    "WorkCarousel-D.dc.html",
+    "LogoLoader.dc.html",
+    "GenParts-Kit.dc.html",
+    "GenParts-Hero.dc.html",
+    "Postmarks.dc.html",
+    "StampCollection.dc.html",
+    "WhiskVariations.dc.html",
+    "VariationStudio.dc.html",
+    "VariationChrome.dc.html",
+    "VariationPixel.dc.html",
+    "VariationKind.dc.html",
+    "ParticlePlay.dc.html"
   ],
   "pages": [
     {

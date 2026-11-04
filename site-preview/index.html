@@ -187,11 +187,11 @@ button.sticker:focus-visible { outline: 2px solid #3078e7; outline-offset: 6px; 
 .stamp-card .stamp-art { backface-visibility: hidden; }
 .stamp-back { position: absolute; inset: 0; display: block; transform: rotateY(180deg); backface-visibility: hidden; }
 .stamp-back-paper { display: block; }
-.stamp-card .stamp-art { width: 100%; aspect-ratio: 537 / 625; }
+.stamp-card .stamp-art { width: 100%; height: auto; filter: drop-shadow(0 1px 1px rgba(40, 32, 20, 0.16)) drop-shadow(0 8px 12px rgba(40, 32, 20, 0.14)); }
 .stamp-back-paper { width: 100%; height: 100%; object-fit: fill; transform: scaleX(-1); }
 .stamp-note { position: absolute; left: 20%; top: 17%; width: 68%; height: 50%; display: grid; align-content: center; gap: 0.3em; text-align: center; rotate: 9deg; font-family: "Caveat", "Bradley Hand", cursive; font-weight: 500; color: #2b3a55; font-size: clamp(13px, 1.35vw, 23px); line-height: 1.05; }
 .stamp-note .sig { font-size: 0.8em; color: #4a5a78; }
-.stamp-postmark { position: absolute; left: 30%; top: 44%; width: 66%; color: #3d5a8a; opacity: 0; scale: 1.5; rotate: -14deg; transition: opacity 0.12s, scale 0.12s; }
+.stamp-postmark { position: absolute; overflow: visible; mix-blend-mode: multiply; opacity: 0; scale: 1.5; transition: opacity 0.12s, scale 0.12s; }
 .sticker.is-flipped .stamp-postmark { opacity: 0.82; scale: 1; transition: opacity 0.1s 0.75s, scale 0.28s cubic-bezier(0.2, 1.6, 0.4, 1) 0.75s; }
 
 /* Matcha: everything inside is laid out on the 206×189 bowl artboard, in --u units */
@@ -511,28 +511,11 @@ a.case-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px -24px r
           <div class="prop stamp">
             <button class="sticker" type="button" aria-pressed="false" aria-label="Postage stamp. Click to flip it over, drag to move it.">
               <span class="stamp-card">
-                <img class="stamp-art" src="assets/gen-stamp-front.webp" alt="" draggable="false" />
+                <img class="stamp-art" src="assets/stamp-dalat.webp" alt="" draggable="false" />
                 <span class="stamp-back" aria-hidden="true">
                   <img class="stamp-back-paper" src="assets/gen-stamp-back.webp" alt="" draggable="false" />
                   <span class="stamp-note"><span>Thanks for<br>flying by!</span><span class="sig">— Tin</span></span>
-                  <svg class="stamp-postmark" viewBox="0 0 200 200" fill="none" stroke="currentColor">
-                    <defs>
-                      <filter id="pm-ink" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3" result="n"></feTurbulence><feDisplacementMap in="SourceGraphic" in2="n" scale="1.3" result="d"></feDisplacementMap><feComponentTransfer in="n" result="s"><feFuncA type="discrete" tableValues="1 1 1 1 0.5 1 1 1"></feFuncA></feComponentTransfer><feComposite in="d" in2="s" operator="in"></feComposite></filter>
-                      <path id="pm-top" d="M 27 100 A 73 73 0 0 1 173 100"></path>
-                      <path id="pm-bottom" d="M 14 100 A 86 86 0 0 0 186 100"></path>
-                    </defs>
-                    <g filter="url(#pm-ink)">
-                      <circle cx="100" cy="100" r="92" stroke-width="4"></circle>
-                      <circle cx="100" cy="100" r="66" stroke-width="2"></circle>
-                      <text font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="17" font-weight="600" letter-spacing="2.5" fill="currentColor" stroke="none"><textPath class="pm-loc" href="#pm-top" startOffset="50%" text-anchor="middle">YOU VISITED TIN</textPath></text>
-                      <text font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="14" font-weight="600" letter-spacing="3" fill="currentColor" stroke="none"><textPath class="pm-sub" href="#pm-bottom" startOffset="50%" text-anchor="middle">TIN LE · PORTFOLIO</textPath></text>
-                      <path d="M21 94l1.74 3.60 3.96 0.60-2.88 2.76 0.72 3.96-3.54-1.86-3.54 1.86 0.72-3.96-2.88-2.76 3.96-0.60z" fill="currentColor" stroke="none"></path><path d="M179 94l1.74 3.60 3.96 0.60-2.88 2.76 0.72 3.96-3.54-1.86-3.54 1.86 0.72-3.96-2.88-2.76 3.96-0.60z" fill="currentColor" stroke="none"></path>
-                      <line x1="52" y1="76" x2="148" y2="76" stroke-width="2"></line>
-                      <line x1="52" y1="130" x2="148" y2="130" stroke-width="2"></line>
-                      <text class="pm-day" x="100" y="108" text-anchor="middle" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="34" font-weight="700" letter-spacing="1" fill="currentColor" stroke="none">NOV 04</text>
-                      <text class="pm-year" x="100" y="124" text-anchor="middle" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="14" font-weight="600" letter-spacing="4" fill="currentColor" stroke="none">2026</text>
-                    </g>
-                  </svg>
+                  <svg class="stamp-postmark" fill="none" stroke="currentColor" aria-hidden="true"></svg>
                 </span>
               </span>
               <svg class="stamp-wind" viewBox="0 0 220 110" aria-hidden="true">
@@ -962,19 +945,40 @@ a.case-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px -24px r
   sticker.addEventListener("pointerdown", () => { dragged = false; });
   sticker.addEventListener("pointermove", (e) => { if (drag && (Math.abs(e.movementX) + Math.abs(e.movementY)) > 0) dragged = true; });
   const drop = () => { drag = null; sticker.classList.remove("is-dragging"); };
+  // Each visit gets a stamp from one of the places Tin has been.
+  const PLACES = ["dalat", "japan", "singapore", "oregon", "washington"];
+  sticker.querySelector(".stamp-art").src = `assets/stamp-${PLACES[Math.floor(Math.random() * PLACES.length)]}.webp`;
   // A click (not a drag) flips the stamp; today's date goes on the postmark.
   const today = new Date();
-  sticker.querySelector(".pm-day").textContent = today.toLocaleDateString("en-US", { month: "short", day: "2-digit" }).toUpperCase();
-  sticker.querySelector(".pm-year").textContent = String(today.getFullYear());
-  // Visitor's country from their browser's language region (no network call). Unknown: "You visited Tin".
+  // Postmark: one of Tin's five designs, picked at random on every flip, with the visitor's date and country.
+  const POSTMARKS = [{"name": "Classic round", "color": "#3d5a8a", "vb": "0 0 200 200", "body": "<defs><filter id=\"pmink1\" x=\"-5%\" y=\"-5%\" width=\"110%\" height=\"110%\"><feTurbulence type=\"fractalNoise\" baseFrequency=\"0.9\" numOctaves=\"2\" seed=\"3\" result=\"n\"></feTurbulence><feDisplacementMap in=\"SourceGraphic\" in2=\"n\" scale=\"1.3\" result=\"d\"></feDisplacementMap><feComponentTransfer in=\"n\" result=\"s\"><feFuncA type=\"discrete\" tableValues=\"1 1 1 1 0.5 1 1 1\"></feFuncA></feComponentTransfer><feComposite in=\"d\" in2=\"s\" operator=\"in\"></feComposite></filter><path id=\"pmt1\" d=\"M 27 100 A 73 73 0 0 1 173 100\"></path><path id=\"pmb1\" d=\"M 14 100 A 86 86 0 0 0 186 100\"></path></defs>\n<g filter=\"url(#pmink1)\"><circle cx=\"100\" cy=\"100\" r=\"92\" stroke-width=\"4\"></circle><circle cx=\"100\" cy=\"100\" r=\"66\" stroke-width=\"2\"></circle>\n<text font-family=\"'Barlow Condensed', 'Arial Narrow', sans-serif\" font-size=\"17\" font-weight=\"600\" letter-spacing=\"2.5\" fill=\"currentColor\" stroke=\"none\"><textPath href=\"#pmt1\" startOffset=\"50%\" text-anchor=\"middle\">__LOC__</textPath></text>\n<text font-family=\"'Barlow Condensed', 'Arial Narrow', sans-serif\" font-size=\"14\" font-weight=\"600\" letter-spacing=\"3\" fill=\"currentColor\" stroke=\"none\"><textPath href=\"#pmb1\" startOffset=\"50%\" text-anchor=\"middle\">__SUB__</textPath></text>\n<path d=\"M21 94l1.74 3.60 3.96 0.60-2.88 2.76 0.72 3.96-3.54-1.86-3.54 1.86 0.72-3.96-2.88-2.76 3.96-0.60z\" fill=\"currentColor\" stroke=\"none\"></path><path d=\"M179 94l1.74 3.60 3.96 0.60-2.88 2.76 0.72 3.96-3.54-1.86-3.54 1.86 0.72-3.96-2.88-2.76 3.96-0.60z\" fill=\"currentColor\" stroke=\"none\"></path><line x1=\"52\" y1=\"76\" x2=\"148\" y2=\"76\" stroke-width=\"2\"></line><line x1=\"52\" y1=\"130\" x2=\"148\" y2=\"130\" stroke-width=\"2\"></line>\n<text x=\"100\" y=\"108\" text-anchor=\"middle\" font-family=\"'Barlow Condensed', 'Arial Narrow', sans-serif\" font-size=\"34\" font-weight=\"700\" letter-spacing=\"1\" fill=\"currentColor\" stroke=\"none\">__DAY__</text>\n<text x=\"100\" y=\"124\" text-anchor=\"middle\" font-family=\"'Barlow Condensed', 'Arial Narrow', sans-serif\" font-size=\"14\" font-weight=\"600\" letter-spacing=\"4\" fill=\"currentColor\" stroke=\"none\">__YEAR__</text></g>", "left": 0.54, "top": 0.34, "width": 0.57, "rot": -3}, {"name": "Machine cancel", "color": "#2a2f36", "vb": "0 0 262 180", "body": "<defs><filter id=\"pmink2\" x=\"-5%\" y=\"-5%\" width=\"110%\" height=\"110%\"><feTurbulence type=\"fractalNoise\" baseFrequency=\"0.9\" numOctaves=\"2\" seed=\"6\" result=\"n\"></feTurbulence><feDisplacementMap in=\"SourceGraphic\" in2=\"n\" scale=\"1.3\" result=\"d\"></feDisplacementMap><feComponentTransfer in=\"n\" result=\"s\"><feFuncA type=\"discrete\" tableValues=\"1 1 1 1 0.5 1 1 1\"></feFuncA></feComponentTransfer><feComposite in=\"d\" in2=\"s\" operator=\"in\"></feComposite></filter><path id=\"pmt2\" d=\"M 32 90 A 58 58 0 0 1 148 90\"></path><path id=\"pmb2\" d=\"M 22 90 A 68 68 0 0 0 158 90\"></path></defs>\n<g filter=\"url(#pmink2)\"><circle cx=\"90\" cy=\"90\" r=\"74\" stroke-width=\"3.5\"></circle>\n<text font-family=\"'Barlow Condensed', 'Arial Narrow', sans-serif\" font-size=\"14\" font-weight=\"600\" letter-spacing=\"2\" fill=\"currentColor\" stroke=\"none\"><textPath href=\"#pmt2\" startOffset=\"50%\" text-anchor=\"middle\">__LOC__</textPath></text>\n<text font-family=\"'Barlow Condensed', 'Arial Narrow', sans-serif\" font-size=\"12\" font-weight=\"600\" letter-spacing=\"2.5\" fill=\"currentColor\" stroke=\"none\"><textPath href=\"#pmb2\" startOffset=\"50%\" text-anchor=\"middle\">__SUB__</textPath></text>\n<text x=\"90\" y=\"92\" text-anchor=\"middle\" font-family=\"'Barlow Condensed', 'Arial Narrow', sans-serif\" font-size=\"28\" font-weight=\"700\" fill=\"currentColor\" stroke=\"none\">__DAY__</text>\n<text x=\"90\" y=\"112\" text-anchor=\"middle\" font-family=\"'Barlow Condensed', 'Arial Narrow', sans-serif\" font-size=\"15\" font-weight=\"600\" letter-spacing=\"3\" fill=\"currentColor\" stroke=\"none\">__YEAR__</text>\n<g stroke-width=\"5\" stroke-linecap=\"round\"><path d=\"M172 62 C 186 52, 200 52, 214 62 S 242 72, 256 62\"></path><path d=\"M172 90 C 186 80, 200 80, 214 90 S 242 100, 256 90\"></path><path d=\"M172 118 C 186 108, 200 108, 214 118 S 242 128, 256 118\"></path></g></g>", "left": 0.03, "top": 0.41, "width": 0.91, "rot": -14}, {"name": "Passport arrival", "color": "#b23a3a", "vb": "0 0 250 160", "body": "<defs><filter id=\"pmink3\" x=\"-5%\" y=\"-5%\" width=\"110%\" height=\"110%\"><feTurbulence type=\"fractalNoise\" baseFrequency=\"0.9\" numOctaves=\"2\" seed=\"9\" result=\"n\"></feTurbulence><feDisplacementMap in=\"SourceGraphic\" in2=\"n\" scale=\"1.3\" result=\"d\"></feDisplacementMap><feComponentTransfer in=\"n\" result=\"s\"><feFuncA type=\"discrete\" tableValues=\"1 1 1 1 0.5 1 1 1\"></feFuncA></feComponentTransfer><feComposite in=\"d\" in2=\"s\" operator=\"in\"></feComposite></filter></defs>\n<g filter=\"url(#pmink3)\"><rect x=\"5\" y=\"5\" width=\"240\" height=\"150\" rx=\"16\" stroke-width=\"4\"></rect><rect x=\"15\" y=\"15\" width=\"220\" height=\"130\" rx=\"9\" stroke-width=\"1.5\"></rect>\n<text x=\"125\" y=\"40\" text-anchor=\"middle\" font-family=\"'Barlow Condensed', 'Arial Narrow', sans-serif\" font-size=\"15\" font-weight=\"600\" letter-spacing=\"5\" fill=\"currentColor\" stroke=\"none\">ARRIVED \u00b7 TIN LE</text>\n<path d=\"M44 84l18-4 8-12h5l-3 11 10-2 3-4h3l-1 6 1 6h-3l-3-4-10-2 3 11h-5l-8-12-18-4z\" fill=\"currentColor\" stroke=\"none\" transform=\"translate(-16 2) scale(0.85)\"></path>\n<text x=\"150\" y=\"96\" text-anchor=\"middle\" font-family=\"'Barlow Condensed', 'Arial Narrow', sans-serif\" font-size=\"31\" font-weight=\"700\" letter-spacing=\"1\" fill=\"currentColor\" stroke=\"none\">__DMY__</text>\n<line x1=\"30\" y1=\"108\" x2=\"220\" y2=\"108\" stroke-width=\"1.5\"></line>\n<text x=\"125\" y=\"132\" text-anchor=\"middle\" font-family=\"'Barlow Condensed', 'Arial Narrow', sans-serif\" font-size=\"16\" font-weight=\"600\" letter-spacing=\"3\" fill=\"currentColor\" stroke=\"none\">__LOC__</text></g>", "left": 0.49, "top": 0.5, "width": 0.71, "rot": 24}, {"name": "Visa octagon", "color": "#5b4a8a", "vb": "0 0 200 200", "body": "<defs><filter id=\"pmink5\" x=\"-5%\" y=\"-5%\" width=\"110%\" height=\"110%\"><feTurbulence type=\"fractalNoise\" baseFrequency=\"0.9\" numOctaves=\"2\" seed=\"15\" result=\"n\"></feTurbulence><feDisplacementMap in=\"SourceGraphic\" in2=\"n\" scale=\"1.3\" result=\"d\"></feDisplacementMap><feComponentTransfer in=\"n\" result=\"s\"><feFuncA type=\"discrete\" tableValues=\"1 1 1 1 0.5 1 1 1\"></feFuncA></feComponentTransfer><feComposite in=\"d\" in2=\"s\" operator=\"in\"></feComposite></filter></defs>\n<g filter=\"url(#pmink5)\"><path d=\"M62 6h76l56 56v76l-56 56H62L6 138V62z\" stroke-width=\"3.5\" stroke-dasharray=\"10 5\"></path><path d=\"M67 18h66l49 49v66l-49 49H67l-49-49V67z\" stroke-width=\"1.5\"></path>\n<text x=\"100\" y=\"52\" text-anchor=\"middle\" font-family=\"'Barlow Condensed', 'Arial Narrow', sans-serif\" font-size=\"15\" font-weight=\"700\" letter-spacing=\"5\" fill=\"currentColor\" stroke=\"none\">TIN LE</text>\n<text x=\"100\" y=\"70\" text-anchor=\"middle\" font-family=\"'Barlow Condensed', 'Arial Narrow', sans-serif\" font-size=\"11\" font-weight=\"600\" letter-spacing=\"4\" fill=\"currentColor\" stroke=\"none\">VISITOR \u00b7 ENTRY</text>\n<text x=\"100\" y=\"110\" text-anchor=\"middle\" font-family=\"'Barlow Condensed', 'Arial Narrow', sans-serif\" font-size=\"32\" font-weight=\"700\" fill=\"currentColor\" stroke=\"none\">__DAY__</text>\n<text x=\"100\" y=\"128\" text-anchor=\"middle\" font-family=\"'Barlow Condensed', 'Arial Narrow', sans-serif\" font-size=\"14\" font-weight=\"600\" letter-spacing=\"4\" fill=\"currentColor\" stroke=\"none\">__YEAR__</text>\n<text x=\"100\" y=\"156\" text-anchor=\"middle\" font-family=\"'Barlow Condensed', 'Arial Narrow', sans-serif\" font-size=\"13\" font-weight=\"600\" letter-spacing=\"2.5\" fill=\"currentColor\" stroke=\"none\">__LOC__</text></g>", "left": 0.62, "top": 0.37, "width": 0.56, "rot": 31}, {"name": "Received date stamp", "color": "#c2552d", "vb": "0 0 270 120", "body": "<defs><filter id=\"pmink6\" x=\"-5%\" y=\"-5%\" width=\"110%\" height=\"110%\"><feTurbulence type=\"fractalNoise\" baseFrequency=\"0.9\" numOctaves=\"2\" seed=\"18\" result=\"n\"></feTurbulence><feDisplacementMap in=\"SourceGraphic\" in2=\"n\" scale=\"1.3\" result=\"d\"></feDisplacementMap><feComponentTransfer in=\"n\" result=\"s\"><feFuncA type=\"discrete\" tableValues=\"1 1 1 1 0.5 1 1 1\"></feFuncA></feComponentTransfer><feComposite in=\"d\" in2=\"s\" operator=\"in\"></feComposite></filter></defs>\n<g filter=\"url(#pmink6)\"><rect x=\"4\" y=\"4\" width=\"262\" height=\"112\" rx=\"6\" stroke-width=\"3.5\"></rect>\n<text x=\"135\" y=\"34\" text-anchor=\"middle\" font-family=\"'Barlow Condensed', 'Arial Narrow', sans-serif\" font-size=\"19\" font-weight=\"700\" letter-spacing=\"8\" fill=\"currentColor\" stroke=\"none\">RECEIVED</text>\n<text x=\"135\" y=\"78\" text-anchor=\"middle\" font-family=\"'Barlow Condensed', 'Arial Narrow', sans-serif\" font-size=\"38\" font-weight=\"700\" letter-spacing=\"2\" fill=\"currentColor\" stroke=\"none\">__FULL__</text>\n<text x=\"135\" y=\"104\" text-anchor=\"middle\" font-family=\"'Barlow Condensed', 'Arial Narrow', sans-serif\" font-size=\"14\" font-weight=\"600\" letter-spacing=\"3\" fill=\"currentColor\" stroke=\"none\">__FROM__</text></g>", "left": 0.17, "top": 0.62, "width": 0.65, "rot": -6}];
+  const mon = today.toLocaleDateString("en-US", { month: "short" }).toUpperCase();
+  const dd = String(today.getDate()).padStart(2, "0"), yyyy = String(today.getFullYear());
+  let place = "";
   try {
     const region = new Intl.Locale(navigator.language || "").maximize().region;
     const country = region && new Intl.DisplayNames(["en"], { type: "region" }).of(region);
-    if (country && country !== region) {
-      sticker.querySelector(".pm-loc").textContent = country.toUpperCase();
-      sticker.querySelector(".pm-sub").textContent = "VISITED TIN";
-    }
-  } catch (e) { /* keep the fallback wording */ }
+    if (country && country !== region) place = country.toUpperCase();
+  } catch (e) { /* no country: use the fallback wording */ }
+  const FIELDS = {
+    __LOC__: place || "YOU VISITED TIN", __SUB__: place ? "VISITED TIN" : "TIN LE · PORTFOLIO",
+    __FROM__: place ? `FROM ${place} · TO TIN` : "YOU VISITED TIN",
+    __DAY__: `${mon} ${dd}`, __YEAR__: yyyy, __DMY__: `${dd} ${mon} ${yyyy}`, __FULL__: `${mon} ${dd} ${yyyy}`,
+  };
+  const postmark = sticker.querySelector(".stamp-postmark");
+  let lastMark = -1;
+  const pickPostmark = () => {
+    let i = Math.floor(Math.random() * POSTMARKS.length);
+    if (i === lastMark) i = (i + 1) % POSTMARKS.length;
+    lastMark = i;
+    const m = POSTMARKS[i];
+    postmark.setAttribute("viewBox", m.vb);
+    postmark.innerHTML = m.body.replace(/__[A-Z]+__/g, (k) => FIELDS[k] ?? k);
+    postmark.style.left = `${m.left * 100}%`; postmark.style.top = `${m.top * 100}%`; postmark.style.width = `${m.width * 100}%`;
+    postmark.style.rotate = `${m.rot}deg`; postmark.style.color = m.color;
+    postmark.setAttribute("aria-label", `Postmark: ${m.name}`);
+  };
+  pickPostmark();
   // Hover: a gust of wind draws in beside the stamp, lingers, then blows away.
   let windTimer = 0;
   const gust = () => {
@@ -989,6 +993,7 @@ a.case-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px -24px r
   sticker.addEventListener("click", () => {
     if (dragged) { dragged = false; return; }
     const on = !sticker.classList.contains("is-flipped");
+    if (on) pickPostmark();   // a different postmark every time it's flipped
     sticker.classList.toggle("is-flipped", on);
     sticker.setAttribute("aria-pressed", String(on));
   });

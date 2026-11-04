@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Variation: kind words and play</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800;900&amp;family=Geist+Mono:wght@400;500&amp;family=Caveat:wght@500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}a:hover{opacity:0.75}
+sc-for, sc-if { display: contents; }
+button:focus-visible { outline: 2px solid #3078e7; outline-offset: 3px; }
+.vv-ring { transition: transform 0.25s cubic-bezier(0.2, 1.6, 0.4, 1), box-shadow 0.25s; }
+.vv-ring:hover { transform: scale(1.18); }
+@media (prefers-reduced-motion: reduce) { [style*="vv-"], .vv-anim { animation: none !important; } }
+</style>
+</helmet>
+<div style="position: relative; width: 1440px; height: 1400px; overflow: hidden; background: #f7f5ef; color: #14161a; font-family: 'Inter Tight', system-ui, sans-serif;">
+  <section style="position: relative; height: 760px;">
+    <div style="position: absolute; left: 72px; top: 64px; display: flex; flex-direction: column; gap: 8px;">
+      <h2 style="margin: 0; font: 800 64px/1 'Inter Tight', system-ui, sans-serif; letter-spacing: -0.03em;">Kind words</h2>
+      <p style="margin: 0; font: 500 15px 'Geist Mono', ui-monospace, monospace; opacity: 0.6;">Stickers from people I’ve worked with. Drag them around.</p>
+    </div>
+    <img src="/_blob/add72c5f2f2ae62e98c2eb3e17898e11" alt="" aria-hidden="true" style="position: absolute; right: 120px; top: 70px; width: 120px; transform: rotate(8deg);">
+    <img src="/_blob/b87cee741b28406d3c016845683bf9f9" alt="" aria-hidden="true" style="position: absolute; right: 250px; top: 140px; width: 90px;">
+    <button type="button" aria-label="Sticker: [Name] · PM. Drag to move." onPointerDown="{{ s0.down }}" onPointerMove="{{ s0.move }}" onPointerUp="{{ s0.up }}" onPointerCancel="{{ s0.up }}" style="{{ s0.style }}"><span style="font: 600 18px/1.35 'Inter Tight', system-ui, sans-serif;">[Quote from a PM you worked with: one sentence on how you work]</span><span style="font: 500 13px 'Geist Mono', ui-monospace, monospace; opacity: 0.65;">[Name] · PM</span></button><button type="button" aria-label="Sticker: [Name] · Engineer. Drag to move." onPointerDown="{{ s1.down }}" onPointerMove="{{ s1.move }}" onPointerUp="{{ s1.up }}" onPointerCancel="{{ s1.up }}" style="{{ s1.style }}"><span style="font: 600 18px/1.35 'Inter Tight', system-ui, sans-serif;">[Quote from an engineer]</span><span style="font: 500 13px 'Geist Mono', ui-monospace, monospace; opacity: 0.65;">[Name] · Engineer</span></button><button type="button" aria-label="Sticker: [Name] · Design lead. Drag to move." onPointerDown="{{ s2.down }}" onPointerMove="{{ s2.move }}" onPointerUp="{{ s2.up }}" onPointerCancel="{{ s2.up }}" style="{{ s2.style }}"><span style="font: 600 18px/1.35 'Inter Tight', system-ui, sans-serif;">[Quote from a design lead or manager]</span><span style="font: 500 13px 'Geist Mono', ui-monospace, monospace; opacity: 0.65;">[Name] · Design lead</span></button><button type="button" aria-label="Sticker: [Name] · Student. Drag to move." onPointerDown="{{ s3.down }}" onPointerMove="{{ s3.move }}" onPointerUp="{{ s3.up }}" onPointerCancel="{{ s3.up }}" style="{{ s3.style }}"><span style="font: 600 18px/1.35 'Inter Tight', system-ui, sans-serif;">[Quote from a student you taught at UO]</span><span style="font: 500 13px 'Geist Mono', ui-monospace, monospace; opacity: 0.65;">[Name] · Student</span></button><button type="button" aria-label="Sticker: [Name] · Research. Drag to move." onPointerDown="{{ s4.down }}" onPointerMove="{{ s4.move }}" onPointerUp="{{ s4.up }}" onPointerCancel="{{ s4.up }}" style="{{ s4.style }}"><span style="font: 600 18px/1.35 'Inter Tight', system-ui, sans-serif;">[Quote from a researcher or partner]</span><span style="font: 500 13px 'Geist Mono', ui-monospace, monospace; opacity: 0.65;">[Name] · Research</span></button>
+  </section>
+  <section style="position: relative; height: 640px; background: #14161a; color: #f5f5f7;">
+    <div style="position: absolute; left: 72px; top: 56px; display: flex; flex-direction: column; gap: 8px;">
+      <h2 style="margin: 0; font: 800 64px/1 'Inter Tight', system-ui, sans-serif; letter-spacing: -0.03em;">Play</h2>
+      <p style="margin: 0; font: 500 15px 'Geist Mono', ui-monospace, monospace; opacity: 0.6;">Little experiments. Hover the rings, click to light them up.</p>
+    </div>
+    <div style="position: absolute; left: 72px; right: 72px; top: 210px; display: grid; grid-template-columns: repeat(14, minmax(0, 1fr)); gap: 14px;">
+      <sc-for list="{{ rings }}" as="r" hint-placeholder-count="42"><button class="vv-ring" type="button" aria-label="Ring {{ r.n }}" aria-pressed="{{ r.on }}" onClick="{{ r.pick }}" style="{{ r.style }}"></button></sc-for>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview": {"width": 1440, "height": 1400}}'>
+const ST = [{"x": 120, "y": 230, "r": -6, "c": "#ffe9a8"}, {"x": 560, "y": 200, "r": 4, "c": "#d8ecff"}, {"x": 980, "y": 290, "r": -3, "c": "#e3f0cf"}, {"x": 300, "y": 470, "r": 7, "c": "#f6dccb"}, {"x": 760, "y": 480, "r": -8, "c": "#e6defa"}];
+const RING = ['#3078e7', '#65a3ee', '#6f8a3e', '#a9c46a', '#b8754a', '#e6b88a', '#5b4a8a', '#e0457b'];
+class Component extends DCLogic {
+  renderVals() {
+    const s = this.state || {};
+    const out = {};
+    ST.forEach((b, i) => {
+      const pos = s['p' + i] || { x: b.x, y: b.y }, drag = s.drag === i;
+      out['s' + i] = {
+        style: `position: absolute; left: ${pos.x}px; top: ${pos.y}px; width: 340px; display: flex; flex-direction: column; gap: 12px; padding: 22px 24px; border: 0; border-radius: 22px; background: ${b.c}; color: #14161a; text-align: left; cursor: ${drag ? 'grabbing' : 'grab'}; touch-action: none; user-select: none; transform: rotate(${drag ? 0 : b.r}deg) scale(${drag ? 1.04 : 1}); box-shadow: ${drag ? '0 24px 40px -18px rgba(0,0,0,0.35)' : '0 10px 24px -16px rgba(0,0,0,0.3)'}; transition: transform 0.2s, box-shadow 0.2s; z-index: ${s['z' + i] || 1};`,
+        down: (e) => { e.currentTarget.setPointerCapture && e.currentTarget.setPointerCapture(e.pointerId); const r = e.currentTarget.getBoundingClientRect(); const k = e.currentTarget.offsetWidth ? r.width / e.currentTarget.offsetWidth : 1; this._d = { i, x: e.clientX, y: e.clientY, ox: pos.x, oy: pos.y, k }; this._z = (this._z || 10) + 1; this.setState({ drag: i, ['z' + i]: this._z }); },
+        move: (e) => { const d = this._d; if (!d || d.i !== i) return; this.setState({ ['p' + i]: { x: d.ox + (e.clientX - d.x) / d.k, y: d.oy + (e.clientY - d.y) / d.k } }); },
+        up: () => { this._d = null; this.setState({ drag: undefined }); },
+      };
+    });
+    const lit = s.lit || {};
+    out.rings = Array.from({ length: 42 }, (_, i) => {
+      const c = RING[(i * 5) % RING.length], on = !!lit[i];
+      return { n: i + 1, on: String(on), pick: () => this.setState({ lit: { ...lit, [i]: !on } }),
+        style: `width: 100%; aspect-ratio: 1; border-radius: 50%; border: 0; padding: 0; cursor: pointer; background: ${on ? `radial-gradient(circle, #fff 0 18%, ${c} 19% 100%)` : '#1f2226'}; box-shadow: inset 0 0 0 6px ${c}, inset 0 0 0 12px #14161a, inset 0 0 0 16px ${c}${on ? ', 0 0 24px ' + c : ''};` };
+    });
+    return out;
+  }
+}
+</script>
+</body>
+</html>
