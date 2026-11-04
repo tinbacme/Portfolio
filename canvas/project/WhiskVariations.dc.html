@@ -179,7 +179,9 @@ class Component extends DCLogic {
     out.stage3 = stage();
     out.ring3 = `stroke-dasharray: 1 1; stroke-dashoffset: ${(1 - p3).toFixed(3)}; transition: stroke-dashoffset 0.1s linear;`;
     const holdX = s.h3 ? Math.sin(ph) * (10 + 14 * p3) : 0;
-    out.whisk3 = whiskBox(TIP.x + holdX, TIP.y + (s.h3 ? 0 : -42), `opacity: ${s.h3 ? 1 : (s.d3 ? 0 : 0.35)}; transition: top 0.3s, opacity 0.3s; transform: rotate(${holdX * 0.3}deg); ${s.h3 && p3 > 0.5 ? 'filter: blur(' + ((p3 - 0.5) * 1.2).toFixed(2) + 'px);' : ''}`);
+    // the whisk stays in the scene: hovering ready above the bowl, in the matcha while you hold, and resting tilted against the rim once the heart appears
+    const rest3 = !s.h3 && s.d3;
+    out.whisk3 = whiskBox(TIP.x + (rest3 ? 64 : holdX), TIP.y + (s.h3 ? 0 : rest3 ? -14 : -42), `opacity: 1; transition: top 0.55s cubic-bezier(0.22, 1, 0.36, 1)${s.h3 ? '' : ', left 0.55s cubic-bezier(0.22, 1, 0.36, 1), transform 0.55s cubic-bezier(0.22, 1, 0.36, 1)'}; transform-origin: 50% 90%; transform: rotate(${rest3 ? 24 : holdX * 0.3}deg); ${s.h3 && p3 > 0.5 ? 'filter: blur(' + ((p3 - 0.5) * 1.2).toFixed(2) + 'px);' : ''}`);
     out.foam3 = foam(p3); out.art3 = art(!!s.d3); out.art3Path = HEART; out.rip3 = [];
     out.status3 = s.d3 ? 'foam heart · press to brew again' : (s.h3 ? `brewing ${Math.round(p3 * 100)}%` : 'press and hold');
     out.down3 = () => { this._ph = 0; this.setState(s.d3 ? { d3: false, p3: 0, h3: true } : { h3: true }); };
