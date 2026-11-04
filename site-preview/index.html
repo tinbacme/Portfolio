@@ -952,8 +952,46 @@ a.case-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px -24px r
     raf = current === target ? 0 : requestAnimationFrame(tick);
   }
 
+  // ---------- Past the window, the rest plays by itself ----------
+  // A little scroll starts it; the zoom, the "I am Tin Le" intro and the dive into "My work" then run as one animation.
+  const AUTO_AT = 0.05;
+  const LEGS = [
+    { to: 0.42, dur: 1.8, ease: easeInOut },          // lean in until the sky fills the screen
+    { to: 0.58, dur: 2.6, ease: (t) => t },           // "I am Tin Le" holds while we drift
+    { to: 0.9, dur: 1.5, ease: easeInOut },           // dive through the glass
+    { to: 1, dur: 0.9, ease: easeOut },               // settle on "My work"
+  ];
+  let auto = null, autoArmed = true;
+  const journeyY = (p) => journey.offsetTop + (journey.offsetHeight - innerHeight) * p;
+  function autoStep(now) {
+    if (!auto) return;
+    const leg = LEGS[auto.i], k = Math.min(1, (now - auto.t0) / (leg.dur * 1000));
+    scrollTo(0, journeyY(auto.from + (leg.to - auto.from) * leg.ease(k)));
+    if (k >= 1) { auto.from = leg.to; auto.t0 = now; auto.i++; if (auto.i >= LEGS.length) { auto = null; return; } }
+    requestAnimationFrame(autoStep);
+  }
+  function startAuto() {
+    autoArmed = false;
+    if (reduceMotion) { scrollTo(0, journeyY(1)); return; }
+    let i = 0; while (i < LEGS.length - 1 && target >= LEGS[i].to) i++;
+    auto = { i, from: target, t0: performance.now() };
+    requestAnimationFrame(autoStep);
+  }
+  // While it plays, scrolling down is ignored; scrolling up hands control straight back.
+  addEventListener("wheel", (e) => { if (!auto) return; if (e.deltaY < 0) auto = null; else e.preventDefault(); }, { passive: false });
+  let touchY = 0;
+  addEventListener("touchstart", (e) => { touchY = e.touches[0].clientY; }, { passive: true });
+  addEventListener("touchmove", (e) => { if (!auto) return; if (e.touches[0].clientY > touchY + 8) auto = null; else e.preventDefault(); }, { passive: false });
+  addEventListener("keydown", (e) => {
+    if (!auto) return;
+    if (["ArrowUp", "PageUp", "Home", "Escape"].includes(e.key)) auto = null;
+    else if (["ArrowDown", "PageDown", "End", " "].includes(e.key)) e.preventDefault();
+  });
+
   function onScroll() {
     readProgress();
+    if (target < 0.01) autoArmed = true;   // back at the hero: it can play again
+    if (autoArmed && !auto && target > AUTO_AT && target < 0.5) startAuto();
     if (!raf) raf = requestAnimationFrame(tick);
   }
 
@@ -1224,7 +1262,7 @@ a.case-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px -24px r
     const glides = [];
     const glide = (to, dur, at) => { if (reduceMotion) { if (to > scrollY) scrollTo(0, to); return; } glides.push({ to, dur, at }); };
     // any input of their own hands the scroll straight back to the visitor
-    for (const ev of ["wheel", "touchstart", "keydown", "pointerdown"]) addEventListener(ev, () => { glides.length = 0; }, { passive: true });
+    for (const ev of ["wheel", "touchstart", "keydown", "pointerdown"]) addEventListener(ev, () => { if (!auto) glides.length = 0; }, { passive: true });
     const cur = {};   // each teammate's cursor glides in, follows its pen, and drifts off when done
     const step = (now) => {
       raf = 0;
@@ -1240,7 +1278,7 @@ a.case-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px -24px r
       } else if (seqT0 && target < 0.6) {   // scrolled back up: rewind so it plays again next time
         seqT0 = 0; glides.length = 0; for (const it of items) if (it.seq) { it.t = 0; it.fill = 0; it.done = 0; }
       }
-      if (glides.length && seqT0) {
+      if (glides.length && seqT0 && !auto) {
         const g = glides[0], tg = (now - seqT0) / 1000 - g.at;
         if (tg >= 0) {
           if (g.from === undefined) g.from = scrollY;
@@ -1302,7 +1340,7 @@ a.case-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px -24px r
 
   // "About" lands where the intro is fully visible.
   document.querySelector('a[href="#about"]').addEventListener("click", (e) => {
-    e.preventDefault();
+    e.preventDefault(); autoArmed = false; auto = null;
     const track = journey.offsetHeight - innerHeight;
     scrollTo({ top: journey.offsetTop + track * 0.52, behavior: reduceMotion ? "auto" : "smooth" });
   });
