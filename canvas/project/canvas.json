@@ -407,6 +407,15 @@
       "w": 1440,
       "x": 28880,
       "y": 5640
+    },
+    "VariationJobPoint.dc.html": {
+      "h": 900,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Variation I · the job and the point (inspired by kenjilambert.com) · intro + scroll inside",
+      "w": 1440,
+      "x": 30400,
+      "y": 5640
     }
   },
   "createdOnFiles": {
@@ -547,7 +556,8 @@
     "Artboard-xxww.dc.html",
     "VariationCanvasHeader.dc.html",
     "VariationMap-wjo5.dc.html",
-    "VariationPixelSky.dc.html"
+    "VariationPixelSky.dc.html",
+    "VariationJobPoint.dc.html"
   ],
   "pages": [
     {

@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Variation I: the job and the point</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Archivo:wdth,wght@125,800&amp;family=Instrument+Serif:ital@0;1&amp;family=Inter:wght@400;500;600&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+.k { --bg: #0c0d0b; --cream: #f1ead6; --green: #9cc65b; --blue: #4aa3ff; --terra: #e8693f; --dim: #8b8778; position: relative; width: 1440px; height: 900px; overflow: hidden; background: var(--bg); color: var(--cream); font-family: "Inter", system-ui, sans-serif; }
+.k a { color: inherit; text-decoration: none; }
+.k-scroll { position: absolute; inset: 0; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; overscroll-behavior: contain; }
+.k-scroll::-webkit-scrollbar { width: 0; }
+.k-scroll:focus-visible { outline: none; }
+
+/* corner nav */
+.k-corner { position: absolute; z-index: 30; font: 600 15px "Inter", sans-serif; letter-spacing: -0.01em; transition: opacity 0.6s 0.2s; }
+.k.intro .k-corner { opacity: 0; transition: none; }
+.k-c-logo { left: 26px; top: 20px; width: 40px; }
+.k-c-logo svg { display: block; width: 40px; fill: var(--cream); }
+.k-c-lang { left: 50%; top: 24px; translate: -50% 0; font: 500 10px "Geist Mono", monospace; color: var(--dim); }
+.k-c-lang b { color: var(--cream); font-weight: 500; }
+.k-c-work { right: 28px; top: 22px; }
+.k-c-about { left: 28px; bottom: 20px; }
+.k-c-hi { right: 28px; bottom: 20px; color: var(--green); }
+.k-c-mid { left: 50%; bottom: 14px; translate: -50% 0; display: grid; justify-items: center; gap: 4px; font: 400 9px "Geist Mono", monospace; color: #55534b; }
+.k-c-mid svg { width: 14px; stroke: var(--blue); animation: k-nudge 1.8s ease-in-out infinite; }
+.k-c-mid button { border: 0; padding: 0; background: none; color: #77746a; font: inherit; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+.k-c-mid button:hover { color: var(--cream); }
+@keyframes k-nudge { 50% { translate: 0 3px; } }
+
+/* intro loader */
+.k-load { position: absolute; inset: 0; z-index: 40; background: var(--bg); pointer-events: none; opacity: 0; transition: opacity 0.45s; }
+.k.intro .k-load { opacity: 1; transition: none; }
+.k-load svg { position: absolute; width: 46px; height: 46px; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; opacity: 0; }
+.k-load svg.on { opacity: 1; animation: k-tumble 0.42s cubic-bezier(0.34, 1.5, 0.5, 1) both; }
+.k-load svg.on path { animation: k-draw 0.36s ease-out both; }
+@keyframes k-draw { from { stroke-dashoffset: 100; } to { stroke-dashoffset: 0; } }
+@keyframes k-tumble { from { rotate: -24deg; scale: 0.7; } to { rotate: 0deg; scale: 1; } }
+.k-load i { position: absolute; left: 50%; top: 50%; width: 5px; height: 5px; margin: -2.5px; border-radius: 50%; background: var(--blue); }
+
+/* hero */
+.k-hero { position: relative; height: 900px; }
+.k-hero h1 { position: absolute; left: 0; right: 0; top: 112px; margin: 0; text-align: center; font: 400 112px/1.04 "Anton", Impact, sans-serif; letter-spacing: -0.012em; text-transform: lowercase; }
+.k-hero h1 > span { display: block; white-space: nowrap; }
+.hw { display: inline-block; }
+.k.play .hw { animation: k-blur 0.8s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@keyframes k-blur { from { opacity: 0; filter: blur(14px); transform: translateY(14px) scale(1.04); } to { opacity: 1; filter: blur(0); transform: none; } }
+.k.intro .hw { opacity: 0; }
+.par { display: inline-flex; align-items: center; vertical-align: top; }
+.par > b { font: 300 0.82em/1 "Instrument Serif", serif; color: var(--cream); translate: 0 -0.04em; }
+.obj { position: relative; display: inline-block; width: 1.18em; height: 1em; margin: 0 0.06em; }
+.obj img { position: absolute; inset: -0.08em; width: calc(100% + 0.16em); height: calc(100% + 0.16em); object-fit: contain; opacity: 0; scale: 0.6; }
+.obj img.on { opacity: 1; scale: 1; transition: scale 0.34s cubic-bezier(0.34, 1.6, 0.5, 1), opacity 0.12s; }
+.c-cream { color: var(--cream); } .c-terra { color: var(--terra); } .c-blue { color: var(--blue); } .c-green { color: var(--green); }
+
+/* lanyard badge */
+.k-lan { position: absolute; z-index: 15; left: 720px; top: 0; width: 0; height: 0; transform-origin: 0 0; will-change: transform; }
+.k.intro .k-lan { visibility: hidden; }
+.k-cord { position: absolute; left: -7px; top: -900px; width: 14px; height: 1446px; border-radius: 3px; background: repeating-linear-gradient(180deg, #24241f 0 6px, #2c2c26 6px 12px); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04); }
+.k-cord::after { content: ""; position: absolute; left: 2px; right: 2px; bottom: -14px; height: 22px; border-radius: 4px; background: linear-gradient(#bfc2c6, #7d8187); }
+.k-card { position: absolute; left: -64px; top: 556px; width: 128px; height: 176px; padding: 10px; box-sizing: border-box; border-radius: 6px; background: var(--blue); box-shadow: 0 18px 30px -12px rgba(0, 0, 0, 0.7); cursor: grab; touch-action: none; user-select: none; }
+.k-card:active { cursor: grabbing; }
+.k-card::before { content: ""; position: absolute; left: 50%; top: 7px; width: 22px; height: 5px; margin-left: -11px; border-radius: 3px; background: var(--bg); }
+.k-card .in { display: grid; height: 100%; padding-top: 10px; box-sizing: border-box; border-radius: 3px; background: var(--cream); color: var(--bg); text-align: center; overflow: hidden; }
+.k-card .nm { font: 400 21px/0.95 "Anton", sans-serif; text-transform: lowercase; letter-spacing: 0; }
+.k-card img { display: block; width: 104px; margin: -4px auto 0; pointer-events: none; }
+.k-card small { font: 500 7px "Geist Mono", monospace; letter-spacing: 0.08em; text-transform: uppercase; color: #5b584f; padding-bottom: 6px; }
+
+/* about paragraph */
+.k-about { position: relative; padding: 140px 0 70px; text-align: center; }
+.k-about p { width: 860px; margin: 0 auto; font: 400 30px/1.32 "Inter", sans-serif; letter-spacing: -0.02em; }
+.k-about .w { transition: opacity 0.5s, filter 0.5s; opacity: 0.12; filter: blur(4px); }
+.k-about .w.on { opacity: 1; filter: none; }
+.k-about em { font: italic 400 1.08em "Instrument Serif", serif; letter-spacing: 0; }
+.k-about .star { color: var(--terra); }
+.k-about .pill { display: inline-block; padding: 0 12px 2px; border-radius: 999px; background: var(--green); color: var(--bg); font-weight: 600; }
+.k-logos { display: flex; gap: 56px; width: max-content; margin-top: 70px; font: 500 13px "Inter", sans-serif; color: #77746a; white-space: nowrap; animation: k-marq 34s linear infinite; }
+.k-logos span { display: inline-flex; align-items: center; gap: 9px; }
+.k-logos span::before { content: ""; width: 9px; height: 9px; border-radius: 2px; background: currentColor; opacity: 0.6; }
+@keyframes k-marq { to { transform: translateX(-50%); } }
+
+/* giant marquee */
+.k-big { overflow: hidden; padding: 30px 0 10px; }
+.k-big .row { display: flex; width: max-content; font: 400 168px/1 "Anton", sans-serif; text-transform: uppercase; letter-spacing: -0.005em; white-space: nowrap; will-change: transform; }
+.k-big .row span { padding-right: 34px; }
+.k-big .ast { color: var(--green); }
+
+/* projects */
+.k-proj { padding: 60px 0 40px; }
+.k-ph { display: grid; grid-template-columns: 1.1fr 0.5fr 1fr auto; gap: 24px; align-items: start; padding: 0 28px 26px; }
+.k-tags { display: flex; gap: 5px; margin-bottom: 14px; }
+.k-tags span { padding: 3px 7px; border-radius: 999px; font: 600 8.5px "Inter", sans-serif; letter-spacing: 0.05em; text-transform: uppercase; color: var(--bg); background: var(--cream); }
+.k-tags span:nth-child(2) { background: var(--blue); } .k-tags span:nth-child(3) { background: var(--terra); }
+.k-ph h3 { margin: 0; font: 800 40px/1.02 "Archivo", sans-serif; font-stretch: 125%; letter-spacing: -0.01em; }
+.k-ph .yr { font: 500 9px/1.5 "Geist Mono", monospace; color: var(--dim); text-transform: uppercase; padding-top: 40px; }
+.k-ph .yr b { color: var(--cream); font-weight: 500; }
+.k-ph p { margin: 0; padding-top: 40px; font-size: 11.5px; line-height: 1.5; color: #bcb6a4; }
+.k-see { display: inline-block; margin-top: 2px; padding: 5px 10px; border-radius: 999px; background: var(--cream); color: var(--bg) !important; font: 700 9px "Inter", sans-serif; letter-spacing: 0.05em; white-space: nowrap; transition: background 0.2s; }
+.k-see:hover { background: var(--green); }
+.k-strip { display: flex; gap: 10px; width: max-content; padding: 0 28px; will-change: transform; }
+.k-strip figure { margin: 0; width: 400px; height: 420px; overflow: hidden; border-radius: 4px; background: #1a1b18; }
+.k-strip figure.wide { width: 620px; }
+.k-strip img { display: block; width: 100%; height: 100%; object-fit: cover; transition: scale 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
+.k-strip figure:hover img { scale: 1.04; }
+.k-strip figure.wide img { scale: 1.05; }
+.k-strip figure.wide:hover img { scale: 1.08; }
+.k-all { display: flex; justify-content: center; padding: 70px 0 90px; }
+.k-all a { padding: 7px 14px; border-radius: 999px; background: var(--terra); color: var(--bg) !important; font: 700 10px "Inter", sans-serif; letter-spacing: 0.05em; }
+
+/* footer */
+.k-foot { position: relative; border-top: 1px solid #23241f; padding: 34px 28px 0; height: 620px; overflow: hidden; }
+.k-foot .el { display: grid; grid-template-columns: 120px 1fr auto; align-items: start; }
+.k-foot small { font: 500 8px "Geist Mono", monospace; letter-spacing: 0.08em; color: #5f5c52; text-transform: uppercase; padding-top: 8px; }
+.k-foot nav { display: grid; gap: 2px; font: 400 21px/1.25 "Inter", sans-serif; letter-spacing: -0.01em; }
+.k-foot nav a:hover { color: var(--green); }
+.k-foot .big { position: absolute; left: 0; bottom: 60px; display: flex; width: max-content; font: 400 230px/1 "Anton", sans-serif; text-transform: uppercase; white-space: nowrap; animation: k-marq 22s linear infinite; }
+.k-foot .big span { padding-right: 40px; }
+.k-foot .big .ast { color: var(--green); }
+.k-talk { position: absolute; right: 28px; top: 34px; padding: 6px 12px; border-radius: 999px; background: var(--blue); color: var(--bg) !important; font: 700 9px "Inter", sans-serif; letter-spacing: 0.06em; }
+
+@media (prefers-reduced-motion: reduce) { .k.play .hw { animation: none; } .k-logos, .k-foot .big, .k-c-mid svg { animation: none; } }
+</style>
+</helmet>
+<div class="k intro" ref="{{ host }}">
+  <div class="k-load" aria-hidden="true">
+    <i></i>
+    <svg viewBox="0 0 48 48" stroke="#4aa3ff"><path pathLength="100" stroke-dasharray="100" d="M24 6c2 0 3 2 3 5v9l15 8v4l-15-4v9l5 4v3l-8-2-8 2v-3l5-4v-9L6 32v-4l15-8v-9c0-3 1-5 3-5z"></path></svg>
+    <svg viewBox="0 0 48 48" stroke="#9cc65b"><path pathLength="100" stroke-dasharray="100" d="M7 21h34c0 10-7 17-17 17S7 31 7 21zM18 38h12M13 21c2-4 6-5 11-5s9 1 11 5M33 9l-7 10"></path></svg>
+    <svg viewBox="0 0 48 48" stroke="#ff6fb1"><path pathLength="100" stroke-dasharray="100" d="M14 36h21a8 8 0 0 0 1-16 11 11 0 0 0-21-3 9.5 9.5 0 0 0-1 19z"></path></svg>
+    <svg viewBox="0 0 48 48" stroke="#e8693f"><path pathLength="100" stroke-dasharray="100" d="M9 41h18M18 41V31l11-12M29 19l-5-6 9-6 5 7zM36 16l2 4"></path></svg>
+    <svg viewBox="0 0 48 48" stroke="#a99bff"><path pathLength="100" stroke-dasharray="100" d="M21 31a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM28 28l12 12"></path></svg>
+  </div>
+
+  <a class="k-corner k-c-logo" href="#top" aria-label="Tin Le, home"><svg viewBox="6 13 52 37" aria-hidden="true">%%LOGO%%</svg></a>
+  <span class="k-corner k-c-lang"><b>EN</b> / VI</span>
+  <a class="k-corner k-c-work" href="#work">work</a>
+  <a class="k-corner k-c-about" href="#about">about</a>
+  <a class="k-corner k-c-hi" href="#say-hi">say hi</a>
+  <div class="k-corner k-c-mid"><svg viewBox="0 0 14 8" fill="none" stroke-width="1.5" aria-hidden="true"><path d="M1 1l6 6 6-6"></path></svg><span>(v1.0) · more work on the way · <button type="button" class="k-replay">replay intro</button></span></div>
+
+  <div class="k-scroll" ref="{{ root }}" onScroll="{{ onScroll }}" tabindex="0" aria-label="Scroll the page">
+    <section class="k-hero" id="top">
+      <h1 aria-label="Designing search is the job. Earning trust is the point.">
+        <span><span class="hw c-cream" style="animation-delay: 0ms;">designing</span> <span class="hw par" style="animation-delay: 90ms;"><b>(</b><span class="obj" data-off="0">%%OBJS%%</span><b>)</b></span> <span class="hw c-terra" style="animation-delay: 160ms;">search</span></span>
+        <span><span class="hw c-cream" style="animation-delay: 240ms;">is the</span> <span class="hw c-blue" style="animation-delay: 320ms;">job.</span></span>
+        <span><span class="hw c-terra" style="animation-delay: 400ms;">earning</span> <span class="hw par" style="animation-delay: 470ms;"><b>(</b><span class="obj" data-off="4">%%OBJS%%</span><b>)</b></span> <span class="hw c-green" style="animation-delay: 540ms;">trust</span></span>
+        <span><span class="hw c-cream" style="animation-delay: 620ms;">is the</span> <span class="hw c-green" style="animation-delay: 700ms;">point.</span></span>
+      </h1>
+      <div class="k-lan" aria-hidden="true"><span class="k-cord"></span><span class="k-card"><span class="in"><span class="nm">tin le</span><img src="%%BADGE%%" alt=""><small>designer · washington</small></span></span></div>
+    </section>
+
+    <section class="k-about" id="about">
+      <p>%%ABOUT%%</p>
+      <div style="overflow: hidden;"><div class="k-logos">%%LOGOS%%</div></div>
+    </section>
+
+    <section class="k-big" id="work" aria-label="Featured work"><div class="row">%%BIG%%</div></section>
+
+    <section class="k-proj">
+      <div class="k-ph"><div><div class="k-tags"><span>Search</span><span>AI</span><span>Product design</span></div><h3>Search you can<br>trust at a glance</h3></div><div class="yr"><b>2025</b><br>Microsoft AI · Windows</div><p>Making search results in Windows feel calm and clear, so people know what an answer is, where it came from and what to do next.</p><a class="k-see" href="#windows-search">SEE FULL CASE ↗</a></div>
+      <div class="k-strip" data-dir="-1"><figure class="wide"><img src="/_blob/2a4b16aaf0284c63e51aa51dc7ad5996" alt="Windows search"></figure><figure><img src="/_blob/058a1e4f71c41cad18dbe6a632862617" alt=""></figure><figure><img src="/_blob/4d164a51804f8978f2607d488602f4a2" alt=""></figure><figure><img src="/_blob/bb63863a75e37522abd7a2f10361fa3e" alt=""></figure></div>
+    </section>
+    <section class="k-proj">
+      <div class="k-ph"><div><div class="k-tags"><span>Enterprise</span><span>Admin</span><span>Systems</span></div><h3>Manage users,<br>minus the dread</h3></div><div class="yr"><b>2021</b><br>Salesforce</div><p>Redesigning how admins add, find and update people in Salesforce, turning a dense settings page into a calm, scannable workspace.</p><a class="k-see" href="#manage-users">SEE FULL CASE ↗</a></div>
+      <div class="k-strip" data-dir="1"><figure><img src="/_blob/80ecf61f9f73902c1a2417fc0c0ea2db" alt=""></figure><figure class="wide"><img src="/_blob/f931dcc4cb51782b134276f3c1c53d8a" alt="Salesforce Manage users"></figure><figure><img src="/_blob/81ae3fff42161e29a6464458e8f07d62" alt=""></figure><figure><img src="/_blob/172e09e27c48b1ba6ee837a153fbc532" alt=""></figure></div>
+    </section>
+    <div class="k-all"><a href="#work">SEE ALL WORK ↗</a></div>
+
+    <footer class="k-foot" id="say-hi">
+      <div class="el"><small>Elsewhere</small><nav><a href="#linkedin">LinkedIn</a><a href="#instagram">Instagram</a><a href="#readcv">Read.cv</a><a href="#say-hi">Say hi</a></nav></div>
+      <div class="big" aria-hidden="true">%%FOOTBIG%%</div>
+      <a class="k-talk" href="#say-hi">LET'S TALK ↗</a>
+    </footer>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const reduce = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+const LOAD_SPOTS = [[1040, 250], [560, 470], [920, 520], [380, 300], [720, 430]];
+
+// lanyard: a damped pendulum hanging from the top edge, dropped in and draggable
+function lanyard(host, st) {
+  const lan = host.querySelector('.k-lan'), card = host.querySelector('.k-card');
+  const P = st.lan = { th: 0.22, om: 0, drop: -720, dv: 0, drag: false, run: false };
+  const step = () => {
+    if (!host.isConnected) return;
+    const dt = 1 / 60;
+    if (!P.drag) { P.om += (-26 * Math.sin(P.th) - 1.6 * P.om) * dt; P.th += P.om * dt; }
+    P.dv += (-170 * P.drop - 15 * P.dv) * dt; P.drop += P.dv * dt;
+    lan.style.transform = `translateY(${P.drop.toFixed(1)}px) rotate(${(P.th * 180 / Math.PI).toFixed(2)}deg)`;
+    if (!P.drag && Math.abs(P.th) < 0.0008 && Math.abs(P.om) < 0.0008 && Math.abs(P.drop) < 0.2 && Math.abs(P.dv) < 0.2) { P.run = false; return; }
+    requestAnimationFrame(step);
+  };
+  P.kick = () => { if (!P.run) { P.run = true; requestAnimationFrame(step); } };
+  let last = null;
+  const angleAt = (e) => { const r = lan.getBoundingClientRect(), k = host.getBoundingClientRect().width / 1440 || 1; return Math.atan2((e.clientX - r.left) / k, Math.max(60, (e.clientY - r.top) / k)) * -1; };
+  card.addEventListener('pointerdown', (e) => { e.preventDefault(); card.setPointerCapture(e.pointerId); P.drag = true; P.grab = angleAt(e) - P.th; last = { th: P.th, t: performance.now() }; P.kick(); });
+  card.addEventListener('pointermove', (e) => { if (!P.drag) return; const th = clamp(angleAt(e) - P.grab, -1.2, 1.2), now = performance.now(); P.om = (th - last.th) / Math.max(0.008, (now - last.t) / 1000); last = { th, t: now }; P.th = th; });
+  const up = () => { P.drag = false; P.om = clamp(P.om, -8, 8); P.kick(); };
+  card.addEventListener('pointerup', up); card.addEventListener('pointercancel', up);
+}
+
+function playIntro(host, st) {
+  clearTimeout(st.t1); clearTimeout(st.t2); clearInterval(st.ti);
+  host.classList.remove('play'); host.classList.add('intro');
+  const r = host.querySelector('.k-scroll'); if (r) r.scrollTop = 0;
+  const icons = [...host.querySelectorAll('.k-load svg')];
+  const dur = reduce ? 0 : 1700, per = 340;
+  let i = 0;
+  const show = () => {
+    icons.forEach((s) => s.classList.remove('on'));
+    const s = icons[i % icons.length], [x, y] = LOAD_SPOTS[i % LOAD_SPOTS.length];
+    s.style.left = (x - 23) + 'px'; s.style.top = (y - 23) + 'px';
+    void s.getBoundingClientRect(); s.classList.add('on'); i++;
+  };
+  if (!reduce) { show(); st.ti = setInterval(show, per); }
+  st.t1 = setTimeout(() => {
+    clearInterval(st.ti);
+    host.classList.remove('intro'); void host.offsetWidth; host.classList.add('play');
+    const P = st.lan; if (P) { P.drop = -760; P.dv = 0; P.th = 0.26; P.om = 0; P.kick(); }
+  }, dur);
+}
+
+function cycle(host, st) {
+  // the two brackets take turns swapping their object, like a slot machine that never stops
+  const boxes = [...host.querySelectorAll('.obj')], idx = boxes.map(() => 0);
+  const show = (bi) => { const b = boxes[bi], imgs = b.querySelectorAll('img'), k = (idx[bi] + +b.dataset.off) % imgs.length; imgs.forEach((im, j) => im.classList.toggle('on', j === k)); };
+  boxes.forEach((b, bi) => show(bi));
+  let n = 0;
+  st.cy = setInterval(() => {
+    if (!host.isConnected) return clearInterval(st.cy);
+    if (host.classList.contains('intro')) return;
+    const bi = n++ % boxes.length; idx[bi]++; show(bi);
+  }, reduce ? 2400 : 300);
+}
+
+function paint(host, root) {
+  const y = root.scrollTop, H = 900;
+  // about: words come into focus as the paragraph passes the middle
+  const ab = host.querySelector('.k-about'), ws = ab.querySelectorAll('.w');
+  const prog = clamp((y + H * 0.85 - ab.offsetTop - 140) / 520), cut = Math.round(prog * ws.length);
+  ws.forEach((w, i) => w.classList.toggle('on', i < cut));
+  // giant marquee follows the scroll a little
+  const big = host.querySelector('.k-big .row');
+  big.style.transform = `translateX(${(-((y * 0.55) % 1600)).toFixed(1)}px)`;
+  // image strips slide sideways as you pass them
+  host.querySelectorAll('.k-strip').forEach((s) => {
+    const sec = s.parentNode, p = clamp((y + H - sec.offsetTop) / (sec.offsetHeight + H)), d = +s.dataset.dir;
+    s.style.transform = `translateX(${(d < 0 ? -p * 420 : -420 + p * 420).toFixed(1)}px)`;
+  });
+}
+
+class Component extends DCLogic {
+  renderVals() {
+    if (!this._v) {
+      const st = this._st = {};
+      this._v = {
+        host: (el) => {
+          if (!el || this._host === el) return;
+          this._host = el;
+          lanyard(el, st);
+          cycle(el, st);
+          playIntro(el, st);
+          const rb = el.querySelector('.k-replay');
+          rb.addEventListener('pointerdown', (e) => e.preventDefault());
+          rb.addEventListener('click', () => playIntro(el, st));
+        },
+        root: (el) => { if (el) { this._root = el; requestAnimationFrame(() => this._host && paint(this._host, el)); } },
+        onScroll: (e) => { const r = e.currentTarget; if (!this._raf) this._raf = requestAnimationFrame(() => { this._raf = 0; if (this._host) paint(this._host, r); }); },
+      };
+    }
+    return this._v;
+  }
+}
+</script>
+</body>
+</html>
