@@ -1,0 +1,9 @@
+cd /tmp/claude-0/-home-user/ab4b1994-dd78-54cb-abb4-90a167a3ba6b/scratchpad
+N="No people, no text, no letters, no logos, no signature, no border."
+python3 tools/gen_new.py mo-aerial "A top-down aerial painting looking straight down at a calm teal river meeting lush green riverbank and dark tree canopies, painted in rich textured gouache/acrylic with dabbed brush marks, deep teal on the left blending to bright lime-yellow greens on the right; a loose diagonal line of six small white birds flies across with their soft shadows on the water below, and one tiny white paper airplane leads them. Calm, meditative, lots of quiet texture. $N" 1536x1024 opaque &
+python3 tools/gen_new.py mo-flowers "A photograph of soft rolling green hills under a clear blue sky with a few white cumulus clouds, a meadow of red, orange, yellow and white wildflowers in the foreground rendered with a horizontal motion blur, as if seen from the window of a moving train or a plane taking off; airy, joyful, lots of open sky in the upper half for text. $N" 1536x1024 opaque &
+wait
+python3 tools/gen_new.py mo-fuzzy "A surreal minimal 3D render of soft rolling hills covered in short fuzzy matcha-green felt-like grass, under a flat warm beige-cream sky, with three small fluffy volumetric clouds tinted peach floating just above the hills; very clean composition, the hills occupy only the bottom third, the rest is empty sky for text; soft diffuse light, calm and playful. $N" 1536x1024 opaque &
+python3 tools/gen_new.py mo-moss "A minimal 3D product still life: a low rolling miniature landscape of soft green moss along the bottom of the frame against a plain warm cream background that fills the upper two thirds; on the right, a small ceramic matcha bowl and a tiny bamboo whisk sit nestled on the moss like objects in a landscape, softly lit, shallow depth of field, calm and premium, lots of empty space for text. $N" 1536x1024 opaque &
+wait
+echo ALLDONE

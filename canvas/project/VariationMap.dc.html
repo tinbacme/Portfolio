@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Variation F: Tin's map</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,400&amp;family=DotGothic16&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+<style>
+@font-face { font-family: "Geist Serif"; src: url("/_blob/7e30fdbbbab8996f8ff56a6dbd54e97f") format("woff2"); font-weight: 400; font-display: swap; }
+body{margin:0}
+.fp { --ink: #1b2930; --muted: #6b737a; --seal: #c0392b; position: relative; width: 1440px; height: 1900px; overflow: hidden; color: var(--ink); font-family: "Newsreader", Georgia, serif;
+  background: radial-gradient(circle, rgba(27, 41, 48, 0.12) 1px, transparent 1.4px) 0 0 / 22px 22px, #fbf9f4; }
+.fp a { color: inherit; text-decoration: none; }
+.fp-seal { position: absolute; left: 40px; top: 36px; width: 72px; height: 84px; display: grid; place-items: center; border: 2.5px solid var(--seal); border-radius: 10px; rotate: -4deg; background: rgba(192, 57, 43, 0.04); }
+.fp-seal img { width: 46px; filter: invert(27%) sepia(85%) saturate(2300%) hue-rotate(350deg) brightness(88%); }
+.fp-hello { position: absolute; left: 136px; top: 40px; width: 330px; display: grid; gap: 10px; font-size: 15px; line-height: 1.55; color: var(--muted); }
+.fp-hello b { display: flex; align-items: center; gap: 8px; font: 500 17px "Geist Mono", ui-monospace, monospace; color: var(--ink); }
+.fp-hello b i { width: 14px; height: 14px; border-radius: 50%; background: var(--seal); display: inline-block; }
+.fp-hello u { text-decoration: none; border-bottom: 1px solid currentColor; color: var(--ink); }
+.fp-rail { position: absolute; right: 26px; top: 120px; display: grid; gap: 8px; }
+.fp-rail span { width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center; background: #fff; box-shadow: 0 1px 0 rgba(0,0,0,0.06), 0 4px 10px -6px rgba(0,0,0,0.25); font: 600 11px "Geist Mono", monospace; color: var(--muted); }
+.fp-rail span:first-child { background: #e8f0ff; color: #3078e7; }
+.fp-word { position: absolute; left: 1150px; top: 540px; width: 210px; display: grid; gap: 6px; }
+.fp-word b { font: 400 22px "DotGothic16", "Geist Mono", monospace; letter-spacing: 0.02em; }
+.fp-word span { font-size: 14px; line-height: 1.5; font-style: italic; color: var(--muted); }
+.fp-place { position: absolute; width: 230px; height: 220px; margin-left: -115px; display: flex; flex-direction: column; align-items: center; gap: 10px; cursor: pointer; }
+.fp-place img { width: var(--w); max-height: 150px; object-fit: contain; rotate: var(--r); transition: translate 0.5s cubic-bezier(0.22, 1, 0.36, 1), rotate 0.5s cubic-bezier(0.22, 1, 0.36, 1), filter 0.4s; filter: drop-shadow(0 6px 8px rgba(40, 32, 20, 0.12)); }
+.fp-tag { padding: 4px 12px; border-radius: 6px; background: #fff; box-shadow: 0 1px 0 rgba(0,0,0,0.05), 0 6px 14px -8px rgba(0,0,0,0.3); font-style: italic; font-size: 15px; transition: background 0.3s, color 0.3s; white-space: nowrap; }
+.fp-desc { font: 12px "Geist Mono", monospace; color: var(--muted); text-align: center; opacity: 0; translate: 0 -4px; transition: opacity 0.35s, translate 0.35s; }
+.fp-place:hover img, .fp-place:focus-visible img { translate: 0 -8px; rotate: 0deg; filter: drop-shadow(0 16px 16px rgba(40, 32, 20, 0.18)); }
+.fp-place:hover .fp-tag, .fp-place:focus-visible .fp-tag { background: var(--ink); color: #fbf9f4; }
+.fp-place:hover .fp-desc, .fp-place:focus-visible .fp-desc { opacity: 1; translate: 0 0; }
+.fp-place:focus-visible { outline: none; }
+.fp-place:focus-visible .fp-tag { outline: 2px solid #3078e7; outline-offset: 3px; }
+.fp-scene { position: absolute; left: 0; right: 0; bottom: 0; height: 1080px; background: url("/_blob/3b30300c3fc92b0c7538a1023b765b5f") center bottom / 100% auto no-repeat; -webkit-mask-image: linear-gradient(to bottom, transparent 0%, transparent 20%, #000 52%); mask-image: linear-gradient(to bottom, transparent 0%, transparent 20%, #000 52%); }
+.fp-card { position: absolute; left: 50%; top: 1290px; translate: -50% 0; width: 720px; display: grid; grid-template-columns: 1fr 1.25fr; gap: 36px; padding: 32px 36px; border-radius: 16px; background: rgba(251, 249, 244, 0.82); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 24px 50px -30px rgba(27, 41, 48, 0.5); }
+.fp-card h2 { margin: 12px 0 10px; font: 400 26px "Geist Serif", Georgia, serif; }
+.fp-card .mono { font: 13px/1.5 "Geist Mono", monospace; color: var(--muted); }
+.fp-card p { margin: 0 0 12px; font-size: 16px; line-height: 1.6; }
+.fp-card i.dot { width: 14px; height: 14px; border-radius: 50%; background: var(--seal); display: inline-block; }
+.fp-foot { position: absolute; left: 48px; right: 48px; bottom: 26px; display: flex; justify-content: space-between; align-items: center; padding-top: 12px; border-top: 1px solid rgba(27, 41, 48, 0.18); font: 12px "Geist Mono", monospace; color: var(--ink); }
+.fp-mote { position: absolute; top: -20px; width: 6px; height: 6px; border-radius: 50%; background: rgba(48, 120, 231, 0.35); animation: fp-fall linear infinite; pointer-events: none; }
+.fp-mote:nth-child(3n) { background: rgba(111, 138, 62, 0.4); width: 5px; height: 8px; border-radius: 50% 50% 50% 0; }
+@keyframes fp-fall { from { transform: translate(0, 0) rotate(0); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } to { transform: translate(var(--dx), 1900px) rotate(320deg); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .fp-mote { display: none; } .fp-place img, .fp-desc { transition: none; } }
+</style>
+</helmet>
+<main class="fp">
+  <div class="fp-seal" aria-hidden="true"><img src="/_blob/3ca00abc7d7968429b8d83395785269e" alt=""></div>
+  <div class="fp-hello">
+    <b><i></i>xin chào</b>
+    <span>i’m Tin, a product designer who trained in industrial design. i think about matcha, window seats and interfaces that feel kind. <u>wander the map</u> or jump to my work →</span>
+    <span>safe travels, &amp; enjoy the view.</span>
+  </div>
+  <nav class="fp-rail" aria-label="Shortcuts"><span>⌂</span><span>W</span><span>A</span><span>in</span><span>✉</span></nav>
+  <a class="fp-place" href="#the-search-desk" aria-label="the search desk: Work · Windows Search Box, Bing" style="left: 420px; top: 250px; --w: 190px; --r: -2deg;">
+  <span class="fp-tag">the search desk</span>
+  <img src="/_blob/ea97273e193d54e49bc073679045361f" alt="" draggable="false">
+  <span class="fp-desc">Work · Windows Search Box, Bing</span>
+</a><a class="fp-place" href="#the-hangar" aria-label="the hangar: Travel · window seat, always" style="left: 720px; top: 230px; --w: 230px; --r: 2deg;">
+  <span class="fp-tag">the hangar</span>
+  <img src="/_blob/e15fd7e76b555bc84fdef81036c81636" alt="" draggable="false">
+  <span class="fp-desc">Travel · window seat, always</span>
+</a><a class="fp-place" href="#the-lamp-studio" aria-label="the lamp studio: Industrial design · LED lamp, concept to prototype" style="left: 1020px; top: 250px; --w: 150px; --r: -3deg;">
+  <span class="fp-tag">the lamp studio</span>
+  <img src="/_blob/2a09bac538f4861d56f2ccb86598b243" alt="" draggable="false">
+  <span class="fp-desc">Industrial design · LED lamp, concept to prototype</span>
+</a><a class="fp-place" href="#the-matcha-bar" aria-label="the matcha bar: About · how I like to work" style="left: 420px; top: 520px; --w: 190px; --r: 3deg;">
+  <span class="fp-tag">the matcha bar</span>
+  <img src="/_blob/925284f08d8587128bce2a50c9d0f2e9" alt="" draggable="false">
+  <span class="fp-desc">About · how I like to work</span>
+</a><a class="fp-place" href="#you-are-here" aria-label="you are here: Da Lat → Pacific Northwest" style="left: 720px; top: 520px; --w: 120px; --r: 3deg;">
+  <span class="fp-tag">you are here</span>
+  <img src="/_blob/f12c7dbaca27f2809f2f668b42419520" alt="" draggable="false">
+  <span class="fp-desc">Da Lat → Pacific Northwest</span>
+</a><a class="fp-place" href="#the-luggage-room" aria-label="the luggage room: Sketchbook · places I’ve drawn" style="left: 1020px; top: 520px; --w: 120px; --r: -2deg;">
+  <span class="fp-tag">the luggage room</span>
+  <img src="/_blob/4a4520456d2bc8280412b45ed36ca889" alt="" draggable="false">
+  <span class="fp-desc">Sketchbook · places I’ve drawn</span>
+</a><a class="fp-place" href="#postcard-place" aria-label="postcard place: Contact · send me a postcard" style="left: 420px; top: 790px; --w: 170px; --r: -3deg;">
+  <span class="fp-tag">postcard place</span>
+  <img src="/_blob/42a15cf87574831206b4ff60be31084f" alt="" draggable="false">
+  <span class="fp-desc">Contact · send me a postcard</span>
+</a><a class="fp-place" href="#the-view" aria-label="the view: Play · particles, whisking, small toys" style="left: 720px; top: 790px; --w: 220px; --r: -3deg;">
+  <span class="fp-tag">the view</span>
+  <img src="/_blob/cf147e779a660d3f16996544d01e5dac" alt="" draggable="false">
+  <span class="fp-desc">Play · particles, whisking, small toys</span>
+</a>
+  <div class="fp-word"><b>/dʒɜː.ni/</b><span>(n.) a winding path from Da Lat to the Pacific Northwest, with a lot of sketching along the way.</span></div>
+  <div class="fp-scene" aria-hidden="true"></div>
+  <span class="fp-mote" style="left: 80px; animation-delay: 5.6s; animation-duration: 21.2s; --dx: 42px;"></span><span class="fp-mote" style="left: 160px; animation-delay: 3.1s; animation-duration: 17.4s; --dx: -25px;"></span><span class="fp-mote" style="left: 393px; animation-delay: 11.6s; animation-duration: 14.6s; --dx: 60px;"></span><span class="fp-mote" style="left: 92px; animation-delay: 11.6s; animation-duration: 20.1s; --dx: 42px;"></span><span class="fp-mote" style="left: 596px; animation-delay: 2.7s; animation-duration: 15.1s; --dx: 20px;"></span><span class="fp-mote" style="left: 802px; animation-delay: 1.2s; animation-duration: 18.1s; --dx: 25px;"></span><span class="fp-mote" style="left: 834px; animation-delay: 7.1s; animation-duration: 13.8s; --dx: 0px;"></span><span class="fp-mote" style="left: 613px; animation-delay: 1.3s; animation-duration: 21.3s; --dx: 50px;"></span><span class="fp-mote" style="left: 1161px; animation-delay: 11.8s; animation-duration: 12.1s; --dx: -23px;"></span><span class="fp-mote" style="left: 1212px; animation-delay: 9.9s; animation-duration: 15.1s; --dx: 37px;"></span><span class="fp-mote" style="left: 1081px; animation-delay: 2.7s; animation-duration: 16.2s; --dx: -24px;"></span><span class="fp-mote" style="left: 922px; animation-delay: 6.3s; animation-duration: 14.3s; --dx: -27px;"></span><span class="fp-mote" style="left: 128px; animation-delay: 1.1s; animation-duration: 16.6s; --dx: -25px;"></span><span class="fp-mote" style="left: 1102px; animation-delay: 7.5s; animation-duration: 16.7s; --dx: -17px;"></span><span class="fp-mote" style="left: 337px; animation-delay: 14.0s; animation-duration: 14.0s; --dx: -8px;"></span><span class="fp-mote" style="left: 455px; animation-delay: 8.9s; animation-duration: 16.4s; --dx: -37px;"></span><span class="fp-mote" style="left: 768px; animation-delay: 6.1s; animation-duration: 17.9s; --dx: 21px;"></span><span class="fp-mote" style="left: 1183px; animation-delay: 2.8s; animation-duration: 15.2s; --dx: 47px;"></span><span class="fp-mote" style="left: 166px; animation-delay: 9.9s; animation-duration: 14.8s; --dx: 14px;"></span><span class="fp-mote" style="left: 1300px; animation-delay: 12.1s; animation-duration: 13.2s; --dx: 59px;"></span><span class="fp-mote" style="left: 403px; animation-delay: 4.1s; animation-duration: 12.3s; --dx: -15px;"></span><span class="fp-mote" style="left: 209px; animation-delay: 12.5s; animation-duration: 21.5s; --dx: 34px;"></span><span class="fp-mote" style="left: 709px; animation-delay: 0.3s; animation-duration: 14.9s; --dx: -41px;"></span><span class="fp-mote" style="left: 1375px; animation-delay: 5.7s; animation-duration: 21.4s; --dx: 19px;"></span><span class="fp-mote" style="left: 199px; animation-delay: 4.1s; animation-duration: 13.9s; --dx: -4px;"></span><span class="fp-mote" style="left: 638px; animation-delay: 1.9s; animation-duration: 15.8s; --dx: -40px;"></span>
+  <section class="fp-card" aria-label="Welcome">
+    <div><i class="dot"></i><h2>welcome to my map</h2><span class="mono">so you’ve landed. where do you want to go next?</span></div>
+    <div><p>I was born in Vietnam, studied industrial design at the University of Oregon, and now design search experiences at Microsoft. Before that I made things at Salesforce.</p><p>Every place on this map is a corner of my work and life. Hover to peek, click to visit. For case studies, start at <b>the search desk</b>.</p></div>
+  </section>
+  <footer class="fp-foot"><span>looking for case studies? start at the search desk</span><span>drawn by tin</span><span>year: 2026</span></footer>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1900}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>
