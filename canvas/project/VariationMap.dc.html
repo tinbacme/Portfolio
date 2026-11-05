@@ -8,96 +8,78 @@
 <body>
 <x-dc>
 <helmet>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,400&amp;family=DotGothic16&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,400&amp;family=Instrument+Sans:wght@400;500;600&amp;family=Caveat:wght@500&amp;family=Geist+Mono:wght@400&amp;display=swap">
 <style>
-@font-face { font-family: "Geist Serif"; src: url("/_blob/7e30fdbbbab8996f8ff56a6dbd54e97f") format("woff2"); font-weight: 400; font-display: swap; }
 body{margin:0}
-.fp { --ink: #1b2930; --muted: #6b737a; --seal: #c0392b; position: relative; width: 1440px; height: 1900px; overflow: hidden; color: var(--ink); font-family: "Newsreader", Georgia, serif;
-  background: radial-gradient(circle, rgba(27, 41, 48, 0.12) 1px, transparent 1.4px) 0 0 / 22px 22px, #fbf9f4; }
-.fp a { color: inherit; text-decoration: none; }
-.fp-seal { position: absolute; left: 40px; top: 36px; width: 72px; height: 84px; display: grid; place-items: center; border: 2.5px solid var(--seal); border-radius: 10px; rotate: -4deg; background: rgba(192, 57, 43, 0.04); }
-.fp-seal img { width: 46px; filter: invert(27%) sepia(85%) saturate(2300%) hue-rotate(350deg) brightness(88%); }
-.fp-hello { position: absolute; left: 136px; top: 40px; width: 330px; display: grid; gap: 10px; font-size: 15px; line-height: 1.55; color: var(--muted); }
-.fp-hello b { display: flex; align-items: center; gap: 8px; font: 500 17px "Geist Mono", ui-monospace, monospace; color: var(--ink); }
-.fp-hello b i { width: 14px; height: 14px; border-radius: 50%; background: var(--seal); display: inline-block; }
-.fp-hello u { text-decoration: none; border-bottom: 1px solid currentColor; color: var(--ink); }
-.fp-rail { position: absolute; right: 26px; top: 120px; display: grid; gap: 8px; }
-.fp-rail span { width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center; background: #fff; box-shadow: 0 1px 0 rgba(0,0,0,0.06), 0 4px 10px -6px rgba(0,0,0,0.25); font: 600 11px "Geist Mono", monospace; color: var(--muted); }
-.fp-rail span:first-child { background: #e8f0ff; color: #3078e7; }
-.fp-word { position: absolute; left: 1150px; top: 540px; width: 210px; display: grid; gap: 6px; }
-.fp-word b { font: 400 22px "DotGothic16", "Geist Mono", monospace; letter-spacing: 0.02em; }
-.fp-word span { font-size: 14px; line-height: 1.5; font-style: italic; color: var(--muted); }
-.fp-place { position: absolute; width: 230px; height: 220px; margin-left: -115px; display: flex; flex-direction: column; align-items: center; gap: 10px; cursor: pointer; }
-.fp-place img { width: var(--w); max-height: 150px; object-fit: contain; rotate: var(--r); transition: translate 0.5s cubic-bezier(0.22, 1, 0.36, 1), rotate 0.5s cubic-bezier(0.22, 1, 0.36, 1), filter 0.4s; filter: drop-shadow(0 6px 8px rgba(40, 32, 20, 0.12)); }
-.fp-tag { padding: 4px 12px; border-radius: 6px; background: #fff; box-shadow: 0 1px 0 rgba(0,0,0,0.05), 0 6px 14px -8px rgba(0,0,0,0.3); font-style: italic; font-size: 15px; transition: background 0.3s, color 0.3s; white-space: nowrap; }
-.fp-desc { font: 12px "Geist Mono", monospace; color: var(--muted); text-align: center; opacity: 0; translate: 0 -4px; transition: opacity 0.35s, translate 0.35s; }
-.fp-place:hover img, .fp-place:focus-visible img { translate: 0 -8px; rotate: 0deg; filter: drop-shadow(0 16px 16px rgba(40, 32, 20, 0.18)); }
-.fp-place:hover .fp-tag, .fp-place:focus-visible .fp-tag { background: var(--ink); color: #fbf9f4; }
-.fp-place:hover .fp-desc, .fp-place:focus-visible .fp-desc { opacity: 1; translate: 0 0; }
-.fp-place:focus-visible { outline: none; }
-.fp-place:focus-visible .fp-tag { outline: 2px solid #3078e7; outline-offset: 3px; }
-.fp-scene { position: absolute; left: 0; right: 0; bottom: 0; height: 1080px; background: url("/_blob/3b30300c3fc92b0c7538a1023b765b5f") center bottom / 100% auto no-repeat; -webkit-mask-image: linear-gradient(to bottom, transparent 0%, transparent 20%, #000 52%); mask-image: linear-gradient(to bottom, transparent 0%, transparent 20%, #000 52%); }
-.fp-card { position: absolute; left: 50%; top: 1290px; translate: -50% 0; width: 720px; display: grid; grid-template-columns: 1fr 1.25fr; gap: 36px; padding: 32px 36px; border-radius: 16px; background: rgba(251, 249, 244, 0.82); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 24px 50px -30px rgba(27, 41, 48, 0.5); }
-.fp-card h2 { margin: 12px 0 10px; font: 400 26px "Geist Serif", Georgia, serif; }
-.fp-card .mono { font: 13px/1.5 "Geist Mono", monospace; color: var(--muted); }
-.fp-card p { margin: 0 0 12px; font-size: 16px; line-height: 1.6; }
-.fp-card i.dot { width: 14px; height: 14px; border-radius: 50%; background: var(--seal); display: inline-block; }
-.fp-foot { position: absolute; left: 48px; right: 48px; bottom: 26px; display: flex; justify-content: space-between; align-items: center; padding-top: 12px; border-top: 1px solid rgba(27, 41, 48, 0.18); font: 12px "Geist Mono", monospace; color: var(--ink); }
-.fp-mote { position: absolute; top: -20px; width: 6px; height: 6px; border-radius: 50%; background: rgba(48, 120, 231, 0.35); animation: fp-fall linear infinite; pointer-events: none; }
-.fp-mote:nth-child(3n) { background: rgba(111, 138, 62, 0.4); width: 5px; height: 8px; border-radius: 50% 50% 50% 0; }
-@keyframes fp-fall { from { transform: translate(0, 0) rotate(0); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } to { transform: translate(var(--dx), 1900px) rotate(320deg); opacity: 0; } }
-@media (prefers-reduced-motion: reduce) { .fp-mote { display: none; } .fp-place img, .fp-desc { transition: none; } }
+.m { --ink: #0b0d12; --body: #41403f; --red: #b10000; position: relative; width: 1440px; height: 1900px; overflow: hidden; font-family: "Newsreader", Georgia, serif; color: var(--body); background: #0b1220; }
+.m a { color: inherit; text-decoration: none; }
+.m-paper { position: absolute; left: 0; right: 0; top: 0; height: 1180px; background: #f7f4ee; }
+.m-grid { position: absolute; left: 0; right: 0; top: 0; height: 1000px; background: radial-gradient(circle, rgba(65, 64, 63, 0.22) 0.9px, transparent 1.2px) 0 0 / 18px 18px; -webkit-mask-image: radial-gradient(ellipse 46% 52% at 50% 42%, #000 40%, transparent 80%); mask-image: radial-gradient(ellipse 46% 52% at 50% 42%, #000 40%, transparent 80%); }
+.m-sky { position: absolute; left: -60px; right: -60px; top: 380px; height: 1100px; background: url("/_blob/bb63863a75e37522abd7a2f10361fa3e") center 30% / cover no-repeat; filter: blur(26px) saturate(1.15); -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 26%, #000 100%); mask-image: linear-gradient(to bottom, transparent 0%, #000 26%, #000 100%); }
+.m-dusk { position: absolute; left: 0; right: 0; top: 860px; height: 1040px; background: linear-gradient(to bottom, rgba(11, 18, 32, 0) 0%, rgba(11, 18, 32, 0.55) 30%, #0b1220 62%); }
+.m-seal { position: absolute; left: 50px; top: 44px; width: 74px; height: 134px; rotate: -3deg; }
+.m-hello { position: absolute; left: 158px; top: 62px; width: 250px; }
+.m-hello h1 { display: flex; align-items: center; gap: 10px; margin: 0 0 22px; font: 500 20px/1 "Instrument Sans", system-ui, sans-serif; letter-spacing: -0.2px; color: var(--ink); }
+.m-num { display: inline-grid; place-items: center; width: 19px; height: 19px; border-radius: 50%; background: #c74a4a; color: #fff; font: 600 9px "Instrument Sans", sans-serif; }
+.m-hello p { margin: 0 0 14px; font-size: 12px; line-height: 1.42; }
+.m-hello u { text-underline-offset: 2px; }
+sup { color: var(--red); font-size: 7.7px; }
+.m-place { position: absolute; inset: 0; pointer-events: none; }
+.m-tag, .m-obj { pointer-events: auto; }
+.m-tag { position: absolute; padding: 7px 8px 6px; background: #fdfcf9; font-style: italic; font-size: 12px; line-height: 1; white-space: nowrap; box-shadow: 0 0 0 1px rgba(65, 64, 63, 0.06), 0 1px 2px rgba(0, 0, 0, 0.08), 0 4px 10px -6px rgba(0, 0, 0, 0.25); transition: translate 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s; }
+.m-obj { position: absolute; display: block; transition: translate 0.45s cubic-bezier(0.22, 1, 0.36, 1), filter 0.45s; filter: drop-shadow(0 3px 3px rgba(40, 32, 20, 0.14)); }
+.m-place:hover .m-obj, .m-place:focus-visible .m-obj { translate: 0 -6px; filter: drop-shadow(0 12px 10px rgba(40, 32, 20, 0.2)); }
+.m-place:hover .m-tag, .m-place:focus-visible .m-tag { translate: 0 -2px; box-shadow: 0 0 0 1px rgba(177, 0, 0, 0.35), 0 6px 14px -6px rgba(0, 0, 0, 0.3); }
+.m-place:focus-visible { outline: none; }
+.m-place:focus-visible .m-tag { outline: 2px solid #3078e7; outline-offset: 2px; }
+.m-frames { display: flex; gap: 6px; align-items: flex-start; }
+.m-frame { display: block; padding: 4px; background: linear-gradient(135deg, #b8893f, #6e4a1c 60%, #c9a35a); box-shadow: 0 3px 6px rgba(0,0,0,0.25); }
+.m-frame img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.m-at { position: absolute; left: 704px; top: 452px; width: 74px; text-align: center; font: 300 10px "Newsreader", serif; color: #131313; }
+.m-at b { display: block; margin-top: 6px; font: 400 21px/1 "Caveat", cursive; color: #2b2620; }
+.m-def { position: absolute; left: 1032px; top: 364px; width: 168px; }
+.m-def h2 { display: flex; align-items: center; gap: 10px; margin: 0 0 14px; margin-left: -34px; font: 400 18px "Instrument Sans", sans-serif; color: var(--ink); }
+.m-def .m-num { background: var(--red); }
+.m-def p { margin: 0; font-size: 12px; line-height: 1.42; }
+.m-rail { position: absolute; right: 50px; top: 120px; display: grid; gap: 6px; }
+.m-rail-i { display: grid; place-items: center; width: 31px; height: 31px; border-radius: 4px; color: #41403f; background: rgba(255,255,255,0.7); }
+.m-rail-i.on { background: #e1ebfa; color: #2a6cf0; }
+.m-sticker { position: absolute; right: 44px; top: 300px; width: 26px; height: 26px; border-radius: 50%; border: 1.5px dashed var(--red); display: grid; place-items: center; color: var(--red); font: 600 11px "Caveat", cursive; rotate: -8deg; }
+.m-flake { position: absolute; width: var(--s); height: var(--s); border-radius: 40% 60% 55% 45%; background: rgba(255, 255, 255, 0.85); filter: blur(0.6px); animation: m-drift linear infinite; pointer-events: none; }
+@keyframes m-drift { 0% { transform: translate(0, 0) rotate(0); opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { transform: translate(40px, 160px) rotate(200deg); opacity: 0; } }
+.m-card { position: absolute; left: 50%; top: 1190px; translate: -50% 0; width: 560px; display: grid; grid-template-columns: 1fr 1.15fr; gap: 28px; padding: 26px 28px 30px; border-radius: 10px; background: rgba(28, 36, 52, 0.62); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06), 0 30px 60px -30px rgba(0, 0, 0, 0.6); color: #e8e6e1; }
+.m-card h2 { margin: 18px 0 10px; font: 500 15px "Instrument Sans", sans-serif; color: #fff; }
+.m-card .mono { font: 11px/1.5 "Geist Mono", monospace; color: #c9c6bf; }
+.m-card p { margin: 0 0 12px; font-size: 12px; line-height: 1.55; }
+.m-card i.m-num { font-style: normal; background: var(--red); }
+.m-foot { position: absolute; left: 50px; right: 50px; bottom: 34px; display: grid; grid-template-columns: 1fr 1fr 1fr 1fr auto; gap: 24px; align-items: end; font: 11px/1.5 "Geist Mono", monospace; color: #b9b6ae; }
+.m-foot b { color: #fff; font-weight: 400; }
+.m-foot span.rule { border-top: 1px solid rgba(255,255,255,0.14); padding-top: 8px; }
+.m-foot .m-go { width: 40px; height: 26px; border-radius: 4px; background: #fff; color: #2a6cf0; display: grid; place-items: center; font-size: 12px; }
+@media (prefers-reduced-motion: reduce) { .m-flake { animation: none; } .m-obj, .m-tag { transition: none; } }
 </style>
 </helmet>
-<main class="fp">
-  <div class="fp-seal" aria-hidden="true"><img src="/_blob/3ca00abc7d7968429b8d83395785269e" alt=""></div>
-  <div class="fp-hello">
-    <b><i></i>xin chào</b>
-    <span>i’m Tin, a product designer who trained in industrial design. i think about matcha, window seats and interfaces that feel kind. <u>wander the map</u> or jump to my work →</span>
-    <span>safe travels, &amp; enjoy the view.</span>
+<main class="m">
+  <div class="m-paper" aria-hidden="true"></div>
+  <div class="m-sky" aria-hidden="true"></div>
+  <div class="m-grid" aria-hidden="true"></div>
+  <div class="m-dusk" aria-hidden="true"></div>
+  <svg class="m-seal" viewBox="0 0 74 134" aria-label="tín seal"><defs><filter id="mink" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="7" result="n"></feTurbulence><feDisplacementMap in="SourceGraphic" in2="n" scale="1.6" result="d"></feDisplacementMap><feComponentTransfer in="n" result="s"><feFuncA type="discrete" tableValues="1 1 1 1 0.45 1 1 1"></feFuncA></feComponentTransfer><feComposite in="d" in2="s" operator="in"></feComposite></filter></defs>
+<g filter="url(#mink)" fill="none" stroke="#c0392b"><rect x="3" y="3" width="68" height="128" rx="9" stroke-width="2.6"></rect><rect x="8" y="8" width="58" height="118" rx="6" stroke-width="0.9"></rect>
+<text x="37" y="44" text-anchor="middle" font-family="Newsreader, Georgia, serif" font-size="30" fill="#c0392b" stroke="none">T</text><text x="37" y="78" text-anchor="middle" font-family="Newsreader, Georgia, serif" font-size="30" fill="#c0392b" stroke="none">Í</text><text x="37" y="112" text-anchor="middle" font-family="Newsreader, Georgia, serif" font-size="30" fill="#c0392b" stroke="none">N</text></g></svg>
+  <div class="m-hello">
+    <h1><span class="m-num">1.</span>xin chào</h1>
+    <p>i’m tin! i oft think about matcha whisked a little too long, window seats &amp; product design with a high degree of craft. still sketching, <u>mail me</u> ideas →</p>
+    <p>safe travels to you, &amp; your <i>window seat</i>.<sup>2</sup></p>
   </div>
-  <nav class="fp-rail" aria-label="Shortcuts"><span>⌂</span><span>W</span><span>A</span><span>in</span><span>✉</span></nav>
-  <a class="fp-place" href="#the-search-desk" aria-label="the search desk: Work · Windows Search Box, Bing" style="left: 420px; top: 250px; --w: 190px; --r: -2deg;">
-  <span class="fp-tag">the search desk</span>
-  <img src="/_blob/ea97273e193d54e49bc073679045361f" alt="" draggable="false">
-  <span class="fp-desc">Work · Windows Search Box, Bing</span>
-</a><a class="fp-place" href="#the-hangar" aria-label="the hangar: Travel · window seat, always" style="left: 720px; top: 230px; --w: 230px; --r: 2deg;">
-  <span class="fp-tag">the hangar</span>
-  <img src="/_blob/e15fd7e76b555bc84fdef81036c81636" alt="" draggable="false">
-  <span class="fp-desc">Travel · window seat, always</span>
-</a><a class="fp-place" href="#the-lamp-studio" aria-label="the lamp studio: Industrial design · LED lamp, concept to prototype" style="left: 1020px; top: 250px; --w: 150px; --r: -3deg;">
-  <span class="fp-tag">the lamp studio</span>
-  <img src="/_blob/2a09bac538f4861d56f2ccb86598b243" alt="" draggable="false">
-  <span class="fp-desc">Industrial design · LED lamp, concept to prototype</span>
-</a><a class="fp-place" href="#the-matcha-bar" aria-label="the matcha bar: About · how I like to work" style="left: 420px; top: 520px; --w: 190px; --r: 3deg;">
-  <span class="fp-tag">the matcha bar</span>
-  <img src="/_blob/925284f08d8587128bce2a50c9d0f2e9" alt="" draggable="false">
-  <span class="fp-desc">About · how I like to work</span>
-</a><a class="fp-place" href="#you-are-here" aria-label="you are here: Da Lat → Pacific Northwest" style="left: 720px; top: 520px; --w: 120px; --r: 3deg;">
-  <span class="fp-tag">you are here</span>
-  <img src="/_blob/f12c7dbaca27f2809f2f668b42419520" alt="" draggable="false">
-  <span class="fp-desc">Da Lat → Pacific Northwest</span>
-</a><a class="fp-place" href="#the-luggage-room" aria-label="the luggage room: Sketchbook · places I’ve drawn" style="left: 1020px; top: 520px; --w: 120px; --r: -2deg;">
-  <span class="fp-tag">the luggage room</span>
-  <img src="/_blob/4a4520456d2bc8280412b45ed36ca889" alt="" draggable="false">
-  <span class="fp-desc">Sketchbook · places I’ve drawn</span>
-</a><a class="fp-place" href="#postcard-place" aria-label="postcard place: Contact · send me a postcard" style="left: 420px; top: 790px; --w: 170px; --r: -3deg;">
-  <span class="fp-tag">postcard place</span>
-  <img src="/_blob/42a15cf87574831206b4ff60be31084f" alt="" draggable="false">
-  <span class="fp-desc">Contact · send me a postcard</span>
-</a><a class="fp-place" href="#the-view" aria-label="the view: Play · particles, whisking, small toys" style="left: 720px; top: 790px; --w: 220px; --r: -3deg;">
-  <span class="fp-tag">the view</span>
-  <img src="/_blob/cf147e779a660d3f16996544d01e5dac" alt="" draggable="false">
-  <span class="fp-desc">Play · particles, whisking, small toys</span>
-</a>
-  <div class="fp-word"><b>/dʒɜː.ni/</b><span>(n.) a winding path from Da Lat to the Pacific Northwest, with a lot of sketching along the way.</span></div>
-  <div class="fp-scene" aria-hidden="true"></div>
-  <span class="fp-mote" style="left: 80px; animation-delay: 5.6s; animation-duration: 21.2s; --dx: 42px;"></span><span class="fp-mote" style="left: 160px; animation-delay: 3.1s; animation-duration: 17.4s; --dx: -25px;"></span><span class="fp-mote" style="left: 393px; animation-delay: 11.6s; animation-duration: 14.6s; --dx: 60px;"></span><span class="fp-mote" style="left: 92px; animation-delay: 11.6s; animation-duration: 20.1s; --dx: 42px;"></span><span class="fp-mote" style="left: 596px; animation-delay: 2.7s; animation-duration: 15.1s; --dx: 20px;"></span><span class="fp-mote" style="left: 802px; animation-delay: 1.2s; animation-duration: 18.1s; --dx: 25px;"></span><span class="fp-mote" style="left: 834px; animation-delay: 7.1s; animation-duration: 13.8s; --dx: 0px;"></span><span class="fp-mote" style="left: 613px; animation-delay: 1.3s; animation-duration: 21.3s; --dx: 50px;"></span><span class="fp-mote" style="left: 1161px; animation-delay: 11.8s; animation-duration: 12.1s; --dx: -23px;"></span><span class="fp-mote" style="left: 1212px; animation-delay: 9.9s; animation-duration: 15.1s; --dx: 37px;"></span><span class="fp-mote" style="left: 1081px; animation-delay: 2.7s; animation-duration: 16.2s; --dx: -24px;"></span><span class="fp-mote" style="left: 922px; animation-delay: 6.3s; animation-duration: 14.3s; --dx: -27px;"></span><span class="fp-mote" style="left: 128px; animation-delay: 1.1s; animation-duration: 16.6s; --dx: -25px;"></span><span class="fp-mote" style="left: 1102px; animation-delay: 7.5s; animation-duration: 16.7s; --dx: -17px;"></span><span class="fp-mote" style="left: 337px; animation-delay: 14.0s; animation-duration: 14.0s; --dx: -8px;"></span><span class="fp-mote" style="left: 455px; animation-delay: 8.9s; animation-duration: 16.4s; --dx: -37px;"></span><span class="fp-mote" style="left: 768px; animation-delay: 6.1s; animation-duration: 17.9s; --dx: 21px;"></span><span class="fp-mote" style="left: 1183px; animation-delay: 2.8s; animation-duration: 15.2s; --dx: 47px;"></span><span class="fp-mote" style="left: 166px; animation-delay: 9.9s; animation-duration: 14.8s; --dx: 14px;"></span><span class="fp-mote" style="left: 1300px; animation-delay: 12.1s; animation-duration: 13.2s; --dx: 59px;"></span><span class="fp-mote" style="left: 403px; animation-delay: 4.1s; animation-duration: 12.3s; --dx: -15px;"></span><span class="fp-mote" style="left: 209px; animation-delay: 12.5s; animation-duration: 21.5s; --dx: 34px;"></span><span class="fp-mote" style="left: 709px; animation-delay: 0.3s; animation-duration: 14.9s; --dx: -41px;"></span><span class="fp-mote" style="left: 1375px; animation-delay: 5.7s; animation-duration: 21.4s; --dx: 19px;"></span><span class="fp-mote" style="left: 199px; animation-delay: 4.1s; animation-duration: 13.9s; --dx: -4px;"></span><span class="fp-mote" style="left: 638px; animation-delay: 1.9s; animation-duration: 15.8s; --dx: -40px;"></span>
-  <section class="fp-card" aria-label="Welcome">
-    <div><i class="dot"></i><h2>welcome to my map</h2><span class="mono">so you’ve landed. where do you want to go next?</span></div>
-    <div><p>I was born in Vietnam, studied industrial design at the University of Oregon, and now design search experiences at Microsoft. Before that I made things at Salesforce.</p><p>Every place on this map is a corner of my work and life. Hover to peek, click to visit. For case studies, start at <b>the search desk</b>.</p></div>
-  </section>
-  <footer class="fp-foot"><span>looking for case studies? start at the search desk</span><span>drawn by tin</span><span>year: 2026</span></footer>
+  <nav class="m-rail" aria-label="Shortcuts"><span class="m-rail-i on"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M3 10l7-6 7 6v7h-5v-4H8v4H3z" fill="currentColor"></path></svg></span><span class="m-rail-i"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><rect x="3" y="3" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.4"></rect><path d="M6.5 9v5M6.5 6.2v.1M9.5 14v-3.2c0-1.4 2.8-1.6 2.8 0V14" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"></path></svg></span><span class="m-rail-i"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><circle cx="10" cy="10" r="7" fill="none" stroke="currentColor" stroke-width="1.4"></circle><path d="M4 8c4 0 9 1 12 6M7 3.8c3 3 5 8 5.6 12.6M3.4 12.4c3-3 8-4.6 12.4-3.4" fill="none" stroke="currentColor" stroke-width="1.1"></path></svg></span><span class="m-rail-i"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M7 3h3v5H7a2.5 2.5 0 010-5zM10 3h3a2.5 2.5 0 010 5h-3zM7 8h3v5H7a2.5 2.5 0 010-5zM12.5 10.5a2.5 2.5 0 11-.01 0zM7 13h3v2.5A2.5 2.5 0 117 13z" fill="none" stroke="currentColor" stroke-width="1.2"></path></svg></span><span class="m-rail-i"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><rect x="3" y="5" width="14" height="10" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.4"></rect><path d="M3.5 6l6.5 5 6.5-5" fill="none" stroke="currentColor" stroke-width="1.4"></path></svg></span></nav>
+  <span class="m-sticker" aria-hidden="true">tin</span>
+  <a class="m-place" href="#the-stamp-drawer" aria-label="the stamp drawer"><span class="m-tag" style="left: 408px; top: 298px;">the stamp drawer</span><img class="m-obj" src="/_blob/f12c7dbaca27f2809f2f668b42419520" alt="" draggable="false" style="left: 424px; top: 350px; width: 52px; rotate: -4deg; "></a><a class="m-place" href="#the-matcha-bar" aria-label="the matcha bar"><span class="m-tag" style="left: 686px; top: 282px;">the matcha bar</span><img class="m-obj" src="/_blob/925284f08d8587128bce2a50c9d0f2e9" alt="" draggable="false" style="left: 650px; top: 326px; width: 150px; rotate: -2deg; "></a><a class="m-place" href="#the-gallery" aria-label="the gallery"><span class="m-tag" style="left: 928px; top: 116px;">the gallery</span><span class="m-obj m-frames" style="left: 872px; top: 170px;"><span class="m-frame" style="rotate: -8deg; width: 64px; height: 46px; margin-top: 8px;"><img src="/_blob/2a4b16aaf0284c63e51aa51dc7ad5996" alt=""></span><span class="m-frame" style="rotate: 2deg; width: 72px; height: 50px;"><img src="/_blob/f931dcc4cb51782b134276f3c1c53d8a" alt=""></span><span class="m-frame" style="rotate: 9deg; width: 40px; height: 40px; margin-top: 10px; background: linear-gradient(160deg, #3078e7, #c1dff9);"></span></span></a><a class="m-place" href="#the-lamp-studio" aria-label="the lamp studio"><span class="m-tag" style="left: 946px; top: 282px;">the lamp studio</span><img class="m-obj" src="/_blob/2a09bac538f4861d56f2ccb86598b243" alt="" draggable="false" style="left: 918px; top: 300px; width: 150px; rotate: 3deg; "></a><a class="m-place" href="#the-luggage-room" aria-label="the luggage room"><span class="m-tag" style="left: 476px; top: 464px;">the luggage room</span><img class="m-obj" src="/_blob/4a4520456d2bc8280412b45ed36ca889" alt="" draggable="false" style="left: 468px; top: 488px; width: 120px; rotate: -3deg; "></a><a class="m-place" href="#the-hangar" aria-label="the hangar"><span class="m-tag" style="left: 912px; top: 472px;">the hangar</span><img class="m-obj" src="/_blob/e15fd7e76b555bc84fdef81036c81636" alt="" draggable="false" style="left: 880px; top: 516px; width: 124px; rotate: -6deg; "></a><a class="m-place" href="#postcard-place" aria-label="postcard place"><span class="m-tag" style="left: 408px; top: 640px;">postcard place</span><span class="m-obj" style="left: 392px; top: 696px; width: 112px; height: 76px;"><img src="/_blob/42a15cf87574831206b4ff60be31084f" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; rotate: 1.5deg; box-shadow: 0 2px 4px rgba(0,0,0,0.12);"><img src="/_blob/f12c7dbaca27f2809f2f668b42419520" alt="" style="position: absolute; right: 6px; top: 6px; width: 30px; rotate: -6deg;"></span></a><a class="m-place" href="#the-search-desk" aria-label="the search desk"><span class="m-tag" style="left: 690px; top: 636px;">the search desk</span><img class="m-obj" src="/_blob/ea97273e193d54e49bc073679045361f" alt="" draggable="false" style="left: 656px; top: 668px; width: 140px; rotate: 2deg; "></a><a class="m-place" href="#the-view" aria-label="the view"><span class="m-tag" style="left: 952px; top: 646px;">the view</span><img class="m-obj" src="/_blob/7e25c6b447309c4eede2b8b7dcbbbb13" alt="" draggable="false" style="left: 936px; top: 688px; width: 104px; rotate: 0deg; "></a>
+  <a class="m-place" href="#the-map" aria-label="you are at the map"><span class="m-at m-tag" style="background: none; box-shadow: none; padding: 0;">you are at<b>the map</b></span><span class="m-obj m-map" style="left: 704px; top: 520px;"><svg viewBox="0 0 74 74" width="74" height="74" aria-hidden="true"><rect x="1" y="1" width="72" height="72" fill="#f7f1e3" stroke="#d9cfb8"></rect><path d="M6 24h62M6 50h62M24 6v62M50 6v62" stroke="#e7dcc4" stroke-width="0.8"></path><path d="M16 54 C 24 46, 30 52, 36 42 S 50 30, 58 20" fill="none" stroke="#b10000" stroke-width="1.4" stroke-dasharray="3 3" stroke-linecap="round"></path><circle cx="16" cy="54" r="3.2" fill="#b10000"></circle><path d="M55 22l6-5-1.5 7z" fill="#1b2930"></path><circle cx="14" cy="14" r="5" fill="none" stroke="#b10000" stroke-width="1"></circle><path d="M14 7v14M7 14h14" stroke="#b10000" stroke-width="0.8"></path><path d="M44 58 q4 -3 8 0 q4 -3 8 0" fill="none" stroke="#7a8a5a" stroke-width="1"></path></svg></span></a>
+  <div class="m-def"><h2><span class="m-num">2.</span>/tín/</h2><p>(<i>in Vietnamese</i>) trust, faith; the thing I try to design into every product.<sup>3</sup></p></div>
+  <span class="m-flake" style="left: 986px; top: 993px; --s: 5.7px; animation-duration: 16.7s; animation-delay: -3.4s;"></span><span class="m-flake" style="left: 1108px; top: 1014px; --s: 6.8px; animation-duration: 16.1s; animation-delay: -1.7s;"></span><span class="m-flake" style="left: 681px; top: 330px; --s: 3.5px; animation-duration: 16.3s; animation-delay: -12.5s;"></span><span class="m-flake" style="left: 145px; top: 851px; --s: 8.8px; animation-duration: 14.9s; animation-delay: -11.1s;"></span><span class="m-flake" style="left: 382px; top: 70px; --s: 8.0px; animation-duration: 9.6s; animation-delay: -0.6s;"></span><span class="m-flake" style="left: 555px; top: 101px; --s: 7.7px; animation-duration: 11.9s; animation-delay: -10.6s;"></span><span class="m-flake" style="left: 460px; top: 518px; --s: 6.8px; animation-duration: 13.5s; animation-delay: -11.9s;"></span><span class="m-flake" style="left: 996px; top: 609px; --s: 5.4px; animation-duration: 14.0s; animation-delay: -16.8s;"></span><span class="m-flake" style="left: 230px; top: 560px; --s: 4.9px; animation-duration: 11.1s; animation-delay: -5.2s;"></span><span class="m-flake" style="left: 203px; top: 261px; --s: 5.4px; animation-duration: 16.6s; animation-delay: -7.0s;"></span><span class="m-flake" style="left: 94px; top: 41px; --s: 4.3px; animation-duration: 17.3s; animation-delay: -0.9s;"></span><span class="m-flake" style="left: 828px; top: 853px; --s: 5.5px; animation-duration: 14.1s; animation-delay: -3.6s;"></span><span class="m-flake" style="left: 612px; top: 729px; --s: 3.5px; animation-duration: 12.0s; animation-delay: -17.4s;"></span><span class="m-flake" style="left: 301px; top: 315px; --s: 4.5px; animation-duration: 9.9s; animation-delay: -1.1s;"></span><span class="m-flake" style="left: 1057px; top: 403px; --s: 7.1px; animation-duration: 10.7s; animation-delay: -9.2s;"></span><span class="m-flake" style="left: 328px; top: 898px; --s: 6.9px; animation-duration: 10.0s; animation-delay: -7.6s;"></span><span class="m-flake" style="left: 495px; top: 40px; --s: 4.6px; animation-duration: 17.7s; animation-delay: -14.5s;"></span><span class="m-flake" style="left: 682px; top: 80px; --s: 4.3px; animation-duration: 12.5s; animation-delay: -15.4s;"></span><span class="m-flake" style="left: 1374px; top: 245px; --s: 3.3px; animation-duration: 10.3s; animation-delay: -7.9s;"></span><span class="m-flake" style="left: 79px; top: 713px; --s: 8.0px; animation-duration: 12.5s; animation-delay: -1.3s;"></span><span class="m-flake" style="left: 487px; top: 537px; --s: 3.1px; animation-duration: 12.3s; animation-delay: -11.2s;"></span><span class="m-flake" style="left: 320px; top: 1030px; --s: 8.0px; animation-duration: 10.2s; animation-delay: -6.9s;"></span><span class="m-flake" style="left: 1344px; top: 355px; --s: 4.9px; animation-duration: 11.1s; animation-delay: -11.0s;"></span><span class="m-flake" style="left: 448px; top: 364px; --s: 7.4px; animation-duration: 17.5s; animation-delay: -3.5s;"></span><span class="m-flake" style="left: 855px; top: 1028px; --s: 6.6px; animation-duration: 12.8s; animation-delay: -1.9s;"></span><span class="m-flake" style="left: 139px; top: 1089px; --s: 8.8px; animation-duration: 11.1s; animation-delay: -12.7s;"></span><span class="m-flake" style="left: 586px; top: 901px; --s: 7.9px; animation-duration: 14.4s; animation-delay: -5.3s;"></span><span class="m-flake" style="left: 419px; top: 180px; --s: 3.8px; animation-duration: 13.3s; animation-delay: -11.8s;"></span><span class="m-flake" style="left: 1321px; top: 191px; --s: 4.7px; animation-duration: 17.3s; animation-delay: -3.7s;"></span><span class="m-flake" style="left: 93px; top: 181px; --s: 4.6px; animation-duration: 13.0s; animation-delay: -1.1s;"></span><span class="m-flake" style="left: 420px; top: 617px; --s: 5.2px; animation-duration: 14.1s; animation-delay: -2.4s;"></span><span class="m-flake" style="left: 801px; top: 323px; --s: 8.3px; animation-duration: 17.8s; animation-delay: -11.8s;"></span><span class="m-flake" style="left: 1128px; top: 327px; --s: 6.5px; animation-duration: 17.3s; animation-delay: -8.5s;"></span><span class="m-flake" style="left: 792px; top: 678px; --s: 8.8px; animation-duration: 9.2s; animation-delay: -11.5s;"></span>
+  
+  <footer class="m-foot"><span class="rule">looking for case studies? see<br><b>the gallery</b></span><span class="rule">drawn by tin</span><span class="rule">year: 2026</span><span class="rule">© 2026 Tin Le</span><span class="m-go" aria-hidden="true">✈</span></footer>
 </main>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1900}}'>
