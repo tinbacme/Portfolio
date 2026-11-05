@@ -156,7 +156,7 @@ body{margin:0}
 
   <div class="g-scroll" ref="{{ root }}" onScroll="{{ onScroll }}" tabindex="0" aria-label="Scroll the page">
     <section class="g-hero" id="top">
-      <canvas class="g-sky g-px" width="90" height="63" aria-hidden="true"></canvas>
+      <canvas class="g-sky" width="1440" height="1008" aria-hidden="true"></canvas>
       <div class="g-head">
         <h1>Designer<svg class="g-dot g-px" viewBox="0 0 11 7" aria-hidden="true"><path d="M3 1h3v1h1V1h2v1h1v1h1v3H0V4h1V3h1V2h1z" fill="#1f9bff"></path><path d="M3 2h1v1H3zM7 3h1v1H7z" fill="#c4e8ff"></path></svg>who<br>designs for <span class="g-swap"><span class="on">trust</span><span>search</span><span>people</span></span></h1>
         <p>I’m Tin, a senior designer at Microsoft AI, making search feel clear, calm and worth trusting. Trained in industrial design at the University of Oregon. From Vietnam, based in Washington.</p>
@@ -311,10 +311,35 @@ function paint(host, root, st) {
   });
   host.querySelector('.g-bw').style.transform = `scale(${lerp(1, 0.82, e).toFixed(3)})`;
 }
+// Figma-style canvas: dotted grey board with a white, stepped "cloud" artboard drawn on its grid
+function drawDots(cv, t, field) {
+  const G = 16, cw = cv.width / G, ch = Math.ceil(cv.height / G), ctx = cv.getContext('2d'), k = [];
+  for (let y = 0; y < ch; y++) { k.push([]); for (let x = 0; x < cw; x++) {
+    const v = field(x, y, fbm(x * 0.08 + t * 0.05, y * 0.107 - t * 0.012));
+    k[y].push(v > 0.62 ? 3 : v > 0.55 ? 2 : v > 0.5 ? 1 : 0);
+  } }
+  ctx.fillStyle = '#f3f3f4'; ctx.fillRect(0, 0, cv.width, cv.height);
+  for (let y = 0; y < ch; y++) for (let x = 0; x < cw; x++) {
+    const l = k[y][x];
+    if (l >= 2) { ctx.fillStyle = '#fff'; ctx.fillRect(x * G, y * G, G, G); }
+    if (l < 3) { ctx.fillStyle = l === 2 ? '#ebebed' : l === 1 ? '#c9cbcf' : '#b4b7bc'; ctx.fillRect(x * G + 7, y * G + 7, l === 0 ? 2 : 1.6, l === 0 ? 2 : 1.6); }
+  }
+  // selection outline around the white shape, like a vector selected in Figma
+  ctx.beginPath();
+  for (let y = 0; y < ch; y++) for (let x = 0; x < cw; x++) {
+    if (k[y][x] < 2) continue;
+    const X = x * G + 0.5, Y = y * G + 0.5;
+    if (y === 0 || k[y - 1][x] < 2) { ctx.moveTo(X, Y); ctx.lineTo(X + G, Y); }
+    if (y === ch - 1 || k[y + 1][x] < 2) { ctx.moveTo(X, Y + G); ctx.lineTo(X + G, Y + G); }
+    if (x === 0 || k[y][x - 1] < 2) { ctx.moveTo(X, Y); ctx.lineTo(X, Y + G); }
+    if (x === cw - 1 || k[y][x + 1] < 2) { ctx.moveTo(X + G, Y); ctx.lineTo(X + G, Y + G); }
+  }
+  ctx.strokeStyle = 'rgba(13, 153, 255, 0.9)'; ctx.lineWidth = 1; ctx.stroke();
+}
 function skies(host, st, t) {
   const part = st.part || 0;
   // hero: white heart of the cloud behind the headline, opening as you scroll
-  drawSky(host.querySelector('.g-sky'), t, (x, y, n) => {
+  drawDots(host.querySelector('.g-sky'), t, (x, y, n) => {
     const dx = (x - 45) / (31 + part * 60), dy = (y - 19) / (17 + part * 45), dd = Math.sqrt(dx * dx + dy * dy);
     return n + 0.8 * (1 - clamp(dd)) + clamp((y - 46) / 14) * (0.15 + part * 0.6) + part * 0.5 - 0.1;
   });
