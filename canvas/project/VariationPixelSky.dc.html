@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Variation G: pixel sky</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Inter:wght@400;500;600&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+.g { --blue: #1f9bff; --ink: #0d0f12; --muted: #6b7178; --line: #ececee; position: relative; width: 1440px; height: 900px; overflow: hidden; background: #fff; color: var(--ink); font-family: "Inter", system-ui, sans-serif; }
+.g a { color: inherit; text-decoration: none; }
+.g-scroll { position: absolute; inset: 0; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; overscroll-behavior: contain; }
+.g-scroll::-webkit-scrollbar { width: 0; }
+.g-scroll:focus-visible { outline: none; }
+.g-px { image-rendering: pixelated; image-rendering: crisp-edges; }
+
+/* nav */
+.g-nav { position: absolute; z-index: 20; left: 24px; right: 24px; top: 20px; display: flex; justify-content: space-between; pointer-events: none; }
+.g-nav > * { pointer-events: auto; }
+.g-pill { display: flex; align-items: center; gap: 4px; padding: 4px 6px 4px 4px; border-radius: 10px; background: #fff; box-shadow: 0 0 0 1px rgba(13, 15, 18, 0.06), 0 6px 18px -10px rgba(13, 15, 18, 0.35); font-size: 13px; }
+.g-pill .logo { display: grid; place-items: center; width: 34px; height: 30px; border-radius: 7px; background: var(--ink); }
+.g-pill .logo svg { width: 26px; fill: #fff; }
+.g-pill a.lnk { padding: 7px 10px; border-radius: 7px; color: #3c4046; transition: background 0.2s, color 0.2s; }
+.g-pill a.lnk:hover { background: #f2f3f5; color: var(--ink); }
+.g-cta { display: flex; gap: 4px; }
+.g-btn { display: inline-flex; align-items: center; height: 34px; padding: 0 14px; border-radius: 9px; background: var(--ink); color: #fff !important; font: 500 13px "Inter", sans-serif; }
+.g-arrow { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 9px; background: var(--ink); color: #fff !important; font-size: 14px; }
+.g-btn.sm { height: 28px; padding: 0 12px; font-size: 12px; border-radius: 8px; }
+.g-arrow.sm { width: 28px; height: 28px; border-radius: 8px; font-size: 12px; }
+.g-btn.light, .g-arrow.light { background: #fff; color: var(--ink) !important; }
+
+/* hero */
+.g-hero { position: relative; height: 860px; }
+.g-sky { position: absolute; left: 0; top: 0; width: 1440px; height: 1008px; }
+.g-head { position: absolute; left: 0; right: 0; top: 148px; text-align: center; will-change: transform, opacity; }
+.g-head h1 { margin: 0; font: italic 400 104px/0.96 "Instrument Serif", Georgia, serif; letter-spacing: -0.035em; color: var(--ink); }
+.g-swap { position: relative; display: inline-block; vertical-align: top; text-align: left; }
+.g-swap > span { display: inline-block; white-space: nowrap; transition: opacity 0.5s, translate 0.6s cubic-bezier(0.22, 1, 0.36, 1), filter 0.5s; }
+.g-swap > span:not(.on) { position: absolute; left: 0; top: 0; opacity: 0; translate: 0 0.35em; filter: blur(8px); }
+.g-swap > span.out { translate: 0 -0.35em; }
+.g-dot { display: inline-block; width: 0.62em; height: 0.4em; margin: 0 0.1em 0 0.06em; vertical-align: 0.14em; }
+.g-head p { width: 520px; margin: 30px auto 0; font-size: 14px; line-height: 1.55; color: #33373c; }
+
+/* work bento */
+.g-work { position: relative; z-index: 2; margin-top: -150px; padding: 0 30px 120px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.g-card { position: relative; display: block; overflow: hidden; border-radius: 18px; background: #f2f3f5; opacity: 0; translate: 0 50px; transition: opacity 0.8s, translate 0.9s cubic-bezier(0.22, 1, 0.36, 1); }
+.g-card.in { opacity: 1; translate: 0 0; }
+.g-card img { display: block; width: 100%; height: 100%; object-fit: cover; transition: scale 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
+.g-card:hover img { scale: 1.03; }
+.g-big .shot img { scale: 1.05; }
+.g-card.g-big:hover .shot img { scale: 1.08; }
+.g-card .view { position: absolute; right: 14px; top: 14px; display: flex; gap: 3px; opacity: 0; translate: 0 -6px; transition: opacity 0.25s, translate 0.3s; }
+.g-card:hover .view, .g-card:focus-visible .view { opacity: 1; translate: 0 0; }
+.g-big { grid-column: span 2; grid-row: span 2; height: 640px; padding: 26px 26px 0; display: flex; flex-direction: column; background: linear-gradient(180deg, #e9f5ff, #f6f9fc 60%); }
+.g-big .shot { flex: 1; overflow: hidden; border-radius: 12px 12px 0 0; box-shadow: 0 0 0 1px rgba(13, 15, 18, 0.06), 0 30px 50px -30px rgba(13, 30, 60, 0.4); }
+.g-small { height: 313px; }
+.g-small.dark { background: #0d0f12; display: grid; place-items: center; }
+.g-small.blue { background: var(--blue); display: grid; place-items: center; }
+.g-small.cream { background: #f4efe4; display: grid; place-items: center; }
+.g-small.dark img, .g-small.blue img, .g-small.cream img { width: 62%; height: auto; object-fit: contain; }
+.g-cap { grid-column: span 2; padding: 4px 4px 40px; }
+.g-cap .tags { display: flex; gap: 6px; margin-bottom: 10px; }
+.g-cap .tags span { padding: 3px 7px; border-radius: 5px; background: #f2f3f5; font-size: 11px; color: #4b5057; }
+.g-cap h3 { margin: 0; font: 500 21px/1.25 "Inter", sans-serif; letter-spacing: -0.015em; }
+.g-cap p { margin: 6px 0 0; font-size: 12.5px; color: var(--muted); }
+
+/* globe */
+.g-globe-sec { position: relative; height: 2700px; background: var(--blue); }
+.g-stage { position: sticky; top: 0; height: 900px; overflow: hidden; }
+.g-cloudsB { position: absolute; left: 0; top: 0; width: 1440px; height: 912px; }
+.g-globe { position: absolute; left: 0; top: 0; width: 640px; height: 640px; transform-origin: 0 0; will-change: transform; }
+.g-globe img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.g-globe svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.g-route { fill: none; stroke: #fff; stroke-linecap: round; filter: drop-shadow(0 0 2px rgba(0, 70, 160, 0.55)); }
+.g-pin { position: absolute; display: flex; align-items: center; gap: 6px; padding: 5px 9px 5px 6px; border-radius: 7px; background: #fff; box-shadow: 0 6px 14px -6px rgba(0, 40, 90, 0.45); font: 500 12px "Inter", sans-serif; white-space: nowrap; transform-origin: 0 50%; scale: var(--inv, 1); translate: 10px -50%; opacity: 0; transition: opacity 0.35s; }
+.g-pin.on { opacity: 1; }
+.g-pin.flip { transform-origin: 100% 50%; translate: calc(-100% - 10px) -50%; }
+.g-pin.flip::before { left: auto; right: -10px; }
+.g-pin::before { content: ""; position: absolute; left: -10px; top: 50%; width: 8px; height: 8px; margin-top: -4px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.4); }
+.g-pin svg { display: block; width: 18px; height: 12px; border-radius: 2px; }
+.g-move { position: absolute; left: 30px; right: 30px; bottom: 44px; display: grid; grid-template-columns: 1fr 1fr; color: #fff; opacity: 0; will-change: opacity, transform; }
+.g-move h2 { margin: 0; font: 500 40px/1.1 "Inter", sans-serif; letter-spacing: -0.03em; }
+.g-move p { width: 400px; margin: 0 0 18px; font-size: 13px; line-height: 1.55; color: rgba(255, 255, 255, 0.92); }
+.g-edge { position: relative; display: block; width: 1440px; height: 216px; margin-top: -1px; }
+
+/* beyond work */
+.g-beyond { position: relative; height: 2100px; }
+.g-ring { position: absolute; inset: 0; }
+.g-tile { position: absolute; left: 0; top: 0; overflow: hidden; border-radius: 14px; box-shadow: 0 14px 30px -18px rgba(0, 0, 0, 0.45); will-change: transform, opacity; }
+.g-tile img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.g-bw { position: absolute; left: 50%; top: 50%; width: 420px; translate: -50% -50%; text-align: center; will-change: transform; }
+.g-bw h2 { margin: 0; font: 600 74px/0.95 "Inter", sans-serif; letter-spacing: -0.045em; }
+.g-bw p { width: 330px; margin: 16px auto 18px; font-size: 13px; line-height: 1.55; color: #4b5057; }
+.g-bw .row { display: flex; gap: 3px; justify-content: center; }
+
+/* taste notes */
+.g-notes { padding: 60px 30px 120px; }
+.g-sechead { display: grid; grid-template-columns: 1fr 1fr; align-items: start; margin-bottom: 48px; }
+.g-sechead h2 { margin: 0; font: 500 52px/1 "Inter", sans-serif; letter-spacing: -0.035em; }
+.g-sechead p { width: 300px; margin: 6px 0 16px; font-size: 12.5px; line-height: 1.5; color: var(--muted); }
+.g-row { display: flex; gap: 6px; }
+.g-stamps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 34px; }
+.g-stamp { --c: #ff69b4; position: relative; display: block; filter: drop-shadow(0 0 0.5px rgba(0, 0, 0, 0.25)) drop-shadow(0 1px 1px rgba(0, 0, 0, 0.1)) drop-shadow(0 12px 16px rgba(0, 0, 0, 0.1)); transition: translate 0.4s cubic-bezier(0.22, 1, 0.36, 1), rotate 0.4s cubic-bezier(0.22, 1, 0.36, 1); }
+.g-stamp .paper { display: block; padding: 18px 18px 20px; background: #fff;
+  -webkit-mask: linear-gradient(#000 0 0) center / calc(100% - 14px) calc(100% - 14px) no-repeat, radial-gradient(circle 5px at 7px 7px, transparent 98%, #000) -7px -7px / 14px 14px;
+  mask: linear-gradient(#000 0 0) center / calc(100% - 14px) calc(100% - 14px) no-repeat, radial-gradient(circle 5px at 7px 7px, transparent 98%, #000) -7px -7px / 14px 14px; }
+.g-stamp:hover, .g-stamp:focus-visible { translate: 0 -8px; rotate: -1.5deg; }
+.g-stamp img { display: block; width: 100%; aspect-ratio: 44 / 52; }
+.g-stamp .meta { display: flex; justify-content: space-between; align-items: end; margin-top: 18px; color: var(--c); }
+.g-stamp small { display: block; font: 500 9px "Geist Mono", monospace; letter-spacing: 0.04em; opacity: 0.8; }
+.g-stamp i { display: block; margin-top: 2px; font: italic 400 19px/1 "Instrument Serif", serif; }
+.g-stamp b { font: 400 34px/0.8 "Instrument Serif", serif; }
+
+/* small talk */
+.g-talk { display: grid; grid-template-columns: 1fr 1fr; padding: 40px 30px 140px; }
+.g-talk h2 { margin: 0 0 14px; font: 500 52px/1 "Inter", sans-serif; letter-spacing: -0.035em; }
+.g-talk > div > p { width: 260px; margin: 0; font-size: 12.5px; line-height: 1.5; color: var(--muted); }
+.g-faq details { border-bottom: 1px solid var(--line); }
+.g-faq summary { display: flex; justify-content: space-between; align-items: center; padding: 15px 2px; list-style: none; cursor: pointer; font-size: 13.5px; }
+.g-faq summary::-webkit-details-marker { display: none; }
+.g-faq summary::after { content: "+"; font-size: 18px; color: #9aa0a6; transition: rotate 0.3s; }
+.g-faq details[open] summary::after { rotate: 45deg; }
+.g-faq details p { margin: -4px 0 16px; padding-right: 40px; font-size: 13px; line-height: 1.55; color: #4b5057; }
+.g-ask { display: flex; align-items: center; gap: 10px; margin-top: 16px; padding: 6px 6px 6px 12px; border-radius: 12px; background: #f4f5f7; }
+.g-ask input { flex: 1; border: 0; background: none; font: 13px "Inter", sans-serif; color: var(--ink); outline: none; }
+.g-ask input::placeholder { color: #9aa0a6; }
+.g-ask button { width: 30px; height: 30px; border: 0; border-radius: 8px; background: #dfe2e6; color: #fff; font-size: 13px; cursor: pointer; transition: background 0.2s; }
+.g-ask:focus-within button { background: var(--ink); }
+
+/* footer */
+.g-foot { position: relative; height: 820px; overflow: hidden; padding: 0 30px; }
+.g-foot-top { display: grid; grid-template-columns: 1.3fr 0.5fr 1fr; align-items: start; }
+.g-foot h2 { margin: 0 0 18px; font: italic 400 64px/0.95 "Instrument Serif", serif; letter-spacing: -0.02em; }
+.g-foot .soc { display: flex; gap: 18px; font-size: 12px; color: #3c4046; }
+.g-foot nav { display: grid; gap: 4px; font-size: 12px; color: #3c4046; }
+.g-clock { display: grid; grid-template-columns: 1fr auto auto; gap: 6px 26px; font: 12px "Geist Mono", monospace; color: #9aa0a6; }
+.g-clock .here { color: var(--ink); }
+.g-mark { position: absolute; left: 50%; bottom: -150px; width: 1180px; translate: -50% 0; }
+.g-mark svg { display: block; width: 100%; height: auto; }
+
+@media (prefers-reduced-motion: reduce) { .g-card, .g-swap > span, .g-stamp, .g-pin { transition: none !important; } }
+</style>
+</helmet>
+<div class="g" ref="{{ host }}">
+  <header class="g-nav">
+    <nav class="g-pill" aria-label="Main">
+      <a class="logo" href="#top" aria-label="Tin Le, home"><svg viewBox="6 13 52 37" aria-hidden="true"><path d="M11.7891 40.2597V29.7451H8.02393V24.4721H11.7891V18.603H13.6266C14.7138 18.603 15.7565 19.0349 16.5252 19.8037C17.294 20.5724 17.7259 21.6151 17.7259 22.7023V24.4585H23.8342V29.7451H17.7259V38.1559C17.7259 39.8083 17.5047 42.7608 19.6627 42.7608C20.4363 42.7269 21.1786 42.4452 21.78 41.9572L23.8026 46.5215C22.1367 47.6818 20.7416 48.3274 18.6739 48.3274C13.8117 48.3048 11.7891 44.7292 11.7891 40.2597Z"/><path d="M30.6692 22.1201C29.751 22.1335 28.8646 21.7839 28.2026 21.1473C27.5407 20.5108 27.1568 19.6387 27.1343 18.7206C27.1801 17.814 27.5725 16.9596 28.2305 16.3341C28.8884 15.7087 29.7614 15.3599 30.6692 15.3599C31.577 15.3599 32.4501 15.7087 33.108 16.3341C33.7659 16.9596 34.1584 17.814 34.2042 18.7206C34.1817 19.6387 33.7977 20.5108 33.1358 21.1473C32.4739 21.7839 31.5875 22.1335 30.6692 22.1201V22.1201Z"/><path d="M33.202 24.8921H28.0192C27.7873 24.8921 27.5994 25.0801 27.5994 25.312V47.8987C27.5994 48.1305 27.7873 48.3185 28.0192 48.3185H33.202C33.4339 48.3185 33.6219 48.1305 33.6219 47.8987V25.312C33.6219 25.0801 33.4339 24.8921 33.202 24.8921Z"/><path d="M56.213 33.3163V47.8986C56.213 47.9537 56.2021 48.0083 56.181 48.0592C56.1599 48.1102 56.129 48.1565 56.09 48.1955C56.051 48.2344 56.0047 48.2654 55.9538 48.2865C55.9029 48.3076 55.8483 48.3184 55.7931 48.3184H50.6058C50.4945 48.3184 50.3877 48.2742 50.3089 48.1955C50.2302 48.1167 50.1859 48.0099 50.1859 47.8986V35.9709C50.1859 33.6459 49.7345 31.4563 47.0573 31.4563C44.3124 31.4563 43.4095 33.7407 43.4095 35.9709V47.8986C43.4101 47.9535 43.3998 48.008 43.3792 48.0589C43.3586 48.1098 43.3281 48.1561 43.2894 48.1952C43.2508 48.2342 43.2048 48.2652 43.1541 48.2864C43.1034 48.3075 43.0491 48.3184 42.9941 48.3184H37.8068C37.6955 48.3184 37.5887 48.2742 37.5099 48.1955C37.4312 48.1167 37.387 48.0099 37.387 47.8986V25.3254C37.387 25.214 37.4312 25.1073 37.5099 25.0285C37.5887 24.9498 37.6955 24.9055 37.8068 24.9055H42.9941C43.1047 24.9067 43.2103 24.9515 43.2881 25.0301C43.3659 25.1087 43.4095 25.2148 43.4095 25.3254V27.9619C43.4095 27.9727 43.4138 27.9831 43.4214 27.9907C43.429 27.9983 43.4393 28.0026 43.4501 28.0026C43.4609 28.0026 43.4712 27.9983 43.4788 27.9907C43.4865 27.9831 43.4907 27.9727 43.4907 27.9619C44.3937 25.8717 46.958 24.3999 49.8112 24.3999C54.5832 24.3999 56.213 28.4766 56.213 33.3163Z"/></svg></a>
+      <a class="lnk" href="#work">Work</a><a class="lnk" href="#about">About</a><a class="lnk" href="#notes">Notes</a><a class="lnk" href="#play">Play</a>
+    </nav>
+    <div class="g-cta"><a class="g-btn" href="#say-hi">Say hi</a><a class="g-arrow" href="#say-hi" aria-label="Say hi">↗</a></div>
+  </header>
+
+  <div class="g-scroll" ref="{{ root }}" onScroll="{{ onScroll }}" tabindex="0" aria-label="Scroll the page">
+    <section class="g-hero" id="top">
+      <canvas class="g-sky g-px" width="90" height="63" aria-hidden="true"></canvas>
+      <div class="g-head">
+        <h1>Designer<svg class="g-dot g-px" viewBox="0 0 11 7" aria-hidden="true"><path d="M3 1h3v1h1V1h2v1h1v1h1v3H0V4h1V3h1V2h1z" fill="#1f9bff"></path><path d="M3 2h1v1H3zM7 3h1v1H7z" fill="#c4e8ff"></path></svg>who<br>designs for <span class="g-swap"><span class="on">trust</span><span>search</span><span>people</span></span></h1>
+        <p>I’m Tin, a senior designer at Microsoft AI, making search feel clear, calm and worth trusting. Trained in industrial design at the University of Oregon. From Vietnam, based in Washington.</p>
+      </div>
+    </section>
+
+    <section class="g-work" id="work" aria-label="Selected work">
+      <a class="g-card g-big" href="#windows-search"><span class="shot"><img src="/_blob/2a4b16aaf0284c63e51aa51dc7ad5996" alt="Windows search results"></span><span class="view"><span class="g-btn sm light">View</span><span class="g-arrow sm light">↗</span></span></a>
+      <a class="g-card g-small dark" href="#play"><img class="g-px" src="/_blob/3d3c7e6c607ddec2cd717398f2b22ebf" alt="Pixel globe" style="width: 70%;"></a>
+      <a class="g-card g-small cream" href="#play"><img src="/_blob/925284f08d8587128bce2a50c9d0f2e9" alt="Matcha bowl sketch"></a>
+      <a class="g-card g-small" href="#play"><img src="/_blob/be80b2dbdedae7a3d6b7e813977ab9bc" alt="Moss and lamp still life"></a>
+      <a class="g-card g-small blue" href="#play"><img src="/_blob/e15fd7e76b555bc84fdef81036c81636" alt="Plane sketch" style="filter: brightness(0) invert(1); opacity: 0.95;"></a>
+      <div class="g-cap"><div class="tags"><span>Search</span><span>AI</span><span>Windows</span></div><h3>Search results you can trust at a glance</h3><p>Microsoft AI · Senior designer</p></div>
+      <div class="g-cap"></div>
+
+      <a class="g-card g-small" href="#play"><img src="/_blob/47d7348bdeaaf475e13eb76281441a60" alt="Aerial painting of rice terraces"></a>
+      <a class="g-card g-small cream" href="#play"><img src="/_blob/2a09bac538f4861d56f2ccb86598b243" alt="Desk lamp sketch"></a>
+      <a class="g-card g-big" href="#manage-users"><span class="shot"><img src="/_blob/f931dcc4cb51782b134276f3c1c53d8a" alt="Salesforce Manage users"></span><span class="view"><span class="g-btn sm light">View</span><span class="g-arrow sm light">↗</span></span></a>
+      <a class="g-card g-small" href="#play"><img src="/_blob/cf74e14fcd359da9a957be1f0f57f261" alt="Fuzzy matcha bowl"></a>
+      <a class="g-card g-small dark" href="#play"><img src="/_blob/ea97273e193d54e49bc073679045361f" alt="Laptop sketch" style="filter: invert(1) hue-rotate(180deg);"></a>
+      <div class="g-cap"></div>
+      <div class="g-cap"><div class="tags"><span>Enterprise</span><span>Admin</span><span>Salesforce</span></div><h3>Making user management calm for admins</h3><p>Salesforce · Product designer</p></div>
+    </section>
+
+    <section class="g-globe-sec" id="about" aria-label="Where I come from">
+      <div class="g-stage">
+        <canvas class="g-cloudsB g-px" width="60" height="38" aria-hidden="true"></canvas>
+        <div class="g-globe">
+          <img class="g-px" src="/_blob/3d3c7e6c607ddec2cd717398f2b22ebf" alt="Pixel globe centred on the Pacific">
+          <svg viewBox="0 0 1024 1024" aria-hidden="true">
+            <path class="g-route" d="M164 464 C 330 180, 640 160, 778 398 Q 792 374, 768 352"></path>
+            <g class="g-plane"><path d="M0 -15 L3.2 -5 L15 2 L15 5.5 L3.2 2.5 L2.4 10 L6 13 L6 15.5 L0 13.8 L-6 15.5 L-6 13 L-2.4 10 L-3.2 2.5 L-15 5.5 L-15 2 L-3.2 -5 Z" fill="#fff" stroke="#0a5bb8" stroke-width="1.4" stroke-linejoin="round"></path></g>
+          </svg>
+          <span class="g-pin" data-k="vn" style="left: 102px; top: 290px;"><svg viewBox="0 0 18 12"><rect width="18" height="12" fill="#da251d"></rect><path d="M9 2.6l.95 2.9h3.05l-2.47 1.8.94 2.9L9 8.4l-2.47 1.8.94-2.9L5 5.5h3.05z" fill="#ff0"></path></svg>Đà Lạt, Vietnam</span>
+          <span class="g-pin" data-k="or" style="left: 488px; top: 250px;"><svg viewBox="0 0 18 12"><rect width="18" height="12" fill="#fff"></rect><path d="M0 0h18v1.3H0zM0 2.6h18v1.3H0zM0 5.2h18v1.3H0zM0 7.8h18v1.3H0zM0 10.4h18V12H0z" fill="#b22234"></path><rect width="8" height="6.5" fill="#3c3b6e"></rect></svg>Eugene, Oregon</span>
+          <span class="g-pin flip" data-k="wa" style="left: 480px; top: 220px;"><svg viewBox="0 0 18 12"><rect width="18" height="12" fill="#fff"></rect><path d="M0 0h18v1.3H0zM0 2.6h18v1.3H0zM0 5.2h18v1.3H0zM0 7.8h18v1.3H0zM0 10.4h18V12H0z" fill="#b22234"></path><rect width="8" height="6.5" fill="#3c3b6e"></rect></svg>Washington</span>
+        </div>
+        <div class="g-move">
+          <h2>Built to wander</h2>
+          <div><p>Like the plane, I do my best work between places. Vietnam gave me an eye for small, careful details. Oregon taught me how things should feel in the hand. Washington is where I bring both into search.</p><div class="g-row"><a class="g-btn light sm" href="#how">How I design</a><a class="g-arrow light sm" href="#how" aria-label="How I design">↗</a></div></div>
+        </div>
+      </div>
+    </section>
+    <canvas class="g-edge g-px" width="60" height="9" aria-hidden="true"></canvas>
+
+    <section class="g-beyond" aria-label="Beyond work">
+      <div class="g-stage">
+        <div class="g-ring"><span class="g-tile" data-a="-92.8" data-far="2.09" data-tw="-43" data-r="0.6" data-w="118" data-h="147" style="width: 118px; height: 147px; opacity: 0;"><img src="/_blob/be80b2dbdedae7a3d6b7e813977ab9bc" alt=""></span><span class="g-tile" data-a="-62.1" data-far="1.83" data-tw="-41" data-r="-1.3" data-w="104" data-h="83" style="width: 104px; height: 83px; opacity: 0;"><img src="/_blob/47d7348bdeaaf475e13eb76281441a60" alt=""></span><span class="g-tile" data-a="-34.1" data-far="2.20" data-tw="-38" data-r="-4.4" data-w="146" data-h="146" style="width: 146px; height: 146px; opacity: 0;"><img src="/_blob/cf74e14fcd359da9a957be1f0f57f261" alt=""></span><span class="g-tile" data-a="2.0" data-far="2.05" data-tw="-45" data-r="-4.5" data-w="104" data-h="83" style="width: 104px; height: 83px; opacity: 0;"><img src="/_blob/172e09e27c48b1ba6ee837a153fbc532" alt=""></span><span class="g-tile" data-a="30.9" data-far="1.95" data-tw="4" data-r="1.1" data-w="118" data-h="147" style="width: 118px; height: 147px; opacity: 0;"><img src="/_blob/4d164a51804f8978f2607d488602f4a2" alt=""></span><span class="g-tile" data-a="61.0" data-far="2.05" data-tw="14" data-r="-2.0" data-w="118" data-h="118" style="width: 118px; height: 118px; opacity: 0;"><img src="/_blob/81ae3fff42161e29a6464458e8f07d62" alt=""></span><span class="g-tile" data-a="90.8" data-far="1.74" data-tw="-29" data-r="2.9" data-w="104" data-h="83" style="width: 104px; height: 83px; opacity: 0;"><img src="/_blob/058a1e4f71c41cad18dbe6a632862617" alt=""></span><span class="g-tile" data-a="118.8" data-far="2.05" data-tw="-5" data-r="-3.2" data-w="132" data-h="165" style="width: 132px; height: 165px; opacity: 0;"><img src="/_blob/bb63863a75e37522abd7a2f10361fa3e" alt=""></span><span class="g-tile" data-a="154.7" data-far="2.04" data-tw="3" data-r="6.0" data-w="118" data-h="118" style="width: 118px; height: 118px; opacity: 0;"><img src="/_blob/7dbf645f6df4f60061eba9b8bddb022e" alt=""></span><span class="g-tile" data-a="183.7" data-far="2.29" data-tw="-38" data-r="-1.3" data-w="132" data-h="105" style="width: 132px; height: 105px; opacity: 0;"><img src="/_blob/80ecf61f9f73902c1a2417fc0c0ea2db" alt=""></span><span class="g-tile" data-a="214.1" data-far="1.95" data-tw="46" data-r="-6.8" data-w="118" data-h="147" style="width: 118px; height: 147px; opacity: 0;"><img src="/_blob/872c055ad51680554fde4a4d40a9c019" alt=""></span><span class="g-tile" data-a="240.9" data-far="2.12" data-tw="9" data-r="1.3" data-w="132" data-h="165" style="width: 132px; height: 165px; opacity: 0;"><img src="/_blob/37663bc52d5e9b05200ebf2b14bb1ae7" alt=""></span></div>
+        <div class="g-bw"><h2>Beyond<br>work</h2><p>Exploring new cities, chasing great food and whisking matcha a little too long. Most of my ideas start somewhere far from a desk.</p><div class="row"><a class="g-btn sm" href="#about">More about me</a><a class="g-arrow sm" href="#about" aria-label="More about me">↗</a></div></div>
+      </div>
+    </section>
+
+    <section class="g-notes" id="notes" aria-label="Taste notes">
+      <div class="g-sechead"><h2>Taste notes</h2><div><p>Short notes on design, food and how I see the world, one stamp at a time.</p><div class="g-row"><a class="g-btn sm" href="#notes">More notes</a><a class="g-arrow sm" href="#notes" aria-label="More notes">↗</a></div></div></div>
+      <div class="g-stamps">
+        <a class="g-stamp" href="#note-07" style="--c: #d62080;"><span class="paper"><img class="g-px" src="/_blob/535d92e1478df5cad23d702e0cd65928" alt=""><span class="meta"><span><small>2026 · 10</small><i>Soft things,<br>hard problems</i></span><b>07</b></span></span></a>
+        <a class="g-stamp" href="#note-06" style="--c: #d66e00;"><span class="paper"><img class="g-px" src="/_blob/acac24fbb03962b0fea0446fbb4673c6" alt=""><span class="meta"><span><small>2026 · 08</small><i>Đà Lạt,<br>slowly</i></span><b>06</b></span></span></a>
+        <a class="g-stamp" href="#note-05" style="--c: #0060d6;"><span class="paper"><img class="g-px" src="/_blob/88ebc5209a358776e4185274b4585e2b" alt=""><span class="meta"><span><small>2026 · 05</small><i>The window<br>seat</i></span><b>05</b></span></span></a>
+        <a class="g-stamp" href="#note-04" style="--c: #128a42;"><span class="paper"><img class="g-px" src="/_blob/0ad544bfa31aaa4e0814b72a9412d2aa" alt=""><span class="meta"><span><small>2026 · 02</small><i>Moss &amp;<br>matcha</i></span><b>04</b></span></span></a>
+      </div>
+    </section>
+
+    <section class="g-talk" aria-label="Small talk">
+      <div><h2>Small talk</h2><p>The short answers live here. For anything else, ask the cloud.</p></div>
+      <div class="g-faq">
+        <details><summary>How did you get into design?</summary><p>I studied industrial design at the University of Oregon, then moved from physical products to software, where you can keep improving the thing after it ships.</p></details>
+        <details><summary>What’s your main thing?</summary><p>Search and AI at Microsoft: making answers clear enough to trust at a glance.</p></details>
+        <details><summary>Where are you based?</summary><p>Washington, with Mt. Hood on the horizon on a clear day. Originally from Vietnam.</p></details>
+        <details><summary>Matcha or coffee?</summary><p>Matcha most days. Cà phê sữa đá whenever I’m back in Vietnam.</p></details>
+        <details><summary>How can I get in touch?</summary><p>Say hi with the button up top. I read everything.</p></details>
+        <label class="g-ask"><svg width="22" height="14" viewBox="0 0 11 7" class="g-px" aria-hidden="true"><path d="M3 1h3v1h1V1h2v1h1v1h1v3H0V4h1V3h1V2h1z" fill="#1f9bff"></path></svg><input type="text" placeholder="Ask the cloud anything else" aria-label="Ask a question"><button type="button" aria-label="Send">↑</button></label>
+      </div>
+    </section>
+
+    <footer class="g-foot" id="say-hi">
+      <div class="g-foot-top">
+        <div><h2>Tin Le</h2><div class="soc"><a href="#linkedin">LinkedIn</a><a href="#readcv">Read.cv</a><a href="#instagram">Instagram</a><a href="#say-hi">Say hi</a></div></div>
+        <nav aria-label="Footer"><a href="#work">Work</a><a href="#about">About</a><a href="#notes">Notes</a><a href="#play">Play</a></nav>
+        <div class="g-clock"><span>Đà Lạt, VN</span><span class="t" data-tz="Asia/Ho_Chi_Minh">--:--</span><span>GMT+7</span><span class="here">Seattle, WA</span><span class="t here" data-tz="America/Los_Angeles">--:--</span><span class="here">PT</span></div>
+      </div>
+      <div class="g-mark" aria-hidden="true"><svg viewBox="6 13 52 37"><defs><pattern id="g-hatch" width="0.9" height="0.9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="0.32" height="0.9" fill="#8fd0ff"></rect></pattern></defs><g fill="url(#g-hatch)"><path d="M11.7891 40.2597V29.7451H8.02393V24.4721H11.7891V18.603H13.6266C14.7138 18.603 15.7565 19.0349 16.5252 19.8037C17.294 20.5724 17.7259 21.6151 17.7259 22.7023V24.4585H23.8342V29.7451H17.7259V38.1559C17.7259 39.8083 17.5047 42.7608 19.6627 42.7608C20.4363 42.7269 21.1786 42.4452 21.78 41.9572L23.8026 46.5215C22.1367 47.6818 20.7416 48.3274 18.6739 48.3274C13.8117 48.3048 11.7891 44.7292 11.7891 40.2597Z"/><path d="M30.6692 22.1201C29.751 22.1335 28.8646 21.7839 28.2026 21.1473C27.5407 20.5108 27.1568 19.6387 27.1343 18.7206C27.1801 17.814 27.5725 16.9596 28.2305 16.3341C28.8884 15.7087 29.7614 15.3599 30.6692 15.3599C31.577 15.3599 32.4501 15.7087 33.108 16.3341C33.7659 16.9596 34.1584 17.814 34.2042 18.7206C34.1817 19.6387 33.7977 20.5108 33.1358 21.1473C32.4739 21.7839 31.5875 22.1335 30.6692 22.1201V22.1201Z"/><path d="M33.202 24.8921H28.0192C27.7873 24.8921 27.5994 25.0801 27.5994 25.312V47.8987C27.5994 48.1305 27.7873 48.3185 28.0192 48.3185H33.202C33.4339 48.3185 33.6219 48.1305 33.6219 47.8987V25.312C33.6219 25.0801 33.4339 24.8921 33.202 24.8921Z"/><path d="M56.213 33.3163V47.8986C56.213 47.9537 56.2021 48.0083 56.181 48.0592C56.1599 48.1102 56.129 48.1565 56.09 48.1955C56.051 48.2344 56.0047 48.2654 55.9538 48.2865C55.9029 48.3076 55.8483 48.3184 55.7931 48.3184H50.6058C50.4945 48.3184 50.3877 48.2742 50.3089 48.1955C50.2302 48.1167 50.1859 48.0099 50.1859 47.8986V35.9709C50.1859 33.6459 49.7345 31.4563 47.0573 31.4563C44.3124 31.4563 43.4095 33.7407 43.4095 35.9709V47.8986C43.4101 47.9535 43.3998 48.008 43.3792 48.0589C43.3586 48.1098 43.3281 48.1561 43.2894 48.1952C43.2508 48.2342 43.2048 48.2652 43.1541 48.2864C43.1034 48.3075 43.0491 48.3184 42.9941 48.3184H37.8068C37.6955 48.3184 37.5887 48.2742 37.5099 48.1955C37.4312 48.1167 37.387 48.0099 37.387 47.8986V25.3254C37.387 25.214 37.4312 25.1073 37.5099 25.0285C37.5887 24.9498 37.6955 24.9055 37.8068 24.9055H42.9941C43.1047 24.9067 43.2103 24.9515 43.2881 25.0301C43.3659 25.1087 43.4095 25.2148 43.4095 25.3254V27.9619C43.4095 27.9727 43.4138 27.9831 43.4214 27.9907C43.429 27.9983 43.4393 28.0026 43.4501 28.0026C43.4609 28.0026 43.4712 27.9983 43.4788 27.9907C43.4865 27.9831 43.4907 27.9727 43.4907 27.9619C44.3937 25.8717 46.958 24.3999 49.8112 24.3999C54.5832 24.3999 56.213 28.4766 56.213 33.3163Z"/></g></svg></div>
+    </footer>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const ease = (t) => 1 - Math.pow(1 - t, 3);
+const inout = (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+const lerp = (a, b, t) => a + (b - a) * t;
+const reduce = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+// value noise for the pixel clouds
+const hash = (x, y) => { const s = Math.sin(x * 127.1 + y * 311.7) * 43758.5453; return s - Math.floor(s); };
+const sm = (t) => t * t * (3 - 2 * t);
+function noise(x, y) { const xi = Math.floor(x), yi = Math.floor(y), xf = sm(x - xi), yf = sm(y - yi);
+  const a = hash(xi, yi), b = hash(xi + 1, yi), c = hash(xi, yi + 1), d = hash(xi + 1, yi + 1);
+  return lerp(lerp(a, b, xf), lerp(c, d, xf), yf); }
+const fbm = (x, y) => 0.55 * noise(x, y) + 0.3 * noise(x * 2.1 + 5, y * 2.1 + 9) + 0.15 * noise(x * 4.3 + 11, y * 4.3 + 3);
+const SKY = [[31, 155, 255], [110, 196, 255], [196, 232, 255], [255, 255, 255]];
+function drawSky(cv, t, field) {
+  const w = cv.width, h = cv.height, ctx = cv.getContext('2d'), img = ctx.createImageData(w, h), d = img.data;
+  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+    const sc = 60 / w, v = field(x, y, fbm(x * 0.12 * sc + t * 0.05, y * 0.16 * sc - t * 0.012));
+    const k = v > 0.62 ? 3 : v > 0.55 ? 2 : v > 0.5 ? 1 : 0, c = SKY[k], i = (y * w + x) * 4;
+    d[i] = c[0]; d[i + 1] = c[1]; d[i + 2] = c[2]; d[i + 3] = 255;
+  }
+  ctx.putImageData(img, 0, 0);
+}
+const VN = [102.5, 290.0], ROUTE_LEN = { v: 0 };
+function paint(host, root, st) {
+  const y = root.scrollTop;
+  st.y = y;
+  // hero: headline drifts up, the white cloud opens to the page
+  const head = host.querySelector('.g-head');
+  head.style.transform = `translateY(${-y * 0.3}px)`;
+  head.style.opacity = 1 - clamp((y - 220) / 380);
+  st.part = clamp(y / 760);
+  // work cards rise in as they reach the view
+  host.querySelectorAll('.g-card').forEach((c) => { if (c.offsetTop + c.parentNode.offsetTop - y < 840) c.classList.add('in'); });
+  // globe: zoomed on Vietnam, then pulls back while the plane flies to Oregon and Washington
+  const sec = host.querySelector('.g-globe-sec'), gp = clamp((y - sec.offsetTop) / (sec.offsetHeight - 900));
+  const z = inout(clamp(gp / 0.5)), f = ease(clamp((gp - 0.66) / 0.22));
+  const s = lerp(3.4, 1, z) * lerp(1, 0.78, f);
+  const fx = lerp(VN[0], 320, z), fy = lerp(VN[1], 320, z), cy = lerp(450, 330, f);
+  const globe = host.querySelector('.g-globe');
+  globe.style.transform = `translate(${720 - fx * s}px, ${cy - fy * s}px) scale(${s})`;
+  globe.style.setProperty('--inv', (1 / s).toFixed(4));
+  const route = host.querySelector('.g-route'), plane = host.querySelector('.g-plane');
+  if (!ROUTE_LEN.v) ROUTE_LEN.v = route.getTotalLength();
+  const L = ROUTE_LEN.v, draw = inout(clamp((gp - 0.22) / 0.42));
+  route.style.strokeWidth = (5 / s).toFixed(2);
+  route.style.strokeDasharray = `${L} ${L}`;
+  route.style.strokeDashoffset = (L * (1 - draw)).toFixed(1);
+  const a = route.getPointAtLength(Math.max(0.01, L * draw)), b = route.getPointAtLength(Math.min(L, L * draw + 2));
+  const ang = Math.atan2(b.y - a.y, b.x - a.x) * 180 / Math.PI + 90;
+  plane.setAttribute('transform', `translate(${a.x.toFixed(1)} ${a.y.toFixed(1)}) rotate(${(draw >= 0.999 ? ang : ang).toFixed(1)}) scale(${(1.7 / s).toFixed(3)})`);
+  plane.style.opacity = gp > 0.2 ? 1 : 0;
+  host.querySelector('.g-pin[data-k="vn"]').classList.toggle('on', gp > 0.04);
+  host.querySelector('.g-pin[data-k="or"]').classList.toggle('on', draw > 0.62);
+  host.querySelector('.g-pin[data-k="wa"]').classList.toggle('on', draw > 0.97);
+  const mv = host.querySelector('.g-move'), mt = ease(clamp((gp - 0.74) / 0.16));
+  mv.style.opacity = mt; mv.style.transform = `translateY(${(1 - mt) * 30}px)`;
+  // beyond work: photos fly in to a ring, turn slowly, then gather around the title
+  const bw = host.querySelector('.g-beyond'), bp = clamp((y - bw.offsetTop + 300) / (bw.offsetHeight - 600));
+  const c = ease(clamp(bp / 0.45)), e = ease(clamp((bp - 0.72) / 0.28)), spin = bp * 26;
+  host.querySelectorAll('.g-tile').forEach((el) => {
+    const ang0 = +el.dataset.a + spin + (1 - c) * +el.dataset.tw, r = lerp(+el.dataset.far, 1, c) * lerp(1, 0.62, e);
+    const rad = ang0 * Math.PI / 180, w = +el.dataset.w, h = +el.dataset.h;
+    const px = 720 + Math.cos(rad) * 520 * r - w / 2, py = 450 + Math.sin(rad) * 300 * r - h / 2;
+    el.style.transform = `translate(${px.toFixed(1)}px, ${py.toFixed(1)}px) rotate(${(+el.dataset.r * (1 - c * 0.6)).toFixed(1)}deg) scale(${(lerp(1.3, 1, c) * lerp(1, 0.66, e)).toFixed(3)})`;
+    el.style.opacity = clamp(c * 1.8);
+  });
+  host.querySelector('.g-bw').style.transform = `scale(${lerp(1, 0.82, e).toFixed(3)})`;
+}
+function skies(host, st, t) {
+  const part = st.part || 0;
+  // hero: white heart of the cloud behind the headline, opening as you scroll
+  drawSky(host.querySelector('.g-sky'), t, (x, y, n) => {
+    const dx = (x - 45) / (31 + part * 60), dy = (y - 19) / (17 + part * 45), dd = Math.sqrt(dx * dx + dy * dy);
+    return n + 0.8 * (1 - clamp(dd)) + clamp((y - 46) / 14) * (0.15 + part * 0.6) + part * 0.5 - 0.1;
+  });
+  // globe sky: a few drifting pixel clouds
+  drawSky(host.querySelector('.g-cloudsB'), t * 0.7 + 40, (x, y, n) => n - 0.24);
+  // the stepped edge, blue into white
+  drawSky(host.querySelector('.g-edge'), t + 90, (x, y, n) => n - 0.55 + (y / 8) * 0.95);
+}
+function clocks(host) {
+  host.querySelectorAll('.g-clock .t').forEach((el) => {
+    try { el.textContent = new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: el.dataset.tz }).format(new Date()); } catch (err) {}
+  });
+}
+class Component extends DCLogic {
+  renderVals() {
+    if (!this._v) {
+      const st = this._st = { y: 0, part: 0 };
+      this._v = {
+        host: (el) => {
+          if (!el || this._host === el) return;
+          this._host = el;
+          clocks(el);
+          // word swap in the headline
+          const words = [...el.querySelectorAll('.g-swap > span')];
+          let wi = 0, last = 0, lastSky = -1, lastClock = 0;
+          const t0 = performance.now();
+          const tick = (now) => {
+            if (!el.isConnected) return;
+            const t = (now - t0) / 1000;
+            const step = reduce ? 0 : Math.floor(t * 6) / 6;  // ~6 fps keeps the clouds stepping like pixel art
+            if (step !== lastSky || st.dirty) { lastSky = step; st.dirty = false; skies(el, st, step); }
+            if (!reduce && now - last > 2600) {
+              if (last) { const cur = words[wi]; cur.classList.remove('on'); cur.classList.add('out'); wi = (wi + 1) % words.length; words[wi].classList.remove('out'); words[wi].classList.add('on'); setTimeout(() => cur.classList.remove('out'), 700); }
+              last = now;
+            }
+            if (now - lastClock > 20000) { lastClock = now; clocks(el); }
+            requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+        },
+        root: (el) => { if (el) { this._root = el; requestAnimationFrame(() => { if (this._host) { paint(this._host, el, st); st.dirty = true; } }); } },
+        onScroll: (e) => { const r = e.currentTarget; if (!this._raf) this._raf = requestAnimationFrame(() => { this._raf = 0; if (this._host) { paint(this._host, r, st); st.dirty = true; } }); },
+      };
+    }
+    return this._v;
+  }
+}
+</script>
+</body>
+</html>

@@ -11,6 +11,14 @@
       "x": 0,
       "y": 0
     },
+    "Artboard-xxww.dc.html": {
+      "h": 2267,
+      "page": "page-vmnxsd",
+      "title": "Artboard 1",
+      "w": 1286,
+      "x": 23624,
+      "y": 2093
+    },
     "AwardWall.dc.html": {
       "h": 1300,
       "title": "Award-winning portfolios",
@@ -39,6 +47,14 @@
       "x": 5440,
       "y": 0
     },
+    "CloudSketchStyles.dc.html": {
+      "h": 1720,
+      "page": "page-vmnxsd",
+      "title": "Cloud sketch styles · 8 options + clouds → projects",
+      "w": 1440,
+      "x": 19760,
+      "y": 3800
+    },
     "CurrentPortfolio.dc.html": {
       "h": 1900,
       "page": "page-vmnxsd",
@@ -46,6 +62,30 @@
       "w": 1440,
       "x": 1520,
       "y": 0
+    },
+    "FullWidthScenes.dc.html": {
+      "h": 3640,
+      "page": "page-vmnxsd",
+      "title": "Full-width scenes · footer / hero bands in your sketch styles",
+      "w": 1440,
+      "x": 21280,
+      "y": 5640
+    },
+    "GenParts-Hero.dc.html": {
+      "h": 900,
+      "page": "page-vmnxsd",
+      "title": "Generated parts · hero composed",
+      "w": 1440,
+      "x": 9120,
+      "y": 1400
+    },
+    "GenParts-Kit.dc.html": {
+      "h": 1000,
+      "page": "page-vmnxsd",
+      "title": "Generated parts · kit",
+      "w": 1440,
+      "x": 7600,
+      "y": 1400
     },
     "Hiring.dc.html": {
       "h": 1060,
@@ -62,6 +102,31 @@
       "x": 2800,
       "y": 0
     },
+    "IllustrationKit.dc.html": {
+      "h": 7900,
+      "page": "page-vmnxsd",
+      "title": "Illustration kit · colour + grey Copic, concept sketch, technical, process blends",
+      "w": 1440,
+      "x": 19760,
+      "y": 5640
+    },
+    "ImageMoods.dc.html": {
+      "h": 3620,
+      "page": "page-vmnxsd",
+      "title": "Image moods · aerial painting, motion meadow, fuzzy 3D, moss still life",
+      "w": 1440,
+      "x": 24320,
+      "y": 5640
+    },
+    "LogoLoader.dc.html": {
+      "h": 1240,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "tin logo · loader animation lab",
+      "w": 1440,
+      "x": 4560,
+      "y": 1020
+    },
     "Main.dc.html": {
       "h": 760,
       "title": "Brief: what I know about you",
@@ -76,6 +141,42 @@
       "x": 1280,
       "y": 0
     },
+    "MultiplayerScroll.dc.html": {
+      "h": 1200,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Multiplayer drawing on scroll · 5 variations",
+      "w": 1440,
+      "x": 15200,
+      "y": 2840
+    },
+    "ParticlePlay.dc.html": {
+      "h": 1020,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Play · particle prototypes",
+      "w": 1440,
+      "x": 13680,
+      "y": 4360
+    },
+    "Piece-0w09.dc.html": {
+      "frameless": true,
+      "h": 412,
+      "page": "page-vmnxsd",
+      "title": "Box (2)",
+      "w": 660,
+      "x": 22745,
+      "y": 4505
+    },
+    "Piece-o61g.dc.html": {
+      "frameless": true,
+      "h": 192,
+      "page": "page-vmnxsd",
+      "title": "Box",
+      "w": 616,
+      "x": 23202,
+      "y": 5362
+    },
     "Piece-u7ks.dc.html": {
       "frameless": true,
       "h": 1084,
@@ -84,6 +185,23 @@
       "w": 864,
       "x": 3342,
       "y": 961
+    },
+    "Portfolio20.dc.html": {
+      "h": 5320,
+      "page": "page-vmnxsd",
+      "title": "20 portfolio directions · moss, felt hills, aerial, meadow",
+      "w": 1440,
+      "x": 25840,
+      "y": 5640
+    },
+    "Postmarks.dc.html": {
+      "h": 1160,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Stamp · postmark designs",
+      "w": 1440,
+      "x": 10640,
+      "y": 1400
     },
     "PrevAbout.dc.html": {
       "h": 1460,
@@ -105,6 +223,31 @@
       "w": 1440,
       "x": 1520,
       "y": 3560
+    },
+    "PrototypeWindowToWork.dc.html": {
+      "h": 900,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Prototype · window → I am Tin Le → My work, drawn (scroll inside)",
+      "w": 1440,
+      "x": 15200,
+      "y": 4160
+    },
+    "StampCollection.dc.html": {
+      "h": 640,
+      "page": "page-vmnxsd",
+      "title": "Stamp collection · places",
+      "w": 1440,
+      "x": 12160,
+      "y": 1400
+    },
+    "StudioWallHeroes.dc.html": {
+      "h": 3740,
+      "page": "page-vmnxsd",
+      "title": "Variation E · 5 calmer hero options",
+      "w": 1440,
+      "x": 18240,
+      "y": 2840
     },
     "TinPortfolio-1-Hero.dc.html": {
       "h": 900,
@@ -130,137 +273,140 @@
       "x": 6080,
       "y": 0
     },
-    "WorkCarousel-A.dc.html": {
-      "x": 7600,
-      "y": 0,
-      "w": 1440,
+    "VariationCanvasHeader.dc.html": {
       "h": 900,
+      "is_interactive": true,
       "page": "page-vmnxsd",
-      "title": "My work carousel · A Baggage carousel",
-      "is_interactive": true
-    },
-    "WorkCarousel-B.dc.html": {
-      "x": 9120,
-      "y": 0,
+      "title": "Variation H · canvas header (inspired by onlines.com.ar) · scroll inside",
       "w": 1440,
-      "h": 900,
-      "page": "page-vmnxsd",
-      "title": "My work carousel · B Coverflow",
-      "is_interactive": true
-    },
-    "WorkCarousel-C.dc.html": {
-      "x": 10640,
-      "y": 0,
-      "w": 1440,
-      "h": 900,
-      "page": "page-vmnxsd",
-      "title": "My work carousel · C Window row",
-      "is_interactive": true
-    },
-    "WorkCarousel-D.dc.html": {
-      "x": 12160,
-      "y": 0,
-      "w": 1440,
-      "h": 900,
-      "page": "page-vmnxsd",
-      "title": "My work carousel · D Boarding passes",
-      "is_interactive": true
-    },
-    "LogoLoader.dc.html": {
-      "x": 4560,
-      "y": 1020,
-      "w": 1440,
-      "h": 1240,
-      "page": "page-vmnxsd",
-      "title": "tin logo · loader animation lab",
-      "is_interactive": true
-    },
-    "GenParts-Kit.dc.html": {
-      "x": 7600,
-      "y": 1400,
-      "w": 1440,
-      "h": 1000,
-      "page": "page-vmnxsd",
-      "title": "Generated parts · kit"
-    },
-    "GenParts-Hero.dc.html": {
-      "x": 9120,
-      "y": 1400,
-      "w": 1440,
-      "h": 900,
-      "page": "page-vmnxsd",
-      "title": "Generated parts · hero composed"
-    },
-    "Postmarks.dc.html": {
-      "x": 10640,
-      "y": 1400,
-      "w": 1440,
-      "h": 1160,
-      "page": "page-vmnxsd",
-      "title": "Stamp · postmark designs",
-      "is_interactive": true
-    },
-    "StampCollection.dc.html": {
-      "x": 12160,
-      "y": 1400,
-      "w": 1440,
-      "h": 640,
-      "page": "page-vmnxsd",
-      "title": "Stamp collection · places"
-    },
-    "WhiskVariations.dc.html": {
-      "x": 7600,
-      "y": 2680,
-      "w": 1440,
-      "h": 720,
-      "page": "page-vmnxsd",
-      "title": "Matcha whisk · 5 interaction ideas",
-      "is_interactive": true
-    },
-    "VariationStudio.dc.html": {
-      "x": 9120,
-      "y": 2840,
-      "w": 1440,
-      "h": 2640,
-      "page": "page-vmnxsd",
-      "title": "Variation A · studio energy",
-      "is_interactive": true
+      "x": 27360,
+      "y": 5640
     },
     "VariationChrome.dc.html": {
-      "x": 10640,
-      "y": 2840,
-      "w": 1440,
       "h": 900,
+      "is_interactive": true,
       "page": "page-vmnxsd",
       "title": "Variation B · chrome type",
-      "is_interactive": true
-    },
-    "VariationPixel.dc.html": {
-      "x": 12160,
-      "y": 2840,
       "w": 1440,
-      "h": 900,
-      "page": "page-vmnxsd",
-      "title": "Variation C · pixel contrail",
-      "is_interactive": true
+      "x": 10640,
+      "y": 2840
     },
     "VariationKind.dc.html": {
-      "x": 13680,
-      "y": 2840,
-      "w": 1440,
       "h": 1400,
+      "is_interactive": true,
       "page": "page-vmnxsd",
       "title": "Variation D · kind words + play",
-      "is_interactive": true
-    },
-    "ParticlePlay.dc.html": {
-      "x": 13680,
-      "y": 4360,
       "w": 1440,
-      "h": 1020,
+      "x": 13680,
+      "y": 2840
+    },
+    "VariationMap-wjo5.dc.html": {
+      "h": 1900,
+      "is_interactive": true,
       "page": "page-vmnxsd",
-      "title": "Play · 5 particle prototypes",
-      "is_interactive": true
+      "title": "Variation F · Tin's map (inspired by aileenis.online) copy",
+      "w": 1440,
+      "x": 25410,
+      "y": 3160
+    },
+    "VariationMap.dc.html": {
+      "h": 1900,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Variation F · Tin's map (inspired by aileenis.online)",
+      "w": 1440,
+      "x": 22800,
+      "y": 5640
+    },
+    "VariationPixel.dc.html": {
+      "h": 900,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Variation C · pixel contrail",
+      "w": 1440,
+      "x": 12160,
+      "y": 2840
+    },
+    "VariationStudio.dc.html": {
+      "h": 2640,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Variation A · studio energy",
+      "w": 1440,
+      "x": 9120,
+      "y": 2840
+    },
+    "VariationStudioWall.dc.html": {
+      "h": 3080,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Variation E · studio pin-up wall (inspired by kevintngo.com + your ID background)",
+      "w": 1440,
+      "x": 16720,
+      "y": 2840
+    },
+    "WhiskVariations.dc.html": {
+      "h": 720,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Matcha whisk · 5 interaction ideas",
+      "w": 1440,
+      "x": 7600,
+      "y": 2680
+    },
+    "WorkCarousel-A.dc.html": {
+      "h": 900,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "My work carousel · A Baggage carousel",
+      "w": 1440,
+      "x": 7600,
+      "y": 0
+    },
+    "WorkCarousel-B.dc.html": {
+      "h": 900,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "My work carousel · B Coverflow",
+      "w": 1440,
+      "x": 9120,
+      "y": 0
+    },
+    "WorkCarousel-C.dc.html": {
+      "h": 900,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "My work carousel · C Window row",
+      "w": 1440,
+      "x": 10640,
+      "y": 0
+    },
+    "WorkCarousel-D.dc.html": {
+      "h": 900,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "My work carousel · D Boarding passes",
+      "w": 1440,
+      "x": 12160,
+      "y": 0
+    },
+    "WorkCarousel-Research.dc.html": {
+      "h": 3640,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "My work carousels v2 · 5 researched patterns",
+      "w": 1440,
+      "x": 19760,
+      "y": 0
+    },
+    "VariationPixelSky.dc.html": {
+      "h": 900,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Variation G · pixel sky (inspired by andreas.vision) · scroll inside",
+      "w": 1440,
+      "x": 28880,
+      "y": 5640
     }
   },
   "createdOnFiles": {
@@ -278,7 +424,8 @@
     "portfolioTitle",
     "carouselTitle",
     "partsTitle",
-    "variationsTitle"
+    "variationsTitle",
+    "carousel2Title"
   ],
   "notes": {
     "boardTitle": {
@@ -288,6 +435,33 @@
       "w": 240,
       "x": 0,
       "y": -320
+    },
+    "carousel2Title": {
+      "kind": "title1",
+      "maxW": 1440,
+      "page": "page-vmnxsd",
+      "text": "My work · carousels v2 (from research)",
+      "w": 240,
+      "x": 19760,
+      "y": -300
+    },
+    "carouselTitle": {
+      "kind": "title1",
+      "maxW": 5980,
+      "page": "page-vmnxsd",
+      "text": "My work · carousel explorations",
+      "w": 240,
+      "x": 7600,
+      "y": -300
+    },
+    "partsTitle": {
+      "kind": "title1",
+      "maxW": 6000,
+      "page": "page-vmnxsd",
+      "text": "Generated parts",
+      "w": 240,
+      "x": 7600,
+      "y": 1110
     },
     "portfolioTitle": {
       "kind": "title1",
@@ -314,29 +488,11 @@
       "x": 0,
       "y": 800
     },
-    "carouselTitle": {
-      "kind": "title1",
-      "maxW": 5980,
-      "page": "page-vmnxsd",
-      "text": "My work · carousel explorations",
-      "w": 240,
-      "x": 7600,
-      "y": -300
-    },
-    "partsTitle": {
-      "kind": "title1",
-      "maxW": 6000,
-      "page": "page-vmnxsd",
-      "text": "Generated parts",
-      "w": 240,
-      "x": 7600,
-      "y": 1110
-    },
     "variationsTitle": {
       "kind": "title1",
-      "maxW": 5960,
+      "maxW": 8000,
       "page": "page-vmnxsd",
-      "text": "Design variations · inspired by wowww.art",
+      "text": "Design variations · inspired by wowww.art + kevintngo.com",
       "w": 240,
       "x": 9120,
       "y": 2600
@@ -374,7 +530,24 @@
     "VariationChrome.dc.html",
     "VariationPixel.dc.html",
     "VariationKind.dc.html",
-    "ParticlePlay.dc.html"
+    "ParticlePlay.dc.html",
+    "MultiplayerScroll.dc.html",
+    "VariationStudioWall.dc.html",
+    "PrototypeWindowToWork.dc.html",
+    "StudioWallHeroes.dc.html",
+    "WorkCarousel-Research.dc.html",
+    "CloudSketchStyles.dc.html",
+    "IllustrationKit.dc.html",
+    "FullWidthScenes.dc.html",
+    "VariationMap.dc.html",
+    "ImageMoods.dc.html",
+    "Piece-o61g.dc.html",
+    "Portfolio20.dc.html",
+    "Piece-0w09.dc.html",
+    "Artboard-xxww.dc.html",
+    "VariationCanvasHeader.dc.html",
+    "VariationMap-wjo5.dc.html",
+    "VariationPixelSky.dc.html"
   ],
   "pages": [
     {
