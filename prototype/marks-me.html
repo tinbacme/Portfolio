@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marks from your story · Tin Le</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500&display=swap">
+<style>
+  :root { --bg: #f5f5f5; --ink: #111; --mute: #707070; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: "Be Vietnam Pro", system-ui, sans-serif; font-size: 16px; line-height: 1.4; }
+  header { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; padding: 48px 56px 32px; }
+  header span { color: var(--mute); }
+  .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 20px; padding: 0 56px 56px; }
+  .cell { display: flex; flex-direction: column; gap: 12px; }
+  .hero { aspect-ratio: 16 / 10; display: grid; place-items: center; background: #ececec; border-radius: 6px; }
+  .hero svg { height: 64%; width: auto; }
+  .name { display: flex; justify-content: space-between; gap: 12px; font-size: 15px; }
+  .name span { color: var(--mute); text-align: right; }
+  .row { display: grid; grid-template-columns: 1.6fr repeat(5, minmax(0, 1fr)); gap: 6px; }
+  .head { display: flex; justify-content: space-between; align-items: center; padding: 0 12px; background: #fff; border-radius: 4px; font-size: 14px; }
+  .head svg { width: 20px; height: 20px; }
+  .pl { aspect-ratio: 1; border-radius: 4px; display: grid; place-items: center; }
+  .pl svg { width: 58%; height: 58%; }
+  .a { opacity: 0; transform-box: fill-box; transform-origin: center; animation: pop .5s cubic-bezier(.3, 1.5, .5, 1) forwards; animation-delay: calc(var(--i) * 80ms + 200ms); }
+  @keyframes pop { from { opacity: 0; transform: scale(.4) translateY(-8px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .a { animation: none; opacity: 1; } }
+</style>
+</head>
+<body>
+<header><div>Hello, I'm Tin<br><span>Six marks from my own story</span></div><div>Things I make, and places I'm from<br><span>no flowers, no pine cones</span></div><div>A few parts each<br><span>so it reads at 16 px</span></div></header>
+<main class="grid" id="grid"></main>
+<script>
+  const rad = a => a * Math.PI / 180, f1 = n => n.toFixed(1);
+  const drop = (x, y, s, f) => `<path d="M${x} ${y - s * 1.6} C ${x + s * .9} ${y - s * .3}, ${x + s} ${y + s * .3}, ${x} ${y + s} C ${x - s} ${y + s * .3}, ${x - s * .9} ${y - s * .3}, ${x} ${y - s * 1.6} Z" fill="${f}"/>`;
+  const marks = [
+    { t: 'Desk lamp', n: 'The lamps I design', draw(f, c) { return [
+      `<rect x="50" y="166" width="84" height="16" rx="8" fill="${f}"/>`,
+      `<path d="M92 168 L70 104" stroke="${f}" stroke-width="11" stroke-linecap="round"/>`,
+      `<circle cx="70" cy="104" r="11" fill="${f}" stroke="${c}" stroke-width="4"/>`,
+      `<path d="M70 104 L124 62" stroke="${f}" stroke-width="11" stroke-linecap="round"/>`,
+      `<circle cx="124" cy="62" r="10" fill="${f}" stroke="${c}" stroke-width="4"/>`,
+      `<path d="M120 50 L164 72 L148 104 Q 128 104 114 82 Z" fill="${f}" transform="rotate(8 140 77)"/>`,
+    ]; } },
+    { t: 'Dovetail', n: 'Woodworking, two parts that lock', draw(f, c) { return [
+      `<path d="M30 96 H72 L64 124 H136 L128 96 H170 V164 H30 Z" fill="${f}"/>`,
+      `<path d="M40 36 H160 V76 H122 L136 124 H64 L78 76 H40 Z" fill="${f}" stroke="${c}" stroke-width="6" stroke-linejoin="round"/>`,
+    ]; } },
+    { t: 'Dial', n: 'Rams, mechanics, the maker’s knob', draw(f, c) {
+      const out = [];
+      for (let i = 0; i < 11; i++) { const a = rad(135 + i * 27); out.push(`<rect x="97" y="10" width="6" height="${i % 5 ? 12 : 20}" rx="3" fill="${f}" transform="rotate(${f1(135 + i * 27 - 270)} 100 100)"/>`); }
+      out.push(`<circle cx="100" cy="100" r="62" fill="${f}"/>`, `<circle cx="100" cy="100" r="48" fill="none" stroke="${c}" stroke-width="4"/>`, `<rect x="95" y="46" width="10" height="34" rx="5" fill="${c}" transform="rotate(40 100 100)"/>`);
+      return out; } },
+    { t: 'Two homes', n: 'The market house and the farm', draw(f, c) { return [
+      `<path d="M44 176 V58 L70 44 L96 58 V176 Z" fill="${f}"/>`,
+      `<rect x="58" y="74" width="24" height="26" rx="2" fill="${c}"/>`, `<rect x="58" y="120" width="24" height="56" rx="2" fill="${c}"/>`,
+      `<path d="M104 176 V118 L132 92 L160 118 V176 Z" fill="${f}"/>`,
+      `<rect x="122" y="132" width="20" height="20" rx="2" fill="${c}"/>`,
+      `<rect x="30" y="176" width="140" height="8" rx="4" fill="${f}"/>`,
+    ]; } },
+    { t: 'Rain on glass', n: 'Drives through Đà Lạt with my dad', draw(f, c) { return [
+      `<path d="M28 160 A 72 72 0 0 1 172 160" fill="none" stroke="${f}" stroke-width="10" stroke-linecap="round"/>`,
+      `<path d="M100 160 L56 104" stroke="${f}" stroke-width="10" stroke-linecap="round"/>`, `<circle cx="100" cy="160" r="12" fill="${f}"/>`,
+      drop(46, 52, 10, f), drop(150, 46, 12, f), drop(176, 94, 8, f), drop(22, 112, 8, f), drop(112, 22, 7, f),
+    ]; } },
+    { t: 'Ripple', n: 'One small change, many people', draw(f, c) { return [
+      `<circle cx="100" cy="100" r="13" fill="${f}"/>`,
+      `<path d="M100 62 A 38 38 0 1 1 64 112" fill="none" stroke="${f}" stroke-width="10" stroke-linecap="round"/>`,
+      `<path d="M100 36 A 64 64 0 1 1 44 130" fill="none" stroke="${f}" stroke-width="10" stroke-linecap="round"/>`,
+      `<path d="M100 10 A 90 90 0 1 1 22 145" fill="none" stroke="${f}" stroke-width="10" stroke-linecap="round"/>`,
+    ]; } },
+  ];
+  const svg = (m, f, c, animate) => `<svg viewBox="0 0 200 200" role="img" aria-label="${m.t} mark">${m.draw(f, c).map((e, i) => animate ? `<g class="a" style="--i:${i}">${e}</g>` : e).join('')}</svg>`;
+  const plates = [['#1d3fc4', '#f6efdd'], ['#d9342b', '#ffd23f'], ['#ffd23f', '#d9342b'], ['#17694a', '#f6efdd'], ['#f6efdd', '#17694a']];
+  document.getElementById('grid').innerHTML = marks.map(m => `
+    <section class="cell">
+      <div class="hero">${svg(m, '#cfcfcf', '#ececec', true)}</div>
+      <div class="name">${m.t}<span>${m.n}</span></div>
+      <div class="row"><div class="head"><span>Tin Le</span>${svg(m, '#111', '#fff', false)}</div>${plates.map(([bg, f]) => `<div class="pl" style="background:${bg}">${svg(m, f, bg, false)}</div>`).join('')}</div>
+    </section>`).join('');
+</script>
+</body>
+</html>
