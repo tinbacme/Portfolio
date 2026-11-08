@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simple pine cone marks · Tin Le</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500&display=swap">
+<style>
+  :root { --bg: #f5f5f5; --ink: #111; --mute: #707070; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: "Be Vietnam Pro", system-ui, sans-serif; font-size: 16px; line-height: 1.4; }
+  header { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; padding: 48px 56px 32px; }
+  header span { color: var(--mute); }
+  .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 20px; padding: 0 56px 56px; }
+  .cell { display: flex; flex-direction: column; gap: 12px; }
+  .hero { aspect-ratio: 16 / 10; display: grid; place-items: center; background: #ececec; border-radius: 6px; }
+  .hero svg { height: 64%; width: auto; }
+  .name { display: flex; justify-content: space-between; gap: 12px; font-size: 15px; }
+  .name span { color: var(--mute); text-align: right; }
+  .row { display: grid; grid-template-columns: 1.6fr repeat(5, minmax(0, 1fr)); gap: 6px; }
+  .head { display: flex; justify-content: space-between; align-items: center; padding: 0 12px; background: #fff; border-radius: 4px; font-size: 14px; }
+  .head svg { width: 20px; height: 20px; }
+  .pl { aspect-ratio: 1; border-radius: 4px; display: grid; place-items: center; }
+  .pl svg { width: 58%; height: 58%; }
+  .a { opacity: 0; transform-box: fill-box; transform-origin: center; animation: pop .5s cubic-bezier(.3, 1.5, .5, 1) forwards; animation-delay: calc(var(--i) * 90ms + 200ms); }
+  @keyframes pop { from { opacity: 0; transform: scale(.3) translateY(-10px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .a { animation: none; opacity: 1; } }
+</style>
+</head>
+<body>
+<header><div>Hello, I'm Tin<br><span>Six simpler pine cones</span></div><div>Three to ten parts each<br><span>so it reads at 16 px</span></div><div>Đà Lạt pines, Oregon pines<br><span>the same tree on both sides of my life</span></div></header>
+<main class="grid" id="grid"></main>
+<script>
+  // A scale: a rounded shield pointing down, top-center at (x, y)
+  const shield = (x, y, w, h, fill) => `<path d="M${x - w / 2} ${y} H${x + w / 2} V${y + h * .45} Q ${x + w / 2} ${y + h} ${x} ${y + h} Q ${x - w / 2} ${y + h} ${x - w / 2} ${y + h * .45} Z" fill="${fill}"/>`;
+  const marks = [
+    { t: 'Nine', n: '1 · 2 · 3 · 2 · 1 scales', draw(f, c) {
+      const rows = [[0], [-1, 1], [-2, 0, 2], [-1, 1], [0]], out = [`<rect x="96" y="12" width="8" height="22" rx="4" fill="${f}"/>`];
+      rows.forEach((r, i) => r.forEach(k => out.push(shield(100 + k * 22, 30 + i * 30, 42, 46, f).replace('/>', ` stroke="${c}" stroke-width="6"/>`))));
+      return out; } },
+    { t: 'Chevron', n: 'One shape, three cuts', draw(f, c) {
+      const out = [`<path d="M100 26 C 150 40, 160 110, 100 186 C 40 110, 50 40, 100 26 Z" fill="${f}"/>`, `<rect x="96" y="8" width="8" height="24" rx="4" fill="${f}"/>`];
+      [66, 102, 138].forEach(y => out.push(`<path d="M56 ${y - 22} L100 ${y} L144 ${y - 22}" fill="none" stroke="${c}" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>`));
+      return out; } },
+    { t: 'Arches', n: 'Four stacked arches', draw(f, c) {
+      const out = [`<rect x="96" y="12" width="8" height="22" rx="4" fill="${f}"/>`];
+      [[34, 24], [62, 40], [96, 52], [134, 40]].forEach(([y, hw]) => out.push(`<path d="M${100 - hw} ${y} H${100 + hw} Q ${100 + hw} ${y + hw * 1.15} 100 ${y + hw * 1.25} Q ${100 - hw} ${y + hw * 1.15} ${100 - hw} ${y} Z" fill="${f}" stroke="${c}" stroke-width="5"/>`));
+      return out; } },
+    { t: 'Diamond', n: 'Four diamonds, Rams-strict', draw(f, c) {
+      const d = (x, y, s) => `<path d="M${x} ${y - s} L${x + s * .8} ${y} L${x} ${y + s} L${x - s * .8} ${y} Z" fill="${f}"/>`;
+      return [`<rect x="96" y="10" width="8" height="24" rx="4" fill="${f}"/>`, d(100, 66, 30), d(73, 108, 30), d(127, 108, 30), d(100, 150, 30)]; } },
+    { t: 'T stem', n: 'The stem is a T, for Tin', draw(f, c) {
+      const out = [`<path d="M100 34 C 150 48, 160 112, 100 186 C 40 112, 50 48, 100 34 Z" fill="${f}"/>`, `<rect x="95" y="14" width="10" height="26" rx="3" fill="${f}"/>`, `<rect x="74" y="10" width="52" height="10" rx="3" fill="${f}"/>`];
+      [72, 106, 140].forEach(y => out.push(`<path d="M58 ${y - 20} L100 ${y} L142 ${y - 20}" fill="none" stroke="${c}" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>`));
+      return out; } },
+    { t: 'Pen chevron', n: 'The chevron, drawn with one pen', draw(f, c) {
+      const out = [`<path d="M100 30 C 148 44, 156 110, 100 182 C 44 110, 52 44, 100 30 Z" fill="none" stroke="${f}" stroke-width="8" stroke-linejoin="round"/>`, `<path d="M100 12 V30" stroke="${f}" stroke-width="8" stroke-linecap="round"/>`];
+      [[70, 34], [104, 40], [138, 33]].forEach(([y, hw]) => out.push(`<path d="M${100 - hw} ${y - 17} L100 ${y} L${100 + hw} ${y - 17}" fill="none" stroke="${f}" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>`));
+      return out; } },
+  ];
+  const svg = (m, f, c, animate) => `<svg viewBox="0 0 200 200" role="img" aria-label="${m.t} pine cone mark">${m.draw(f, c).map((e, i) => animate ? `<g class="a" style="--i:${i}">${e}</g>` : e).join('')}</svg>`;
+  const plates = [['#1d3fc4', '#f6efdd'], ['#d9342b', '#ffd23f'], ['#ffd23f', '#d9342b'], ['#17694a', '#f6efdd'], ['#f6efdd', '#17694a']];
+  document.getElementById('grid').innerHTML = marks.map(m => `
+    <section class="cell">
+      <div class="hero">${svg(m, '#cfcfcf', '#ececec', true)}</div>
+      <div class="name">${m.t}<span>${m.n}</span></div>
+      <div class="row"><div class="head"><span>Tin Le</span>${svg(m, '#111', '#fff', false)}</div>${plates.map(([bg, f]) => `<div class="pl" style="background:${bg}">${svg(m, f, bg, false)}</div>`).join('')}</div>
+    </section>`).join('');
+</script>
+</body>
+</html>
