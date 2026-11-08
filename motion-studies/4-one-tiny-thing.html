@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>One tiny thing</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;800;900&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+  :root { --pine: #124734; --cream: #f3eedf; --sun: #f2c230; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--pine); color: var(--cream); font-family: "Be Vietnam Pro", system-ui, sans-serif; }
+  .track { height: 700vh; }
+  .stage { position: sticky; top: 0; height: 100vh; overflow: hidden; }
+  canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .meta { position: absolute; top: 28px; left: 36px; right: 36px; display: flex; justify-content: space-between; font: 500 12px/1 "JetBrains Mono", monospace; letter-spacing: .05em; text-transform: uppercase; z-index: 3; }
+  .look { position: absolute; left: 36px; top: 70px; margin: 0; font-weight: 900; font-size: min(15vw, 230px); line-height: .84; letter-spacing: -.06em; opacity: var(--lo); z-index: 1; }
+  .box h1, .box { margin: 0; } .box { position: absolute; left: 50%; top: 50%; width: 260px; height: 44px; transform: translate(-50%, -50%) scale(var(--bs)); display: flex; align-items: center; gap: 10px; padding: 0 16px; background: var(--cream); color: #3d4a44; border-radius: 22px; font-size: 15px; z-index: 2; box-shadow: 0 0 0 1px rgba(0,0,0,.08); }
+  .box svg { flex: 0 0 auto; }
+  .box .caret { width: 1.5px; height: 18px; background: #124734; animation: blink 1s steps(1) infinite; margin-left: -6px; }
+  @keyframes blink { 50% { opacity: 0; } }
+  .cap { position: absolute; left: 50%; top: calc(50% + 46px); transform: translateX(-50%); font-size: 17px; white-space: nowrap; opacity: var(--co); z-index: 2; }
+  .count { position: absolute; left: 36px; top: 78px; z-index: 3; opacity: var(--no); }
+  .count b { display: block; font-weight: 900; font-size: min(9vw, 132px); line-height: .9; letter-spacing: -.05em; color: var(--sun); font-variant-numeric: tabular-nums; }
+  .count span { font: 500 13px "JetBrains Mono", monospace; text-transform: uppercase; letter-spacing: .05em; }
+  .end { position: absolute; left: 36px; bottom: 34px; z-index: 3; opacity: var(--eo); transform: translateY(calc((1 - var(--eo)) * 40px)); }
+  .end h2 { margin: 0; font-weight: 900; font-size: min(10vw, 150px); line-height: .86; letter-spacing: -.055em; }
+  .end a { display: inline-block; margin-top: 18px; color: var(--cream); font: 500 13px "JetBrains Mono", monospace; text-transform: uppercase; letter-spacing: .05em; }
+</style>
+</head>
+<body>
+<div class="track">
+<div class="stage" id="stage">
+  <canvas id="c"></canvas>
+  <div class="meta"><span>Tin Le · product designer, Microsoft</span><span>Scroll to zoom out</span></div>
+  <div class="box" aria-label="A search box"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#124734" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="M15.5 15.5 21 21"></path></svg><span class="caret"></span><span id="ph">Look closer.</span></div>
+  <p class="cap">A search box. Small. I spent a long time on it.</p>
+  <div class="count"><b id="n">1</b><span id="nl">person</span></div>
+  <div class="end"><h2>One small change.<br>Billions of people.</h2><a href="#windows-search">Windows Search · read the case study →</a></div>
+</div>
+</div>
+<script>
+  const st = document.getElementById('stage'), cv = document.getElementById('c'), cx = cv.getContext('2d');
+  const ph = document.getElementById('ph'), nEl = document.getElementById('n'), nl = document.getElementById('nl');
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  const seg = (p, a, b) => clamp((p - a) / (b - a));
+  const ease = t => 1 - Math.pow(1 - t, 3);
+  let W, H, pts = [];
+  function size() {
+    const d = devicePixelRatio || 1; W = innerWidth; H = innerHeight;
+    cv.width = W * d; cv.height = H * d; cx.setTransform(d, 0, 0, d, 0, 0);
+    pts = []; let s = 7;
+    const rnd = () => (s = (s * 16807) % 2147483647) / 2147483647;
+    for (let i = 0; i < 9000; i++) {
+      const a = rnd() * Math.PI * 2, r = 40 + Math.pow(rnd(), .62) * Math.hypot(W, H) * .62;
+      pts.push({ x: W / 2 + Math.cos(a) * r * 1.25, y: H / 2 + Math.sin(a) * r * .8, r, y2: rnd() < .06 });
+    }
+    pts.sort((a, b) => a.r - b.r);
+  }
+  size(); addEventListener('resize', size);
+  const steps = [[1, 'person'], [10, 'people'], [1000, 'people'], [100000, 'people'], [10000000, 'people'], [1000000000, 'people and counting']];
+  function frame() {
+    const p = clamp(scrollY / (document.body.scrollHeight - innerHeight));
+    st.style.setProperty('--bs', (1 + 11 * (1 - ease(seg(p, .02, .26)))).toFixed(3));
+    ph.textContent = p < .16 ? 'Look closer.' : 'Search';
+    st.style.setProperty('--co', (seg(p, .24, .3) * (1 - seg(p, .4, .46))).toFixed(3));
+    const g = seg(p, .42, .86);
+    st.style.setProperty('--no', (seg(p, .42, .46) * (1 - seg(p, .86, .9))).toFixed(3));
+    st.style.setProperty('--eo', ease(seg(p, .88, .96)).toFixed(3));
+    const k = Math.min(steps.length - 1, Math.floor(g * steps.length));
+    nEl.textContent = steps[k][0].toLocaleString('en-US'); nl.textContent = steps[k][1];
+    cx.clearRect(0, 0, W, H);
+    const shown = Math.floor(Math.pow(g, 1.6) * pts.length);
+    cx.strokeStyle = 'rgba(243,238,223,.10)'; cx.lineWidth = 1;
+    for (let i = 0; i < Math.min(shown, 140); i += 1) { const q = pts[i * 40 % pts.length]; if (i * 40 >= shown) break; cx.beginPath(); cx.moveTo(W / 2, H / 2); cx.lineTo(q.x, q.y); cx.stroke(); }
+    for (let i = 0; i < shown; i++) { const q = pts[i]; cx.fillStyle = q.y2 ? '#f2c230' : 'rgba(243,238,223,.85)'; cx.fillRect(q.x, q.y, 2.4, 2.4); }
+    requestAnimationFrame(frame);
+  }
+  frame();
+</script>
+</body>
+</html>

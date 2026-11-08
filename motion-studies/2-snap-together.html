@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Snap together</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;800;900&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+  :root { --bg: #ee5a2b; --cream: #f4eee1; --ink: #151412; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: "Be Vietnam Pro", system-ui, sans-serif; }
+  .track { height: 700vh; }
+  .stage { position: sticky; top: 0; height: 100vh; overflow: hidden; display: grid; grid-template-columns: 44% 56%; }
+  .meta { position: absolute; top: 28px; left: 36px; right: 36px; display: flex; justify-content: space-between; font: 500 12px/1 "JetBrains Mono", monospace; letter-spacing: .04em; text-transform: uppercase; z-index: 2; }
+  .words { align-self: center; padding-left: 36px; display: flex; flex-direction: column; }
+  .w { font-weight: 900; font-size: min(10.5vw, 150px); line-height: .86; letter-spacing: -.055em; opacity: var(--o, 0); transform: translateY(calc((1 - var(--o, 0)) * 40px)); }
+  .w.cream { color: var(--cream); }
+  .rig { position: relative; align-self: center; }
+  svg { width: 100%; height: auto; overflow: visible; display: block; }
+  .tag { font: 500 11px "JetBrains Mono", monospace; fill: var(--ink); letter-spacing: .04em; }
+  .cap { position: absolute; left: 36px; bottom: 30px; font-size: 18px; line-height: 1.45; max-width: 520px; opacity: var(--co, 0); z-index: 2; }
+  .cap b { font-weight: 800; }
+  .hint { position: absolute; right: 36px; bottom: 30px; font: 500 12px "JetBrains Mono", monospace; text-transform: uppercase; letter-spacing: .04em; }
+</style>
+</head>
+<body>
+<div class="track">
+<div class="stage" id="stage">
+  <div class="meta"><span>Tin Le · product designer</span><span>Assembly 01 of 01</span></div>
+  <div class="words" aria-label="I make useful little things.">
+    <span class="w" data-t="0.08">I</span>
+    <span class="w" data-t="0.2">make</span>
+    <span class="w" data-t="0.32">useful</span>
+    <span class="w" data-t="0.44">little</span>
+    <span class="w cream" data-t="0.56">things.</span>
+  </div>
+  <div class="rig">
+    <svg viewBox="-60 -40 720 520" role="img" aria-label="A small radio-like device assembling from its parts">
+      <ellipse id="shadow" cx="300" cy="392" rx="250" ry="16" fill="#151412" opacity=".18"></ellipse>
+      <g class="part" data-t="0.08" data-dx="-40" data-dy="300" data-r="-8"><rect x="40" y="60" width="520" height="300" rx="64" fill="#f4eee1" stroke="#151412" stroke-width="4"></rect></g>
+      <g class="part" data-t="0.2" data-dx="60" data-dy="-260" data-r="6"><rect x="72" y="92" width="456" height="236" rx="40" fill="#e6dcc8" stroke="#151412" stroke-width="3"></rect></g>
+      <g class="part" data-t="0.32" data-dx="-330" data-dy="-120" data-r="-10"><rect x="100" y="120" width="210" height="72" rx="10" fill="#151412"></rect><text id="screen" x="118" y="164" font-family="JetBrains Mono, monospace" font-size="17" fill="#f2b23a">HI, I'M TIN.</text></g>
+      <g class="part" data-t="0.44" data-dx="-300" data-dy="220" data-r="12" id="grille"></g>
+      <g class="part" data-t="0.56" data-dx="300" data-dy="40" data-r="90"><g id="dial"><circle cx="425" cy="212" r="84" fill="#151412"></circle><circle cx="425" cy="212" r="70" fill="none" stroke="#3a3833" stroke-width="10" stroke-dasharray="2 4"></circle><rect x="421" y="140" width="8" height="38" rx="4" fill="#f4eee1"></rect></g></g>
+      <g class="part" data-t="0.66" data-dx="200" data-dy="260" data-r="0"><circle cx="330" cy="296" r="11" fill="#ee5a2b" stroke="#151412" stroke-width="3"></circle><text class="tag" x="350" y="300">ON</text></g>
+      <g class="part" data-t="0.72" data-dx="0" data-dy="160" data-r="0"><rect x="120" y="356" width="70" height="14" rx="7" fill="#151412"></rect><rect x="410" y="356" width="70" height="14" rx="7" fill="#151412"></rect></g>
+      <g class="part" data-t="0.78" data-dx="0" data-dy="-200" data-r="0"><text x="470" y="340" font-family="JetBrains Mono, monospace" font-size="13" fill="#151412">TL-1</text></g>
+      <circle id="click" cx="300" cy="210" r="10" fill="none" stroke="#f4eee1" stroke-width="3" opacity="0"></circle>
+    </svg>
+  </div>
+  <p class="cap" id="cap"><b>TL-1.</b> The tiny thing I built for this site. Turn the dial to tune through my work.</p>
+  <div class="hint">Scroll to assemble</div>
+</div>
+</div>
+<script>
+  const st = document.getElementById('stage');
+  const grille = document.getElementById('grille');
+  let dots = '';
+  for (let r = 0; r < 6; r++) for (let c = 0; c < 14; c++) dots += `<circle cx="${110 + c * 14.5}" cy="${222 + r * 15}" r="4" fill="#151412"></circle>`;
+  grille.innerHTML = dots;
+  const parts = [...document.querySelectorAll('.part')], words = [...document.querySelectorAll('.w')];
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  const backOut = t => { const c = 1.9; return 1 + (c + 1) * Math.pow(t - 1, 3) + c * Math.pow(t - 1, 2); };
+  const projects = ['HI, I\'M TIN.', 'BING REAL EST.', 'WINDOWS SEARCH', 'EDGE + BING', 'HOW I LEAD', 'SALESFORCE'];
+  const screen = document.getElementById('screen'), dial = document.getElementById('dial'), click = document.getElementById('click');
+  function frame() {
+    const p = clamp(scrollY / (document.body.scrollHeight - innerHeight));
+    let lastSnap = -1;
+    parts.forEach(g => {
+      const t0 = +g.dataset.t, k = clamp((p - (t0 - .07)) / .07), e = backOut(k), u = 1 - e;
+      g.setAttribute('transform', `translate(${(+g.dataset.dx * u).toFixed(1)} ${(+g.dataset.dy * u).toFixed(1)}) rotate(${(+g.dataset.r * u).toFixed(2)} 300 210)`);
+      g.style.opacity = (0.35 + 0.65 * clamp(k * 3)).toFixed(2);
+      if (k >= 1) lastSnap = Math.max(lastSnap, t0);
+    });
+    const since = p - lastSnap;
+    click.setAttribute('r', (10 + since * 2400).toFixed(1));
+    click.setAttribute('opacity', lastSnap > 0 && since < .03 ? (1 - since / .03).toFixed(2) : 0);
+    words.forEach(w => w.style.setProperty('--o', clamp((p - (+w.dataset.t - .05)) / .05).toFixed(3)));
+    const tune = clamp((p - .84) / .16);
+    dial.setAttribute('transform', `rotate(${(tune * 300).toFixed(1)} 425 212)`);
+    screen.textContent = projects[Math.min(projects.length - 1, Math.floor(tune * projects.length))];
+    st.style.setProperty('--co', clamp((p - .8) / .05).toFixed(3));
+    requestAnimationFrame(frame);
+  }
+  frame();
+</script>
+</body>
+</html>

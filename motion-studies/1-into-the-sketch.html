@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Into the sketch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;800;900&family=Caveat:wght@500&display=swap">
+<style>
+  :root { --ink: #111311; --paper: #fbfbf7; --pine: #1d6b47; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--paper); color: var(--ink); font-family: "Be Vietnam Pro", system-ui, sans-serif; }
+  .track { height: 600vh; }
+  .stage { position: sticky; top: 0; height: 100vh; overflow: hidden; }
+  .cam { position: absolute; inset: 0; transform-origin: var(--ox) var(--oy); transform: scale(var(--z)); will-change: transform; }
+  .frame { position: absolute; left: 50%; top: 50%; width: min(100vw, 150vh); aspect-ratio: 1536 / 1024; transform: translate(-50%, -50%); }
+  .frame img { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .ex { opacity: var(--exo); }
+  .sk { opacity: calc(1 - var(--exo)); }
+  .meta { position: absolute; top: 28px; left: 32px; right: 32px; display: flex; justify-content: space-between; font-size: 13px; letter-spacing: .02em; z-index: 3; }
+  .meta b { font-weight: 800; }
+  .hero { position: absolute; left: 32px; bottom: 24px; z-index: 3; opacity: var(--ho); transform: translateY(calc((1 - var(--ho)) * 60px)); }
+  .hero h1 { margin: 0; font-weight: 900; font-size: min(17vw, 250px); line-height: .82; letter-spacing: -.06em; }
+  .hero h1 em { font-style: normal; color: var(--pine); }
+  .hero p { margin: 18px 0 0 6px; font-size: 18px; max-width: 460px; line-height: 1.45; }
+  .cap { position: absolute; left: 50%; bottom: 48px; transform: translateX(-50%); z-index: 3; font: 500 34px/1.1 "Caveat", cursive; opacity: var(--co); white-space: nowrap; }
+  .labels { position: absolute; inset: 0; pointer-events: none; }
+  .lb { position: absolute; display: flex; flex-direction: column; gap: 2px; opacity: var(--o); transform: translateX(calc((1 - var(--o)) * -24px)); pointer-events: auto; }
+  .lb strong { font-weight: 800; font-size: 22px; letter-spacing: -.02em; }
+  .lb span { font-size: 14px; color: #3a3d3a; }
+  a.lb { color: inherit; text-decoration: none; }
+  a.lb:hover strong { color: var(--pine); }
+  .end { position: absolute; left: 32px; bottom: 28px; z-index: 3; font-size: 13px; opacity: var(--lo); }
+</style>
+</head>
+<body>
+<div class="track">
+  <div class="stage" id="stage">
+    <div class="meta"><span><b>Tin Le</b> · product designer</span><span>Đà Lạt → Oregon → Microsoft</span></div>
+    <div class="cam" id="cam"><div class="frame">
+      <img class="sk" src="sketch.jpg" alt="Pencil sketch of a desk lamp with callouts for the pivot, spring and weighted base">
+      <img class="ex" src="exploded.jpg" alt="The same lamp as an exploded-view sketch with five numbered parts">
+      <div class="labels">
+      <a class="lb" data-i="0" style="left: 75.4%; top: 4.6%" href="#windows"><strong>Windows Search</strong><span>The shade. What billions of people see.</span></a>
+      <a class="lb" data-i="1" style="right: 60.2%; top: 15.4%; text-align: right; align-items: flex-end" href="#bing"><strong>Bing Real Estate</strong><span>The arm. Sole designer, +15% daily users.</span></a>
+      <a class="lb" data-i="2" style="left: 50.3%; top: 37.4%" href="#lead"><strong>How I lead</strong><span>The spring. ProtoPie licenses 3 → 23.</span></a>
+      <a class="lb" data-i="3" style="left: 54.9%; top: 58.4%" href="#surfaces"><strong>Across Windows, Edge, Bing</strong><span>The joints. Small parts that hold it together.</span></a>
+      <a class="lb" data-i="4" style="left: 61.4%; top: 80.4%" href="#salesforce"><strong>Salesforce</strong><span>The weighted base. Where I learned the craft.</span></a>
+    </div>
+    </div>    </div>
+    <div class="hero"><h1>I draw it<br><em>first.</em></h1><p>Industrial designer by training, product designer at Microsoft. Scroll to look closer.</p></div>
+    <div class="cap" id="cap">every product starts as a sketch like this one</div>
+    <div class="end">Every part is a case study →</div>
+  </div>
+</div>
+<script>
+  const st = document.getElementById('stage'), labels = [...document.querySelectorAll('.lb')];
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  const seg = (p, a, b) => clamp((p - a) / (b - a));
+  const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  function frame() {
+    const p = clamp(scrollY / (document.body.scrollHeight - innerHeight));
+    const zin = ease(seg(p, .12, .42)), zout = ease(seg(p, .52, .7));
+    const z = 1 + 3.2 * zin - 3.2 * zout;
+    st.style.setProperty('--z', z.toFixed(4));
+    st.style.setProperty('--ox', '59%'); st.style.setProperty('--oy', '13%');
+    st.style.setProperty('--exo', seg(p, .44, .52).toFixed(3));
+    st.style.setProperty('--ho', (1 - seg(p, .06, .18)).toFixed(3));
+    st.style.setProperty('--co', (seg(p, .3, .36) * (1 - seg(p, .5, .56))).toFixed(3));
+    labels.forEach((l, i) => l.style.setProperty('--o', ease(seg(p, .7 + i * .05, .76 + i * .05)).toFixed(3)));
+    st.style.setProperty('--lo', seg(p, .95, 1).toFixed(3));
+    requestAnimationFrame(frame);
+  }
+  frame();
+</script>
+</body>
+</html>
