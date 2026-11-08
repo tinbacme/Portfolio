@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Tin Le · Homepage</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#141414;text-decoration:none}a:hover{color:#141414;text-decoration:underline;text-underline-offset:3px}
+.th-loop img{transition:opacity .12s, transform .28s cubic-bezier(.3,1.6,.5,1)}
+@media (max-width: 820px){
+  .th-hero{grid-template-columns:1fr !important;gap:36px !important;padding-top:48px !important}
+  .th-hero-mark{order:-1;justify-self:start !important;width:150px !important}
+  .th-shots{grid-template-columns:1fr !important}
+  .th-side{grid-template-rows:none !important;grid-template-columns:1fr 1fr !important}
+  .th-small{aspect-ratio:4 / 3}
+  .th-meta{grid-template-columns:1fr !important;gap:2px !important}
+}
+</style>
+</helmet>
+<div style="background: #f5f5f5; color: #141414; font-family: 'Be Vietnam Pro', system-ui, sans-serif; font-size: 16px; line-height: 1.4; min-height: 100%">
+
+  <header style="position: sticky; top: 0; z-index: 10; display: flex; justify-content: space-between; align-items: center; padding: 14px 40px; background: rgba(245, 245, 245, 0.9)">
+    <a href="#top">Tin Le</a>
+    <button type="button" class="th-loop" aria-label="Tin's logo. Click to change it" onClick="{{next}}" style="position: relative; width: 30px; height: 30px; border: 0; padding: 0; background: none; cursor: pointer">
+      <sc-for list="{{frames}}" as="f" hint-placeholder-count="8"><img src="{{f.src}}" alt="" style="{{f.style}}"></sc-for>
+    </button>
+  </header>
+
+  <section id="top" class="th-hero" style="min-height: 760px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(220px, 1.1fr); align-items: center; gap: 24px; padding: 0 100px">
+    <div><p style="margin: 0; font-size: 22px">Hi, I'm Tin</p></div>
+    <div style="display: flex; flex-direction: column; gap: 4px">
+      <p style="margin: 0; font-size: 22px">I design products</p>
+      <p style="margin: 0; font-size: 22px; color: #6e6e6e">at Microsoft</p>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 4px">
+      <p style="margin: 0; font-size: 22px">Let's talk</p>
+      <a href="https://www.linkedin.com/in/[YOUR-HANDLE]" style="font-size: 22px; color: #6e6e6e">LinkedIn</a>
+      <button type="button" onClick="{{copy}}" style="align-self: flex-start; background: none; border: 0; padding: 0; font: inherit; font-size: 22px; color: #6e6e6e; cursor: pointer">{{copyLabel}}</button>
+    </div>
+    <button type="button" class="th-loop th-hero-mark" aria-label="Tin's logo, hand-drawn in many ways. Click to change it" onClick="{{next}}" style="position: relative; justify-self: end; width: 300px; aspect-ratio: 1; border: 0; padding: 0; background: none; cursor: pointer; opacity: {{markOpacity}}">
+      <sc-for list="{{frames}}" as="f" hint-placeholder-count="8"><img src="{{f.src}}" alt="" style="{{f.style}}"></sc-for>
+    </button>
+  </section>
+
+  <main aria-label="Work" style="display: flex; flex-direction: column; gap: 88px; padding: 24px 40px 96px">
+
+    <a href="#bing" style="display: flex; flex-direction: column; gap: 14px; text-decoration: none">
+      <div class="th-shots" style="display: grid; grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr); gap: 12px">
+        <div style="aspect-ratio: 16 / 10; border-radius: 6px; background: #1d3fc4; display: grid; place-items: center"><div style="width: 78%; aspect-ratio: 16 / 10; border-radius: 8px; background: #ffffff; display: grid; place-items: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); font-size: 12px; color: #8a8a8a; letter-spacing: 0.06em; text-transform: uppercase">Search results and map</div></div>
+        <div class="th-side" style="display: grid; grid-template-rows: 1fr 1fr; gap: 12px">
+          <div class="th-small" style="border-radius: 6px; background: #1d3fc4; display: grid; place-items: center"><div style="width: 72%; aspect-ratio: 16 / 10; border-radius: 8px; background: #ffffff; display: grid; place-items: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); font-size: 12px; color: #8a8a8a; letter-spacing: 0.06em; text-transform: uppercase">Listing</div></div>
+          <div class="th-small" style="border-radius: 6px; background: #1d3fc4; display: grid; place-items: center"><div style="width: 72%; aspect-ratio: 16 / 10; border-radius: 8px; background: #ffffff; display: grid; place-items: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); font-size: 12px; color: #8a8a8a; letter-spacing: 0.06em; text-transform: uppercase">Saved homes</div></div>
+        </div>
+      </div>
+      <div class="th-meta" style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) auto; gap: 16px; font-size: 15px">
+        <span>Bing Real Estate</span><span style="color: #6e6e6e">Sole designer. 103,000 homes saved and 15% more people every day.</span><span style="color: #6e6e6e">Read ↗</span>
+      </div>
+    </a>
+
+    <a href="#search" style="display: flex; flex-direction: column; gap: 14px; text-decoration: none">
+      <div class="th-shots" style="display: grid; grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr); gap: 12px">
+        <div style="aspect-ratio: 16 / 10; border-radius: 6px; background: #ffd23f; display: grid; place-items: center"><div style="width: 78%; aspect-ratio: 16 / 10; border-radius: 8px; background: #ffffff; display: grid; place-items: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); font-size: 12px; color: #8a8a8a; letter-spacing: 0.06em; text-transform: uppercase">[Cleared screen]</div></div>
+        <div class="th-side" style="display: grid; grid-template-rows: 1fr 1fr; gap: 12px">
+          <div class="th-small" style="border-radius: 6px; background: #ffd23f; display: grid; place-items: center"><div style="width: 72%; aspect-ratio: 16 / 10; border-radius: 8px; background: #ffffff; display: grid; place-items: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); font-size: 12px; color: #8a8a8a; letter-spacing: 0.06em; text-transform: uppercase">[Cleared screen]</div></div>
+          <div class="th-small" style="border-radius: 6px; background: #ffd23f; display: grid; place-items: center"><div style="width: 72%; aspect-ratio: 16 / 10; border-radius: 8px; background: #ffffff; display: grid; place-items: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); font-size: 12px; color: #8a8a8a; letter-spacing: 0.06em; text-transform: uppercase">[Cleared screen]</div></div>
+        </div>
+      </div>
+      <div class="th-meta" style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) auto; gap: 16px; font-size: 15px">
+        <span>Windows search and Copilot</span><span style="color: #6e6e6e">Not public yet. Ask me and I'll walk you through it.</span><span style="color: #6e6e6e">Read ↗</span>
+      </div>
+    </a>
+
+    <a href="#surfaces" style="display: flex; flex-direction: column; gap: 14px; text-decoration: none">
+      <div class="th-shots" style="display: grid; grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr); gap: 12px">
+        <div style="aspect-ratio: 16 / 10; border-radius: 6px; background: #17694a; display: grid; place-items: center"><div style="width: 78%; aspect-ratio: 16 / 10; border-radius: 8px; background: #ffffff; display: grid; place-items: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); font-size: 12px; color: #8a8a8a; letter-spacing: 0.06em; text-transform: uppercase">Windows calendar</div></div>
+        <div class="th-side" style="display: grid; grid-template-rows: 1fr 1fr; gap: 12px">
+          <div class="th-small" style="border-radius: 6px; background: #17694a; display: grid; place-items: center"><div style="width: 72%; aspect-ratio: 16 / 10; border-radius: 8px; background: #ffffff; display: grid; place-items: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); font-size: 12px; color: #8a8a8a; letter-spacing: 0.06em; text-transform: uppercase">Lock screen widget</div></div>
+          <div class="th-small" style="border-radius: 6px; background: #17694a; display: grid; place-items: center"><div style="width: 72%; aspect-ratio: 16 / 10; border-radius: 8px; background: #ffffff; display: grid; place-items: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); font-size: 12px; color: #8a8a8a; letter-spacing: 0.06em; text-transform: uppercase">Edge search bar</div></div>
+        </div>
+      </div>
+      <div class="th-meta" style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) auto; gap: 16px; font-size: 15px">
+        <span>Across Windows, Edge and Bing</span><span style="color: #6e6e6e">A calendar sprint, a lock screen widget and search bar prototypes.</span><span style="color: #6e6e6e">Read ↗</span>
+      </div>
+    </a>
+
+    <a href="#lead" style="display: flex; flex-direction: column; gap: 14px; text-decoration: none">
+      <div class="th-shots" style="display: grid; grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr); gap: 12px">
+        <div style="aspect-ratio: 16 / 10; border-radius: 6px; background: #d9342b; display: grid; place-items: center"><div style="width: 78%; aspect-ratio: 16 / 10; border-radius: 8px; background: #ffffff; display: grid; place-items: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); font-size: 12px; color: #8a8a8a; letter-spacing: 0.06em; text-transform: uppercase">ProtoPie workshop</div></div>
+        <div class="th-side" style="display: grid; grid-template-rows: 1fr 1fr; gap: 12px">
+          <div class="th-small" style="border-radius: 6px; background: #d9342b; display: grid; place-items: center"><div style="width: 72%; aspect-ratio: 16 / 10; border-radius: 8px; background: #ffffff; display: grid; place-items: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); font-size: 12px; color: #8a8a8a; letter-spacing: 0.06em; text-transform: uppercase">Class critique</div></div>
+          <div class="th-small" style="border-radius: 6px; background: #d9342b; display: grid; place-items: center"><div style="width: 72%; aspect-ratio: 16 / 10; border-radius: 8px; background: #ffffff; display: grid; place-items: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); font-size: 12px; color: #8a8a8a; letter-spacing: 0.06em; text-transform: uppercase">Team review</div></div>
+        </div>
+      </div>
+      <div class="th-meta" style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) auto; gap: 16px; font-size: 15px">
+        <span>How I lead</span><span style="color: #6e6e6e">ProtoPie at Microsoft from 3 licenses to 23, and UX classes at the University of Oregon.</span><span style="color: #6e6e6e">Read ↗</span>
+      </div>
+    </a>
+
+    <a href="#salesforce" style="display: flex; flex-direction: column; gap: 14px; text-decoration: none">
+      <div class="th-shots" style="display: grid; grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr); gap: 12px">
+        <div style="aspect-ratio: 16 / 10; border-radius: 6px; background: #f1e9d6; display: grid; place-items: center"><div style="width: 78%; aspect-ratio: 16 / 10; border-radius: 8px; background: #ffffff; display: grid; place-items: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); font-size: 12px; color: #8a8a8a; letter-spacing: 0.06em; text-transform: uppercase">Help home</div></div>
+        <div class="th-side" style="display: grid; grid-template-rows: 1fr 1fr; gap: 12px">
+          <div class="th-small" style="border-radius: 6px; background: #f1e9d6; display: grid; place-items: center"><div style="width: 72%; aspect-ratio: 16 / 10; border-radius: 8px; background: #ffffff; display: grid; place-items: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); font-size: 12px; color: #8a8a8a; letter-spacing: 0.06em; text-transform: uppercase">Manage Users</div></div>
+          <div class="th-small" style="border-radius: 6px; background: #f1e9d6; display: grid; place-items: center"><div style="width: 72%; aspect-ratio: 16 / 10; border-radius: 8px; background: #ffffff; display: grid; place-items: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); font-size: 12px; color: #8a8a8a; letter-spacing: 0.06em; text-transform: uppercase">Article</div></div>
+        </div>
+      </div>
+      <div class="th-meta" style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) auto; gap: 16px; font-size: 15px">
+        <span>Salesforce Help</span><span style="color: #6e6e6e">97% of people found their answer without filing a case.</span><span style="color: #6e6e6e">Read ↗</span>
+      </div>
+    </a>
+  </main>
+
+  <footer style="display: flex; justify-content: space-between; align-items: center; padding: 28px 40px 40px; color: #6e6e6e; font-size: 14px">
+    <span>© 2026 Tin Le · Grew up in Đà Lạt, made in Oregon</span>
+    <button type="button" class="th-loop" aria-label="Tin's logo" onClick="{{next}}" style="position: relative; width: 28px; height: 28px; border: 0; padding: 0; background: none; cursor: pointer">
+      <sc-for list="{{frames}}" as="f" hint-placeholder-count="8"><img src="{{f.src}}" alt="" style="{{f.style}}"></sc-for>
+    </button>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"speed":{"editor":"int","default":700,"min":200,"max":3000,"step":50,"unit":"ms","section":"Logo loop"},"markOpacity":{"editor":"range","default":0.3,"min":0.1,"max":1,"step":0.05,"section":"Logo loop"},"$preview":{"width":1440,"height":4600}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { i: 0, copied: false }; }
+  componentDidMount() { this.start(); }
+  componentDidUpdate(prev) { if (prev.speed !== this.props.speed) this.start(); }
+  componentWillUnmount() { clearInterval(this.timer); clearTimeout(this.t2); }
+  start() {
+    clearInterval(this.timer);
+    const reduce = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) { this.setState({ i: 7 }); return; }
+    this.timer = setInterval(() => this.setState(s => ({ i: (s.i + 1) % 8 })), this.props.speed ?? 700);
+  }
+  renderVals() {
+    const srcs = ['/_blob/8fbd77508883c78b84540da031e5f678', '/_blob/e09f528d7a65e7ee280d22130c36c17d', '/_blob/ca23789dd45bf344382c52b8987884a8', '/_blob/720e3e91bd1b388459c182e4c63e3469', '/_blob/a25aa6071a426de3b10058361008b0e1', '/_blob/2ed749d513062c2fc935541bb195ad95', '/_blob/eb61a3bdf25e26fc602c11f962cebff2', '/_blob/971b6a3ff00fa61ea013489a3df324e6'];
+    const frames = srcs.map((src, j) => ({ src, style: `position: absolute; inset: 0; width: 100%; height: 100%; opacity: ${j === this.state.i ? 1 : 0}; transform: ${j === this.state.i ? 'none' : 'scale(.92) rotate(-3deg)'}` }));
+    return {
+      frames,
+      markOpacity: this.props.markOpacity ?? 0.3,
+      next: () => this.setState(s => ({ i: (s.i + 1) % 8 })),
+      copyLabel: this.state.copied ? 'Email copied' : 'Copy email',
+      copy: () => { try { navigator.clipboard && navigator.clipboard.writeText('[YOUR EMAIL]'); } catch (e) {} this.setState({ copied: true }); clearTimeout(this.t2); this.t2 = setTimeout(() => this.setState({ copied: false }), 1600); },
+    };
+  }
+}
+</script>
+</body>
+</html>

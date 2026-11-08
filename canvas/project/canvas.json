@@ -2,6 +2,14 @@
   "v": 3,
   "attachments": {},
   "boards": {
+    "Artboard-4zgx.dc.html": {
+      "h": 1011,
+      "page": "page-vmnxsd",
+      "title": "Artboard 2",
+      "w": 1468,
+      "x": 6080,
+      "y": 3760
+    },
     "Artboard-wcqg.dc.html": {
       "expand": "fill",
       "h": 3600,
@@ -61,6 +69,38 @@
       "title": "Your current portfolio (live, in progress)",
       "w": 1440,
       "x": 1520,
+      "y": 0
+    },
+    "DirectionA-Tin.dc.html": {
+      "h": 2140,
+      "page": "page-directions",
+      "title": "Direction A · Stamped Tin",
+      "w": 1440,
+      "x": 0,
+      "y": 0
+    },
+    "DirectionB-DrawingSet.dc.html": {
+      "h": 2160,
+      "page": "page-directions",
+      "title": "Direction B · Drawing Set",
+      "w": 1440,
+      "x": 1520,
+      "y": 0
+    },
+    "DirectionC-Syllabus.dc.html": {
+      "h": 2140,
+      "page": "page-directions",
+      "title": "Direction C · The Syllabus",
+      "w": 1440,
+      "x": 3040,
+      "y": 0
+    },
+    "DirectionD-LightTable.dc.html": {
+      "h": 2160,
+      "page": "page-directions",
+      "title": "Direction D · Light Table",
+      "w": 1440,
+      "x": 4560,
       "y": 0
     },
     "FullWidthScenes.dc.html": {
@@ -273,14 +313,14 @@
       "x": 6080,
       "y": 0
     },
-    "VariationCanvasHeader.dc.html": {
-      "h": 900,
+    "TinPortfolio-4-About.dc.html": {
+      "h": 1000,
       "is_interactive": true,
       "page": "page-vmnxsd",
-      "title": "Variation H · canvas header (inspired by onlines.com.ar) · scroll inside",
+      "title": "Tin Le Portfolio · 4 About",
       "w": 1440,
-      "x": 27360,
-      "y": 5640
+      "x": 6080,
+      "y": 2640
     },
     "VariationChrome.dc.html": {
       "h": 900,
@@ -290,6 +330,15 @@
       "w": 1440,
       "x": 10640,
       "y": 2840
+    },
+    "VariationJobPoint.dc.html": {
+      "h": 900,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Variation I · the job and the point (inspired by kenjilambert.com) · intro + scroll inside",
+      "w": 1440,
+      "x": 30400,
+      "y": 5640
     },
     "VariationKind.dc.html": {
       "h": 1400,
@@ -326,6 +375,15 @@
       "w": 1440,
       "x": 12160,
       "y": 2840
+    },
+    "VariationPixelSky.dc.html": {
+      "h": 900,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Variation G · pixel sky (inspired by andreas.vision) · scroll inside",
+      "w": 1440,
+      "x": 28880,
+      "y": 5640
     },
     "VariationStudio.dc.html": {
       "h": 2640,
@@ -399,54 +457,14 @@
       "x": 19760,
       "y": 0
     },
-    "VariationPixelSky.dc.html": {
-      "h": 900,
+    "TinHome.dc.html": {
+      "expand": "fill",
+      "h": 4600,
       "is_interactive": true,
-      "page": "page-vmnxsd",
-      "title": "Variation G · pixel sky (inspired by andreas.vision) · scroll inside",
-      "w": 1440,
-      "x": 28880,
-      "y": 5640
-    },
-    "VariationJobPoint.dc.html": {
-      "h": 900,
-      "is_interactive": true,
-      "page": "page-vmnxsd",
-      "title": "Variation I · the job and the point (inspired by kenjilambert.com) · intro + scroll inside",
-      "w": 1440,
-      "x": 30400,
-      "y": 5640
-    },
-    "DirectionA-Tin.dc.html": {
-      "h": 2140,
-      "page": "page-directions",
-      "title": "Direction A · Stamped Tin",
+      "page": "page-home",
+      "title": "Tin Le · Homepage (logo loop + work)",
       "w": 1440,
       "x": 0,
-      "y": 0
-    },
-    "DirectionB-DrawingSet.dc.html": {
-      "h": 2160,
-      "page": "page-directions",
-      "title": "Direction B · Drawing Set",
-      "w": 1440,
-      "x": 1520,
-      "y": 0
-    },
-    "DirectionC-Syllabus.dc.html": {
-      "h": 2140,
-      "page": "page-directions",
-      "title": "Direction C · The Syllabus",
-      "w": 1440,
-      "x": 3040,
-      "y": 0
-    },
-    "DirectionD-LightTable.dc.html": {
-      "h": 2160,
-      "page": "page-directions",
-      "title": "Direction D · Light Table",
-      "w": 1440,
-      "x": 4560,
       "y": 0
     }
   },
@@ -496,6 +514,15 @@
       "x": 7600,
       "y": -300
     },
+    "directionsTitle": {
+      "kind": "title1",
+      "maxW": 5920,
+      "page": "page-directions",
+      "text": "Design directions · original, not travel",
+      "w": 240,
+      "x": 0,
+      "y": -300
+    },
     "partsTitle": {
       "kind": "title1",
       "maxW": 6000,
@@ -538,15 +565,6 @@
       "w": 240,
       "x": 9120,
       "y": 2600
-    },
-    "directionsTitle": {
-      "kind": "title1",
-      "maxW": 5920,
-      "page": "page-directions",
-      "text": "Design directions · original, not travel",
-      "w": 240,
-      "x": 0,
-      "y": -300
     }
   },
   "order": [
@@ -561,11 +579,16 @@
     "PrevHelp.dc.html",
     "PrevManageUsers.dc.html",
     "PrevAbout.dc.html",
+    "DirectionA-Tin.dc.html",
+    "DirectionB-DrawingSet.dc.html",
+    "DirectionC-Syllabus.dc.html",
+    "DirectionD-LightTable.dc.html",
     "Artboard-wcqg.dc.html",
     "CurrentPortfolio.dc.html",
     "TinPortfolio-1-Hero.dc.html",
     "TinPortfolio-2-Intro.dc.html",
     "TinPortfolio-3-Work.dc.html",
+    "TinPortfolio-4-About.dc.html",
     "Piece-u7ks.dc.html",
     "WorkCarousel-A.dc.html",
     "WorkCarousel-B.dc.html",
@@ -596,14 +619,11 @@
     "Portfolio20.dc.html",
     "Piece-0w09.dc.html",
     "Artboard-xxww.dc.html",
-    "VariationCanvasHeader.dc.html",
     "VariationMap-wjo5.dc.html",
     "VariationPixelSky.dc.html",
     "VariationJobPoint.dc.html",
-    "DirectionA-Tin.dc.html",
-    "DirectionB-DrawingSet.dc.html",
-    "DirectionC-Syllabus.dc.html",
-    "DirectionD-LightTable.dc.html"
+    "Artboard-4zgx.dc.html",
+    "TinHome.dc.html"
   ],
   "pages": [
     {
@@ -617,6 +637,10 @@
     {
       "id": "page-directions",
       "name": "Directions"
+    },
+    {
+      "id": "page-home",
+      "name": "Homepage"
     }
   ],
   "title": "Tin's Portfolio Moodboard"
