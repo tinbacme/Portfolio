@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pine cone marks · Tin Le</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500&display=swap">
+<style>
+  :root { --bg: #f5f5f5; --ink: #111; --mute: #707070; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: "Be Vietnam Pro", system-ui, sans-serif; font-size: 16px; line-height: 1.4; }
+  header { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; padding: 48px 56px 32px; }
+  header span { color: var(--mute); }
+  .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 20px; padding: 0 56px 56px; }
+  .cell { display: flex; flex-direction: column; gap: 12px; }
+  .hero { aspect-ratio: 16 / 10; display: grid; place-items: center; background: #ececec; border-radius: 6px; }
+  .hero svg { height: 76%; width: auto; }
+  .name { display: flex; justify-content: space-between; gap: 12px; font-size: 15px; }
+  .name span { color: var(--mute); text-align: right; }
+  .row { display: grid; grid-template-columns: 1.6fr repeat(5, minmax(0, 1fr)); gap: 6px; }
+  .head { display: flex; justify-content: space-between; align-items: center; padding: 0 12px; background: #fff; border-radius: 4px; font-size: 14px; }
+  .head svg { width: 20px; height: 20px; }
+  .row .pl { aspect-ratio: 1; border-radius: 4px; display: grid; place-items: center; }
+  .pl svg { width: 64%; height: 64%; }
+  .a { opacity: 0; transform-box: fill-box; transform-origin: center; animation: pop .45s cubic-bezier(.3, 1.5, .5, 1) forwards; animation-delay: calc(var(--i) * 22ms + 150ms); }
+  @keyframes pop { from { opacity: 0; transform: scale(.3) translateY(-6px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .a { animation: none; opacity: 1; } }
+</style>
+</head>
+<body>
+<header><div>Hello, I'm Tin<br><span>Six pine cones</span></div><div>Đà Lạt pines, Oregon pines<br><span>the same tree on both sides of my life</span></div><div>Built scale by scale<br><span>the way it assembles on load</span></div></header>
+<main class="grid" id="grid"></main>
+<script>
+  const rad = a => a * Math.PI / 180, f1 = n => n.toFixed(1);
+  // A scale: rounded shield pointing down, centered at x,y, width w, height h
+  const scale = (x, y, w, h, fill, extra = '') => `<path d="M${f1(x - w / 2)} ${f1(y - h * .35)} Q ${f1(x - w / 2)} ${f1(y + h * .25)} ${f1(x)} ${f1(y + h * .55)} Q ${f1(x + w / 2)} ${f1(y + h * .25)} ${f1(x + w / 2)} ${f1(y - h * .35)} Q ${f1(x)} ${f1(y - h * .6)} ${f1(x - w / 2)} ${f1(y - h * .35)} Z" fill="${fill}" ${extra}/>`;
+  // Side-view cone profile: half-width at t (0 top → 1 bottom), an egg shape wider below the middle
+  const prof = t => 60 * Math.pow(Math.sin(Math.PI * (0.06 + 0.9 * t)), 0.7) * (0.62 + 0.38 * Math.sin(Math.PI * t * 0.9));
+  function sideCone(f, cut, opt = {}) {
+    const out = [], rows = opt.rows || 10, top = opt.top || 30, bot = opt.bot || 184, sw = opt.sw || 2.4, gap = (bot - top) / (rows - 1);
+    for (let r = rows - 1; r >= 0; r--) { // bottom rows first, so each upper row overlaps the one below like shingles
+      const t = r / (rows - 1), y = top + gap * r, hw = Math.max(7, prof(t)), n = Math.max(1, Math.round(hw / 13) + (r % 2)), w = (2 * hw) / n;
+      for (let i = 0; i < n; i++) {
+        const x = 100 - hw + w * (i + .5), h = gap * 1.9;
+        if (opt.hex) { const R = Math.min(w * .56, gap * .62); out.push(`<polygon points="${[...Array(6)].map((_, k) => `${f1(x + Math.cos(rad(k * 60 + 30)) * R)},${f1(y + Math.sin(rad(k * 60 + 30)) * R)}`).join(' ')}" fill="${f}" stroke="${cut}" stroke-width="${sw}" stroke-linejoin="round"/>`); if (R > 7) out.push(`<circle cx="${f1(x)}" cy="${f1(y)}" r="${f1(R * .34)}" fill="${cut}"/>`); }
+        else out.push(scale(x, y + h * .18, w * 1.08, h, opt.line ? 'none' : f, opt.line ? `stroke="${f}" stroke-width="2.6" stroke-linejoin="round"` : `stroke="${cut}" stroke-width="${sw}" stroke-linejoin="round"`));
+        if (opt.line) out.push(scale(x, y + h * .18, w * 1.08 - 5.2, h - 5.2, cut, ''));
+      }
+    }
+    return out;
+  }
+  const stem = (f, y = 34) => `<path d="M100 ${y + 6} C 98 ${y - 6}, 101 ${y - 14}, 106 ${y - 22}" stroke="${f}" stroke-width="5" stroke-linecap="round" fill="none"/>`;
+  const marks = [
+    { t: 'Spiral', n: 'From above, golden angle', vb: '0 0 200 200', draw(f, cut) {
+      const out = [], c = 8.2, N = 132;
+      for (let i = N; i >= 1; i--) { const r = c * Math.sqrt(i), a = i * 137.508, x = 100 + Math.cos(rad(a)) * r, y = 100 + Math.sin(rad(a)) * r, k = .75 + .25 * Math.min(1, i / 40);
+        out.push(`<g transform="rotate(${f1(a - 90)} ${f1(x)} ${f1(y)})">${scale(x, y, c * 1.75 * k, c * 1.9 * k, f, `stroke="${cut}" stroke-width="2"`)}</g>`); }
+      out.push(`<circle cx="100" cy="100" r="7" fill="${f}" stroke="${cut}" stroke-width="2"/>`); return out; } },
+    { t: 'Classic', n: 'Side view, nine rows', vb: '0 0 200 200', draw(f, cut) { return [stem(f, 30), ...sideCone(f, cut)]; } },
+    { t: 'Sprig', n: 'Cone with two needle bundles', vb: '0 0 200 200', draw(f, cut) {
+      const out = [];
+      const needles = (cx, cy, dir) => { for (let k = 0; k < 5; k++) { const a = rad(dir + (k - 2) * 11), L = 50 - Math.abs(k - 2) * 5; out.push(`<path d="M${cx} ${cy} Q ${f1(cx + Math.cos(a) * L * .55)} ${f1(cy + Math.sin(a) * L * .55 - 4)} ${f1(cx + Math.cos(a) * L)} ${f1(cy + Math.sin(a) * L)}" stroke="${f}" stroke-width="2.6" stroke-linecap="round" fill="none"/>`); } };
+      needles(97, 34, 205); needles(103, 34, -25);
+      out.push(`<path d="M100 50 L100 34" stroke="${f}" stroke-width="5" stroke-linecap="round"/>`);
+      return [...out, ...sideCone(f, cut, { top: 56, bot: 186, rows: 9 })]; } },
+    { t: 'Line', n: 'Outline only, drafting pen', vb: '0 0 200 200', draw(f, cut) { return [stem(f, 30), ...sideCone(f, cut, { line: true })]; } },
+    { t: 'Hex scales', n: 'Every scale is a nut', vb: '0 0 200 200', draw(f, cut) { return [stem(f, 30), ...sideCone(f, cut, { hex: true, sw: 2.2 })]; } },
+    { t: 'Badge', n: 'Cone in a stamped seal', vb: '0 0 200 200', draw(f, cut) {
+      const out = [`<circle cx="100" cy="100" r="96" fill="${f}"/>`, `<circle cx="100" cy="100" r="84" fill="none" stroke="${cut}" stroke-width="3"/>`];
+      for (let i = 0; i < 36; i++) { const a = rad(i * 10); out.push(`<circle cx="${f1(100 + Math.cos(a) * 90)}" cy="${f1(100 + Math.sin(a) * 90)}" r="1.8" fill="${cut}"/>`); }
+      out.push(`<g transform="translate(34 32) scale(.66)">${[stem(cut, 30), ...sideCone(cut, f, { sw: 3 })].join('')}</g>`);
+      return out; } },
+  ];
+  const svg = (m, f, cut, animate) => `<svg viewBox="${m.vb}" role="img" aria-label="${m.t} pine cone mark">${m.draw(f, cut).map((e, i) => animate ? `<g class="a" style="--i:${i}">${e}</g>` : e).join('')}</svg>`;
+  const plates = [['#1d3fc4', '#f6efdd'], ['#d9342b', '#ffd23f'], ['#ffd23f', '#d9342b'], ['#17694a', '#f6efdd'], ['#f6efdd', '#17694a']];
+  document.getElementById('grid').innerHTML = marks.map(m => `
+    <section class="cell">
+      <div class="hero">${svg(m, '#cfcfcf', '#ececec', true)}</div>
+      <div class="name">${m.t}<span>${m.n}</span></div>
+      <div class="row"><div class="head"><span>Tin Le</span>${svg(m, '#111', '#fff', false)}</div>${plates.map(([bg, f]) => `<div class="pl" style="background:${bg}">${svg(m, f, bg, false)}</div>`).join('')}</div>
+    </section>`).join('');
+</script>
+</body>
+</html>
