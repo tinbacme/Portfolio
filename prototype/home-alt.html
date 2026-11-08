@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tin Le</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500&display=swap">
+<style>
+  :root { --bg: #f5f5f5; --ink: #141414; --mute: #6e6e6e; --cobalt: #1d3fc4; --red: #d9342b; --yellow: #ffd23f; --pine: #17694a; --cream: #f1e9d6; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: "Be Vietnam Pro", system-ui, sans-serif; font-size: 16px; line-height: 1.4; }
+  a, button { color: inherit; font: inherit; }
+  a { text-decoration: none; }
+  a:hover, button:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+  .bar { position: sticky; top: 0; z-index: 10; display: flex; justify-content: space-between; align-items: center; padding: 14px clamp(20px, 3vw, 40px); background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); opacity: var(--bar, 0); transition: opacity .3s; }
+  .bar .loop { width: 30px; height: 30px; }
+
+  .hero { min-height: 86vh; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(220px, 1.1fr); align-items: center; gap: 24px; padding: 0 clamp(20px, 6vw, 100px); }
+  .col p { margin: 0; font-size: clamp(17px, 1.5vw, 22px); }
+  .col .m { color: var(--mute); }
+  .col.stack { display: flex; flex-direction: column; gap: 4px; }
+  .col button { background: none; border: 0; padding: 0; cursor: pointer; text-align: left; color: var(--mute); font-size: clamp(17px, 1.5vw, 22px); }
+  .col a.m { font-size: clamp(17px, 1.5vw, 22px); }
+  .hero .loop { width: min(100%, 300px); aspect-ratio: 1; justify-self: end; cursor: pointer; }
+
+  .loop { position: relative; display: block; border: 0; padding: 0; background: none; }
+  .loop img { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transform: scale(.92) rotate(-3deg); transition: opacity .12s, transform .28s cubic-bezier(.3, 1.6, .5, 1); }
+  .loop img.on { opacity: 1; transform: none; }
+  .loop.soft img { filter: opacity(.28); }
+
+  .work { display: flex; flex-direction: column; gap: 72px; padding: 24px clamp(20px, 3vw, 40px) 96px; }
+  .proj { display: flex; flex-direction: column; gap: 14px; }
+  .plates { display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 12px; }
+  .plates.two { grid-template-columns: 1fr 2fr; }
+  .plate { aspect-ratio: 4 / 5; border-radius: 6px; display: grid; place-items: center; overflow: hidden; }
+  .plate.wide { aspect-ratio: auto; }
+  .phone { width: 58%; aspect-ratio: 9 / 19; border-radius: 18px; background: #fff; display: grid; place-items: center; box-shadow: 0 10px 30px rgba(0,0,0,.12); }
+  .desk { width: 84%; aspect-ratio: 16 / 10; border-radius: 8px; background: #fff; display: grid; place-items: center; box-shadow: 0 10px 30px rgba(0,0,0,.12); }
+  .ph { font-size: 12px; color: #8a8a8a; text-transform: uppercase; letter-spacing: .06em; text-align: center; padding: 8px; }
+  .meta { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) auto; gap: 16px; font-size: 15px; }
+  .meta span { color: var(--mute); }
+  .c1 { background: var(--cobalt); } .c2 { background: var(--yellow); } .c3 { background: var(--pine); } .c4 { background: var(--red); } .c5 { background: var(--cream); }
+
+  footer { display: flex; justify-content: space-between; align-items: center; padding: 28px clamp(20px, 3vw, 40px) 40px; color: var(--mute); font-size: 14px; }
+  footer .loop { width: 28px; height: 28px; }
+  .toast { position: fixed; left: 50%; bottom: 28px; transform: translate(-50%, 12px); opacity: 0; transition: .2s; background: var(--ink); color: #fff; padding: 10px 14px; border-radius: 8px; font-size: 14px; pointer-events: none; }
+  .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+  @media (max-width: 820px) {
+    .hero { grid-template-columns: 1fr; align-content: center; gap: 40px; min-height: 88vh; padding-top: 40px; }
+    .hero .loop { justify-self: start; width: 160px; order: -1; }
+    .plates, .plates.two { grid-template-columns: 1fr; }
+    .plate { aspect-ratio: 4 / 3; }
+    .phone { width: 34%; }
+    .meta { grid-template-columns: 1fr; gap: 2px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .loop img { transition: none; } }
+
+  .switch { display: flex; gap: 8px; padding: 0 clamp(20px, 3vw, 40px) 18px; font-size: 14px; color: var(--mute); }
+  .switch a { padding: 6px 10px; border-radius: 6px; }
+  .switch a.on { background: var(--ink); color: #fff; text-decoration: none; }
+  .lay { display: none; padding: 8px clamp(20px, 3vw, 40px) 96px; }
+  body[data-l="a"] .la, body[data-l="b"] .lb, body[data-l="c"] .lc, body[data-l="d"] .ld { display: block; }
+  /* A: index */
+  .idx { list-style: none; margin: 0; padding: 0; border-top: 1px solid #d9d9d9; }
+  .idx a { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) 80px minmax(0, 1.6fr); gap: 16px; align-items: baseline; padding: 22px 0; border-bottom: 1px solid #d9d9d9; text-decoration: none; }
+  .idx .nm { font-size: clamp(22px, 2.6vw, 34px); letter-spacing: -.02em; transition: transform .25s; }
+  .idx a:hover .nm, .idx a:focus-visible .nm { transform: translateX(10px); }
+  .idx span { color: var(--mute); }
+  .peek { position: fixed; z-index: 20; width: 260px; aspect-ratio: 4 / 3; border-radius: 8px; pointer-events: none; opacity: 0; transform: translate(-50%, -110%) scale(.9); transition: opacity .15s, transform .25s; display: grid; place-items: center; }
+  .peek.on { opacity: 1; transform: translate(-50%, -110%) scale(1); }
+  .peek .desk { width: 80%; }
+  /* B: contact sheet */
+  .sheet { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 40px 20px; }
+  .tile { display: flex; flex-direction: column; gap: 10px; text-decoration: none; }
+  .tile .th { aspect-ratio: 4 / 3; border-radius: 6px; display: grid; place-items: center; transition: transform .3s; }
+  .tile:hover .th { transform: translateY(-4px); }
+  .tile .th .desk { width: 74%; }
+  .tile b { font-weight: 500; } .tile span { color: var(--mute); font-size: 15px; }
+  /* C: one at a time */
+  .one { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 32px; align-items: end; }
+  .one .th { aspect-ratio: 16 / 10; border-radius: 8px; display: grid; place-items: center; transition: background .4s; }
+  .one .th .desk { width: 70%; }
+  .one .txt { display: flex; flex-direction: column; gap: 10px; padding-bottom: 6px; }
+  .one .txt b { font-weight: 500; font-size: 28px; letter-spacing: -.02em; }
+  .one .txt span { color: var(--mute); }
+  .one .nav { display: flex; gap: 12px; align-items: center; margin-top: 18px; }
+  .one .nav button { border: 1px solid #cfcfcf; background: #fff; border-radius: 999px; width: 44px; height: 44px; cursor: pointer; }
+  /* D: results first */
+  .res { list-style: none; margin: 0; padding: 0; }
+  .res a { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 24px; align-items: baseline; padding: 26px 0; border-top: 1px solid #d9d9d9; text-decoration: none; }
+  .res .num { font-size: clamp(48px, 8vw, 120px); line-height: .9; letter-spacing: -.05em; }
+  .res .num i { font-style: normal; display: inline-block; width: .5em; height: .5em; border-radius: 50%; margin-right: .18em; vertical-align: .08em; }
+  .res span { color: var(--mute); display: block; margin-top: 4px; }
+  @media (max-width: 820px) { .idx a { grid-template-columns: 1fr; gap: 2px; } .one, .res a { grid-template-columns: 1fr; } .peek { display: none; } }
+</style>
+</head>
+<body>
+<header class="bar" id="bar"><a href="#top">Tin Le</a><button class="loop" aria-label="Tin's logo. Click to change it" data-loop data-speed="900"></button></header>
+
+<main id="top">
+  <section class="hero">
+    <div class="col"><p>Hi, I'm Tin</p></div>
+    <div class="col stack"><p>I design products</p><p class="m">at Microsoft</p></div>
+    <div class="col stack"><p>Let's talk</p><a class="m" href="https://www.linkedin.com/in/[YOUR-HANDLE]">LinkedIn</a><button type="button" id="copy">Copy email</button></div>
+    <button class="loop soft" aria-label="Tin's logo, hand-drawn in many ways. Click to change it" data-loop data-speed="700"></button>
+  </section>
+
+  <nav class="switch" aria-label="Layout"><span>Work layout:</span><a href="?l=a" data-k="a">A · Index</a><a href="?l=b" data-k="b">B · Contact sheet</a><a href="?l=c" data-k="c">C · One at a time</a><a href="?l=d" data-k="d">D · Results first</a></nav>
+  <section class="lay la" aria-label="Work, index"><ul class="idx"><li><a href="#bing" data-c="c1"><span class="nm">Bing Real Estate</span><span>Microsoft</span><span>2022–24</span><span>Sole designer. 103,000 homes saved, 15% more people every day.</span></a></li><li><a href="search.html" data-c="c2"><span class="nm">Windows search and Copilot</span><span>Microsoft</span><span>2025</span><span>Not public yet. Ask me and I’ll walk you through it.</span></a></li><li><a href="#surfaces" data-c="c3"><span class="nm">Across Windows, Edge and Bing</span><span>Microsoft</span><span>2023–25</span><span>A calendar sprint, a lock screen widget and search bar prototypes.</span></a></li><li><a href="#lead" data-c="c4"><span class="nm">How I lead</span><span>Microsoft · UO</span><span>2022–now</span><span>ProtoPie from 3 licenses to 23, and UX classes at the University of Oregon.</span></a></li><li><a href="#salesforce" data-c="c5"><span class="nm">Salesforce Help</span><span>Salesforce</span><span>2017–22</span><span>97% of people found their answer without filing a case.</span></a></li></ul><div class="peek" id="peek"><div class="desk"><span class="ph">Preview</span></div></div></section>
+  <section class="lay lb" aria-label="Work, contact sheet"><div class="sheet"><a class="tile" href="#bing"><div class="th c1"><div class="desk"><span class="ph">Bing Real Estate</span></div></div><b>Bing Real Estate</b><span>Sole designer. 103,000 homes saved, 15% more people every day.</span></a><a class="tile" href="search.html"><div class="th c2"><div class="desk"><span class="ph">Windows search and Copilot</span></div></div><b>Windows search and Copilot</b><span>Not public yet. Ask me and I’ll walk you through it.</span></a><a class="tile" href="#surfaces"><div class="th c3"><div class="desk"><span class="ph">Across Windows, Edge and Bing</span></div></div><b>Across Windows, Edge and Bing</b><span>A calendar sprint, a lock screen widget and search bar prototypes.</span></a><a class="tile" href="#lead"><div class="th c4"><div class="desk"><span class="ph">How I lead</span></div></div><b>How I lead</b><span>ProtoPie from 3 licenses to 23, and UX classes at the University of Oregon.</span></a><a class="tile" href="#salesforce"><div class="th c5"><div class="desk"><span class="ph">Salesforce Help</span></div></div><b>Salesforce Help</b><span>97% of people found their answer without filing a case.</span></a></div></section>
+  <section class="lay lc" aria-label="Work, one at a time"><div class="one"><a class="th c1" id="oneTh" href="#bing"><div class="desk"><span class="ph" id="onePh">Bing Real Estate</span></div></a><div class="txt"><span id="oneN">01 / 05 · Microsoft · 2022–24</span><b id="oneB">Bing Real Estate</b><span id="oneR">Sole designer. 103,000 homes saved, 15% more people every day.</span><div class="nav"><button type="button" id="prev" aria-label="Previous project">←</button><button type="button" id="next" aria-label="Next project">→</button></div></div></div></section>
+  <section class="lay ld" aria-label="Work, results first"><ul class="res"><li><a href="#bing"><div class="num"><i class="c1"></i>+15%</div><div>Bing Real Estate<span>More people every day</span></div></a></li><li><a href="search.html"><div class="num"><i class="c2"></i>1 box</div><div>Windows search and Copilot<span>A search box billions of people use</span></div></a></li><li><a href="#surfaces"><div class="num"><i class="c3"></i>3</div><div>Across Windows, Edge and Bing<span>Surfaces, one system</span></div></a></li><li><a href="#lead"><div class="num"><i class="c4"></i>3 → 23</div><div>How I lead<span>ProtoPie licenses</span></div></a></li><li><a href="#salesforce"><div class="num"><i class="c5"></i>97%</div><div>Salesforce Help<span>Solved without a case</span></div></a></li></ul></section>
+</main>
+
+<footer><span>© 2026 Tin Le · Grew up in Đà Lạt, made in Oregon</span><button class="loop" aria-label="Tin's logo" data-loop data-speed="1200"></button></footer>
+<div class="toast" id="toast" role="status">Email copied</div>
+
+<script>
+  const frames = ['tl-01', 'tl-02', 'tl-03', 'tl-04', 'tl-05', 'tl-06', 'tl-07', 'tl-08'].map(n => `logo/${n}.svg`);
+  const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('[data-loop]').forEach((el, k) => {
+    frames.forEach(src => { const i = new Image(); i.src = src; i.alt = ''; el.appendChild(i); });
+    const imgs = [...el.children]; let i = calm ? imgs.length - 1 : k % imgs.length;
+    const show = () => imgs.forEach((im, j) => im.classList.toggle('on', j === i));
+    show();
+    if (!calm) setInterval(() => { i = (i + 1) % imgs.length; show(); }, +el.dataset.speed);
+    el.addEventListener('click', () => { i = (i + 1) % imgs.length; show(); });
+  });
+  const bar = document.getElementById('bar'), hero = document.querySelector('.hero');
+  addEventListener('scroll', () => bar.style.setProperty('--bar', scrollY > hero.offsetHeight * .6 ? 1 : 0), { passive: true });
+  const toast = document.getElementById('toast');
+  document.getElementById('copy').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText('[YOUR EMAIL]'); } catch (e) {}
+    toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 1600);
+  });
+
+  const L = new URLSearchParams(location.search).get('l') || 'a'; document.body.dataset.l = L;
+  document.querySelectorAll('.switch a').forEach(a => a.classList.toggle('on', a.dataset.k === L));
+  const peek = document.getElementById('peek');
+  document.querySelectorAll('.idx a').forEach(a => {
+    a.addEventListener('mouseenter', () => { peek.className = 'peek on ' + a.dataset.c; peek.querySelector('.ph').textContent = a.querySelector('.nm').textContent; });
+    a.addEventListener('mouseleave', () => peek.classList.remove('on'));
+    a.addEventListener('mousemove', e => { peek.style.left = e.clientX + 'px'; peek.style.top = e.clientY + 'px'; });
+  });
+  const P = [["Bing Real Estate", "Microsoft", "2022\u201324", "Sole designer. 103,000 homes saved, 15% more people every day.", "c1", "#bing"], ["Windows search and Copilot", "Microsoft", "2025", "Not public yet. Ask me and I\u2019ll walk you through it.", "c2", "search.html"], ["Across Windows, Edge and Bing", "Microsoft", "2023\u201325", "A calendar sprint, a lock screen widget and search bar prototypes.", "c3", "#surfaces"], ["How I lead", "Microsoft \u00b7 UO", "2022\u2013now", "ProtoPie from 3 licenses to 23, and UX classes at the University of Oregon.", "c4", "#lead"], ["Salesforce Help", "Salesforce", "2017\u201322", "97% of people found their answer without filing a case.", "c5", "#salesforce"]];
+  let k = 0; const set = () => { const [n, co, y, r, c, h] = P[k]; const th = document.getElementById('oneTh'); th.className = 'th ' + c; th.href = h;
+    document.getElementById('onePh').textContent = n; document.getElementById('oneB').textContent = n; document.getElementById('oneR').textContent = r;
+    document.getElementById('oneN').textContent = `0${k + 1} / 0${P.length} · ${co} · ${y}`; };
+  document.getElementById('next').onclick = () => { k = (k + 1) % P.length; set(); };
+  document.getElementById('prev').onclick = () => { k = (k + P.length - 1) % P.length; set(); };
+</script>
+</body>
+</html>
