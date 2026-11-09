@@ -435,6 +435,7 @@ class Component extends DCLogic {
   trailRelease() { const r = this.tr; if (r && r.form && !r.form.home && !r.form.leaveAt) r.form.leaveAt = performance.now(); }
   trailUnform() {
     const r = this.tr; if (!r || !r.form) return;
+    if (this.state.grad) this.setState({ grad: null }); // the glow leaves together with the logo's dots
     const now = performance.now(), life = this.tp('trailLife', 1.9) * 1000, hold = this.tp('trailHold', 0.39);
     const back = this.tp('afterLogo', 'Back into the trail') === 'Back into the trail';
     const out = [];
@@ -648,10 +649,10 @@ class Component extends DCLogic {
       trMove: (e) => { const cv = this.trCv; if (!this.tr || !cv) return; const b = cv.getBoundingClientRect(), k = cv.clientWidth / (b.width || 1); const x = (e.clientX - b.left) * k, y = (e.clientY - b.top) * k; if (x < 0 || y < 0 || x > cv.clientWidth || y > cv.clientHeight) return; this.tr.mouse = { x, y }; this.tr.lastMove = performance.now(); },
       trLeave: () => { if (this.tr) this.tr.lastMove = -1e9; },
       hiEnter: () => { const r = this.tr; if (r && r.form && !r.form.home) { this.trailUnform(); r.homeTry = 0; } },
-      msEnter: () => { this.setState({ grad: 'ms' }); this.trailForm('ms'); },
-      msLeave: () => { this.setState({ grad: null }); this.trailRelease(); },
-      sfEnter: () => { this.setState({ grad: 'sf' }); this.trailForm('sf'); }, sfLeave: () => { this.setState({ grad: null }); this.trailRelease(); },
-      uoEnter: () => { this.setState({ grad: 'uo' }); this.trailForm('uo'); }, uoLeave: () => { this.setState({ grad: null }); this.trailRelease(); },
+      msEnter: () => { this.trailForm('ms'); this.setState({ grad: 'ms' }); },
+      msLeave: () => this.trailRelease(),
+      sfEnter: () => { this.trailForm('sf'); this.setState({ grad: 'sf' }); }, sfLeave: () => this.trailRelease(),
+      uoEnter: () => { this.trailForm('uo'); this.setState({ grad: 'uo' }); }, uoLeave: () => this.trailRelease(),
       gmEnter: () => this.trailForm(this.tp('emailShows', 'My drawing') === 'Gmail logo' ? 'gm' : 'me'), gmLeave: () => this.trailRelease(),
       liEnter: () => this.trailForm(this.tp('linkedinShows', 'My drawing') === 'LinkedIn logo' ? 'li' : 'hs'), liLeave: () => this.trailRelease(),
       headClass: { 'On scroll': 'hf-scroll', 'Always': 'hf-always', 'Off': 'hf-off' }[this.props.headerFade ?? 'On scroll'] || 'hf-scroll',
