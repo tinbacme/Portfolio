@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Pixel contrail trail: design</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:inherit}a:hover{opacity:.75}
+</style>
+</helmet>
+<div onPointerMove="{{move}}" onPointerLeave="{{leave}}" style="position: relative; width: 1440px; height: 900px; overflow: hidden; background: {{bg}}; touch-action: none">
+  <canvas ref="{{cvRef}}" width="1440" height="900" aria-hidden="true" style="position: absolute; inset: 0; width: 1440px; height: 900px; display: block"></canvas>
+  <sc-if value="{{showHint}}" hint-placeholder-val="{{ true }}">
+    <p style="position: absolute; left: 40px; bottom: 32px; margin: 0; font: 500 13px 'Geist Mono', ui-monospace, monospace; color: #14161a; opacity: 0.55; pointer-events: none">Move your mouse to draw the trail. Stop, and it flies on its own.</p>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"useOriginal": {"editor": "boolean", "default": false, "section": "Reset"}, "mode": {"editor": "enum", "options": ["Follow + auto", "Follow only", "Auto only"], "default": "Follow + auto", "section": "Behavior"}, "idleDelay": {"editor": "range", "default": 1.2, "min": 0.2, "max": 6, "step": 0.1, "unit": "s", "section": "Behavior"}, "smoothing": {"editor": "range", "default": 0.82, "min": 0, "max": 0.97, "step": 0.01, "section": "Behavior"}, "handoff": {"editor": "range", "default": 0.04, "min": 0.005, "max": 0.2, "step": 0.005, "section": "Behavior"}, "autoPath": {"editor": "enum", "options": ["Contrail", "Figure 8", "Orbit", "Wander"], "default": "Contrail", "section": "Auto path"}, "autoSpeed": {"editor": "range", "default": 1, "min": 0.1, "max": 4, "step": 0.05, "section": "Auto path"}, "autoWidth": {"editor": "range", "default": 0.8, "min": 0.1, "max": 1, "step": 0.01, "section": "Auto path"}, "autoHeight": {"editor": "range", "default": 0.35, "min": 0.05, "max": 1, "step": 0.01, "section": "Auto path"}, "autoCenterY": {"editor": "range", "default": 0.42, "min": 0, "max": 1, "step": 0.01, "section": "Auto path"}, "sizeMin": {"editor": "int", "default": 9, "min": 1, "max": 80, "section": "Pixels"}, "sizeMax": {"editor": "int", "default": 28, "min": 1, "max": 120, "section": "Pixels"}, "spacing": {"editor": "int", "default": 14, "min": 2, "max": 80, "unit": "px", "section": "Pixels"}, "density": {"editor": "int", "default": 2, "min": 1, "max": 8, "section": "Pixels"}, "jitter": {"editor": "int", "default": 18, "min": 0, "max": 120, "unit": "px", "section": "Pixels"}, "taper": {"editor": "range", "default": 0.6, "min": 0, "max": 1, "step": 0.05, "section": "Pixels"}, "gridSnap": {"editor": "int", "default": 0, "min": 0, "max": 48, "unit": "px", "section": "Pixels"}, "shape": {"editor": "enum", "options": ["Rounded square", "Square", "Circle", "Diamond"], "default": "Rounded square", "section": "Pixels"}, "corner": {"editor": "int", "default": 3, "min": 0, "max": 30, "unit": "px", "section": "Pixels"}, "life": {"editor": "range", "default": 3.2, "min": 0.3, "max": 10, "step": 0.1, "unit": "s", "section": "Motion"}, "popScale": {"editor": "range", "default": 1.15, "min": 1, "max": 2, "step": 0.01, "section": "Motion"}, "popTime": {"editor": "range", "default": 0.18, "min": 0.02, "max": 0.6, "step": 0.01, "section": "Motion"}, "holdUntil": {"editor": "range", "default": 0.7, "min": 0.2, "max": 0.98, "step": 0.01, "section": "Motion"}, "endScale": {"editor": "range", "default": 0.6, "min": 0, "max": 2, "step": 0.05, "section": "Motion"}, "drift": {"editor": "range", "default": 0, "min": -60, "max": 60, "step": 1, "unit": "px/s", "section": "Motion"}, "spin": {"editor": "range", "default": 0, "min": -360, "max": 360, "step": 5, "unit": "°/s", "section": "Motion"}, "palette": {"editor": "enum", "options": ["Original contrail", "Tin plates", "Pine + sun", "Ink", "Custom"], "default": "Original contrail", "section": "Color"}, "colorBy": {"editor": "enum", "options": ["Random", "Along the trail", "By size"], "default": "Random", "section": "Color"}, "c1": {"editor": "color", "default": "#1d3fc4", "section": "Color"}, "c2": {"editor": "color", "default": "#d9342b", "section": "Color"}, "c3": {"editor": "color", "default": "#ffd23f", "section": "Color"}, "c4": {"editor": "color", "default": "#17694a", "section": "Color"}, "opacity": {"editor": "range", "default": 1, "min": 0.1, "max": 1, "step": 0.05, "section": "Color"}, "blend": {"editor": "enum", "options": ["Normal", "Multiply"], "default": "Normal", "section": "Color"}, "bg": {"editor": "color", "default": "#f7f5ef", "options": ["#f7f5ef", "#f5f5f5", "#ffffff", "#14161a"], "section": "Color"}, "showHint": {"editor": "boolean", "default": true, "section": "Board"}, "$preview": {"width": 1440, "height": 900}}'>
+const PALETTES = {
+  'Original contrail': ['#65a3ee', '#3078e7', '#e6b88a', '#a9c46a', '#5b4a8a', '#6f8a3e', '#c1dff9', '#b8754a'],
+  'Tin plates': ['#1d3fc4', '#d9342b', '#ffd23f', '#17694a', '#f1e9d6'],
+  'Pine + sun': ['#17694a', '#2f8a5f', '#9cc9a5', '#ffd23f', '#f2b23a'],
+  'Ink': ['#14161a', '#3a3d44', '#6e727a', '#a3a7ad'],
+};
+const W = 1440, H = 900;
+class Component extends DCLogic {
+  componentDidMount() {
+    this.ps = []; this.t = 0; this.last = performance.now(); this.lastMove = -1e9; this.mouse = null; this.acc = 0; this.n = 0;
+    this.E = null; this.wasAuto = false;
+    const tick = (now) => { this.step(now); this.raf = requestAnimationFrame(tick); };
+    this.raf = requestAnimationFrame(tick);
+  }
+  componentWillUnmount() { cancelAnimationFrame(this.raf); }
+  P(k, d) { if (this.props.useOriginal) return d; const v = this.props[k]; return v === undefined || v === null ? d : v; }
+  autoPoint(t) {
+    const path = this.P('autoPath', 'Contrail'), aw = this.P('autoWidth', 0.8) * W / 2, ah = this.P('autoHeight', 0.35) * H / 2, cx = W / 2, cy = this.P('autoCenterY', 0.42) * H;
+    if (path === 'Figure 8') return { x: cx + Math.sin(t * 0.6) * aw, y: cy + Math.sin(t * 1.2) * ah * 0.6 };
+    if (path === 'Orbit') return { x: cx + Math.cos(t * 0.5) * aw, y: cy + Math.sin(t * 0.5) * ah };
+    if (path === 'Wander') return { x: cx + (Math.sin(t * 0.37) * 0.6 + Math.sin(t * 0.91 + 1.3) * 0.4) * aw, y: cy + (Math.sin(t * 0.53 + 2) * 0.6 + Math.sin(t * 1.27) * 0.4) * ah };
+    const span = W * this.P('autoWidth', 0.8) + 240, u = ((t * 70) % span) / span; // Contrail: right to left, gentle wave
+    return { x: cx + aw + 120 - u * span, y: cy + Math.sin(u * Math.PI * 2 + 0.4) * ah * 0.5 - u * ah * 0.4, wrap: u < 0.01 };
+  }
+  color(size) {
+    const pal = this.P('palette', 'Original contrail') === 'Custom' ? [this.P('c1', '#1d3fc4'), this.P('c2', '#d9342b'), this.P('c3', '#ffd23f'), this.P('c4', '#17694a')] : PALETTES[this.P('palette', 'Original contrail')] || PALETTES['Original contrail'];
+    const by = this.P('colorBy', 'Random');
+    if (by === 'Along the trail') return pal[Math.floor(this.n / 6) % pal.length];
+    if (by === 'By size') { const a = this.P('sizeMin', 9), b = Math.max(a + 1, this.P('sizeMax', 28)); return pal[Math.min(pal.length - 1, Math.floor((size - a) / (b - a) * pal.length))]; }
+    return pal[Math.floor(Math.random() * pal.length)];
+  }
+  spawn(x, y, speedFactor) {
+    const a = this.P('sizeMin', 9), b = Math.max(a, this.P('sizeMax', 28)), j = this.P('jitter', 18), g = this.P('gridSnap', 0);
+    let s = a + Math.random() * (b - a); s *= 1 - this.P('taper', 0.6) * (1 - speedFactor) * 0.6;
+    let px = x + (Math.random() - 0.5) * 2 * j, py = y + (Math.random() - 0.5) * 2 * j;
+    if (g > 0) { px = Math.round(px / g) * g; py = Math.round(py / g) * g; }
+    this.n++;
+    this.ps.push({ x: px, y: py, s: Math.max(1, s), c: this.color(s), b: this.now, r: Math.random() * 360 });
+    if (this.ps.length > 2500) this.ps.splice(0, this.ps.length - 2500);
+  }
+  step(now) {
+    const dt = Math.min(0.05, (now - this.last) / 1000); this.last = now; this.now = now;
+    const mode = this.P('mode', 'Follow + auto');
+    const reduce = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const idle = (now - this.lastMove) / 1000 > this.P('idleDelay', 1.2) || !this.mouse;
+    const useAuto = !reduce && (mode === 'Auto only' || (mode === 'Follow + auto' && idle));
+    const useMouse = mode !== 'Auto only' && this.mouse && !idle;
+    let T = null;
+    if (useAuto) { this.t += dt * this.P('autoSpeed', 1); T = this.autoPoint(this.t); }
+    else if (useMouse) T = this.mouse;
+    if (T) {
+      if (!this.E || T.wrap) { this.E = { x: T.x, y: T.y }; this.acc = 0; }
+      const k = useAuto && !this.wasAuto ? 0 : (useAuto ? 1 - this.P('handoff', 0.04) * 6 : this.P('smoothing', 0.82));
+      if (useAuto && !this.wasAuto) this.blend = 0;
+      this.blend = Math.min(1, (this.blend ?? 1) + dt * 0.8);
+      const f = useAuto ? (1 - Math.min(0.97, this.P('smoothing', 0.82))) * this.blend + this.P('handoff', 0.04) * (1 - this.blend) : 1 - k;
+      const nx = this.E.x + (T.x - this.E.x) * f, ny = this.E.y + (T.y - this.E.y) * f;
+      const d = Math.hypot(nx - this.E.x, ny - this.E.y), sp = Math.max(2, this.P('spacing', 14));
+      this.acc += d;
+      const speedFactor = Math.min(1, d / (sp * 2));
+      while (this.acc >= sp) {
+        this.acc -= sp; const u = 1 - this.acc / Math.max(d, 0.001);
+        const px = this.E.x + (nx - this.E.x) * u, py = this.E.y + (ny - this.E.y) * u;
+        for (let i = 0; i < this.P('density', 2); i++) this.spawn(px, py, speedFactor);
+      }
+      this.E = { x: nx, y: ny };
+    }
+    this.wasAuto = useAuto;
+    this.draw(now);
+  }
+  draw(now) {
+    const cv = this.cv; if (!cv) return;
+    const ctx = cv.getContext('2d'); if (!ctx) return;
+    ctx.clearRect(0, 0, W, H);
+    ctx.globalCompositeOperation = this.P('blend', 'Normal') === 'Multiply' ? 'multiply' : 'source-over';
+    const life = this.P('life', 3.2) * 1000, pop = this.P('popScale', 1.15), pt = this.P('popTime', 0.18), hold = Math.max(pt + 0.01, this.P('holdUntil', 0.7)), end = this.P('endScale', 0.6);
+    const drift = this.P('drift', 0), spin = this.P('spin', 0), op = this.P('opacity', 1), shape = this.P('shape', 'Rounded square'), corner = this.P('corner', 3);
+    const keep = [];
+    for (const q of this.ps) {
+      const a = (now - q.b) / life; if (a >= 1) continue; keep.push(q);
+      let sc, al;
+      if (a < pt) { const e = a / pt; sc = pop * (1 - Math.pow(1 - e, 3)); al = e; }
+      else if (a < pt * 1.7) { sc = pop + (1 - pop) * ((a - pt) / (pt * 0.7)); al = 1; }
+      else if (a < hold) { sc = 1; al = 1; }
+      else { const e = (a - hold) / (1 - hold); sc = 1 + (end - 1) * e; al = 1 - e; }
+      const s = q.s * Math.max(0, sc), age = (now - q.b) / 1000;
+      ctx.save(); ctx.globalAlpha = Math.max(0, al) * op; ctx.fillStyle = q.c;
+      ctx.translate(q.x, q.y - drift * age); ctx.rotate(((q.r * (spin ? 1 : 0)) + spin * age + (shape === 'Diamond' ? 45 : 0)) * Math.PI / 180);
+      ctx.beginPath();
+      if (shape === 'Circle') ctx.arc(0, 0, s / 2, 0, Math.PI * 2);
+      else if (shape === 'Square' || shape === 'Diamond') ctx.rect(-s / 2, -s / 2, s, s);
+      else if (ctx.roundRect) ctx.roundRect(-s / 2, -s / 2, s, s, Math.min(corner, s / 2)); else ctx.rect(-s / 2, -s / 2, s, s);
+      ctx.fill(); ctx.restore();
+    }
+    this.ps = keep;
+  }
+  renderVals() {
+    return {
+      bg: this.props.useOriginal ? '#f7f5ef' : (this.props.bg ?? '#f7f5ef'),
+      showHint: this.props.useOriginal ? true : (this.props.showHint ?? true),
+      cvRef: (el) => { this.cv = el; },
+      move: (e) => { const r = e.currentTarget.getBoundingClientRect(); const k = W / r.width; this.mouse = { x: (e.clientX - r.left) * k, y: (e.clientY - r.top) * k }; this.lastMove = performance.now(); },
+      leave: () => { this.lastMove = -1e9; },
+    };
+  }
+}
+</script>
+</body>
+</html>
