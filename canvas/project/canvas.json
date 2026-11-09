@@ -8,7 +8,15 @@
       "title": "Artboard 2",
       "w": 1468,
       "x": 6080,
-      "y": 3760
+      "y": 3777
+    },
+    "Artboard-v5i3.dc.html": {
+      "h": 1085,
+      "page": "page-vmnxsd",
+      "title": "Artboard 3",
+      "w": 1599,
+      "x": 2078,
+      "y": 4973
     },
     "Artboard-wcqg.dc.html": {
       "expand": "fill",
@@ -226,6 +234,15 @@
       "x": 3342,
       "y": 961
     },
+    "PixelHero-design.dc.html": {
+      "h": 916,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Pixel contrail hero · design board",
+      "w": 1440,
+      "x": 6080,
+      "y": 5554
+    },
     "Portfolio20.dc.html": {
       "h": 5320,
       "page": "page-vmnxsd",
@@ -288,6 +305,26 @@
       "w": 1440,
       "x": 18240,
       "y": 2840
+    },
+    "TinHome-2goy.dc.html": {
+      "expand": "fill",
+      "h": 4600,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Tin Le · Homepage (logo loop + work) copy",
+      "w": 1440,
+      "x": 3985,
+      "y": 4240
+    },
+    "TinHome.dc.html": {
+      "expand": "fill",
+      "h": 4600,
+      "is_interactive": true,
+      "page": "page-home",
+      "title": "Tin Le · Homepage (logo loop + work)",
+      "w": 1440,
+      "x": 0,
+      "y": 0
     },
     "TinPortfolio-1-Hero.dc.html": {
       "h": 900,
@@ -457,15 +494,25 @@
       "x": 19760,
       "y": 0
     },
-    "TinHome.dc.html": {
+    "TinHome-Tablet.dc.html": {
       "expand": "fill",
       "h": 4600,
       "is_interactive": true,
-      "page": "page-home",
-      "title": "Tin Le · Homepage (logo loop + work)",
-      "w": 1440,
-      "x": 0,
-      "y": 0
+      "page": "page-vmnxsd",
+      "title": "Tin Le · Homepage · Tablet (834px)",
+      "w": 834,
+      "x": 3985,
+      "y": 9080
+    },
+    "TinHome-Mobile.dc.html": {
+      "expand": "fill",
+      "h": 4600,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Tin Le · Homepage · Mobile (390px)",
+      "w": 390,
+      "x": 4979,
+      "y": 9080
     }
   },
   "createdOnFiles": {
@@ -485,7 +532,8 @@
     "partsTitle",
     "variationsTitle",
     "carousel2Title",
-    "directionsTitle"
+    "directionsTitle",
+    "image-2ee2wb"
   ],
   "notes": {
     "boardTitle": {
@@ -522,6 +570,16 @@
       "w": 240,
       "x": 0,
       "y": -300
+    },
+    "image-2ee2wb": {
+      "alt": "foundry-1794201582815-1 1",
+      "h": 80,
+      "kind": "image",
+      "page": "page-vmnxsd",
+      "src": "/_blob/d93a4c868326fad7da44f0182add3bac",
+      "w": 80,
+      "x": 3781,
+      "y": 4671
     },
     "partsTitle": {
       "kind": "title1",
@@ -583,6 +641,7 @@
     "DirectionB-DrawingSet.dc.html",
     "DirectionC-Syllabus.dc.html",
     "DirectionD-LightTable.dc.html",
+    "TinHome.dc.html",
     "Artboard-wcqg.dc.html",
     "CurrentPortfolio.dc.html",
     "TinPortfolio-1-Hero.dc.html",
@@ -623,7 +682,11 @@
     "VariationPixelSky.dc.html",
     "VariationJobPoint.dc.html",
     "Artboard-4zgx.dc.html",
-    "TinHome.dc.html"
+    "TinHome-2goy.dc.html",
+    "PixelHero-design.dc.html",
+    "Artboard-v5i3.dc.html",
+    "TinHome-Tablet.dc.html",
+    "TinHome-Mobile.dc.html"
   ],
   "pages": [
     {
