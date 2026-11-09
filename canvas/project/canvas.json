@@ -553,6 +553,46 @@
       "w": 390,
       "x": 8147,
       "y": 9080
+    },
+    "TinHome-Tablet-C.dc.html": {
+      "expand": "fill",
+      "h": 4600,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Tin Le · Homepage · Tablet option C · greeting band, info in a 2×2 grid",
+      "w": 834,
+      "x": 8777,
+      "y": 9080
+    },
+    "TinHome-Tablet-D.dc.html": {
+      "expand": "fill",
+      "h": 4600,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Tin Le · Homepage · Tablet option D · two columns + work as a 2-column grid",
+      "w": 834,
+      "x": 9771,
+      "y": 9080
+    },
+    "TinHome-Mobile-C.dc.html": {
+      "expand": "fill",
+      "h": 4600,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Tin Le · Homepage · Mobile option C · compact: small waving avatar beside the greeting",
+      "w": 390,
+      "x": 10765,
+      "y": 9080
+    },
+    "TinHome-Mobile-D.dc.html": {
+      "expand": "fill",
+      "h": 4600,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Tin Le · Homepage · Mobile option D · drawing first + swipeable work cards",
+      "w": 390,
+      "x": 11315,
+      "y": 9080
     }
   },
   "createdOnFiles": {
@@ -730,7 +770,11 @@
     "TinHome-Tablet-A.dc.html",
     "TinHome-Tablet-B.dc.html",
     "TinHome-Mobile-A.dc.html",
-    "TinHome-Mobile-B.dc.html"
+    "TinHome-Mobile-B.dc.html",
+    "TinHome-Tablet-C.dc.html",
+    "TinHome-Tablet-D.dc.html",
+    "TinHome-Mobile-C.dc.html",
+    "TinHome-Mobile-D.dc.html"
   ],
   "pages": [
     {

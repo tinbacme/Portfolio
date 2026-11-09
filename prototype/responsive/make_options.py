@@ -45,6 +45,31 @@ V = {
  'TinHome-Mobile-B': dict(w=390, title='Homepage · Mobile option B · intro first, then drawing', kind='mobile',
    css='''  #top{min-height:auto !important;justify-content:flex-start !important;padding-top:48px !important;padding-bottom:330px !important;gap:18px !important}
 ''', props={'logoSize': 150, 'sizeWave': 1.65, 'waveX': 0.5, 'waveY': tune.get('mbY', 0.8), 'logoX': 0.5, 'logoY': tune.get('mbY', 0.8)}),
+ 'TinHome-Tablet-C': dict(w=834, title='Homepage · Tablet option C · greeting band, info in a 2×2 grid', kind='tablet',
+   css='''  #top{display:grid !important;grid-template-columns:1fr 1fr !important;column-gap:48px;row-gap:32px;align-content:start;min-height:auto !important;padding-top:96px !important;padding-bottom:88px !important}
+  #top > div:first-child{grid-column:1 / -1;min-height:250px;display:flex;align-items:center}
+  #top p[style*="font-size: 46px"]{font-size:72px !important}
+''', props={'logoSize': 170, 'sizeWave': 1.5, 'waveX': 0.75, 'waveY': tune.get('tcY', 0.3), 'logoX': 0.75, 'logoY': tune.get('tcY', 0.3)}),
+ 'TinHome-Tablet-D': dict(w=834, title='Homepage · Tablet option D · two columns + work as a 2-column grid', kind='tablet',
+   css='''  #top{min-height:640px !important}
+  #top > div:not(.th-trail){max-width:52%}
+  main{display:grid !important;grid-template-columns:1fr 1fr;column-gap:24px !important;row-gap:48px !important;align-items:start}
+  main .th-shots{grid-template-columns:1fr !important}
+  main .th-side{grid-template-columns:1fr 1fr !important;grid-template-rows:none !important}
+  main .th-side > .th-small:only-child{grid-column:1 / -1;height:auto !important;aspect-ratio:16 / 10 !important}
+  main .th-meta{grid-template-columns:1fr !important;gap:2px !important}
+  main > div > div:first-child{flex-direction:column !important;gap:2px !important}
+''', props={'logoSize': 210, 'sizeWave': 1.45, 'waveX': 0.76, 'waveY': 0.5, 'logoX': 0.76, 'logoY': 0.5}),
+ 'TinHome-Mobile-C': dict(w=390, title='Homepage · Mobile option C · compact: small waving avatar beside the greeting', kind='mobile',
+   css='''  #top{min-height:auto !important;justify-content:flex-start !important;padding-top:40px !important;padding-bottom:48px !important;gap:16px !important}
+  #top > div:first-child{min-height:150px;display:flex;align-items:center;padding-right:150px;box-sizing:border-box}
+  #top p[style*="font-size: 46px"]{font-size:34px !important;line-height:1.1}
+''', props={'logoSize': 95, 'sizeWave': 1.6, 'waveX': 0.73, 'waveY': tune.get('mcY', 0.16), 'logoX': 0.5, 'logoY': tune.get('mcY', 0.16)}),
+ 'TinHome-Mobile-D': dict(w=390, title='Homepage · Mobile option D · drawing first + swipeable work cards', kind='mobile',
+   css='''  #top{min-height:auto !important;justify-content:flex-start !important;padding-top:330px !important;padding-bottom:56px !important;gap:18px !important}
+  main{flex-direction:row !important;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px !important;padding-bottom:24px !important;scrollbar-width:none}
+  main > *{flex:0 0 84%;scroll-snap-align:start}
+''', props={'logoSize': 150, 'sizeWave': 1.65, 'waveX': 0.5, 'waveY': tune.get('maY', 0.2), 'logoX': 0.5, 'logoY': tune.get('maY', 0.2)}),
 }
 for name, v in V.items():
     s = src
