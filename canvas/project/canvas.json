@@ -513,6 +513,46 @@
       "w": 390,
       "x": 4979,
       "y": 9080
+    },
+    "TinHome-Tablet-A.dc.html": {
+      "expand": "fill",
+      "h": 4600,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Tin Le · Homepage · Tablet option A · two columns, smaller drawing",
+      "w": 834,
+      "x": 5609,
+      "y": 9080
+    },
+    "TinHome-Tablet-B.dc.html": {
+      "expand": "fill",
+      "h": 4600,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Tin Le · Homepage · Tablet option B · drawing on top, intro below",
+      "w": 834,
+      "x": 6603,
+      "y": 9080
+    },
+    "TinHome-Mobile-A.dc.html": {
+      "expand": "fill",
+      "h": 4600,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Tin Le · Homepage · Mobile option A · drawing first, then intro",
+      "w": 390,
+      "x": 7597,
+      "y": 9080
+    },
+    "TinHome-Mobile-B.dc.html": {
+      "expand": "fill",
+      "h": 4600,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Tin Le · Homepage · Mobile option B · intro first, then drawing",
+      "w": 390,
+      "x": 8147,
+      "y": 9080
     }
   },
   "createdOnFiles": {
@@ -686,7 +726,11 @@
     "PixelHero-design.dc.html",
     "Artboard-v5i3.dc.html",
     "TinHome-Tablet.dc.html",
-    "TinHome-Mobile.dc.html"
+    "TinHome-Mobile.dc.html",
+    "TinHome-Tablet-A.dc.html",
+    "TinHome-Tablet-B.dc.html",
+    "TinHome-Mobile-A.dc.html",
+    "TinHome-Mobile-B.dc.html"
   ],
   "pages": [
     {
