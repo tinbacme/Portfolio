@@ -101,7 +101,7 @@ sc-for, sc-if { display: contents; }
 
   <header class="th-head {{headClass}}" style="position: sticky; top: 0; z-index: 10; display: flex; justify-content: center; align-items: center; padding: 14px 40px; flex-direction: row">
     <div class="th-fade" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-    <button type="button" class="th-loop" aria-label="Tin's logo. Click to change it" onClick="{{next}}" style="position: relative; width: 96px; height: 96px; border: 0; padding: 0; background: none; cursor: pointer">
+    <button type="button" class="th-loop" aria-label="Tin's logo. Back to the top" onClick="{{next}}" style="position: relative; width: 96px; height: 96px; border: 0; padding: 0; background: none; cursor: pointer">
       <sc-for list="{{frames}}" as="f" hint-placeholder-count="8"><img src="{{f.src}}" alt="" style="{{f.style}}"></sc-for>
     </button>
     
@@ -128,8 +128,8 @@ sc-for, sc-if { display: contents; }
 
     
       <div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 20px"><div style="box-sizing: border-box; display: flex; flex-direction: row; gap: 12px"><span style="font-size: 20px; width: 100%">Windows Search Box</span>
-      <p style="margin: 0; color: #6e6e6e; font-size: 20px; width: 1161px">Design the next generation of Agentic Windows OS Search</p></div><div style="aspect-ratio: 16 / 10; border-radius: 6px; display: grid; place-items: center; background-color: #E7E7E7; width: 1137px"><div style="width: 78%; aspect-ratio: 16 / 10; border-radius: 8px; background: #ffffff; display: grid; place-items: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); font-size: 12px; color: #8a8a8a; letter-spacing: 0.06em; text-transform: uppercase">Search results and map</div></div></div><div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 20px"><div style="box-sizing: border-box; display: flex; flex-direction: row; gap: 12px"><span style="font-size: 20px; width: 100%">Windows Search Box</span>
-      <p style="margin: 0; color: #6e6e6e; font-size: 20px; width: 1161px">Design the next generation of Agentic Windows OS Search</p></div><div style="aspect-ratio: 16 / 10; border-radius: 6px; display: grid; place-items: center; background-color: #E7E7E7; width: 1137px"><div style="width: 78%; aspect-ratio: 16 / 10; border-radius: 8px; background: #ffffff; display: grid; place-items: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); font-size: 12px; color: #8a8a8a; letter-spacing: 0.06em; text-transform: uppercase">Search results and map</div></div></div>
+      <p style="margin: 0; color: #6e6e6e; font-size: 20px; width: 1161px">Design the next generation of Agentic Windows OS Search</p></div><div style="aspect-ratio: 16 / 10; border-radius: 6px; display: grid; place-items: center; background-color: #E7E7E7; width: 100%; max-width: 100%"><div style="width: 78%; aspect-ratio: 16 / 10; border-radius: 8px; background: #ffffff; display: grid; place-items: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); font-size: 12px; color: #8a8a8a; letter-spacing: 0.06em; text-transform: uppercase">Search results and map</div></div></div><div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 20px"><div style="box-sizing: border-box; display: flex; flex-direction: row; gap: 12px"><span style="font-size: 20px; width: 100%">Windows Search Box</span>
+      <p style="margin: 0; color: #6e6e6e; font-size: 20px; width: 1161px">Design the next generation of Agentic Windows OS Search</p></div><div style="aspect-ratio: 16 / 10; border-radius: 6px; display: grid; place-items: center; background-color: #E7E7E7; width: 100%; max-width: 100%"><div style="width: 78%; aspect-ratio: 16 / 10; border-radius: 8px; background: #ffffff; display: grid; place-items: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); font-size: 12px; color: #8a8a8a; letter-spacing: 0.06em; text-transform: uppercase">Search results and map</div></div></div>
         
         
       
@@ -590,6 +590,13 @@ class Component extends DCLogic {
     this.setState({ intro: 'run' }); if (this.tr) { this.tr.form = null; this.tr.ret = []; this.tr.ghost = null; }
     this.tIntro = setTimeout(() => this.setState({ intro: 'done' }), 3900);
   }
+  goHome() {
+    try { (document.scrollingElement || document.documentElement).scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) {}
+    const r = this.tr; if (!r) return;
+    // every dot goes back where it started: logos let go, the waving figure rebuilds, the trail starts fresh
+    if (r.form) this.trailUnform();
+    r.ps = []; r.E = null; r.t = 0; r.acc = 0; r.lastMove = -1e9; r.homeTry = 0;
+  }
   componentDidMount() { this.start(); this.trailPreload(); this.trailStart(); this.introStart(); }
   componentDidUpdate(prev) { if (prev.speed !== this.props.speed) this.start(); if (prev.introLoader !== this.props.introLoader && this.props.introLoader !== false) this.introStart(); }
   componentWillUnmount() { clearInterval(this.timer); clearTimeout(this.t2); clearTimeout(this.tIntro); cancelAnimationFrame(this.trRaf); }
@@ -605,7 +612,7 @@ class Component extends DCLogic {
     return {
       frames,
       markOpacity: this.props.markOpacity ?? 0.3,
-      next: () => this.setState(s => ({ i: (s.i + 1) % 8 })),
+      next: () => { this.setState(s => ({ i: (s.i + 1) % 8 })); this.goHome(); },
       ...this.aboutVals(),
       trWidth: (this.props.trailWidth ?? 55) + '%',
       trRef: (el) => { this.trCv = el; },
