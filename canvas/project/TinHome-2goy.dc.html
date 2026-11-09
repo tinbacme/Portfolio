@@ -219,27 +219,40 @@ class Component extends DCLogic {
     return r.rects;
   }
   trailHit(x, y, pad) { for (const q of this.tr.rects || []) if (x > q.x0 - pad && x < q.x1 + pad && y > q.y0 - pad && y < q.y1 + pad) return q; return null; }
+  trailMix(a, b, k) {
+    const h = (c) => { c = String(c).replace('#', ''); if (c.length === 3) c = c.split('').map((x) => x + x).join(''); const n = parseInt(c.slice(0, 6), 16) || 0; return [(n >> 16) & 255, (n >> 8) & 255, n & 255]; };
+    const x = h(a), y = h(b); return `rgb(${Math.round(x[0] + (y[0] - x[0]) * k)}, ${Math.round(x[1] + (y[1] - x[1]) * k)}, ${Math.round(x[2] + (y[2] - x[2]) * k)})`;
+  }
+  trailCol(q, pal, by) { return q.fc ? q.fc : by === 'Along the trail' ? pal[Math.floor(q.n / 6) % pal.length] : by === 'By size' ? pal[Math.min(pal.length - 1, Math.floor(q.sf * pal.length))] : pal[Math.floor(q.rnd * pal.length) % pal.length]; }
   trailForm(name) {
     const r = this.tr, cv = this.trCv; if (!r || !cv) return;
+    if (r.form) this.trailUnform();
     const W = cv.clientWidth, H = cv.clientHeight, now = performance.now();
     const S = this.tp('trailLogoSize', 220), n = Math.max(2, this.tp('trailLogoGrid', 6)), gap = S * 0.06, q = (S - gap) / 2, cell = q / n;
     const cx = W * this.tp('trailLogoX', 0.72), cy = H * 0.5, x0 = cx - S / 2, y0 = cy - S / 2;
     const quads = [[0, 0, '#f25022'], [1, 0, '#7fba00'], [0, 1, '#00a4ef'], [1, 1, '#ffb900']];
-    const from = r.ps.length ? r.ps : [{ x: (r.E && r.E.x) || cx, y: (r.E && r.E.y) || cy }];
-    const parts = [];
-    quads.forEach(([qx, qy, c]) => { for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) {
-      const src = from[Math.floor(Math.random() * from.length)];
-      parts.push({ sx: src.x, sy: src.y, tx: x0 + qx * (q + gap) + (i + 0.5) * cell, ty: y0 + qy * (q + gap) + (j + 0.5) * cell, s: cell * 0.86, c, delay: Math.random() * 260 });
-    } });
+    const targets = [];
+    quads.forEach(([qx, qy, c]) => { for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) targets.push({ tx: x0 + qx * (q + gap) + (i + 0.5) * cell, ty: y0 + qy * (q + gap) + (j + 0.5) * cell, c }); });
+    // the trail's own pixels, oldest first, become the logo: each one flies from where it is
+    const pal = this.trailPal(), by = this.tp('trailColorBy', 'Along the trail'), life = this.tp('trailLife', 1.9) * 1000;
+    const live = r.ps.filter((p) => (now - p.b) / life < 1).sort((u, v) => u.b - v.b);
+    const src = live.length ? live : [{ x: (r.E && r.E.x) || cx, y: (r.E && r.E.y) || cy, s: cell * 0.6, n: 0, rnd: 0, sf: 0 }];
+    for (let i = targets.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [targets[i], targets[j]] = [targets[j], targets[i]]; }
+    const parts = [], dur = 900;
+    const mk = (p, t, absorb, reuse) => { const sx = p.x + (reuse ? (Math.random() - 0.5) * 10 : 0), sy = p.y + (reuse ? (Math.random() - 0.5) * 10 : 0), dist = Math.hypot(t.tx - sx, t.ty - sy);
+      parts.push({ sx, sy, ss: Math.max(2, p.s * (reuse ? 0.5 : 1)), sc: this.trailCol(p, pal, by), tx: t.tx, ty: t.ty, s: cell * 0.86, c: t.c, delay: Math.min(380, dist * 0.25) + Math.random() * 140, dur, absorb, born: reuse }); };
+    targets.forEach((t, i) => { const reuse = i >= src.length; mk(src[i % src.length], t, false, reuse); });
+    for (let i = targets.length; i < src.length; i++) mk(src[i], targets[i % targets.length], true, false);
+    r.ps = [];
     r.form = { name, t0: now, parts, cell };
   }
   trailUnform() {
     const r = this.tr; if (!r || !r.form) return;
     const now = performance.now(), life = this.tp('trailLife', 1.9) * 1000, hold = this.tp('trailHold', 0.39);
-    for (const p of r.form.parts) { const k = this.trailFormK(p, now); r.ps.push({ x: p.sx + (p.tx - p.sx) * k, y: p.sy + (p.ty - p.sy) * k, s: p.s, fc: p.c, n: 0, rnd: 0, sf: 0, b: now - life * hold * (0.6 + Math.random() * 0.4), rot: 0 }); }
+    for (const p of r.form.parts) { if (p.absorb) continue; const k = this.trailFormK(p, now); r.ps.push({ x: p.sx + (p.tx - p.sx) * k, y: p.sy + (p.ty - p.sy) * k, s: p.ss + (p.s - p.ss) * k, fc: k > 0.5 ? p.c : p.sc, n: 0, rnd: 0, sf: 0, b: now - life * hold * (0.6 + Math.random() * 0.4), rot: 0 }); }
     r.form = null; r.E = null;
   }
-  trailFormK(p, now) { const t = Math.max(0, Math.min(1, (now - this.tr.form.t0 - p.delay) / 650)); return 1 - Math.pow(1 - t, 3); }
+  trailFormK(p, now) { const t = Math.max(0, Math.min(1, (now - this.tr.form.t0 - p.delay) / (p.dur || 900))); return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
   trailStep(now) {
     const r = this.tr, cv = this.trCv; r.now = now;
     const dt = Math.min(0.05, (now - r.last) / 1000); r.last = now;
@@ -305,9 +318,12 @@ class Component extends DCLogic {
       ctx.globalCompositeOperation = 'source-over';
       const reduceF = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
       for (const p of r.form.parts) {
-        const k = reduceF ? 1 : this.trailFormK(p, now), x = p.sx + (p.tx - p.sx) * k, y = p.sy + (p.ty - p.sy) * k, sc = k < 1 ? 0.6 + 0.4 * k : 1;
-        ctx.globalAlpha = 0.35 + 0.65 * k; ctx.fillStyle = p.c; const z = p.s * sc;
-        ctx.beginPath(); if (ctx.roundRect) ctx.roundRect(x - z / 2, y - z / 2, z, z, Math.min(2, z / 4)); else ctx.rect(x - z / 2, y - z / 2, z, z); ctx.fill();
+        const k = reduceF ? 1 : this.trailFormK(p, now);
+        const x = p.sx + (p.tx - p.sx) * k, y = p.sy + (p.ty - p.sy) * k, z = p.ss + (p.s - p.ss) * k;
+        const al = p.absorb ? 1 - k : (p.born ? Math.min(1, k * 3) : 1);
+        if (al <= 0.01) continue;
+        ctx.globalAlpha = al; ctx.fillStyle = this.trailMix(p.sc, p.c, Math.min(1, k * 1.15));
+        ctx.beginPath(); if (ctx.roundRect) ctx.roundRect(x - z / 2, y - z / 2, z, z, Math.min(3, z / 4)); else ctx.rect(x - z / 2, y - z / 2, z, z); ctx.fill();
       }
       ctx.globalAlpha = 1;
     }
