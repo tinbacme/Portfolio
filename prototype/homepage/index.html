@@ -13,7 +13,7 @@ sc-for, sc-if { display: contents; }
 .th-co:hover p,.th-co:focus-within p{color:#141414 !important}
 .th-co{align-self:flex-start;margin-left:-10px;padding:4px 10px;border-radius:200px;transition:background-color .25s}
 .th-co:hover,.th-co:focus-within{background-color:#e7e7e7}
-.th-co .lg-out{opacity:.55;transition:opacity .25s,transform .25s}
+.th-co .lg-out{opacity:0;transform:translate(-3px,3px);transition:opacity .25s,transform .25s}
 .th-co:hover .lg-out,.th-co:focus-within .lg-out{opacity:1;transform:translate(1px,-1px);color:#141414 !important}
 /* About collage: photos ride a ring turning around a vertical axis (from "4 About") */
 @keyframes ab-orbit { from { transform: rotateY(0deg); } to { transform: rotateY(360deg); } }
@@ -60,6 +60,32 @@ sc-for, sc-if { display: contents; }
   .hf-scroll .th-fade::before{animation:hf-in-c linear both;animation-timeline:scroll(nearest);animation-range:0 140px}
   .hf-scroll .th-fade i{animation:hf-in-b linear both;animation-timeline:scroll(nearest);animation-range:0 140px}
 }
+
+/* Intro: the tin logo draws itself, then the page arrives */
+.th-intro{position:fixed;inset:0;z-index:60;display:grid;place-items:center;background:#f5f5f5;animation:ldOut .5s 2.45s cubic-bezier(.22,1,.36,1) both;pointer-events:none}
+.th-intro svg{width:150px;height:150px;overflow:visible}
+.th-intro .ld-g{transform-box:view-box;transform-origin:50% 50%;animation:ldExit .6s 2.3s cubic-bezier(.22,1,.36,1) both}
+.th-intro .ld-l{fill:#1e1e1e;stroke:#1e1e1e;stroke-width:1.1;stroke-linejoin:round;stroke-linecap:round;stroke-dasharray:1 1;fill-opacity:0}
+.th-intro .ld-t{animation:ldDraw .6s .15s cubic-bezier(.22,1,.36,1) both,ldFill .35s .75s cubic-bezier(.22,1,.36,1) both}
+.th-intro .ld-i{animation:ldDraw .45s .45s cubic-bezier(.22,1,.36,1) both,ldFill .35s .9s cubic-bezier(.22,1,.36,1) both}
+.th-intro .ld-n{animation:ldDraw .75s .65s cubic-bezier(.22,1,.36,1) both,ldFill .35s 1.4s cubic-bezier(.22,1,.36,1) both}
+.th-intro .ld-dot{fill:#1e1e1e;transform-box:fill-box;transform-origin:50% 100%;animation:ldDot .55s 1.55s linear both}
+@keyframes ldDraw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes ldFill{from{fill-opacity:0}to{fill-opacity:1}}
+@keyframes ldDot{0%{transform:translateY(-16px) scale(0,0)}30%{transform:translateY(-6px) scale(.8,.75)}55%{transform:translateY(1px) scale(1.12,.9)}80%{transform:translateY(-.3px) scale(.98,1.02)}100%{transform:none}}
+@keyframes ldExit{to{opacity:0;transform:scale(.9)}}
+@keyframes ldOut{to{opacity:0;visibility:hidden}}
+@keyframes inUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes inFade{from{opacity:0}to{opacity:1}}
+.intro-run header{animation:inFade .6s 2.55s both}
+.intro-run #top > div:not(.th-trail){animation:inUp .7s cubic-bezier(.2,.8,.2,1) both}
+.intro-run #top > div:nth-child(1){animation-delay:2.6s}
+.intro-run #top > div:nth-child(2){animation-delay:2.68s}
+.intro-run #top > div:nth-child(3){animation-delay:2.76s}
+.intro-run #top > div:nth-child(4){animation-delay:2.84s}
+.intro-run #top > div:nth-child(5){animation-delay:2.92s}
+.intro-run main,.intro-run #about,.intro-run footer{animation:inUp .8s 3.05s cubic-bezier(.2,.8,.2,1) both}
+@media (prefers-reduced-motion: reduce){.th-intro{display:none}.intro-run *{animation:none !important}}
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&amp;display=swap">
 <style>html,body{background:#f5f5f5}body{margin:0;overflow-x:hidden}
@@ -72,7 +98,9 @@ sc-for, sc-if { display: contents; }
 @supports not (zoom:calc(1)){@media (max-width:700px){#app .ab-board{zoom:.56}}}
 </style>
 <template id="dc-tpl">
-<div style="background: #f5f5f5; color: #141414; font-family: 'Be Vietnam Pro', system-ui, sans-serif; font-size: 16px; line-height: 1.4; min-height: 100%">
+<div class="{{introClass}}" style="background: #f5f5f5; color: #141414; font-family: 'Be Vietnam Pro', system-ui, sans-serif; font-size: 16px; line-height: 1.4; min-height: 100%">
+<sc-if value="{{introOn}}" hint-placeholder-val="{{ false }}"><div class="th-intro" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none"><g class="ld-g"><path class="ld-l ld-t" pathLength="1" d="M11.7891 40.2597V29.7451H8.02393V24.4721H11.7891V18.603H13.6266C14.7138 18.603 15.7565 19.0349 16.5252 19.8037C17.294 20.5724 17.7259 21.6151 17.7259 22.7023V24.4585H23.8342V29.7451H17.7259V38.1559C17.7259 39.8083 17.5047 42.7608 19.6627 42.7608C20.4363 42.7269 21.1786 42.4452 21.78 41.9572L23.8026 46.5215C22.1367 47.6818 20.7416 48.3274 18.6739 48.3274C13.8117 48.3048 11.7891 44.7292 11.7891 40.2597Z"></path><path class="ld-l ld-i" pathLength="1" d="M33.202 24.8921H28.0192C27.7873 24.8921 27.5994 25.0801 27.5994 25.312V47.8987C27.5994 48.1305 27.7873 48.3185 28.0192 48.3185H33.202C33.4339 48.3185 33.6219 48.1305 33.6219 47.8987V25.312C33.6219 25.0801 33.4339 24.8921 33.202 24.8921Z"></path><path class="ld-l ld-n" pathLength="1" d="M56.213 33.3163V47.8986C56.213 47.9537 56.2021 48.0083 56.181 48.0592C56.1599 48.1102 56.129 48.1565 56.09 48.1955C56.051 48.2344 56.0047 48.2654 55.9538 48.2865C55.9029 48.3076 55.8483 48.3184 55.7931 48.3184H50.6058C50.4945 48.3184 50.3877 48.2742 50.3089 48.1955C50.2302 48.1167 50.1859 48.0099 50.1859 47.8986V35.9709C50.1859 33.6459 49.7345 31.4563 47.0573 31.4563C44.3124 31.4563 43.4095 33.7407 43.4095 35.9709V47.8986C43.4101 47.9535 43.3998 48.008 43.3792 48.0589C43.3586 48.1098 43.3281 48.1561 43.2894 48.1952C43.2508 48.2342 43.2048 48.2652 43.1541 48.2864C43.1034 48.3075 43.0491 48.3184 42.9941 48.3184H37.8068C37.6955 48.3184 37.5887 48.2742 37.5099 48.1955C37.4312 48.1167 37.387 48.0099 37.387 47.8986V25.3254C37.387 25.214 37.4312 25.1073 37.5099 25.0285C37.5887 24.9498 37.6955 24.9055 37.8068 24.9055H42.9941C43.1047 24.9067 43.2103 24.9515 43.2881 25.0301C43.3659 25.1087 43.4095 25.2148 43.4095 25.3254V27.9619C43.4095 27.9727 43.4138 27.9831 43.4214 27.9907C43.429 27.9983 43.4393 28.0026 43.4501 28.0026C43.4609 28.0026 43.4712 27.9983 43.4788 27.9907C43.4865 27.9831 43.4907 27.9727 43.4907 27.9619C44.3937 25.8717 46.958 24.3999 49.8112 24.3999C54.5832 24.3999 56.213 28.4766 56.213 33.3163Z"></path><path class="ld-dot" d="M30.6692 22.1201C29.751 22.1335 28.8646 21.7839 28.2026 21.1473C27.5407 20.5108 27.1568 19.6387 27.1343 18.7206C27.1801 17.814 27.5725 16.9596 28.2305 16.3341C28.8884 15.7087 29.7614 15.3599 30.6692 15.3599C31.577 15.3599 32.4501 15.7087 33.108 16.3341C33.7659 16.9596 34.1584 17.814 34.2042 18.7206C34.1817 19.6387 33.7977 20.5108 33.1358 21.1473C32.4739 21.7839 31.5875 22.1335 30.6692 22.1201V22.1201Z"></path></g></svg></div></sc-if>
+
 
   <header class="th-head {{headClass}}" style="position: sticky; top: 0; z-index: 10; display: flex; justify-content: center; align-items: center; padding: 14px 40px; flex-direction: row">
     <div class="th-fade" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
@@ -605,7 +633,7 @@ class Component extends DCLogic {
     }
     r.wasAuto = useAuto;
     const homeOn = this.tp('heroShows', 'Waving drawing') !== 'Trail only';
-    if (homeOn && !r.form && now - (r.homeTry || 0) > 250) { r.homeTry = now; this.trailForm('wave'); }
+    if (homeOn && !r.form && (this.state.intro !== 'run' || (this.props.introLoader === false)) && now - (r.homeTry || 0) > 250) { r.homeTry = now; this.trailForm('wave'); }
     if (!homeOn && r.form && r.form.home) this.trailUnform();
     if (r.form && r.form.anim && now - r.form.t0 > this.tp('formTime', 900)) {
       const A = r.form.anim, L = A.seq.length, stepMs = 1000 / Math.max(1, this.tp('waveFps', 12)), stepped = this.tp('waveMotion', 'Frames (12 fps)') !== 'Soft';
@@ -704,9 +732,16 @@ class Component extends DCLogic {
       ctx.globalAlpha = 1;
     }
   }
-  componentDidMount() { this.start(); this.trailPreload(); this.trailStart(); }
-  componentDidUpdate(prev) { if (prev.speed !== this.props.speed) this.start(); }
-  componentWillUnmount() { clearInterval(this.timer); clearTimeout(this.t2); cancelAnimationFrame(this.trRaf); }
+  introStart() {
+    const reduce = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    clearTimeout(this.tIntro);
+    if (reduce || this.props.introLoader === false) { this.setState({ intro: 'done' }); return; }
+    this.setState({ intro: 'run' }); if (this.tr) { this.tr.form = null; this.tr.ret = []; this.tr.ghost = null; }
+    this.tIntro = setTimeout(() => this.setState({ intro: 'done' }), 3900);
+  }
+  componentDidMount() { this.start(); this.trailPreload(); this.trailStart(); this.introStart(); }
+  componentDidUpdate(prev) { if (prev.speed !== this.props.speed) this.start(); if (prev.introLoader !== this.props.introLoader && this.props.introLoader !== false) this.introStart(); }
+  componentWillUnmount() { clearInterval(this.timer); clearTimeout(this.t2); clearTimeout(this.tIntro); cancelAnimationFrame(this.trRaf); }
   start() {
     clearInterval(this.timer);
     const reduce = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -732,11 +767,12 @@ class Component extends DCLogic {
       gmEnter: () => this.trailForm(this.tp('emailShows', 'My drawing') === 'Gmail logo' ? 'gm' : 'me'), gmLeave: () => this.trailRelease(),
       liEnter: () => this.trailForm(this.tp('linkedinShows', 'My drawing') === 'LinkedIn logo' ? 'li' : 'hs'), liLeave: () => this.trailRelease(),
       headClass: { 'On scroll': 'hf-scroll', 'Always': 'hf-always', 'Off': 'hf-off' }[this.props.headerFade ?? 'On scroll'] || 'hf-scroll',
+      introOn: this.state.intro === 'run', introClass: this.state.intro === 'run' ? 'intro-run' : '',
       copyLabel: this.state.copied ? 'Email copied' : 'Email',
       copy: () => { try { navigator.clipboard && navigator.clipboard.writeText('tinbacme@gmail.com'); } catch (e) {} this.setState({ copied: true }); clearTimeout(this.t2); this.t2 = setTimeout(() => this.setState({ copied: false }), 1600); },
     };
   }
 }
 
-dcLite.run({ template: document.getElementById('dc-tpl'), host: document.getElementById('app'), Component, props: {"speed": 1000, "markOpacity": 1, "animate": true, "orbitSpeed": 1.25, "direction": "right", "radius": 230, "depth": 1200, "tilt": 6.5, "floatDistance": 7, "hoverLift": true, "pauseOnHover": false, "boardColor": "#f5f5f5", "trailOn": true, "shape": "Blossom", "trailWidth": 100, "trailMode": "Follow + auto", "followLag": 0.82, "followGap": 24, "followDots": 2, "autoDelay": 1.2, "autoPath": "Contrail", "autoSpeed": 1.35, "autoWidth": 0.8, "autoHeight": 0.35, "autoY": 0.42, "autoLag": 0.82, "autoEaseIn": 0.04, "autoGap": 24, "autoDots": 2, "trailSizeMin": 8, "trailSizeMax": 20, "trailJitter": 18, "trailTaper": 0.6, "trailGridSnap": 0, "trailCorner": 3, "trailLife": 5.2, "trailPop": 1.27, "trailPopTime": 0.09, "trailHold": 0.39, "trailEndScale": 0.6, "trailDrift": 0, "trailSpin": 0, "trailPalette": "My colors", "trailColorBy": "Along the trail", "trailColor1": "#3d5bb5", "trailColor2": "#5f7fd0", "trailColor3": "#7694d9", "trailColor4": "#b3c6f2", "trailOpacity": 1, "trailBlend": "Normal", "trailAvoidText": true, "trailTextGap": 20, "heroShows": "Waving drawing", "sizeWave": 1.5, "waveX": 0.72, "waveY": 0.5, "waveMotion": "Frames (12 fps)", "waveFps": 12, "waveDrift": 1.5, "logoSize": 300, "sizeMsft": 1.25, "sizeSales": 1.25, "sizeOregon": 1.25, "sizeGmail": 1.25, "sizeLinkIn": 1.25, "emailShows": "My drawing", "sizeMail": 1.5, "linkedinShows": "My drawing", "sizeHand": 1.5, "drawDetail": 64, "drawLine": 0.1, "drawInk": "#141414", "logoX": 0.72, "logoY": 0.5, "logoFill": 0.86, "logoRound": 0.2, "logoShape": "Same as trail", "msftDots": 10, "detail": 30, "formTime": 900, "linger": 2.5, "pushReach": 110, "pushForce": 2, "springBack": 0.17, "afterLogo": "Back into the trail", "flySpeed": 1, "perStep": 3, "waitMax": 4000, "loosen": 1.85, "headerFade": "On scroll"} });
+dcLite.run({ template: document.getElementById('dc-tpl'), host: document.getElementById('app'), Component, props: {"introLoader": true, "speed": 1000, "markOpacity": 1, "animate": true, "orbitSpeed": 1.25, "direction": "right", "radius": 230, "depth": 1200, "tilt": 6.5, "floatDistance": 7, "hoverLift": true, "pauseOnHover": false, "boardColor": "#f5f5f5", "trailOn": true, "shape": "Blossom", "trailWidth": 100, "trailMode": "Follow + auto", "followLag": 0.82, "followGap": 24, "followDots": 2, "autoDelay": 1.2, "autoPath": "Contrail", "autoSpeed": 1.35, "autoWidth": 0.8, "autoHeight": 0.35, "autoY": 0.42, "autoLag": 0.82, "autoEaseIn": 0.04, "autoGap": 24, "autoDots": 2, "trailSizeMin": 8, "trailSizeMax": 20, "trailJitter": 18, "trailTaper": 0.6, "trailGridSnap": 0, "trailCorner": 3, "trailLife": 5.2, "trailPop": 1.27, "trailPopTime": 0.09, "trailHold": 0.39, "trailEndScale": 0.6, "trailDrift": 0, "trailSpin": 0, "trailPalette": "My colors", "trailColorBy": "Along the trail", "trailColor1": "#3d5bb5", "trailColor2": "#5f7fd0", "trailColor3": "#7694d9", "trailColor4": "#b3c6f2", "trailOpacity": 1, "trailBlend": "Normal", "trailAvoidText": true, "trailTextGap": 20, "heroShows": "Waving drawing", "sizeWave": 1.5, "waveX": 0.72, "waveY": 0.5, "waveMotion": "Frames (12 fps)", "waveFps": 12, "waveDrift": 1.5, "logoSize": 300, "sizeMsft": 1.25, "sizeSales": 1.25, "sizeOregon": 1.25, "sizeGmail": 1.25, "sizeLinkIn": 1.25, "emailShows": "My drawing", "sizeMail": 1.5, "linkedinShows": "My drawing", "sizeHand": 1.5, "drawDetail": 64, "drawLine": 0.1, "drawInk": "#141414", "logoX": 0.72, "logoY": 0.5, "logoFill": 0.86, "logoRound": 0.2, "logoShape": "Same as trail", "msftDots": 10, "detail": 30, "formTime": 900, "linger": 2.5, "pushReach": 110, "pushForce": 2, "springBack": 0.17, "afterLogo": "Back into the trail", "flySpeed": 1, "perStep": 3, "waitMax": 4000, "loosen": 1.85, "headerFade": "On scroll"} });
 </script>
