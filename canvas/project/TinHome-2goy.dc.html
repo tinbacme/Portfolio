@@ -260,7 +260,7 @@ class Component extends DCLogic {
       if (A < 140) continue;
       const white = R > 232 && G > 232 && B > 232;
       if (white && name !== 'sf') continue; // other logos keep white parts as holes
-      pts.push({ i, j, c: white ? '#00a1e0' : `rgb(${R}, ${G}, ${B})` }); // Salesforce: the lettering is filled in blue
+      pts.push({ i, j, c: name === 'sf' ? '#00a1e0' : `rgb(${R}, ${G}, ${B})` }); // Salesforce: one solid blue, letters and their soft edges included
     }
     const out = { w, h, pts }; this.trSamples[key] = out; return out;
   }
