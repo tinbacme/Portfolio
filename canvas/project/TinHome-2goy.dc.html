@@ -143,7 +143,7 @@ sc-for, sc-if { display: contents; }
   </footer>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"speed": {"editor": "int", "default": 1000, "min": 200, "max": 3000, "step": 50, "unit": "ms", "section": "Logo loop"}, "markOpacity": {"editor": "range", "default": 1, "min": 0.1, "max": 1, "step": 0.05, "section": "Logo loop"}, "animate": {"editor": "boolean", "default": true, "section": "About collage"}, "orbitSpeed": {"editor": "range", "default": 3.75, "min": 0.25, "max": 4, "step": 0.25, "unit": "×", "section": "About collage"}, "direction": {"editor": "enum", "default": "right", "options": ["right", "left"], "section": "About collage"}, "radius": {"editor": "range", "default": 230, "min": 60, "max": 320, "step": 5, "unit": "px", "section": "About collage"}, "depth": {"editor": "range", "default": 1200, "min": 400, "max": 2400, "step": 50, "unit": "px", "section": "About collage"}, "tilt": {"editor": "range", "default": 6.5, "min": 0, "max": 15, "step": 0.5, "unit": "°", "section": "About collage"}, "floatDistance": {"editor": "range", "default": 7, "min": 0, "max": 30, "step": 1, "unit": "px", "section": "About collage"}, "hoverLift": {"editor": "boolean", "default": true, "section": "About collage"}, "pauseOnHover": {"editor": "boolean", "default": false, "section": "About collage"}, "boardColor": {"editor": "color", "default": "#f5f5f5", "options": ["#f5f5f5", "#ffffff", "#2b2b2b", "#1b2930"], "section": "About collage"}, "trailOn": {"editor": "boolean", "default": true, "section": "Pixel trail"}, "trailWidth": {"editor": "range", "default": 100, "min": 20, "max": 100, "step": 1, "unit": "%", "section": "Pixel trail"}, "trailMode": {"editor": "enum", "options": ["Follow + auto", "Follow only", "Auto only"], "default": "Follow + auto", "section": "Pixel trail"}, "trailIdleDelay": {"editor": "range", "default": 1.2, "min": 0.2, "max": 6, "step": 0.1, "unit": "s", "section": "Pixel trail"}, "trailSmoothing": {"editor": "range", "default": 0.82, "min": 0, "max": 0.97, "step": 0.01, "section": "Pixel trail"}, "trailHandoff": {"editor": "range", "default": 0.04, "min": 0.005, "max": 0.2, "step": 0.005, "section": "Pixel trail"}, "trailPath": {"editor": "enum", "options": ["Contrail", "Figure 8", "Orbit", "Wander"], "default": "Contrail", "section": "Pixel trail"}, "trailSpeed": {"editor": "range", "default": 1.35, "min": 0.1, "max": 4, "step": 0.05, "section": "Pixel trail"}, "trailPathWidth": {"editor": "range", "default": 0.8, "min": 0.1, "max": 1, "step": 0.01, "section": "Pixel trail"}, "trailPathHeight": {"editor": "range", "default": 0.35, "min": 0.05, "max": 1, "step": 0.01, "section": "Pixel trail"}, "trailPathY": {"editor": "range", "default": 0.42, "min": 0, "max": 1, "step": 0.01, "section": "Pixel trail"}, "trailSizeMin": {"editor": "int", "default": 8, "min": 1, "max": 80, "section": "Pixel trail"}, "trailSizeMax": {"editor": "int", "default": 20, "min": 1, "max": 120, "section": "Pixel trail"}, "trailSpacing": {"editor": "int", "default": 24, "min": 2, "max": 80, "unit": "px", "section": "Pixel trail"}, "trailDensity": {"editor": "int", "default": 2, "min": 1, "max": 8, "section": "Pixel trail"}, "trailJitter": {"editor": "int", "default": 18, "min": 0, "max": 120, "unit": "px", "section": "Pixel trail"}, "trailTaper": {"editor": "range", "default": 0.6, "min": 0, "max": 1, "step": 0.05, "section": "Pixel trail"}, "trailGridSnap": {"editor": "int", "default": 0, "min": 0, "max": 48, "unit": "px", "section": "Pixel trail"}, "trailShape": {"editor": "enum", "options": ["Rounded square", "Square", "Circle", "Diamond", "Flower", "Blossom", "Star", "Sparkle", "Heart", "Hexagon", "Plus", "Ring", "Leaf", "Drop", "Mix"], "default": "Rounded square", "section": "Pixel trail"}, "trailCorner": {"editor": "int", "default": 3, "min": 0, "max": 30, "unit": "px", "section": "Pixel trail"}, "trailLife": {"editor": "range", "default": 5.2, "min": 0.3, "max": 10, "step": 0.1, "unit": "s", "section": "Pixel trail"}, "trailPop": {"editor": "range", "default": 1.27, "min": 1, "max": 2, "step": 0.01, "section": "Pixel trail"}, "trailPopTime": {"editor": "range", "default": 0.09, "min": 0.02, "max": 0.6, "step": 0.01, "section": "Pixel trail"}, "trailHold": {"editor": "range", "default": 0.39, "min": 0.2, "max": 0.98, "step": 0.01, "section": "Pixel trail"}, "trailEndScale": {"editor": "range", "default": 0.6, "min": 0, "max": 2, "step": 0.05, "section": "Pixel trail"}, "trailDrift": {"editor": "range", "default": 0, "min": -60, "max": 60, "step": 1, "unit": "px/s", "section": "Pixel trail"}, "trailSpin": {"editor": "range", "default": 0, "min": -360, "max": 360, "step": 5, "unit": "°/s", "section": "Pixel trail"}, "trailPalette": {"editor": "enum", "options": ["My colors", "Original contrail", "Tin plates", "Pine + sun", "Ink"], "default": "My colors", "section": "Pixel trail"}, "trailColorBy": {"editor": "enum", "options": ["Random", "Along the trail", "By size"], "default": "Along the trail", "section": "Pixel trail"}, "trailColor1": {"editor": "color", "default": "#5f73c4", "section": "Pixel trail"}, "trailColor2": {"editor": "color", "default": "#d64d45", "section": "Pixel trail"}, "trailColor3": {"editor": "color", "default": "#e5839a", "section": "Pixel trail"}, "trailColor4": {"editor": "color", "default": "#f9b1fa", "section": "Pixel trail"}, "trailOpacity": {"editor": "range", "default": 1, "min": 0.1, "max": 1, "step": 0.05, "section": "Pixel trail"}, "trailBlend": {"editor": "enum", "options": ["Normal", "Multiply"], "default": "Normal", "section": "Pixel trail"}, "trailAvoidText": {"editor": "boolean", "default": true, "section": "Pixel trail"}, "trailTextGap": {"editor": "int", "default": 20, "min": 0, "max": 120, "unit": "px", "section": "Pixel trail"}, "trailLogoSize": {"editor": "int", "default": 220, "min": 80, "max": 420, "unit": "px", "section": "Trail logos"}, "trailScaleMicrosoft": {"editor": "range", "default": 1.25, "min": 0.3, "max": 2, "step": 0.05, "unit": "×", "section": "Trail logos"}, "trailScaleSalesforce": {"editor": "range", "default": 1.25, "min": 0.3, "max": 2, "step": 0.05, "unit": "×", "section": "Trail logos"}, "trailScaleOregon": {"editor": "range", "default": 1.25, "min": 0.3, "max": 2, "step": 0.05, "unit": "×", "section": "Trail logos"}, "trailScaleGmail": {"editor": "range", "default": 1.25, "min": 0.3, "max": 2, "step": 0.05, "unit": "×", "section": "Trail logos"}, "trailScaleLinkedIn": {"editor": "range", "default": 1.25, "min": 0.3, "max": 2, "step": 0.05, "unit": "×", "section": "Trail logos"}, "trailLogoX": {"editor": "range", "default": 0.72, "min": 0.4, "max": 0.95, "step": 0.01, "section": "Trail logos"}, "trailLogoY": {"editor": "range", "default": 0.5, "min": 0.15, "max": 0.85, "step": 0.01, "section": "Trail logos"}, "trailLogoDot": {"editor": "range", "default": 0.86, "min": 0.3, "max": 1.3, "step": 0.02, "section": "Trail logos"}, "trailLogoRound": {"editor": "range", "default": 0.2, "min": 0, "max": 0.5, "step": 0.05, "section": "Trail logos"}, "trailLogoShape": {"editor": "enum", "options": ["Rounded square", "Square", "Circle", "Diamond", "Flower", "Blossom", "Star", "Sparkle", "Heart", "Hexagon", "Plus", "Ring", "Leaf", "Drop", "Mix", "Same as trail"], "default": "Rounded square", "section": "Trail logos"}, "trailLogoGrid": {"editor": "int", "default": 10, "min": 2, "max": 12, "section": "Trail logos"}, "trailLogoDetail": {"editor": "int", "default": 30, "min": 8, "max": 60, "section": "Trail logos"}, "trailLogoFlight": {"editor": "int", "default": 900, "min": 200, "max": 3000, "step": 50, "unit": "ms", "section": "Trail logos"}, "trailLogoLinger": {"editor": "range", "default": 2.5, "min": 0, "max": 10, "step": 0.5, "unit": "s", "section": "Trail logos"}, "trailScatterRadius": {"editor": "int", "default": 110, "min": 20, "max": 300, "unit": "px", "section": "Trail logos"}, "trailScatterStrength": {"editor": "range", "default": 1, "min": 0, "max": 3, "step": 0.05, "section": "Trail logos"}, "trailScatterReturn": {"editor": "range", "default": 0.12, "min": 0.02, "max": 0.5, "step": 0.01, "section": "Trail logos"}, "trailLogoAfter": {"editor": "enum", "options": ["Back into the trail", "Fade away"], "default": "Back into the trail", "section": "Trail logos"}, "trailReturnSpeed": {"editor": "range", "default": 1, "min": 0.2, "max": 3, "step": 0.05, "section": "Trail logos"}, "trailReturnRate": {"editor": "int", "default": 3, "min": 1, "max": 12, "section": "Trail logos"}, "trailReturnWait": {"editor": "int", "default": 4000, "min": 500, "max": 15000, "step": 250, "unit": "ms", "section": "Trail logos"}, "$preview": {"width": 1440, "height": 4600}}'>
+<script type="text/x-dc" data-dc-script data-props='{"speed": {"editor": "int", "default": 1000, "min": 200, "max": 3000, "step": 50, "unit": "ms", "section": "Logo loop"}, "markOpacity": {"editor": "range", "default": 1, "min": 0.1, "max": 1, "step": 0.05, "section": "Logo loop"}, "animate": {"editor": "boolean", "default": true, "section": "About collage"}, "orbitSpeed": {"editor": "range", "default": 3.75, "min": 0.25, "max": 4, "step": 0.25, "unit": "×", "section": "About collage"}, "direction": {"editor": "enum", "default": "right", "options": ["right", "left"], "section": "About collage"}, "radius": {"editor": "range", "default": 230, "min": 60, "max": 320, "step": 5, "unit": "px", "section": "About collage"}, "depth": {"editor": "range", "default": 1200, "min": 400, "max": 2400, "step": 50, "unit": "px", "section": "About collage"}, "tilt": {"editor": "range", "default": 6.5, "min": 0, "max": 15, "step": 0.5, "unit": "°", "section": "About collage"}, "floatDistance": {"editor": "range", "default": 7, "min": 0, "max": 30, "step": 1, "unit": "px", "section": "About collage"}, "hoverLift": {"editor": "boolean", "default": true, "section": "About collage"}, "pauseOnHover": {"editor": "boolean", "default": false, "section": "About collage"}, "boardColor": {"editor": "color", "default": "#f5f5f5", "options": ["#f5f5f5", "#ffffff", "#2b2b2b", "#1b2930"], "section": "About collage"}, "trailOn": {"editor": "boolean", "default": true, "section": "Pixel trail"}, "trailWidth": {"editor": "range", "default": 100, "min": 20, "max": 100, "step": 1, "unit": "%", "section": "Pixel trail"}, "trailMode": {"editor": "enum", "options": ["Follow + auto", "Follow only", "Auto only"], "default": "Follow + auto", "section": "Pixel trail"}, "trailIdleDelay": {"editor": "range", "default": 1.2, "min": 0.2, "max": 6, "step": 0.1, "unit": "s", "section": "Pixel trail"}, "trailSmoothing": {"editor": "range", "default": 0.82, "min": 0, "max": 0.97, "step": 0.01, "section": "Pixel trail"}, "trailHandoff": {"editor": "range", "default": 0.04, "min": 0.005, "max": 0.2, "step": 0.005, "section": "Pixel trail"}, "trailPath": {"editor": "enum", "options": ["Contrail", "Figure 8", "Orbit", "Wander"], "default": "Contrail", "section": "Pixel trail"}, "trailSpeed": {"editor": "range", "default": 1.35, "min": 0.1, "max": 4, "step": 0.05, "section": "Pixel trail"}, "trailPathWidth": {"editor": "range", "default": 0.8, "min": 0.1, "max": 1, "step": 0.01, "section": "Pixel trail"}, "trailPathHeight": {"editor": "range", "default": 0.35, "min": 0.05, "max": 1, "step": 0.01, "section": "Pixel trail"}, "trailPathY": {"editor": "range", "default": 0.42, "min": 0, "max": 1, "step": 0.01, "section": "Pixel trail"}, "trailSizeMin": {"editor": "int", "default": 8, "min": 1, "max": 80, "section": "Pixel trail"}, "trailSizeMax": {"editor": "int", "default": 20, "min": 1, "max": 120, "section": "Pixel trail"}, "trailSpacing": {"editor": "int", "default": 24, "min": 2, "max": 80, "unit": "px", "section": "Pixel trail"}, "trailDensity": {"editor": "int", "default": 2, "min": 1, "max": 8, "section": "Pixel trail"}, "trailJitter": {"editor": "int", "default": 18, "min": 0, "max": 120, "unit": "px", "section": "Pixel trail"}, "trailTaper": {"editor": "range", "default": 0.6, "min": 0, "max": 1, "step": 0.05, "section": "Pixel trail"}, "trailGridSnap": {"editor": "int", "default": 0, "min": 0, "max": 48, "unit": "px", "section": "Pixel trail"}, "trailShape": {"editor": "enum", "options": ["Rounded square", "Square", "Circle", "Diamond", "Flower", "Blossom", "Star", "Sparkle", "Heart", "Hexagon", "Plus", "Ring", "Leaf", "Drop", "Mix"], "default": "Rounded square", "section": "Pixel trail"}, "trailCorner": {"editor": "int", "default": 3, "min": 0, "max": 30, "unit": "px", "section": "Pixel trail"}, "trailLife": {"editor": "range", "default": 5.2, "min": 0.3, "max": 10, "step": 0.1, "unit": "s", "section": "Pixel trail"}, "trailPop": {"editor": "range", "default": 1.27, "min": 1, "max": 2, "step": 0.01, "section": "Pixel trail"}, "trailPopTime": {"editor": "range", "default": 0.09, "min": 0.02, "max": 0.6, "step": 0.01, "section": "Pixel trail"}, "trailHold": {"editor": "range", "default": 0.39, "min": 0.2, "max": 0.98, "step": 0.01, "section": "Pixel trail"}, "trailEndScale": {"editor": "range", "default": 0.6, "min": 0, "max": 2, "step": 0.05, "section": "Pixel trail"}, "trailDrift": {"editor": "range", "default": 0, "min": -60, "max": 60, "step": 1, "unit": "px/s", "section": "Pixel trail"}, "trailSpin": {"editor": "range", "default": 0, "min": -360, "max": 360, "step": 5, "unit": "°/s", "section": "Pixel trail"}, "trailPalette": {"editor": "enum", "options": ["My colors", "Original contrail", "Tin plates", "Pine + sun", "Ink"], "default": "My colors", "section": "Pixel trail"}, "trailColorBy": {"editor": "enum", "options": ["Random", "Along the trail", "By size"], "default": "Along the trail", "section": "Pixel trail"}, "trailColor1": {"editor": "color", "default": "#5f73c4", "section": "Pixel trail"}, "trailColor2": {"editor": "color", "default": "#d64d45", "section": "Pixel trail"}, "trailColor3": {"editor": "color", "default": "#e5839a", "section": "Pixel trail"}, "trailColor4": {"editor": "color", "default": "#f9b1fa", "section": "Pixel trail"}, "trailOpacity": {"editor": "range", "default": 1, "min": 0.1, "max": 1, "step": 0.05, "section": "Pixel trail"}, "trailBlend": {"editor": "enum", "options": ["Normal", "Multiply"], "default": "Normal", "section": "Pixel trail"}, "trailAvoidText": {"editor": "boolean", "default": true, "section": "Pixel trail"}, "trailTextGap": {"editor": "int", "default": 20, "min": 0, "max": 120, "unit": "px", "section": "Pixel trail"}, "logoSize": {"editor": "int", "default": 220, "min": 80, "max": 420, "unit": "px", "section": "Hover logos"}, "sizeMsft": {"editor": "range", "default": 1.25, "min": 0.3, "max": 2, "step": 0.05, "unit": "×", "section": "Hover logos"}, "sizeSales": {"editor": "range", "default": 1.25, "min": 0.3, "max": 2, "step": 0.05, "unit": "×", "section": "Hover logos"}, "sizeOregon": {"editor": "range", "default": 1.25, "min": 0.3, "max": 2, "step": 0.05, "unit": "×", "section": "Hover logos"}, "sizeGmail": {"editor": "range", "default": 1.25, "min": 0.3, "max": 2, "step": 0.05, "unit": "×", "section": "Hover logos"}, "sizeLinkIn": {"editor": "range", "default": 1.25, "min": 0.3, "max": 2, "step": 0.05, "unit": "×", "section": "Hover logos"}, "logoX": {"editor": "range", "default": 0.72, "min": 0.4, "max": 0.95, "step": 0.01, "section": "Hover logos"}, "logoY": {"editor": "range", "default": 0.5, "min": 0.15, "max": 0.85, "step": 0.01, "section": "Hover logos"}, "dotFill": {"editor": "range", "default": 0.86, "min": 0.3, "max": 1.3, "step": 0.02, "section": "Hover logos"}, "dotRound": {"editor": "range", "default": 0.2, "min": 0, "max": 0.5, "step": 0.05, "section": "Hover logos"}, "dotShape": {"editor": "enum", "options": ["Rounded square", "Square", "Circle", "Diamond", "Flower", "Blossom", "Star", "Sparkle", "Heart", "Hexagon", "Plus", "Ring", "Leaf", "Drop", "Mix", "Same as trail"], "default": "Rounded square", "section": "Hover logos"}, "msftDots": {"editor": "int", "default": 10, "min": 2, "max": 12, "section": "Hover logos"}, "detail": {"editor": "int", "default": 30, "min": 8, "max": 60, "section": "Hover logos"}, "formTime": {"editor": "int", "default": 900, "min": 200, "max": 3000, "step": 50, "unit": "ms", "section": "Hover logos"}, "linger": {"editor": "range", "default": 2.5, "min": 0, "max": 10, "step": 0.5, "unit": "s", "section": "Hover logos"}, "pushReach": {"editor": "int", "default": 110, "min": 20, "max": 300, "unit": "px", "section": "Hover logos"}, "pushForce": {"editor": "range", "default": 1, "min": 0, "max": 3, "step": 0.05, "section": "Hover logos"}, "springBack": {"editor": "range", "default": 0.12, "min": 0.02, "max": 0.5, "step": 0.01, "section": "Hover logos"}, "afterLogo": {"editor": "enum", "options": ["Back into the trail", "Fade away"], "default": "Back into the trail", "section": "Hover logos"}, "flySpeed": {"editor": "range", "default": 1, "min": 0.2, "max": 3, "step": 0.05, "section": "Hover logos"}, "perStep": {"editor": "int", "default": 3, "min": 1, "max": 12, "section": "Hover logos"}, "waitMax": {"editor": "int", "default": 4000, "min": 500, "max": 15000, "step": 250, "unit": "ms", "section": "Hover logos"}, "loosen": {"editor": "range", "default": 1, "min": 0, "max": 3, "step": 0.05, "section": "Hover logos"}, "$preview": {"width": 1440, "height": 4600}}'>
 const TR_PALETTES = {
   'Original contrail': ['#65a3ee', '#3078e7', '#e6b88a', '#a9c46a', '#5b4a8a', '#6f8a3e', '#c1dff9', '#b8754a'],
   'Tin plates': ['#1d3fc4', '#d9342b', '#ffd23f', '#17694a', '#f1e9d6'],
@@ -209,11 +209,14 @@ class Component extends DCLogic {
     if (g > 0) { px = Math.round(px / g) * g; py = Math.round(py / g) * g; }
     if (this.tp('trailAvoidText', true) && this.trailHit(px, py, this.tp('trailTextGap', 20) + s / 2)) return;
     if (r.ret && r.ret.length) {
-      const take = Math.min(r.ret.length, Math.max(1, Math.round(this.tp('trailReturnRate', 3)))), fd = 650 / Math.max(0.2, this.tp('trailReturnSpeed', 1));
+      const take = Math.min(r.ret.length, Math.max(1, Math.round(this.tp('perStep', 3)))), fd = 700 / Math.max(0.2, this.tp('flySpeed', 1));
       for (let t = 0; t < take; t++) {
-        const d = r.ret.shift(), jx = t ? (Math.random() - 0.5) * 2 * j : 0, jy = t ? (Math.random() - 0.5) * 2 * j : 0;
+        let bi = 0, bd = 1e12; for (let q = 0; q < r.ret.length; q++) { const w = r.ret[q], dd = (w.x - px) * (w.x - px) + (w.y - py) * (w.y - py); if (dd < bd) { bd = dd; bi = q; } }
+        const d = r.ret.splice(bi, 1)[0], jx = t ? (Math.random() - 0.5) * 2 * j : 0, jy = t ? (Math.random() - 0.5) * 2 * j : 0;
         r.n++;
-        r.ps.push({ x: px + jx, y: py + jy, s: Math.max(1, s), n: r.n, rnd: d.rnd, sf: b > a ? Math.max(0, Math.min(0.999, (s - a) / (b - a))) : 0, b: r.now + fd, rot: Math.random() * 360, ft: r.now, fd, fx: d.x, fy: d.y, fz: d.z, fc: null, fc0: d.c });
+        const tx = px + jx, ty = py + jy, dist = Math.hypot(tx - d.x, ty - d.y), bend = (Math.random() < 0.5 ? -1 : 1) * dist * (0.15 + Math.random() * 0.2);
+        const fdd = Math.min(2200, (fd + dist * 0.6) / 1), nx = -(ty - d.y) / (dist || 1), ny = (tx - d.x) / (dist || 1);
+        r.ps.push({ x: tx, y: ty, s: Math.max(1, s), n: r.n, rnd: d.rnd, sf: b > a ? Math.max(0, Math.min(0.999, (s - a) / (b - a))) : 0, b: r.now + fdd, rot: Math.random() * 360, ft: r.now, fd: fdd, fx: d.x, fy: d.y, fz: d.z, fc: null, fc0: d.c, cx: (d.x + tx) / 2 + nx * bend, cy: (d.y + ty) / 2 + ny * bend });
       }
       if (r.ps.length > 2000) r.ps.splice(0, r.ps.length - 2000);
       return;
@@ -269,15 +272,15 @@ class Component extends DCLogic {
     if (r.form && r.form.name === name) { r.form.leaveAt = null; return; }
     if (r.form) this.trailUnform();
     const W = cv.clientWidth, H = cv.clientHeight, now = performance.now();
-    const scaleKey = { ms: 'trailScaleMicrosoft', sf: 'trailScaleSalesforce', uo: 'trailScaleOregon', gm: 'trailScaleGmail', li: 'trailScaleLinkedIn' }[name];
-    const S = this.tp('trailLogoSize', 220) * (scaleKey ? this.tp(scaleKey, 1) : 1), n = Math.max(2, this.tp('trailLogoGrid', 6)), gap = S * 0.06, q = (S - gap) / 2, cell = q / n;
-    const cx = W * this.tp('trailLogoX', 0.72), cy = H * this.tp('trailLogoY', 0.5), x0 = cx - S / 2, y0 = cy - S / 2;
+    const scaleKey = { ms: 'sizeMsft', sf: 'sizeSales', uo: 'sizeOregon', gm: 'sizeGmail', li: 'sizeLinkIn' }[name];
+    const S = this.tp('logoSize', 220) * (scaleKey ? this.tp(scaleKey, 1) : 1), n = Math.max(2, this.tp('msftDots', 6)), gap = S * 0.06, q = (S - gap) / 2, cell = q / n;
+    const cx = W * this.tp('logoX', 0.72), cy = H * this.tp('logoY', 0.5), x0 = cx - S / 2, y0 = cy - S / 2;
     let targets = [], tcell = cell;
     if (name === 'ms') {
       const quads = [[0, 0, '#f25022'], [1, 0, '#7fba00'], [0, 1, '#00a4ef'], [1, 1, '#ffb900']];
       quads.forEach(([qx, qy, c]) => { for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) targets.push({ tx: x0 + qx * (q + gap) + (i + 0.5) * cell, ty: y0 + qy * (q + gap) + (j + 0.5) * cell, c }); });
     } else {
-      const m = this.trailSample(name, Math.max(8, this.tp('trailLogoDetail', 26)));
+      const m = this.trailSample(name, Math.max(8, this.tp('detail', 26)));
       if (!m || !m.pts.length) return;
       tcell = Math.min(S * 1.45 / m.w, S / m.h);
       const ox = cx - (m.w * tcell) / 2, oy = cy - (m.h * tcell) / 2;
@@ -289,9 +292,9 @@ class Component extends DCLogic {
     if (r.ret && r.ret.length) { for (const d of r.ret) live.push({ x: d.x, y: d.y, s: d.z, fc: d.c, n: 0, rnd: d.rnd, sf: 0 }); r.ret = []; }
     const src = live.length ? live : [{ x: (r.E && r.E.x) || cx, y: (r.E && r.E.y) || cy, s: cell * 0.6, n: 0, rnd: 0, sf: 0 }];
     for (let i = targets.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [targets[i], targets[j]] = [targets[j], targets[i]]; }
-    const parts = [], dur = this.tp('trailLogoFlight', 900);
+    const parts = [], dur = this.tp('formTime', 900);
     const mk = (p, t, absorb, reuse) => { const sx = p.x + (reuse ? (Math.random() - 0.5) * 10 : 0), sy = p.y + (reuse ? (Math.random() - 0.5) * 10 : 0), dist = Math.hypot(t.tx - sx, t.ty - sy);
-      parts.push({ sx, sy, ss: Math.max(2, p.s * (reuse ? 0.5 : 1)), sc: this.trailCol(p, pal, by), tx: t.tx, ty: t.ty, s: tcell * this.tp('trailLogoDot', 0.86), c: t.c, delay: Math.min(380, dist * 0.25) + Math.random() * 140, dur, absorb, born: reuse }); };
+      parts.push({ sx, sy, ss: Math.max(2, p.s * (reuse ? 0.5 : 1)), sc: this.trailCol(p, pal, by), tx: t.tx, ty: t.ty, s: tcell * this.tp('dotFill', 0.86), c: t.c, delay: Math.min(380, dist * 0.25) + Math.random() * 140, dur, absorb, born: reuse }); };
     targets.forEach((t, i) => { const reuse = i >= src.length; mk(src[i % src.length], t, false, reuse); });
     for (let i = targets.length; i < src.length; i++) mk(src[i], targets[i % targets.length], true, false);
     r.ps = [];
@@ -303,7 +306,7 @@ class Component extends DCLogic {
   trailUnform() {
     const r = this.tr; if (!r || !r.form) return;
     const now = performance.now(), life = this.tp('trailLife', 1.9) * 1000, hold = this.tp('trailHold', 0.39);
-    const back = this.tp('trailLogoAfter', 'Back into the trail') === 'Back into the trail';
+    const back = this.tp('afterLogo', 'Back into the trail') === 'Back into the trail';
     const out = [];
     for (const p of r.form.parts) {
       if (p.absorb) continue;
@@ -312,7 +315,9 @@ class Component extends DCLogic {
       out.push({ x, y, z, c });
     }
     if (back && out.length) {
-      r.ret = (r.ret || []).concat(out.map((d) => ({ x: d.x, y: d.y, z: d.z, c: d.c, born: now, rnd: Math.random(), fx: (Math.random() - 0.5) * 6, fy: -2 - Math.random() * 6 })));
+      const [bx0, by0, bx1, by1] = r.form.box, mx = (bx0 + bx1) / 2, my = (by0 + by1) / 2;
+      r.ret = (r.ret || []).concat(out.map((d) => { const ax = d.x - mx, ay = d.y - my, al = Math.hypot(ax, ay) || 1, sp = 8 + Math.random() * 14;
+        return { x: d.x, y: d.y, z: d.z, c: d.c, born: now, rnd: Math.random(), vx: (ax / al) * sp, vy: (ay / al) * sp - 4, ph: Math.random() * 6.28 }; }));
     }
     r.form = null; r.E = null; // the trail restarts from the cursor, not from where it froze
   }
@@ -372,7 +377,11 @@ class Component extends DCLogic {
       r.E = { x: nx, y: ny };
     }
     r.wasAuto = useAuto;
-    if (r.ret && r.ret.length) { const wait = this.tp('trailReturnWait', 4000); r.ret = r.ret.filter((d) => now - d.born < wait); }
+    if (r.ret && r.ret.length) {
+      const wait = this.tp('waitMax', 4000), loose = this.tp('loosen', 1);
+      r.ret = r.ret.filter((d) => now - d.born < wait);
+      for (const d of r.ret) { const e = Math.min(1, (now - d.born) / 900) * loose; d.x += (d.vx + Math.sin(now / 700 + d.ph) * 10) * e * dt; d.y += (d.vy + Math.cos(now / 800 + d.ph) * 8) * e * dt; d.vx *= Math.pow(0.6, dt); d.vy *= Math.pow(0.6, dt); }
+    }
     const ctx = cv.getContext('2d'); if (!ctx) return;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
     ctx.globalCompositeOperation = this.tp('trailBlend', 'Normal') === 'Multiply' ? 'multiply' : 'source-over';
@@ -383,11 +392,12 @@ class Component extends DCLogic {
     for (const q of r.ps) {
       if (q.ft && now < q.ft + q.fd) {
         keep.push(q);
-        const t = (now - q.ft) / q.fd, e = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-        const fx = q.fx + (q.x - q.fx) * e, fy = q.fy + (q.y - q.fy) * e, fz = q.fz + (q.s - q.fz) * e, shf = this.trailShapeOf(shape, q.rnd);
-        ctx.save(); ctx.globalAlpha = op; ctx.fillStyle = this.trailMix(q.fc0, this.trailCol(q, pal, by), e);
-        ctx.translate(fx, fy); if (shf === 'Diamond') ctx.rotate(Math.PI / 4);
-        this.trailPath(ctx, shf, fz, fz ? Math.min(0.5, corner / fz) : 0); ctx.fill(); ctx.restore();
+        const t = (now - q.ft) / q.fd, e = 0.5 - Math.cos(Math.PI * t) / 2, u = 1 - e;
+        const cx = q.cx ?? (q.fx + q.x) / 2, cy = q.cy ?? (q.fy + q.y) / 2;
+        const fx = u * u * q.fx + 2 * u * e * cx + e * e * q.x, fy = u * u * q.fy + 2 * u * e * cy + e * e * q.y, fz = q.fz + (q.s - q.fz) * e;
+        const shf = this.trailShapeOf(shape, q.rnd), ls0 = this.tp('dotShape', 'Rounded square'), shl = this.trailShapeOf(ls0 === 'Same as trail' ? shape : ls0, q.rnd), col = this.trailMix(q.fc0, this.trailCol(q, pal, by), e);
+        const drawS = (sh, al) => { if (al <= 0.01) return; ctx.save(); ctx.globalAlpha = op * al; ctx.fillStyle = col; ctx.translate(fx, fy); if (sh === 'Diamond') ctx.rotate(Math.PI / 4); this.trailPath(ctx, sh, fz, sh === shl ? 0.2 : (fz ? Math.min(0.5, corner / fz) : 0)); ctx.fill(); ctx.restore(); };
+        if (shf === shl) drawS(shf, 1); else { drawS(shl, 1 - e); drawS(shf, e); }
         continue;
       }
       const a = (now - q.b) / life; if (a >= 1) continue; keep.push(q);
@@ -406,24 +416,24 @@ class Component extends DCLogic {
     }
     r.ps = keep;
     if (r.ret && r.ret.length) {
-      const wait = this.tp('trailReturnWait', 4000), ls0 = this.tp('trailLogoShape', 'Rounded square');
+      const wait = this.tp('waitMax', 4000), ls0 = this.tp('dotShape', 'Rounded square');
       for (const d of r.ret) {
         const age = now - d.born, al = age < wait * 0.6 ? 1 : Math.max(0, 1 - (age - wait * 0.6) / (wait * 0.4)), float = Math.min(1, age / 1500);
         const shp = this.trailShapeOf(ls0 === 'Same as trail' ? shape : ls0, d.rnd);
-        ctx.save(); ctx.globalAlpha = al * op; ctx.fillStyle = d.c; ctx.translate(d.x + d.fx * float, d.y + d.fy * float); if (shp === 'Diamond') ctx.rotate(Math.PI / 4);
+        ctx.save(); ctx.globalAlpha = al * op; ctx.fillStyle = d.c; ctx.translate(d.x, d.y); if (shp === 'Diamond') ctx.rotate(Math.PI / 4);
         this.trailPath(ctx, shp, d.z, 0.2); ctx.fill(); ctx.restore();
       }
     }
     if (r.form) {
       ctx.globalCompositeOperation = 'source-over';
       const F = r.form, mz = r.mouse && now - r.lastMove < 1200 ? r.mouse : null;
-      const R = this.tp('trailScatterRadius', 110);
+      const R = this.tp('pushReach', 110);
       const [bx0, by0, bx1, by1] = F.box, near = mz && mz.x > bx0 - R * 0.6 && mz.x < bx1 + R * 0.6 && mz.y > by0 - R * 0.6 && mz.y < by1 + R * 0.6;
-      if (F.leaveAt && !near && now - F.leaveAt > this.tp('trailLogoLinger', 2.5) * 1000) this.trailUnform();
+      if (F.leaveAt && !near && now - F.leaveAt > this.tp('linger', 2.5) * 1000) this.trailUnform();
     }
     if (r.form) {
       const mz = r.mouse && now - r.lastMove < 1200 ? r.mouse : null;
-      const R = this.tp('trailScatterRadius', 110), str = this.tp('trailScatterStrength', 1), back = this.tp('trailScatterReturn', 0.12);
+      const R = this.tp('pushReach', 110), str = this.tp('pushForce', 1), back = this.tp('springBack', 0.12);
       const reduceF = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
       for (const p of r.form.parts) {
         const k = reduceF ? 1 : this.trailFormK(p, now);
@@ -437,7 +447,7 @@ class Component extends DCLogic {
         const al = p.absorb ? 1 - k : (p.born ? Math.min(1, k * 3) : 1);
         if (al <= 0.01) continue;
         ctx.globalAlpha = al; ctx.fillStyle = this.trailMix(p.sc, p.c, Math.min(1, k * 1.15));
-        const rr = this.tp('trailLogoRound', 0.2), ls0 = this.tp('trailLogoShape', 'Rounded square');
+        const rr = this.tp('dotRound', 0.2), ls0 = this.tp('dotShape', 'Rounded square');
         const ls = this.trailShapeOf(ls0 === 'Same as trail' ? this.tp('trailShape', 'Rounded square') : ls0, p.rnd || (p.rnd = Math.random()));
         ctx.save(); ctx.translate(x, y); if (ls === 'Diamond') ctx.rotate(Math.PI / 4);
         this.trailPath(ctx, rr >= 0.5 && ls === 'Rounded square' ? 'Circle' : ls, z, rr); ctx.fill(); ctx.restore();
