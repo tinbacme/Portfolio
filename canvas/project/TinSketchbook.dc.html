@@ -1,0 +1,270 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><script src="./support.js"></script></head>
+<body>
+<!-- Concept · Field Notes: Tin's portfolio as a flip-through maker's sketchbook -->
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&amp;family=Be+Vietnam+Pro:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+sc-for, sc-if { display: contents; }
+.bk-page{position:absolute;top:0;bottom:0;width:50%;box-sizing:border-box;background:
+  radial-gradient(#e6dfcf 1px, transparent 1.3px) 0 0 / 26px 26px,
+  var(--paper, #fffdf6)}
+.bk-left{left:0;border-radius:14px 0 0 14px;padding:44px 56px 44px 48px;box-shadow:inset -22px 0 28px -24px rgba(0,0,0,.28)}
+.bk-right{right:0;border-radius:0 14px 14px 0;padding:44px 48px 44px 56px;box-shadow:inset 22px 0 28px -24px rgba(0,0,0,.28)}
+.bk-hand{font-family:Caveat, cursive}
+.bk-note{font-family:Caveat, cursive;font-size:26px;line-height:1.35;color:var(--ink, #2b2620)}
+.bk-note li{margin:0 0 6px}
+.bk-tape{position:absolute;width:92px;height:26px;background:rgba(214,77,69,.34);box-shadow:0 1px 2px rgba(0,0,0,.08);border-left:1px dashed rgba(255,255,255,.5);border-right:1px dashed rgba(255,255,255,.5)}
+.bk-tape.b{background:rgba(95,115,196,.3)}
+.bk-tape.y{background:rgba(249,177,122,.38)}
+.bk-card{position:relative;background:#fff;box-shadow:0 8px 22px rgba(0,0,0,.14);padding:10px}
+.bk-mark{position:absolute;border:3px double #c0564b;border-radius:50%;color:#c0564b;display:grid;place-items:center;text-align:center;font-family:'Be Vietnam Pro',sans-serif;letter-spacing:.14em;text-transform:uppercase;opacity:.75}
+.bk-stamp{display:inline-block;border:2.5px solid #c0564b;color:#c0564b;padding:3px 12px;font-family:'Be Vietnam Pro',sans-serif;font-size:13px;letter-spacing:.2em;text-transform:uppercase;transform:rotate(-7deg);opacity:.8;border-radius:4px}
+.bk-bud{position:absolute;font-size:15px;opacity:.75;pointer-events:none}
+.bk-arrow{font-family:Caveat,cursive;font-size:27px;color:#2b2620;background:none;border:none;cursor:pointer;padding:6px 10px}
+.bk-arrow:hover{color:#d64d45}
+.bk-zone{position:absolute;top:0;bottom:0;width:86px;cursor:pointer;z-index:24}
+.bk-dot{width:9px;height:9px;border-radius:50%;background:#cfc8b8;border:none;padding:0;cursor:pointer}
+.bk-dot.on{background:#d64d45}
+.bk-leaf{position:absolute;top:0;right:0;width:50%;height:100%;transform-origin:left center;transform-style:preserve-3d;z-index:30;pointer-events:none}
+.bk-leaf i{position:absolute;inset:0;backface-visibility:hidden;border-radius:0 14px 14px 0;background:radial-gradient(#e6dfcf 1px, transparent 1.3px) 0 0 / 26px 26px, var(--paper,#fffdf6);box-shadow:0 10px 30px rgba(0,0,0,.22)}
+.bk-leaf i.bb{transform:rotateY(180deg);border-radius:14px 0 0 14px;background:radial-gradient(#ded6c3 1px, transparent 1.3px) 0 0 / 26px 26px, #fbf7ec}
+.bk-leaf.ff{animation:bkff var(--fms,650ms) cubic-bezier(.33,.02,.2,1) both}
+.bk-leaf.fb{animation:bkfb var(--fms,650ms) cubic-bezier(.33,.02,.2,1) both}
+@keyframes bkff{from{transform:rotateY(0)}to{transform:rotateY(-180deg)}}
+@keyframes bkfb{from{transform:rotateY(-180deg)}to{transform:rotateY(0)}}
+.bk-ring{width:30px;height:13px;border:3.5px solid #8d949c;border-radius:999px;box-shadow:0 1px 0 rgba(0,0,0,.25)}
+.bk-petal{transition:transform .9s cubic-bezier(.2,.7,.2,1), opacity .9s}
+.bk-burst .p1{transform:translate(-70px,-56px) rotate(-80deg);opacity:0}
+.bk-burst .p2{transform:translate(64px,-62px) rotate(70deg);opacity:0}
+.bk-burst .p3{transform:translate(-84px,20px) rotate(-120deg);opacity:0}
+.bk-burst .p4{transform:translate(82px,26px) rotate(130deg);opacity:0}
+.bk-burst .p5{transform:translate(-30px,78px) rotate(-160deg);opacity:0}
+.bk-burst .p6{transform:translate(36px,72px) rotate(170deg);opacity:0}
+.bk-flower{cursor:pointer}
+@media (prefers-reduced-motion: reduce){.bk-leaf.ff,.bk-leaf.fb{animation-duration:1ms}.bk-petal{transition-duration:1ms}}
+</style>
+</helmet>
+<section style="position: relative; width: 1440px; height: 900px; background: {{desk}}; font-family: 'Be Vietnam Pro', system-ui, sans-serif; color: #2b2620; overflow: hidden">
+  <p class="bk-hand" style="position: absolute; left: 48px; top: 26px; margin: 0; font-size: 30px; color: #6e6e6e">field notes · a curious maker</p>
+  <p style="position: absolute; right: 48px; top: 34px; margin: 0; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: #9a948a">Flip through ·  tap the page edges</p>
+
+  <div style="position: absolute; left: 50%; top: 92px; transform: translateX(-50%); width: 1156px; height: 716px; perspective: 2600px">
+    <div style="position: absolute; inset: 0; border-radius: 16px; box-shadow: 0 30px 70px rgba(0,0,0,.25), 0 4px 14px rgba(0,0,0,.12); background: #fbf7ec">
+      <!-- the open spread -->
+      <sc-if value="{{s0}}" hint-placeholder-val="{{ true }}">
+        <div class="bk-page bk-left" style="background: #b9c5a3; border-radius: 14px 0 0 14px">
+          <div style="position: absolute; left: 50%; top: 46%; transform: translate(-50%,-50%) rotate(-3deg); width: 240px; height: 240px; background: #fffdf6; border-radius: 18px; box-shadow: 0 6px 18px rgba(0,0,0,.18); display: grid; place-items: center">
+            <img src="/_blob/8fbd77508883c78b84540da031e5f678" alt="tin logo sticker" style="width: 170px; height: 170px">
+          </div>
+          <p class="bk-hand" style="position: absolute; left: 0; right: 0; bottom: 48px; margin: 0; text-align: center; font-size: 26px; color: #415030">sketchbook no.9 — one for every year of design</p>
+        </div>
+        <div class="bk-page bk-right">
+          <p class="bk-hand" style="margin: 26px 0 2px; font-size: 62px; line-height: 1">Field Notes</p>
+          <p style="margin: 0 0 30px; font-size: 14px; letter-spacing: .18em; text-transform: uppercase; color: #9a948a">Tin Le · product designer · est. Đà Lạt</p>
+          <ul class="bk-note" style="list-style: none; padding: 0; margin: 0">
+            <li>01 · a search box that listens — <span style="color:#9a948a">Windows</span></li>
+            <li>02 · calendars, widgets, little wins — <span style="color:#9a948a">Edge + Bing</span></li>
+            <li>03 · help that actually helps — <span style="color:#9a948a">Salesforce</span></li>
+            <li>04 · the teaching pages — <span style="color:#9a948a">Oregon</span></li>
+          </ul>
+          <img src="/_blob/55d0f1cf75dfba60d11a0da3fa86a800" alt="Tin waving, drawn" style="position: absolute; right: 52px; bottom: 44px; width: 190px; transform: rotate(3deg)">
+          <p class="bk-hand" style="position: absolute; right: 60px; bottom: 18px; margin: 0; font-size: 22px; color: #9a948a">hi, that&#39;s me →</p>
+          <span class="bk-bud" style="left: 58px; bottom: 60px; color: #d64d45">✽</span>
+          <span class="bk-bud" style="left: 84px; bottom: 44px; color: #5f73c4">✽</span>
+          <span class="bk-bud" style="left: 72px; bottom: 84px; color: #e5839a">✽</span>
+        </div>
+      </sc-if>
+      <sc-if value="{{s1}}" hint-placeholder-val="{{ false }}">
+        <div class="bk-page bk-left">
+          <div class="bk-card" style="margin-top: 36px; transform: rotate(-1.6deg)">
+            <div style="aspect-ratio: 16 / 10; background: #e7e7e7; display: grid; place-items: center">
+              <div style="width: 74%; aspect-ratio: 16 / 10; background: #fff; box-shadow: 0 10px 26px rgba(0,0,0,.12); display: grid; place-items: center; font-size: 11px; letter-spacing: .08em; color: #8a8a8a">SEARCH RESULTS AND MAP</div>
+            </div>
+            <div class="bk-tape" style="left: -28px; top: -12px; transform: rotate(-38deg)"></div>
+            <div class="bk-tape b" style="right: -26px; top: -10px; transform: rotate(32deg)"></div>
+          </div>
+          <p class="bk-note" style="margin: 18px 4px 0">the next generation of agentic Windows OS search — start from the task, not the box.</p>
+          <div style="position: absolute; left: 48px; bottom: 40px; display: grid; grid-template-columns: 11px 11px; gap: 2px">
+            <span style="width:11px;height:11px;background:#f25022"></span><span style="width:11px;height:11px;background:#7fba00"></span><span style="width:11px;height:11px;background:#00a4ef"></span><span style="width:11px;height:11px;background:#ffb900"></span>
+          </div>
+          <p class="bk-hand" style="position: absolute; left: 82px; bottom: 34px; margin: 0; font-size: 22px; color: #9a948a">current chapter</p>
+        </div>
+        <div class="bk-page bk-right">
+          <p class="bk-hand" style="margin: 10px 0 6px; font-size: 44px">01 · Windows Search Box</p>
+          <ul class="bk-note" style="padding-left: 22px; margin: 8px 0 0; max-width: 330px">
+            <li>the map and the results live together</li>
+            <li>AI waits its turn — delight, not noise</li>
+            <li>one easter egg per release (always)</li>
+          </ul>
+          <svg viewBox="0 0 220 90" style="position: absolute; left: 60px; top: 320px; width: 220px; overflow: visible; fill: none; stroke: #2b2620; stroke-width: 2.5; stroke-linecap: round"><path d="M8 12 C60 70 140 76 196 44 M196 44 l-20 -2 M196 44 l-10 18"></path></svg>
+          <p class="bk-hand" style="position: absolute; left: 100px; top: 408px; margin: 0; font-size: 24px">ship the quiet version first</p>
+          <div class="bk-mark" style="right: 52px; top: 182px; width: 148px; height: 148px; transform: rotate(9deg); font-size: 12px"><span>Redmond · WA<br>✽ 2026 ✽<br>NDA inside</span></div>
+          <span class="bk-stamp" style="position: absolute; right: 78px; bottom: 76px">in the lab</span>
+        </div>
+      </sc-if>
+      <sc-if value="{{s2}}" hint-placeholder-val="{{ false }}">
+        <div class="bk-page bk-left">
+          <div class="bk-card" style="margin-top: 32px; transform: rotate(1.4deg)">
+            <div style="aspect-ratio: 16 / 10; background: #17694a; display: grid; place-items: center">
+              <div style="width: 72%; aspect-ratio: 16 / 10; background: #fff; border-radius: 6px; box-shadow: 0 10px 26px rgba(0,0,0,.2); display: grid; place-items: center; font-size: 11px; letter-spacing: .08em; color: #8a8a8a">WINDOWS CALENDAR</div>
+            </div>
+            <div class="bk-tape y" style="left: 40%; top: -13px; transform: rotate(4deg)"></div>
+          </div>
+          <div style="position: absolute; left: 64px; bottom: 44px; width: 86px; height: 170px; border: 4px solid #2b2620; border-radius: 18px; transform: rotate(-4deg); background: #fff"></div>
+          <p class="bk-hand" style="position: absolute; left: 170px; bottom: 96px; margin: 0; font-size: 23px">lock-screen widget,<br>drawn at 1am</p>
+        </div>
+        <div class="bk-page bk-right">
+          <p class="bk-hand" style="margin: 10px 0 6px; font-size: 44px">02 · Across Windows, Edge &amp; Bing</p>
+          <ul class="bk-note" style="padding-left: 22px; margin: 8px 0 0">
+            <li>a calendar sprint — two weeks, one grid</li>
+            <li>a lock screen widget people wake up to</li>
+            <li>search bar prototypes, dozens of them</li>
+          </ul>
+          <img src="/_blob/b62d77f49157890da8c8fd946e594102" alt="posting a letter, drawn" style="position: absolute; right: 56px; bottom: 60px; width: 200px; transform: rotate(-2deg)">
+          <p class="bk-hand" style="position: absolute; right: 70px; bottom: 34px; margin: 0; font-size: 22px; color: #9a948a">shipping news, daily</p>
+          <span class="bk-stamp" style="position: absolute; left: 64px; bottom: 60px; transform: rotate(5deg)">bing · edge · windows</span>
+        </div>
+      </sc-if>
+      <sc-if value="{{s3}}" hint-placeholder-val="{{ false }}">
+        <div class="bk-page bk-left">
+          <div class="bk-card" style="margin-top: 34px; transform: rotate(-1.2deg)">
+            <div style="aspect-ratio: 16 / 10; background: #f1e9d6; display: grid; place-items: center">
+              <div style="width: 74%; aspect-ratio: 16 / 10; background: #fff; border-radius: 6px; box-shadow: 0 10px 26px rgba(0,0,0,.12); display: grid; place-items: center; font-size: 11px; letter-spacing: .08em; color: #8a8a8a">HELP HOME</div>
+            </div>
+            <div class="bk-tape" style="left: -26px; top: 30%; transform: rotate(52deg)"></div>
+            <div class="bk-tape b" style="right: -24px; bottom: 26%; transform: rotate(-48deg)"></div>
+          </div>
+          <img src="/_blob/ac43d25c19be4e522f4bd492e1c090ab" alt="Salesforce cloud" style="position: absolute; left: 60px; bottom: 52px; width: 92px; opacity: .85">
+          <p class="bk-hand" style="position: absolute; left: 164px; bottom: 58px; margin: 0; font-size: 23px">four years in the cloud</p>
+        </div>
+        <div class="bk-page bk-right">
+          <p class="bk-hand" style="margin: 10px 0 0; font-size: 44px">03 · Salesforce Help</p>
+          <p class="bk-hand" style="margin: 26px 0 0; font-size: 110px; line-height: 1; color: #d64d45">97%</p>
+          <svg viewBox="0 0 300 130" style="position: absolute; left: 36px; top: 112px; width: 300px; overflow: visible; fill: none; stroke: #d64d45; stroke-width: 3; stroke-linecap: round; opacity: .7"><ellipse cx="150" cy="66" rx="142" ry="58" transform="rotate(-4 150 66)"></ellipse></svg>
+          <p class="bk-note" style="margin: 14px 0 0; max-width: 360px">of people found their answer without filing a case. docs, search and a design system that stuck.</p>
+          <img src="/_blob/0cec7f29ebb32fbf0af599c63f3558ec" alt="handshake, drawn" style="position: absolute; right: 48px; bottom: 54px; width: 210px; transform: rotate(2deg)">
+          <div class="bk-mark" style="right: 230px; top: 92px; width: 132px; height: 132px; transform: rotate(-11deg); font-size: 11px"><span>San Francisco<br>✽ CA ✽<br>2019 – 2023</span></div>
+        </div>
+      </sc-if>
+      <sc-if value="{{s4}}" hint-placeholder-val="{{ false }}">
+        <div class="bk-page bk-left">
+          <div style="position: relative; margin-top: 30px; height: 420px">
+            <div class="bk-card" style="position: absolute; left: 8px; top: 0; width: 250px; transform: rotate(-4deg)">
+              <img src="/_blob/c987b1a2bfa77858ecd7e812aefcfdd5" alt="teacup in window light" style="display: block; width: 100%; aspect-ratio: 1; object-fit: cover">
+              <p class="bk-hand" style="margin: 6px 2px 2px; font-size: 21px">tea first, pixels later</p>
+              <div class="bk-tape y" style="left: 30%; top: -13px; transform: rotate(-3deg)"></div>
+            </div>
+            <div class="bk-card" style="position: absolute; right: 2px; top: 150px; width: 240px; transform: rotate(3.5deg)">
+              <img src="/_blob/81ebdd55c5cfbf822db09d0ea5979994" alt="from the road" style="display: block; width: 100%; aspect-ratio: 1; object-fit: cover">
+              <p class="bk-hand" style="margin: 6px 2px 2px; font-size: 21px">home is a long flight away</p>
+              <div class="bk-tape b" style="left: 34%; top: -13px; transform: rotate(2deg)"></div>
+            </div>
+          </div>
+          <p class="bk-hand" style="position: absolute; left: 52px; bottom: 30px; margin: 0; font-size: 23px; color: #9a948a">grew up in Đà Lạt — the city of flowers</p>
+        </div>
+        <div class="bk-page bk-right">
+          <p class="bk-hand" style="margin: 10px 0 6px; font-size: 44px">04 · Teach, travel, repeat</p>
+          <ul class="bk-note" style="padding-left: 22px; margin: 8px 0 0; max-width: 400px">
+            <li>I teach UX/UI at the University of Oregon <img src="/_blob/00e0e1ec841a28c4e0055e4a6738e6b1" alt="Oregon O" style="width: 22px; vertical-align: -4px"></li>
+            <li>industrial design first — hands still make things</li>
+            <li>say hi: tinbacme@gmail.com</li>
+          </ul>
+          <div class="bk-flower {{burstClass}}" onClick="{{burst}}" title="a pressed flower from Đà Lạt" style="position: absolute; right: 120px; bottom: 120px; width: 150px; height: 150px">
+            <svg viewBox="0 0 150 150" style="width: 150px; height: 150px; overflow: visible">
+              <g>
+                <ellipse class="bk-petal p1" cx="75" cy="40" rx="20" ry="30" fill="#e5839a" opacity=".9"></ellipse>
+                <ellipse class="bk-petal p2" cx="105" cy="58" rx="20" ry="30" fill="#f9b1fa" opacity=".9" transform="rotate(60 105 58)"></ellipse>
+                <ellipse class="bk-petal p3" cx="45" cy="58" rx="20" ry="30" fill="#f9b1fa" opacity=".9" transform="rotate(-60 45 58)"></ellipse>
+                <ellipse class="bk-petal p4" cx="100" cy="95" rx="20" ry="30" fill="#e5839a" opacity=".9" transform="rotate(120 100 95)"></ellipse>
+                <ellipse class="bk-petal p5" cx="50" cy="95" rx="20" ry="30" fill="#e5839a" opacity=".9" transform="rotate(-120 50 95)"></ellipse>
+                <ellipse class="bk-petal p6" cx="75" cy="110" rx="18" ry="26" fill="#f9b1fa" opacity=".9" transform="rotate(180 75 110)"></ellipse>
+                <circle cx="75" cy="75" r="16" fill="#d9a62e"></circle>
+              </g>
+            </svg>
+          </div>
+          <div class="bk-tape" style="right: 150px; bottom: 246px; transform: rotate(12deg)"></div>
+          <p class="bk-hand" style="position: absolute; right: 86px; bottom: 76px; margin: 0; font-size: 22px; color: #9a948a">pressed in Đà Lạt · tap it ✽</p>
+        </div>
+      </sc-if>
+      <sc-if value="{{s5}}" hint-placeholder-val="{{ false }}">
+        <div class="bk-page bk-left">
+          <p class="bk-hand" style="position: absolute; left: 56px; top: 56px; margin: 0; font-size: 34px">thanks for flipping through.</p>
+          <p class="bk-note" style="position: absolute; left: 58px; top: 120px; margin: 0; max-width: 380px; color: #9a948a">the real pages — case studies, prototypes and a few easter eggs — live on the site.</p>
+          <span class="bk-bud" style="left: 60px; top: 240px; color: #d64d45; font-size: 18px">✽</span>
+          <span class="bk-bud" style="left: 110px; top: 266px; color: #5f73c4; font-size: 14px">✽</span>
+          <span class="bk-bud" style="left: 164px; top: 250px; color: #e5839a; font-size: 17px">✽</span>
+          <span class="bk-bud" style="left: 216px; top: 282px; color: #f9b1fa; font-size: 13px">✽</span>
+          <span class="bk-bud" style="left: 268px; top: 262px; color: #d64d45; font-size: 15px">✽</span>
+          <span class="bk-bud" style="left: 322px; top: 294px; color: #5f73c4; font-size: 12px">✽</span>
+          <span class="bk-bud" style="left: 376px; top: 272px; color: #e5839a; font-size: 16px">✽</span>
+        </div>
+        <div class="bk-page bk-right" style="display: grid; place-items: center">
+          <div style="text-align: center">
+            <img src="/_blob/8fbd77508883c78b84540da031e5f678" alt="tin logo" style="width: 110px; height: 110px">
+            <p style="margin: 14px 0 0; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: #9a948a">© 2026 Tin Le · made in Oregon</p>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- turning leaf -->
+      <sc-if value="{{leafOn}}" hint-placeholder-val="{{ false }}">
+        <div class="bk-leaf {{leafClass}}" style="--fms: {{flipMs}}ms"><i></i><i class="bb"></i></div>
+      </sc-if>
+
+      <!-- spiral rings -->
+      <div style="position: absolute; left: 50%; top: 24px; bottom: 24px; transform: translateX(-50%); display: flex; flex-direction: column; justify-content: space-between; z-index: 40; pointer-events: none">
+        <sc-for list="{{rings}}" as="r" hint-placeholder-count="12"><span class="bk-ring"></span></sc-for>
+      </div>
+
+      <div class="bk-zone" style="left: 0" onClick="{{prev}}" title="Previous page"></div>
+      <div class="bk-zone" style="right: 0" onClick="{{next}}" title="Next page"></div>
+    </div>
+  </div>
+
+  <div style="position: absolute; left: 50%; bottom: 26px; transform: translateX(-50%); display: flex; align-items: center; gap: 22px">
+    <button type="button" class="bk-arrow" onClick="{{prev}}" aria-label="Previous spread">← back</button>
+    <div style="display: flex; gap: 9px">
+      <sc-for list="{{dots}}" as="d" hint-placeholder-count="6"><button type="button" class="{{d.cls}}" onClick="{{d.go}}" aria-label="{{d.label}}"></button></sc-for>
+    </div>
+    <button type="button" class="bk-arrow" onClick="{{next}}" aria-label="Next spread">turn the page →</button>
+  </div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"desk": {"editor": "color", "default": "#f5f5f5", "options": ["#f5f5f5", "#efe9dd", "#e7ebe4", "#f7f5ef"], "section": "Sketchbook"}, "paper": {"editor": "color", "default": "#fffdf6", "section": "Sketchbook"}, "flipMs": {"editor": "int", "default": 650, "min": 200, "max": 1400, "step": 50, "unit": "ms", "section": "Sketchbook"}, "$preview": {"width": 1440, "height": 900}}'>
+const SPREADS = 6;
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { i: 0, flip: 0, burst: false }; }
+  go(d) {
+    const n = this.state.i + d;
+    if (this.state.flip || n < 0 || n > SPREADS - 1) return;
+    this.setState({ i: n, flip: d > 0 ? 1 : -1 });
+    clearTimeout(this.tf);
+    this.tf = setTimeout(() => this.setState({ flip: 0 }), (this.props.flipMs ?? 650) + 60);
+  }
+  jump(n) { if (n !== this.state.i) this.go(n > this.state.i ? 1 : -1), this.setState({ i: n }); }
+  componentWillUnmount() { clearTimeout(this.tf); clearTimeout(this.tb); }
+  renderVals() {
+    const i = this.state.i;
+    const vals = {
+      desk: this.props.desk ?? '#f5f5f5',
+      flipMs: this.props.flipMs ?? 650,
+      rings: Array.from({ length: 12 }, () => ({})),
+      dots: Array.from({ length: SPREADS }, (_, k) => ({ cls: k === i ? 'bk-dot on' : 'bk-dot', label: 'Go to spread ' + (k + 1), go: () => this.jump(k) })),
+      next: () => this.go(1),
+      prev: () => this.go(-1),
+      leafOn: this.state.flip !== 0,
+      leafClass: this.state.flip > 0 ? 'ff' : 'fb',
+      burstClass: this.state.burst ? 'bk-burst' : '',
+      burst: () => { if (this.state.burst) return; this.setState({ burst: true }); clearTimeout(this.tb); this.tb = setTimeout(() => this.setState({ burst: false }), 1600); },
+    };
+    for (let k = 0; k < SPREADS; k++) vals['s' + k] = k === i;
+    return vals;
+  }
+}
+</script>
+</body>
+</html>

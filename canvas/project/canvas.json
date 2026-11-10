@@ -559,7 +559,7 @@
       "h": 4600,
       "is_interactive": true,
       "page": "page-vmnxsd",
-      "title": "Tin Le · Homepage · Tablet option C · greeting band, info in a 2×2 grid",
+      "title": "Tin Le · Homepage · Tablet option C · greeting band + prose intro (kenjilambert-style)",
       "w": 834,
       "x": 8777,
       "y": 9080
@@ -593,6 +593,15 @@
       "w": 390,
       "x": 11315,
       "y": 9080
+    },
+    "TinSketchbook.dc.html": {
+      "h": 900,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Concept H · Field Notes — flip-through sketchbook",
+      "w": 1440,
+      "x": 3985,
+      "y": 14040
     }
   },
   "createdOnFiles": {
@@ -774,7 +783,8 @@
     "TinHome-Tablet-C.dc.html",
     "TinHome-Tablet-D.dc.html",
     "TinHome-Mobile-C.dc.html",
-    "TinHome-Mobile-D.dc.html"
+    "TinHome-Mobile-D.dc.html",
+    "TinSketchbook.dc.html"
   ],
   "pages": [
     {
