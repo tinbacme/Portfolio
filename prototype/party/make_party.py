@@ -48,6 +48,7 @@ CSS = r'''
 .party .th-prose .th-co p{color:#e9e4f2 !important}
 .party .th-cta .th-btn-primary{background-color:#f4f1ea !important;border-color:#f4f1ea !important;color:#0d0c12 !important;box-shadow:0 0 28px rgba(255,79,216,.35)}
 .party .th-cta .th-btn-secondary{background-color:transparent !important;border-color:rgba(255,255,255,.35) !important;color:#f4f1ea !important}
+.party .th-cta .th-link{color:#f4f1ea !important;text-decoration-color:rgba(255,255,255,.45) !important}
 /* the corner button */
 .th-party-btn{position:absolute;right:28px;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:1.5px solid rgba(20,20,20,.16);background:#fff;color:#141414;display:grid;place-items:center;padding:0;cursor:pointer;z-index:3;transition:transform .25s cubic-bezier(.3,1.6,.5,1),background-color .5s,border-color .5s,color .5s,box-shadow .5s}
 .th-party-btn:hover{transform:translateY(-50%) scale(1.1) rotate(-8deg)}
