@@ -612,6 +612,26 @@
       "w": 390,
       "x": 8777,
       "y": 13880
+    },
+    "TinHome-Party.dc.html": {
+      "expand": "fill",
+      "h": 4600,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Tin Le · Homepage · Party mode · tablet (tap the corner button)",
+      "w": 834,
+      "x": 9271,
+      "y": 13880
+    },
+    "TinHome-Party-Desktop.dc.html": {
+      "expand": "fill",
+      "h": 4600,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Tin Le · Homepage · Party mode · desktop (tap the corner button)",
+      "w": 1440,
+      "x": 10305,
+      "y": 13880
     }
   },
   "createdOnFiles": {
@@ -792,6 +812,8 @@
     "TinHome-Mobile-B.dc.html",
     "TinHome-Tablet-C.dc.html",
     "TinHome-Mobile-E.dc.html",
+    "TinHome-Party.dc.html",
+    "TinHome-Party-Desktop.dc.html",
     "TinHome-Tablet-D.dc.html",
     "TinHome-Mobile-C.dc.html",
     "TinHome-Mobile-D.dc.html",
