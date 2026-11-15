@@ -10,20 +10,20 @@ LOCK = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden=
 ARR = '<svg viewBox="0 0 24 24" width="12" height="12" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>'
 
 def img(src, alt, pos='50% 50%', ratio='16 / 10'):
-    return f'<figure class="st-media" style="aspect-ratio: {ratio}"><img src="{src}" alt="{alt}" style="object-position: {pos}"></figure>'
+    return f'<figure class="st-media"><img src="{src}" alt="{alt}" style="object-position: {pos}"></figure>'
 def locked(title, note):
-    return f'<figure class="st-media st-locked" style="aspect-ratio: 16 / 7"><div>{LOCK}<p class="st-lk-t">Locked</p><p class="st-lk-n">{title} · {note}</p></div></figure>'
+    return f'<figure class="st-media st-locked"><div>{LOCK}<p class="st-lk-t">Locked</p><p class="st-lk-n">{title} · {note}</p></div></figure>'
 def textcard(big, small):
-    return f'<figure class="st-media st-textcard" style="aspect-ratio: 16 / 10"><div><p class="st-tc-big">{big}</p><p class="st-tc-small">{small}</p></div></figure>'
+    return f'<figure class="st-media st-textcard"><div><p class="st-tc-big">{big}</p><p class="st-tc-small">{small}</p></div></figure>'
 
 ROWS = [
  dict(id='microsoft', years='2022 — now', name='Microsoft AI', role='Senior Product Designer',
       logo=MS(26), dock=MS(22, True), dockLabel='Microsoft AI',
-      blurb='Search across Bing, Edge and Windows. Helping people find what they need, growing Bing, and exploring what AI agents could do in search.',
+      blurb='Search across Bing, Edge and Windows. Helping people find what they need, growing Bing, and exploring what AI agents could do in search.', note='Under NDA. Happy to walk you through it.',
       cta=('Available on request', None),
       media=[img(B('effff208332abe411e27c82aaa87e30d'), 'Tin with his Microsoft team', '50% 72%'),
-             locked('Windows Search Box', 'under NDA, happy to walk you through it'),
-             locked('Bing', 'under NDA, happy to walk you through it')]),
+             locked('Windows Search Box', 'under NDA'),
+             locked('Bing', 'under NDA')]),
  dict(id='uo-teach', years='2023 — now', name='University of Oregon', role='Product Design Instructor',
       logo=f'<img src="{LOGO_UO}" alt="" width="24" height="24">', dock=f'<img src="{LOGO_UO}" alt="" width="20" height="20" class="st-mono">', dockLabel='University of Oregon',
       blurb='Teaching UX and product design at the school where I studied industrial design. Students learn the way I still work: by building and prototyping.',
@@ -44,7 +44,7 @@ ROWS = [
              img(B('b3da5c6480ae317af83ea7474a9e0c66'), 'Manage Users: legacy, MVP and MVP plus side by side'),
              img(B('8bd998ead1110dbdb0a707cdb0cb6c60'), 'Tin with his Salesforce team', '18% 50%')]),
  dict(id='luxium', years='2017', name='Luxium Lighting', role='Product Designer',
-      logo=TXT('L', 18, '#141414'), dock=TXT('L', 16, '#fff'), dockLabel='Luxium Lighting',
+      logo=TXT('L', 18, '#141414'), dock=None, dockLabel='Luxium Lighting',
       blurb='An LED light, from design concept to a working prototype: sketches, 3D CAD and close work with engineers.',
       cta=('Concept to prototype', None),
       media=[img(B('ba8bd31d630d184e221d64c307637692'), 'Ballpoint sketch of an LED desk lamp with an exploded view', '50% 50%'),
@@ -63,14 +63,14 @@ def row(r):
     return (f'<section class="st-row" id="{r["id"]}" aria-label="{r["name"]}, {r["role"]}">'
             f'<p class="st-year">{r["years"]}</p>'
             f'<div class="st-stack">{"".join(r["media"])}</div>'
-            f'<div class="st-info"><div class="st-info-in">'
-            f'<span class="st-logo">{r["logo"]}</span>'
-            f'<p class="st-name">{r["name"]}</p><p class="st-role">{r["role"]}</p>'
-            f'<p class="st-blurb">{r["blurb"]}</p>{cta}</div></div></section>')
+            f'<div class="st-info"><div>'
+            f'<div class="st-info-head"><span class="st-logo"><span class="st-glow" aria-hidden="true">{r["logo"]}</span><span class="st-lg">{r["logo"]}</span></span>'
+            f'<p class="st-name">{r["name"]}</p><p class="st-role">{r["role"]}</p></div>'
+            f'<p class="st-blurb">{r["blurb"]}</p>' + (f'<p class="st-note">{r["note"]}</p>' if r.get('note') else '') + f'<div class="st-cta">{cta}</div></div></div></section>')
 
 DOCK = ('<nav class="st-dock" aria-label="Jump to a role">'
-        '<a class="st-dk st-dk-top" href="#top" aria-label="Back to top"><span class="st-dk-ic" style="font: 400 22px/1 Caveat, cursive; color: #fff">tin</span><span class="st-tip">Tin Le</span></a>'
-        + ''.join(f'<a class="st-dk" href="#{r["id"]}" aria-label="{r["dockLabel"]}"><span class="st-dk-ic">{r["dock"]}</span><span class="st-tip">{r["dockLabel"]}</span></a>' for r in ROWS if r['dock'])
+        '<a class="st-dk" href="#top" aria-label="Back to top"><span class="st-dk-ic" style="font: 400 22px/1 Caveat, cursive; color: #fff">tin</span></a>'
+        + ''.join(f'<a class="st-dk" href="#{r["id"]}" aria-label="{r["dockLabel"]}"><span class="st-dk-ic">{r["dock"]}</span></a>' for r in ROWS if r['dock'])
         + '</nav>')
 
 INTRO = ('<header class="st-intro" id="top">'
@@ -79,81 +79,88 @@ INTRO = ('<header class="st-intro" id="top">'
          '<p class="st-tag">A designer who builds things to think<br>from Đà Lạt, made in Oregon.</p>'
          '<div class="st-btns"><button type="button" class="st-btn st-btn-dark" onClick="{{copy}}">{{touchLabel}}</button>'
          '<a class="st-btn st-btn-light" href="https://www.linkedin.com/in/letin08/" target="_blank" rel="noopener">Follow on LinkedIn</a></div>'
-         '<p class="st-sign" aria-hidden="true">Tin Le</p>'
+         '<p class="st-sign" aria-hidden="true">Tin</p>'
          '</header>')
 
 CONTACT = ('<section class="st-contact" id="contact" aria-label="Contact">'
-           '<h2 class="st-h2">Let’s work together</h2>'
-           '<div class="st-form">'
-           '<label class="st-f"><span>Name</span><input type="text" placeholder="Your name" onInput="{{setName}}"></label>'
-           '<label class="st-f"><span>Email</span><input type="email" placeholder="you@company.com" onInput="{{setFrom}}"></label>'
-           '<label class="st-f"><span>What can I help with?</span><select onChange="{{setKind}}"><option>Full-time role</option><option>Product design project</option><option>Teaching or a workshop</option><option>Something else</option></select></label>'
-           '<a class="st-btn st-btn-dark st-submit" href="{{mailHref}}">Send</a>'
-           '</div>'
-           '<p class="st-thanks">Thank you for watching.</p>'
-           '</section>')
+  '<h2 class="st-h2">Let&#8217;s work together</h2>'
+  '<div class="st-form">'
+  '<label class="st-f"><span>Name</span><span class="st-field"><input type="text" placeholder="Full name" onInput="{{setName}}"></span></label>'
+  '<label class="st-f"><span>Email</span><span class="st-field"><input type="email" placeholder="you@company.com" onInput="{{setFrom}}"></span></label>'
+  '<label class="st-f"><span>Looking for</span><span class="st-field"><select onChange="{{setKind}}"><option>Full-time role</option><option>Product design project</option><option>Teaching or a workshop</option><option>Something else</option></select><svg class="st-chev" viewBox="0 0 24 24" width="14" height="14" fill="none" aria-hidden="true"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></label>'
+  '<a class="st-btn st-btn-dark st-submit" href="{{mailHref}}">Submit</a>'
+  '</div>'
+  '<div class="st-bye"><svg viewBox="0 0 40 44" width="22" height="26" fill="none" aria-hidden="true"><path d="M20 40C12 30 4 22 6 12c1.5-7 10-8 14 0 4-8 12.5-7 14 0 2 10-6 18-14 28z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg><p>Thanks for stopping by.</p></div>'
+  '</section>')
 
 BODY = ('<div class="st-root" style="--accent: {{accent}}; --accentBg: {{accentBg}}; --mr: {{mediaRadius}}">'
-        '<div class="st-rail">' + DOCK + '</div>'
+        '<div class="st-rail" style="left: -26px">' + DOCK + '</div>'
         + INTRO + ''.join(row(r) for r in ROWS) + CONTACT + '</div>')
 
 CSS = r'''
 body{margin:0}
 sc-for, sc-if { display: contents; }
-.st-root{position:relative;width:1440px;background:#fff;color:#000;font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;padding:220px 0 140px;box-sizing:border-box}
+.st-root{position:relative;width:1440px;box-sizing:border-box;padding:248px 24px 160px;background:#fff;color:#000;font-family:Inter,system-ui,sans-serif;font-optical-sizing:auto;-webkit-font-smoothing:antialiased}
 .st-rail{position:absolute;left:20px;top:0;bottom:0;width:64px;z-index:5}
-.st-dock{position:sticky;top:220px;display:flex;flex-direction:column;gap:6px;padding:10px 8px;border-radius:22px;background:#2b2b2d;box-shadow:0 1px 0 rgba(255,255,255,.08) inset,0 18px 40px -16px rgba(0,0,0,.45)}
-.st-dk{position:relative;display:grid;place-items:center;width:48px;height:48px;border-radius:14px;text-decoration:none;transition:background-color .2s}
-.st-dk:hover,.st-dk:focus-visible{background:rgba(255,255,255,.12);outline:none}
-.st-dk-ic{display:grid;place-items:center;opacity:.92}
+.st-dock{position:sticky;top:222px;display:flex;flex-direction:column;gap:8px;padding:8px;border-radius:20px;background:rgba(0,0,0,.8);box-shadow:inset 0 0 0 1px rgba(255,255,255,.15),0 .8px .6px -1px rgba(0,0,0,.2),0 2.4px 2px -2px rgba(0,0,0,.2),0 10px 24px -6px rgba(0,0,0,.28);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.st-dk{display:grid;place-items:center;width:48px;height:48px;border-radius:12px;text-decoration:none;transition:background-color .15s}
+.st-dk:hover,.st-dk:focus-visible{background:rgba(255,255,255,.1);outline:none}
+.st-dk-ic{display:grid;place-items:center}
 .st-mono{filter:brightness(0) invert(1)}
-.st-tip{position:absolute;left:58px;top:50%;transform:translate(-4px,-50%);white-space:nowrap;padding:6px 10px;border-radius:8px;background:#2b2b2d;color:#fff;font-size:13px;font-weight:500;opacity:0;pointer-events:none;transition:opacity .15s,transform .15s}
-.st-dk:hover .st-tip,.st-dk:focus-visible .st-tip{opacity:1;transform:translate(0,-50%)}
-.st-intro{position:relative;margin-left:296px;width:848px;padding-bottom:80px}
-.st-av{display:block;width:64px;height:64px;border-radius:50%;overflow:hidden;position:relative;background:#cfe2ff}
-.st-av img{width:100%;height:100%;object-fit:cover;object-position:50% 25%;filter:grayscale(1) contrast(1.35) brightness(1.08);mix-blend-mode:multiply}
-.st-av::after{content:"";position:absolute;inset:0;background:radial-gradient(circle,rgba(30,90,170,.55) 0 .9px,transparent 1.1px) 0 0/3px 3px;mix-blend-mode:screen;opacity:.7}
-.st-h1{margin:30px 0 0;font:600 22px/1.2 'Inter Display',Inter,sans-serif;letter-spacing:-.01em}
-.st-tag{margin:22px 0 0;font:600 20px/1.4 'Inter Display',Inter,sans-serif;color:#6b6b6b;letter-spacing:-.01em}
+.st-intro{position:relative;margin-left:272px;width:848px}
+.st-av{display:block;width:64px;height:64px;border-radius:32px;overflow:hidden;position:relative;background:#c9ddf7}
+.st-av img{width:100%;height:100%;object-fit:cover;object-position:50% 25%;filter:grayscale(1) contrast(1.4) brightness(1.1);mix-blend-mode:multiply}
+.st-av::after{content:"";position:absolute;inset:0;background:radial-gradient(circle,rgba(28,84,160,.6) 0 .8px,transparent 1px) 0 0/2.6px 2.6px;mix-blend-mode:screen}
+.st-h1{margin:22px 0 0;font:600 24px/36px Inter,sans-serif;letter-spacing:-.05px}
+.st-tag{margin:12px 0 0;font:600 20px/28px Inter,sans-serif;letter-spacing:-.25px;color:#666}
 .st-btns{display:flex;gap:10px;margin-top:34px}
-.st-btn{display:inline-flex;align-items:center;justify-content:center;height:38px;padding:0 16px;border-radius:8px;border:0;font:500 15px/1 Inter,sans-serif;text-decoration:none;cursor:pointer;transition:filter .15s,transform .15s}
-.st-btn:active{transform:scale(.98)}
-.st-btn-dark{background:#000;color:#fff}.st-btn-dark:hover{filter:brightness(1.6)}
-.st-btn-light{background:#f2f2f2;color:#5a5a5a;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}.st-btn-light:hover{background:#ebebeb}
-.st-sign{position:absolute;right:0;bottom:84px;margin:0;font:400 46px/1 Caveat,cursive;color:#8a8a8a;transform:rotate(-8deg)}
-.st-row{display:grid;grid-template-columns:120px 848px 234px;column-gap:32px;padding-left:144px;margin-top:96px;align-items:start;scroll-margin-top:60px}
-.st-year{margin:14px 0 0;text-align:right;font:500 15px/1 Inter,sans-serif;color:#a3a3a3;position:sticky;top:120px}
-.st-stack{display:flex;flex-direction:column;gap:12px}
-.st-media{margin:0;border-radius:var(--mr,14px);overflow:hidden;background:#f2f2f2;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)}
+.st-btn{display:inline-flex;align-items:center;justify-content:center;padding:8px 16px;border-radius:10px;border:0;font:600 15px/22.5px Inter,sans-serif;text-decoration:none;cursor:pointer;transition:opacity .15s,transform .15s}
+.st-btn:hover{opacity:.85}.st-btn:active{transform:scale(.98)}
+.st-btn-dark{background:#000;color:#fff}
+.st-btn-light{background:#f0f0f0;color:#666}
+.st-sign{position:absolute;right:0;top:196px;margin:0;font:400 44px/1 Caveat,cursive;color:#9a9a9a;transform:rotate(-14deg);transform-origin:100% 50%}
+.st-row{display:grid;grid-template-columns:240px 848px 240px;column-gap:32px;margin-top:80px;align-items:start;scroll-margin-top:48px}
+.st-intro + .st-row{margin-top:79px}
+.st-year{position:sticky;top:48px;margin:0;padding:4px 0 10px;text-align:right;font:500 15px/22.5px Inter,sans-serif;color:#b3b3b3}
+.st-stack{display:flex;flex-direction:column;gap:8px}
+.st-media{margin:0;height:524px;border-radius:6px;overflow:hidden;background:#fafafa}
 .st-media img{display:block;width:100%;height:100%;object-fit:cover}
-.st-locked{display:grid;place-items:center;text-align:center;color:#b0b0b0;background:#f5f5f5}
-.st-lk-t{margin:8px 0 0;font:500 15px/1 Inter,sans-serif;color:#9a9a9a}
-.st-lk-n{margin:8px 0 0;font:400 13px/1.4 Inter,sans-serif;color:#b8b8b8}
-.st-textcard{display:grid;place-items:center;background:linear-gradient(160deg,#fff4ef,#ffe1d6);text-align:center;padding:40px;box-sizing:border-box}
-.st-tc-big{margin:0;font:600 44px/1.1 'Inter Display',Inter,sans-serif;letter-spacing:-.02em;color:#3b1d12}
-.st-tc-small{margin:18px 0 0;font:500 16px/1.5 Inter,sans-serif;color:#9a5a43}
-.st-info{position:sticky;top:120px}
-.st-info-in{padding-top:4px}
-.st-logo{display:grid;place-items:center;width:48px;height:48px;border-radius:12px;background:#fff;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.04)}
-.st-name{margin:18px 0 0;font:600 20px/1.2 'Inter Display',Inter,sans-serif;letter-spacing:-.01em}
-.st-role{margin:6px 0 0;font:500 15px/1.3 Inter,sans-serif;color:#a3a3a3}
-.st-blurb{margin:18px 0 0;font:400 15px/1.45 Inter,sans-serif;color:#141414}
-.st-open,.st-pill{display:inline-flex;align-items:center;gap:6px;margin-top:20px;height:30px;padding:0 12px;border-radius:7px;font:500 14px/1 Inter,sans-serif;text-decoration:none}
-.st-open{background:var(--accentBg,#e6f3ff);color:var(--accent,#1a8cff);transition:filter .15s}.st-open:hover{filter:brightness(.96)}
-.st-pill{background:#f2f2f2;color:#9a9a9a}
-.st-contact{margin:160px 0 0 296px;width:848px}
-.st-h2{margin:0;font:600 28px/1.2 'Inter Display',Inter,sans-serif;letter-spacing:-.02em}
-.st-form{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px;max-width:640px}
-.st-f{display:flex;flex-direction:column;gap:8px;font:500 13px/1 Inter,sans-serif;color:#6b6b6b}
-.st-f:nth-child(3){grid-column:1 / -1}
-.st-f input,.st-f select{height:42px;border-radius:9px;border:0;background:#f4f4f4;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06);padding:0 12px;font:400 15px/1 Inter,sans-serif;color:#141414;outline:none}
-.st-f input:focus,.st-f select:focus{box-shadow:inset 0 0 0 2px #1a8cff;background:#fff}
-.st-submit{grid-column:1 / -1;justify-self:start;height:42px;padding:0 22px}
-.st-thanks{margin:120px 0 0;font:500 15px/1 Inter,sans-serif;color:#a3a3a3}
-a:focus-visible,button:focus-visible{outline:2px solid #1a8cff;outline-offset:3px}
+.st-locked{display:grid;place-items:center;text-align:center;color:#c4c4c4;box-shadow:inset 0 0 0 1px rgba(0,0,0,.04)}
+.st-lk-t{margin:8px 0 0;font:500 15px/18px Inter,sans-serif;color:#b3b3b3}
+.st-lk-n{margin:6px 0 0;font:500 13px/18px Inter,sans-serif;color:#cbcbcb}
+.st-textcard{display:grid;place-items:center;background:#fafafa;text-align:center;padding:40px;box-sizing:border-box}
+.st-tc-big{margin:0;font:600 40px/1.15 Inter,sans-serif;letter-spacing:-.6px;color:#000}
+.st-tc-small{margin:16px 0 0;font:500 15px/22.5px Inter,sans-serif;color:#b3b3b3}
+.st-info{position:sticky;top:48px}
+.st-info-head{padding:4px 0 10px}
+.st-logo{position:relative;display:grid;place-items:center;width:48px;height:48px;border-radius:12px;background:#fff;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.05);margin-bottom:10px;isolation:isolate}
+.st-logo .st-glow{position:absolute;inset:8px;z-index:-1;filter:blur(8px);opacity:.15;display:grid;place-items:center}
+.st-logo .st-lg{display:grid;place-items:center;width:32px;height:32px}
+.st-name{margin:0;font:600 20px/30px Inter,sans-serif;letter-spacing:-.05px}
+.st-role{margin:0;font:500 15px/22.5px Inter,sans-serif;color:#b3b3b3}
+.st-blurb{margin:0;font:400 15px/20px Inter,sans-serif;color:#000}
+.st-note{margin:12px 0 0;font:400 15px/20px Inter,sans-serif;color:#000}
+.st-cta{padding-top:20px}
+.st-open,.st-pill{display:inline-flex;align-items:center;gap:6px;border-radius:8px;font:600 13px/19.5px Inter,sans-serif;text-decoration:none}
+.st-open{padding:6px 10px 6px 12px;background:var(--accentBg,#e0f3ff);color:var(--accent,#0099ff);transition:filter .15s}.st-open:hover{filter:brightness(.97)}
+.st-pill{padding:6px 12px;background:#f0f0f0;color:#b3b3b3}
+.st-contact{padding-top:256px;display:flex;flex-direction:column;align-items:center}
+.st-h2{margin:0;font:600 24px/36px Inter,sans-serif;letter-spacing:-.05px;text-align:center}
+.st-form{width:359px;box-sizing:border-box;padding:20px 20px 120px;margin-top:12px;display:flex;flex-direction:column;gap:20px}
+.st-f{display:flex;flex-direction:column;gap:10px;font:500 12px/14.4px Inter,sans-serif;color:#888}
+.st-field{position:relative;display:flex;align-items:center;height:40px;border-radius:10px;background:rgba(187,187,187,.15)}
+.st-field input,.st-field select{width:100%;height:100%;box-sizing:border-box;border:0;background:none;padding:0 12px;font:400 14px/16.8px Inter,sans-serif;color:#000;outline:none;-webkit-appearance:none;appearance:none}
+.st-field input::placeholder{color:#999}
+.st-field select{color:#999;cursor:pointer}
+.st-field:focus-within{box-shadow:inset 0 0 0 1px rgba(0,153,255,.6)}
+.st-chev{position:absolute;right:12px;pointer-events:none;color:#999}
+.st-submit{width:100%;height:40px;padding:0;font-size:14px;line-height:16.8px}
+.st-bye{display:flex;flex-direction:column;align-items:center;gap:6px;color:#236fef}
+.st-bye p{margin:0;font:400 28px/28px Caveat,cursive}
+a:focus-visible,button:focus-visible{outline:2px solid #0099ff;outline-offset:3px}
 '''
-props = {"accent": {"editor": "color", "default": "#1a8cff", "section": "Style"},
-         "accentBg": {"editor": "color", "default": "#e6f3ff", "section": "Style"},
+props = {"accent": {"editor": "color", "default": "#0099ff", "section": "Style"},
+         "accentBg": {"editor": "color", "default": "#e0f3ff", "section": "Style"},
          "mediaRadius": {"editor": "range", "default": 14, "min": 0, "max": 32, "step": 1, "unit": "px", "section": "Style"},
          "$preview": {"width": 1440, "height": 9000}}
 attr = json.dumps(props, ensure_ascii=False).replace('&', '&amp;').replace("'", '&#39;')
@@ -162,9 +169,9 @@ JS = r'''class Component extends DCLogic {
   componentWillUnmount() { clearTimeout(this.t); }
   renderVals() {
     const st = this.state;
-    const body = `Hi Tin,%0D%0A%0D%0A${encodeURIComponent(st.kind)}%0D%0A%0D%0A— ${encodeURIComponent(st.name || '')} ${encodeURIComponent(st.from || '')}`;
+    const body = `Hi Tin,%0D%0A%0D%0A${encodeURIComponent(st.kind)}%0D%0A%0D%0A- ${encodeURIComponent(st.name || '')} ${encodeURIComponent(st.from || '')}`;
     return {
-      accent: this.props.accent ?? '#1a8cff', accentBg: this.props.accentBg ?? '#e6f3ff', mediaRadius: (this.props.mediaRadius ?? 14) + 'px',
+      accent: this.props.accent ?? '#0099ff', accentBg: this.props.accentBg ?? '#e0f3ff', mediaRadius: (this.props.mediaRadius ?? 14) + 'px',
       touchLabel: st.copied ? 'Email copied' : 'Get in touch',
       copy: () => { try { navigator.clipboard && navigator.clipboard.writeText('tinbacme@gmail.com'); } catch (e) {} this.setState({ copied: true }); clearTimeout(this.t); this.t = setTimeout(() => this.setState({ copied: false }), 1600); },
       setName: (e) => this.setState({ name: e.target.value }), setFrom: (e) => this.setState({ from: e.target.value }), setKind: (e) => this.setState({ kind: e.target.value }),
@@ -174,7 +181,7 @@ JS = r'''class Component extends DCLogic {
 }'''
 out = ('<!doctype html>\n<html>\n<head><meta charset="utf-8"><script src="./support.js"></script></head>\n<body>\n'
        '<!-- Tin Le · portfolio in the stuart.re style: logo dock, quiet intro, timeline of roles with stacked media, contact form -->\n<x-dc>\n<helmet>\n'
-       '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Caveat:wght@400;600&amp;display=swap">\n'
+       '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&amp;family=Caveat:wght@400;600&amp;display=swap">\n'
        '<style>' + CSS + '</style>\n</helmet>\n' + BODY + '\n</x-dc>\n'
        "<script type=\"text/x-dc\" data-dc-script data-props='" + attr + "'>\n" + JS + '\n</script>\n</body>\n</html>\n')
 out = ''.join(c if ord(c) < 128 else '&#%d;' % ord(c) for c in out)

@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><script src="./support.js"></script></head>
+<body>
+<!-- Tin Le &#183; portfolio in the stuart.re style: logo dock, quiet intro, timeline of roles with stacked media, contact form -->
+<x-dc>
+  <helmet>
+    <style>
+      html, body { margin: 0; height: 100%; }
+    </style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Caveat:wght@400;600&amp;display=swap">
+<style>
+body{margin:0}
+sc-for, sc-if { display: contents; }
+.st-root{position:relative;width:1440px;background:#fff;color:#000;font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;padding:220px 0 140px;box-sizing:border-box}
+.st-rail{position:absolute;left:20px;top:0;bottom:0;width:64px;z-index:5}
+.st-dock{position:sticky;top:220px;display:flex;flex-direction:column;gap:6px;padding:10px 8px;border-radius:22px;background:#2b2b2d;box-shadow:0 1px 0 rgba(255,255,255,.08) inset,0 18px 40px -16px rgba(0,0,0,.45)}
+.st-dk{position:relative;display:grid;place-items:center;width:48px;height:48px;border-radius:14px;text-decoration:none;transition:background-color .2s}
+.st-dk:hover,.st-dk:focus-visible{background:rgba(255,255,255,.12);outline:none}
+.st-dk-ic{display:grid;place-items:center;opacity:.92}
+.st-mono{filter:brightness(0) invert(1)}
+.st-tip{position:absolute;left:58px;top:50%;transform:translate(-4px,-50%);white-space:nowrap;padding:6px 10px;border-radius:8px;background:#2b2b2d;color:#fff;font-size:13px;font-weight:500;opacity:0;pointer-events:none;transition:opacity .15s,transform .15s}
+.st-dk:hover .st-tip,.st-dk:focus-visible .st-tip{opacity:1;transform:translate(0,-50%)}
+.st-intro{position:relative;margin-left:296px;width:848px;padding-bottom:80px}
+.st-av{display:block;width:64px;height:64px;border-radius:50%;overflow:hidden;position:relative;background:#cfe2ff}
+.st-av img{width:100%;height:100%;object-fit:cover;object-position:50% 25%;filter:grayscale(1) contrast(1.35) brightness(1.08);mix-blend-mode:multiply}
+.st-av::after{content:"";position:absolute;inset:0;background:radial-gradient(circle,rgba(30,90,170,.55) 0 .9px,transparent 1.1px) 0 0/3px 3px;mix-blend-mode:screen;opacity:.7}
+.st-h1{margin:30px 0 0;font:600 22px/1.2 'Inter Display',Inter,sans-serif;letter-spacing:-.01em}
+.st-tag{margin:22px 0 0;font:600 20px/1.4 'Inter Display',Inter,sans-serif;color:#6b6b6b;letter-spacing:-.01em}
+.st-btns{display:flex;gap:10px;margin-top:34px}
+.st-btn{display:inline-flex;align-items:center;justify-content:center;height:38px;padding:0 16px;border-radius:8px;border:0;font:500 15px/1 Inter,sans-serif;text-decoration:none;cursor:pointer;transition:filter .15s,transform .15s}
+.st-btn:active{transform:scale(.98)}
+.st-btn-dark{background:#000;color:#fff}.st-btn-dark:hover{filter:brightness(1.6)}
+.st-btn-light{background:#f2f2f2;color:#5a5a5a;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}.st-btn-light:hover{background:#ebebeb}
+.st-sign{position:absolute;right:0;bottom:84px;margin:0;font:400 46px/1 Caveat,cursive;color:#8a8a8a;transform:rotate(-8deg)}
+.st-row{display:grid;grid-template-columns:120px 848px 234px;column-gap:32px;padding-left:144px;margin-top:96px;align-items:start;scroll-margin-top:60px}
+.st-year{margin:14px 0 0;text-align:right;font:500 15px/1 Inter,sans-serif;color:#a3a3a3;position:sticky;top:120px}
+.st-stack{display:flex;flex-direction:column;gap:12px}
+.st-media{margin:0;border-radius:var(--mr,14px);overflow:hidden;background:#f2f2f2;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)}
+.st-media img{display:block;width:100%;height:100%;object-fit:cover}
+.st-locked{display:grid;place-items:center;text-align:center;color:#b0b0b0;background:#f5f5f5}
+.st-lk-t{margin:8px 0 0;font:500 15px/1 Inter,sans-serif;color:#9a9a9a}
+.st-lk-n{margin:8px 0 0;font:400 13px/1.4 Inter,sans-serif;color:#b8b8b8}
+.st-textcard{display:grid;place-items:center;background:linear-gradient(160deg,#fff4ef,#ffe1d6);text-align:center;padding:40px;box-sizing:border-box}
+.st-tc-big{margin:0;font:600 44px/1.1 'Inter Display',Inter,sans-serif;letter-spacing:-.02em;color:#3b1d12}
+.st-tc-small{margin:18px 0 0;font:500 16px/1.5 Inter,sans-serif;color:#9a5a43}
+.st-info{position:sticky;top:120px}
+.st-info-in{padding-top:4px}
+.st-logo{display:grid;place-items:center;width:48px;height:48px;border-radius:12px;background:#fff;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.04)}
+.st-name{margin:18px 0 0;font:600 20px/1.2 'Inter Display',Inter,sans-serif;letter-spacing:-.01em}
+.st-role{margin:6px 0 0;font:500 15px/1.3 Inter,sans-serif;color:#a3a3a3}
+.st-blurb{margin:18px 0 0;font:400 15px/1.45 Inter,sans-serif;color:#141414}
+.st-open,.st-pill{display:inline-flex;align-items:center;gap:6px;margin-top:20px;height:30px;padding:0 12px;border-radius:7px;font:500 14px/1 Inter,sans-serif;text-decoration:none}
+.st-open{background:var(--accentBg,#e6f3ff);color:var(--accent,#1a8cff);transition:filter .15s}.st-open:hover{filter:brightness(.96)}
+.st-pill{background:#f2f2f2;color:#9a9a9a}
+.st-contact{margin:160px 0 0 296px;width:848px}
+.st-h2{margin:0;font:600 28px/1.2 'Inter Display',Inter,sans-serif;letter-spacing:-.02em}
+.st-form{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px;max-width:640px}
+.st-f{display:flex;flex-direction:column;gap:8px;font:500 13px/1 Inter,sans-serif;color:#6b6b6b}
+.st-f:nth-child(3){grid-column:1 / -1}
+.st-f input,.st-f select{height:42px;border-radius:9px;border:0;background:#f4f4f4;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06);padding:0 12px;font:400 15px/1 Inter,sans-serif;color:#141414;outline:none}
+.st-f input:focus,.st-f select:focus{box-shadow:inset 0 0 0 2px #1a8cff;background:#fff}
+.st-submit{grid-column:1 / -1;justify-self:start;height:42px;padding:0 22px}
+.st-thanks{margin:120px 0 0;font:500 15px/1 Inter,sans-serif;color:#a3a3a3}
+a:focus-visible,button:focus-visible{outline:2px solid #1a8cff;outline-offset:3px}
+</style>
+  </helmet>
+<div class="st-rail" style="left: -26px; position: absolute; left: 0px; top: 0px; right: auto; bottom: auto; margin: 0px; box-sizing: border-box; width: 64px;"><nav class="st-dock" aria-label="Jump to a role"><a class="st-dk st-dk-top" href="#top" aria-label="Back to top"><span class="st-dk-ic" style="font: 400 22px/1 Caveat, cursive; color: #fff">tin</span><span class="st-tip">Tin Le</span></a><a class="st-dk" href="#microsoft" aria-label="Microsoft AI"><span class="st-dk-ic"><svg viewBox="0 0 20 20" width="22" height="22" aria-hidden="true"><rect x="0" y="0" width="9" height="9" fill="#fff"></rect><rect x="11" y="0" width="9" height="9" fill="#fff"></rect><rect x="0" y="11" width="9" height="9" fill="#fff"></rect><rect x="11" y="11" width="9" height="9" fill="#fff"></rect></svg></span><span class="st-tip">Microsoft AI</span></a><a class="st-dk" href="#uo-teach" aria-label="University of Oregon"><span class="st-dk-ic"><img src="/_blob/00e0e1ec841a28c4e0055e4a6738e6b1" alt="" width="20" height="20" class="st-mono"></span><span class="st-tip">University of Oregon</span></a><a class="st-dk" href="#2u" aria-label="2U"><span class="st-dk-ic"><span style="font: 700 14px/1 Inter, system-ui, sans-serif; color: #fff; letter-spacing: -0.02em">2U</span></span><span class="st-tip">2U</span></a><a class="st-dk" href="#salesforce" aria-label="Salesforce"><span class="st-dk-ic"><img src="/_blob/ac43d25c19be4e522f4bd492e1c090ab" alt="" width="24" height="18" class="st-mono"></span><span class="st-tip">Salesforce</span></a></nav></div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#1a8cff&quot;,&quot;section&quot;:&quot;Style&quot;},&quot;accentBg&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#e6f3ff&quot;,&quot;section&quot;:&quot;Style&quot;},&quot;mediaRadius&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:14,&quot;min&quot;:0,&quot;max&quot;:32,&quot;step&quot;:1,&quot;unit&quot;:&quot;px&quot;,&quot;section&quot;:&quot;Style&quot;}}">
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { copied: false, name: '', from: '', kind: 'Full-time role' }; }
+  componentWillUnmount() { clearTimeout(this.t); }
+  renderVals() {
+    const st = this.state;
+    const body = `Hi Tin,%0D%0A%0D%0A${encodeURIComponent(st.kind)}%0D%0A%0D%0A&#8212; ${encodeURIComponent(st.name || '')} ${encodeURIComponent(st.from || '')}`;
+    return {
+      accent: this.props.accent ?? '#1a8cff', accentBg: this.props.accentBg ?? '#e6f3ff', mediaRadius: (this.props.mediaRadius ?? 14) + 'px',
+      touchLabel: st.copied ? 'Email copied' : 'Get in touch',
+      copy: () => { try { navigator.clipboard && navigator.clipboard.writeText('tinbacme@gmail.com'); } catch (e) {} this.setState({ copied: true }); clearTimeout(this.t); this.t = setTimeout(() => this.setState({ copied: false }), 1600); },
+      setName: (e) => this.setState({ name: e.target.value }), setFrom: (e) => this.setState({ from: e.target.value }), setKind: (e) => this.setState({ kind: e.target.value }),
+      mailHref: `mailto:tinbacme@gmail.com?subject=${encodeURIComponent('Hello from your portfolio: ' + st.kind)}&body=${body}`,
+    };
+  }
+}
+</script>
+</body>
+</html>
