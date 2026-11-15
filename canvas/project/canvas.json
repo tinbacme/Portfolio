@@ -632,6 +632,16 @@
       "w": 1440,
       "x": 19760,
       "y": 0
+    },
+    "BadgeVariations.dc.html": {
+      "expand": "fill",
+      "h": 2300,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Tin Le · Badge variations · front and back",
+      "w": 1440,
+      "x": 11945,
+      "y": 13880
     }
   },
   "createdOnFiles": {
@@ -803,6 +813,7 @@
     "TinHome-Mobile-E.dc.html",
     "TinHome-Party.dc.html",
     "TinHome-Party-Desktop.dc.html",
+    "BadgeVariations.dc.html",
     "TinHome-Tablet-D.dc.html",
     "TinHome-Mobile-C.dc.html",
     "TinHome-Mobile-D.dc.html",
