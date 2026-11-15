@@ -50,7 +50,7 @@ CSS = r'''
 .party .th-cta .th-btn-secondary{background-color:transparent !important;border-color:rgba(255,255,255,.35) !important;color:#f4f1ea !important}
 .party .th-cta .th-link{color:#f4f1ea !important;text-decoration-color:rgba(255,255,255,.45) !important}
 /* the corner button */
-.th-party-btn{position:absolute;right:28px;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:1.5px solid rgba(20,20,20,.16);background:#fff;color:#141414;display:grid;place-items:center;padding:0;cursor:pointer;z-index:3;transition:transform .25s cubic-bezier(.3,1.6,.5,1),background-color .5s,border-color .5s,color .5s,box-shadow .5s}
+.th-party-btn{pointer-events:auto;position:absolute;right:28px;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:1.5px solid rgba(20,20,20,.16);background:#fff;color:#141414;display:grid;place-items:center;padding:0;cursor:pointer;z-index:3;transition:transform .25s cubic-bezier(.3,1.6,.5,1),background-color .5s,border-color .5s,color .5s,box-shadow .5s}
 .th-party-btn:hover{transform:translateY(-50%) scale(1.1) rotate(-8deg)}
 .th-party-btn:active{transform:translateY(-50%) scale(.92)}
 .th-party-btn:focus-visible{outline:2px solid #3078e7;outline-offset:3px}
@@ -127,7 +127,7 @@ POPPER = ('<svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidd
   '</svg>')
 BTN = ('\n    <button type="button" class="th-party-btn" aria-pressed="{{partyPressed}}" aria-label="{{partyLabel}}" onClick="{{partyToggle}}">'
        '<span class="pb-ring" aria-hidden="true"></span>' + POPPER +
-       '<span class="pb-tip" aria-hidden="true">{{partyTip}}</span>'
+       ''
        '<sc-for list="{{confetti}}" as="c" hint-placeholder-count="0"><i class="th-cf" style="{{c.style}}"></i></sc-for></button>\n  </header>')
 rep('    </button>\n    \n  </header>', '    </button>' + BTN)
 
