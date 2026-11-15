@@ -316,6 +316,136 @@
       "x": 3985,
       "y": 4240
     },
+    "TinHome-Mobile-A.dc.html": {
+      "expand": "fill",
+      "h": 4600,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Tin Le · Homepage · Mobile option A · drawing first, then intro",
+      "w": 390,
+      "x": 7597,
+      "y": 9080
+    },
+    "TinHome-Mobile-B.dc.html": {
+      "expand": "fill",
+      "h": 4600,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Tin Le · Homepage · Mobile option B · intro first, then drawing",
+      "w": 390,
+      "x": 8147,
+      "y": 9080
+    },
+    "TinHome-Mobile-C.dc.html": {
+      "expand": "fill",
+      "h": 4600,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Tin Le · Homepage · Mobile option C · compact: small waving avatar beside the greeting",
+      "w": 390,
+      "x": 10765,
+      "y": 9080
+    },
+    "TinHome-Mobile-D.dc.html": {
+      "expand": "fill",
+      "h": 4600,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Tin Le · Homepage · Mobile option D · drawing first + swipeable work cards",
+      "w": 390,
+      "x": 11315,
+      "y": 9080
+    },
+    "TinHome-Mobile-E.dc.html": {
+      "expand": "fill",
+      "h": 4600,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Tin Le · Homepage · Mobile option E · greeting + prose intro with logo pills (from Tablet C)",
+      "w": 390,
+      "x": 8777,
+      "y": 13880
+    },
+    "TinHome-Mobile.dc.html": {
+      "expand": "fill",
+      "h": 4600,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Tin Le · Homepage · Mobile (390px)",
+      "w": 390,
+      "x": 4979,
+      "y": 9080
+    },
+    "TinHome-Party-Desktop.dc.html": {
+      "expand": "fill",
+      "h": 6400,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Tin Le · Homepage · Party mode · desktop (tap the corner button)",
+      "w": 1440,
+      "x": 10305,
+      "y": 13880
+    },
+    "TinHome-Party.dc.html": {
+      "expand": "fill",
+      "h": 4600,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Tin Le · Homepage · Party mode · tablet (tap the corner button)",
+      "w": 834,
+      "x": 9271,
+      "y": 13880
+    },
+    "TinHome-Tablet-A.dc.html": {
+      "expand": "fill",
+      "h": 4600,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Tin Le · Homepage · Tablet option A · two columns, smaller drawing",
+      "w": 834,
+      "x": 5609,
+      "y": 9080
+    },
+    "TinHome-Tablet-B.dc.html": {
+      "expand": "fill",
+      "h": 4600,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Tin Le · Homepage · Tablet option B · drawing on top, intro below",
+      "w": 834,
+      "x": 6603,
+      "y": 9080
+    },
+    "TinHome-Tablet-C.dc.html": {
+      "expand": "fill",
+      "h": 4600,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Tin Le · Homepage · Tablet option C · greeting band + prose intro (kenjilambert-style)",
+      "w": 834,
+      "x": 8777,
+      "y": 9080
+    },
+    "TinHome-Tablet-D.dc.html": {
+      "expand": "fill",
+      "h": 4600,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Tin Le · Homepage · Tablet option D · two columns + work as a 2-column grid",
+      "w": 834,
+      "x": 9771,
+      "y": 9080
+    },
+    "TinHome-Tablet.dc.html": {
+      "expand": "fill",
+      "h": 4600,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Tin Le · Homepage · Tablet (834px)",
+      "w": 834,
+      "x": 3985,
+      "y": 9080
+    },
     "TinHome.dc.html": {
       "expand": "fill",
       "h": 4600,
@@ -358,6 +488,15 @@
       "w": 1440,
       "x": 6080,
       "y": 2640
+    },
+    "TinSketchbook.dc.html": {
+      "h": 900,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Concept H · Field Notes — flip-through sketchbook",
+      "w": 1440,
+      "x": 3985,
+      "y": 14040
     },
     "VariationChrome.dc.html": {
       "h": 900,
@@ -493,145 +632,6 @@
       "w": 1440,
       "x": 19760,
       "y": 0
-    },
-    "TinHome-Tablet.dc.html": {
-      "expand": "fill",
-      "h": 4600,
-      "is_interactive": true,
-      "page": "page-vmnxsd",
-      "title": "Tin Le · Homepage · Tablet (834px)",
-      "w": 834,
-      "x": 3985,
-      "y": 9080
-    },
-    "TinHome-Mobile.dc.html": {
-      "expand": "fill",
-      "h": 4600,
-      "is_interactive": true,
-      "page": "page-vmnxsd",
-      "title": "Tin Le · Homepage · Mobile (390px)",
-      "w": 390,
-      "x": 4979,
-      "y": 9080
-    },
-    "TinHome-Tablet-A.dc.html": {
-      "expand": "fill",
-      "h": 4600,
-      "is_interactive": true,
-      "page": "page-vmnxsd",
-      "title": "Tin Le · Homepage · Tablet option A · two columns, smaller drawing",
-      "w": 834,
-      "x": 5609,
-      "y": 9080
-    },
-    "TinHome-Tablet-B.dc.html": {
-      "expand": "fill",
-      "h": 4600,
-      "is_interactive": true,
-      "page": "page-vmnxsd",
-      "title": "Tin Le · Homepage · Tablet option B · drawing on top, intro below",
-      "w": 834,
-      "x": 6603,
-      "y": 9080
-    },
-    "TinHome-Mobile-A.dc.html": {
-      "expand": "fill",
-      "h": 4600,
-      "is_interactive": true,
-      "page": "page-vmnxsd",
-      "title": "Tin Le · Homepage · Mobile option A · drawing first, then intro",
-      "w": 390,
-      "x": 7597,
-      "y": 9080
-    },
-    "TinHome-Mobile-B.dc.html": {
-      "expand": "fill",
-      "h": 4600,
-      "is_interactive": true,
-      "page": "page-vmnxsd",
-      "title": "Tin Le · Homepage · Mobile option B · intro first, then drawing",
-      "w": 390,
-      "x": 8147,
-      "y": 9080
-    },
-    "TinHome-Tablet-C.dc.html": {
-      "expand": "fill",
-      "h": 4600,
-      "is_interactive": true,
-      "page": "page-vmnxsd",
-      "title": "Tin Le · Homepage · Tablet option C · greeting band + prose intro (kenjilambert-style)",
-      "w": 834,
-      "x": 8777,
-      "y": 9080
-    },
-    "TinHome-Tablet-D.dc.html": {
-      "expand": "fill",
-      "h": 4600,
-      "is_interactive": true,
-      "page": "page-vmnxsd",
-      "title": "Tin Le · Homepage · Tablet option D · two columns + work as a 2-column grid",
-      "w": 834,
-      "x": 9771,
-      "y": 9080
-    },
-    "TinHome-Mobile-C.dc.html": {
-      "expand": "fill",
-      "h": 4600,
-      "is_interactive": true,
-      "page": "page-vmnxsd",
-      "title": "Tin Le · Homepage · Mobile option C · compact: small waving avatar beside the greeting",
-      "w": 390,
-      "x": 10765,
-      "y": 9080
-    },
-    "TinHome-Mobile-D.dc.html": {
-      "expand": "fill",
-      "h": 4600,
-      "is_interactive": true,
-      "page": "page-vmnxsd",
-      "title": "Tin Le · Homepage · Mobile option D · drawing first + swipeable work cards",
-      "w": 390,
-      "x": 11315,
-      "y": 9080
-    },
-    "TinSketchbook.dc.html": {
-      "h": 900,
-      "is_interactive": true,
-      "page": "page-vmnxsd",
-      "title": "Concept H · Field Notes — flip-through sketchbook",
-      "w": 1440,
-      "x": 3985,
-      "y": 14040
-    },
-    "TinHome-Mobile-E.dc.html": {
-      "expand": "fill",
-      "h": 4600,
-      "is_interactive": true,
-      "page": "page-vmnxsd",
-      "title": "Tin Le · Homepage · Mobile option E · greeting + prose intro with logo pills (from Tablet C)",
-      "w": 390,
-      "x": 8777,
-      "y": 13880
-    },
-    "TinHome-Party.dc.html": {
-      "expand": "fill",
-      "h": 4600,
-      "is_interactive": true,
-      "page": "page-vmnxsd",
-      "title": "Tin Le · Homepage · Party mode · tablet (tap the corner button)",
-      "w": 834,
-      "x": 9271,
-      "y": 13880
-    },
-    "TinHome-Party-Desktop.dc.html": {
-      "expand": "fill",
-      "h": 4600,
-      "is_interactive": true,
-      "page": "page-vmnxsd",
-      "title": "Tin Le · Homepage · Party mode · desktop (tap the corner button)",
-      "w": 1440,
-      "x": 10305,
-      "y": 13880
     }
   },
   "createdOnFiles": {
@@ -651,8 +651,7 @@
     "partsTitle",
     "variationsTitle",
     "carousel2Title",
-    "directionsTitle",
-    "image-2ee2wb"
+    "directionsTitle"
   ],
   "notes": {
     "boardTitle": {
@@ -689,16 +688,6 @@
       "w": 240,
       "x": 0,
       "y": -300
-    },
-    "image-2ee2wb": {
-      "alt": "foundry-1794201582815-1 1",
-      "h": 80,
-      "kind": "image",
-      "page": "page-vmnxsd",
-      "src": "/_blob/d93a4c868326fad7da44f0182add3bac",
-      "w": 80,
-      "x": 3781,
-      "y": 4671
     },
     "partsTitle": {
       "kind": "title1",
