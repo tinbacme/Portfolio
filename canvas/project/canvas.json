@@ -253,6 +253,14 @@
    "x": 12500,
    "y": 19947
   },
+  "Piece-navvars.dc.html": {
+   "h": 1320,
+   "page": "page-vmnxsd",
+   "title": "Box (6) · nav variations",
+   "w": 1600,
+   "x": -2033,
+   "y": 13857
+  },
   "Piece-o61g.dc.html": {
    "frameless": true,
    "h": 192,
@@ -276,7 +284,7 @@
    "h": 284,
    "page": "page-vmnxsd",
    "title": "Box (6)",
-   "w": 194,
+   "w": 198,
    "x": -373,
    "y": 13857
   },
@@ -458,7 +466,7 @@
    "is_interactive": true,
    "page": "page-vmnxsd",
    "title": "Tin Le · Portfolio in the stuart.re style",
-   "w": 1440,
+   "w": 1808,
    "x": 0,
    "y": 13880
   },
@@ -698,14 +706,6 @@
    "w": 1440,
    "x": 19760,
    "y": 0
-  },
-  "Piece-navvars.dc.html": {
-   "h": 690,
-   "page": "page-vmnxsd",
-   "title": "Box (6) · nav variations",
-   "w": 1600,
-   "x": -2033,
-   "y": 13857
   }
  },
  "createdOnFiles": {
