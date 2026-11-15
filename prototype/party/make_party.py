@@ -69,6 +69,9 @@ CSS = r'''
 /* neon light in the hero */
 .th-pglow{position:absolute;top:0;left:0;right:0;height:1100px;z-index:-1;pointer-events:none;opacity:0;transition:opacity 1.4s ease;overflow:hidden}
 .party .th-pglow{opacity:1}
+.th-pglow i{display:none} /* no gradient in party mode, just the stars */
+.th-pp .lg{filter:none !important}
+.party .th-prose,.party .th-prose span:not([style*="color: #9a948a"]){color:#ffffff !important}
 .th-pglow i{position:absolute;border-radius:50%;filter:blur(90px);animation:pgDrift 10s ease-in-out infinite alternate}
 .th-pglow i:nth-child(1){width:520px;height:520px;background:#ff4fd8;opacity:.42;left:-160px;top:-180px}
 .th-pglow i:nth-child(2){width:560px;height:560px;background:#4d5bff;opacity:.5;right:-200px;top:-80px;animation-duration:12s;animation-delay:-4s}
