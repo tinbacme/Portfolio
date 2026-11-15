@@ -49,6 +49,16 @@
       "x": 1520,
       "y": 2200
     },
+    "BadgeVariations.dc.html": {
+      "expand": "fill",
+      "h": 2300,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Tin Le · Badge variations · front and back",
+      "w": 1440,
+      "x": 12080,
+      "y": 17200
+    },
     "BingRealEstate.dc.html": {
       "h": 1640,
       "title": "Case study 1 · Bing Real Estate (outline)",
@@ -215,6 +225,24 @@
       "w": 660,
       "x": 22745,
       "y": 4505
+    },
+    "Piece-46el.dc.html": {
+      "frameless": true,
+      "h": 622,
+      "page": "page-vmnxsd",
+      "title": "Box (3)",
+      "w": 683,
+      "x": 13909,
+      "y": 18174
+    },
+    "Piece-4wk9.dc.html": {
+      "frameless": true,
+      "h": 791,
+      "page": "page-vmnxsd",
+      "title": "Box (4)",
+      "w": 1440,
+      "x": 8693,
+      "y": 19115
     },
     "Piece-o61g.dc.html": {
       "frameless": true,
@@ -632,16 +660,6 @@
       "w": 1440,
       "x": 19760,
       "y": 0
-    },
-    "BadgeVariations.dc.html": {
-      "expand": "fill",
-      "h": 2300,
-      "is_interactive": true,
-      "page": "page-vmnxsd",
-      "title": "Tin Le · Badge variations · front and back",
-      "w": 1440,
-      "x": 11945,
-      "y": 13880
     }
   },
   "createdOnFiles": {
@@ -661,7 +679,11 @@
     "partsTitle",
     "variationsTitle",
     "carousel2Title",
-    "directionsTitle"
+    "directionsTitle",
+    "image-1hskyu",
+    "image-w63vcm",
+    "image-umye47",
+    "image-tinclean"
   ],
   "notes": {
     "boardTitle": {
@@ -698,6 +720,36 @@
       "w": 240,
       "x": 0,
       "y": -300
+    },
+    "image-1hskyu": {
+      "alt": "Microsoft Edge Canary •2026-11-14 at 23.20",
+      "h": 994,
+      "kind": "image",
+      "page": "page-vmnxsd",
+      "src": "/_blob/287681442b5cc097d3bae1633c7b427e",
+      "w": 1200,
+      "x": 13651,
+      "y": 17137
+    },
+    "image-umye47": {
+      "alt": "Microsoft Edge Canary •2026-11-14 at 23.37",
+      "h": 604,
+      "kind": "image",
+      "page": "page-vmnxsd",
+      "src": "/_blob/adad902c0505d6bb69d0c5cbc87cb3b9",
+      "w": 494,
+      "x": 14076,
+      "y": 18827
+    },
+    "image-w63vcm": {
+      "alt": "Microsoft Edge Canary •2026-11-14 at 23.37",
+      "h": 604,
+      "kind": "image",
+      "page": "page-vmnxsd",
+      "src": "/_blob/adad902c0505d6bb69d0c5cbc87cb3b9",
+      "w": 494,
+      "x": 14759,
+      "y": 18192
     },
     "partsTitle": {
       "kind": "title1",
@@ -741,6 +793,16 @@
       "w": 240,
       "x": 9120,
       "y": 2600
+    },
+    "image-tinclean": {
+      "alt": "Tin photo, cleaned up (arms removed, higher resolution)",
+      "h": 618,
+      "kind": "image",
+      "page": "page-vmnxsd",
+      "src": "/_blob/23c37e811ab58e300330f9e6721ba16c",
+      "w": 494,
+      "x": 14630,
+      "y": 18827
     }
   },
   "order": [
@@ -817,7 +879,9 @@
     "TinHome-Tablet-D.dc.html",
     "TinHome-Mobile-C.dc.html",
     "TinHome-Mobile-D.dc.html",
-    "TinSketchbook.dc.html"
+    "TinSketchbook.dc.html",
+    "Piece-46el.dc.html",
+    "Piece-4wk9.dc.html"
   ],
   "pages": [
     {
