@@ -244,6 +244,15 @@
       "x": 8693,
       "y": 19115
     },
+    "Piece-fmcq.dc.html": {
+      "frameless": true,
+      "h": 479,
+      "page": "page-vmnxsd",
+      "title": "Box (5)",
+      "w": 300,
+      "x": 12500,
+      "y": 19947
+    },
     "Piece-o61g.dc.html": {
       "frameless": true,
       "h": 192,
@@ -404,9 +413,19 @@
       "x": 4979,
       "y": 9080
     },
+    "TinHome-Party-Desktop-fx15.dc.html": {
+      "expand": "fill",
+      "h": 2090,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Tin Le · Homepage · Party mode · desktop (tap the corner button) copy",
+      "w": 1440,
+      "x": 12080,
+      "y": 13880
+    },
     "TinHome-Party-Desktop.dc.html": {
       "expand": "fill",
-      "h": 6400,
+      "h": 2090,
       "is_interactive": true,
       "page": "page-vmnxsd",
       "title": "Tin Le · Homepage · Party mode · desktop (tap the corner button)",
@@ -660,6 +679,16 @@
       "w": 1440,
       "x": 19760,
       "y": 0
+    },
+    "TinHome-About.dc.html": {
+      "expand": "fill",
+      "h": 1800,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Tin Le · About",
+      "w": 1440,
+      "x": 10305,
+      "y": 16170
     }
   },
   "createdOnFiles": {
@@ -681,9 +710,12 @@
     "carousel2Title",
     "directionsTitle",
     "image-1hskyu",
-    "image-w63vcm",
-    "image-umye47",
-    "image-tinclean"
+    "image-uikdpq",
+    "image-nxtbsa",
+    "image-r7jopx",
+    "image-67lt7s",
+    "image-65g3vt",
+    "image-bj4c2p"
   ],
   "notes": {
     "boardTitle": {
@@ -731,35 +763,65 @@
       "x": 13651,
       "y": 17137
     },
-    "image-tinclean": {
-      "alt": "Tin photo, cleaned up (arms removed, higher resolution)",
-      "h": 618,
+    "image-65g3vt": {
+      "alt": "Pasted image",
+      "h": 1600,
       "kind": "image",
       "page": "page-vmnxsd",
-      "src": "/_blob/23c37e811ab58e300330f9e6721ba16c",
-      "w": 494,
-      "x": 14630,
-      "y": 18827
+      "src": "/_blob/effff208332abe411e27c82aaa87e30d",
+      "w": 1200,
+      "x": 18035,
+      "y": 17588
     },
-    "image-umye47": {
-      "alt": "Microsoft Edge Canary •2026-11-14 at 23.37",
-      "h": 604,
+    "image-67lt7s": {
+      "alt": "Pasted image",
+      "h": 1339,
       "kind": "image",
       "page": "page-vmnxsd",
-      "src": "/_blob/adad902c0505d6bb69d0c5cbc87cb3b9",
-      "w": 494,
-      "x": 14076,
-      "y": 18827
+      "src": "/_blob/155942c7f1c522f9aec7d43d1c1d0d0d",
+      "w": 753,
+      "x": 17074,
+      "y": 17901
     },
-    "image-w63vcm": {
-      "alt": "Microsoft Edge Canary •2026-11-14 at 23.37",
-      "h": 604,
+    "image-bj4c2p": {
+      "alt": "Pasted image",
+      "h": 800,
       "kind": "image",
       "page": "page-vmnxsd",
-      "src": "/_blob/adad902c0505d6bb69d0c5cbc87cb3b9",
-      "w": 494,
-      "x": 14759,
-      "y": 18192
+      "src": "/_blob/54416d11bdc955c9c7fb45c9c479a828",
+      "w": 1200,
+      "x": 17827,
+      "y": 20631
+    },
+    "image-nxtbsa": {
+      "alt": "Pasted image",
+      "h": 426,
+      "kind": "image",
+      "page": "page-vmnxsd",
+      "src": "/_blob/4eac407aac52c547e08dbd5a341e2432",
+      "w": 640,
+      "x": 17074,
+      "y": 20280
+    },
+    "image-r7jopx": {
+      "alt": "Pasted image",
+      "h": 704,
+      "kind": "image",
+      "page": "page-vmnxsd",
+      "src": "/_blob/7cf40081dbe5d6b4a1824a5ac5755b57",
+      "w": 1200,
+      "x": 16313,
+      "y": 20900
+    },
+    "image-uikdpq": {
+      "alt": "Pasted image",
+      "h": 800,
+      "kind": "image",
+      "page": "page-vmnxsd",
+      "src": "/_blob/8bd998ead1110dbdb0a707cdb0cb6c60",
+      "w": 1200,
+      "x": 17074,
+      "y": 19360
     },
     "partsTitle": {
       "kind": "title1",
@@ -875,13 +937,16 @@
     "TinHome-Mobile-E.dc.html",
     "TinHome-Party.dc.html",
     "TinHome-Party-Desktop.dc.html",
+    "TinHome-About.dc.html",
     "BadgeVariations.dc.html",
     "TinHome-Tablet-D.dc.html",
     "TinHome-Mobile-C.dc.html",
     "TinHome-Mobile-D.dc.html",
     "TinSketchbook.dc.html",
     "Piece-46el.dc.html",
-    "Piece-4wk9.dc.html"
+    "Piece-4wk9.dc.html",
+    "Piece-fmcq.dc.html",
+    "TinHome-Party-Desktop-fx15.dc.html"
   ],
   "pages": [
     {

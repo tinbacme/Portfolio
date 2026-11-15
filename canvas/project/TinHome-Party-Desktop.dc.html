@@ -260,6 +260,15 @@ sc-for, sc-if { display: contents; }
 .bd-chev:hover{opacity:1;background:rgba(20,20,20,.06)}
 .party .bd-dot{background:rgba(255,255,255,.3)}.party .bd-dot:hover{background:rgba(255,255,255,.55)}.party .bd-dot.on{background:#fff}
 .party .bd-chev{color:#fff}.party .bd-chev:hover{background:rgba(255,255,255,.1)}
+
+/* header nav */
+.th-nav{position:relative;z-index:1;display:flex;align-items:center;gap:28px}
+.th-navlink{font-size:16px;font-weight:500;color:#141414;text-decoration:none;opacity:.55;transition:opacity .2s}
+.th-navlink:hover,.th-navlink.on{opacity:1}
+.th-navlink:focus-visible,.th-sayhi:focus-visible{outline:2px solid #3078e7;outline-offset:4px;border-radius:4px}
+.th-sayhi{border:0;border-radius:999px;background:#141414;color:#fff;padding:11px 20px;font:inherit;font-size:15px;font-weight:500;cursor:pointer;transition:transform .2s cubic-bezier(.3,1.5,.5,1),filter .2s}
+.th-sayhi:hover{transform:translateY(-1px);filter:brightness(1.35)}
+.party .th-navlink{color:#f4f1ea}.party .th-sayhi{background:#f4f1ea;color:#0d0c12}
 </style>
 </helmet>
 <div class="th-root {{introClass}} {{gradClass}} {{partyClass}}" style="position: relative; isolation: isolate; background: #f5f5f5; color: #141414; font-family: 'Be Vietnam Pro', system-ui, sans-serif; font-size: 16px; line-height: 1.4; min-height: 100%">
@@ -268,11 +277,12 @@ sc-for, sc-if { display: contents; }
 <sc-if value="{{introOn}}" hint-placeholder-val="{{ false }}"><div class="th-intro" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none"><g class="ld-g"><path class="ld-l ld-t" pathLength="1" d="M11.7891 40.2597V29.7451H8.02393V24.4721H11.7891V18.603H13.6266C14.7138 18.603 15.7565 19.0349 16.5252 19.8037C17.294 20.5724 17.7259 21.6151 17.7259 22.7023V24.4585H23.8342V29.7451H17.7259V38.1559C17.7259 39.8083 17.5047 42.7608 19.6627 42.7608C20.4363 42.7269 21.1786 42.4452 21.78 41.9572L23.8026 46.5215C22.1367 47.6818 20.7416 48.3274 18.6739 48.3274C13.8117 48.3048 11.7891 44.7292 11.7891 40.2597Z"></path><path class="ld-l ld-i" pathLength="1" d="M33.202 24.8921H28.0192C27.7873 24.8921 27.5994 25.0801 27.5994 25.312V47.8987C27.5994 48.1305 27.7873 48.3185 28.0192 48.3185H33.202C33.4339 48.3185 33.6219 48.1305 33.6219 47.8987V25.312C33.6219 25.0801 33.4339 24.8921 33.202 24.8921Z"></path><path class="ld-l ld-n" pathLength="1" d="M56.213 33.3163V47.8986C56.213 47.9537 56.2021 48.0083 56.181 48.0592C56.1599 48.1102 56.129 48.1565 56.09 48.1955C56.051 48.2344 56.0047 48.2654 55.9538 48.2865C55.9029 48.3076 55.8483 48.3184 55.7931 48.3184H50.6058C50.4945 48.3184 50.3877 48.2742 50.3089 48.1955C50.2302 48.1167 50.1859 48.0099 50.1859 47.8986V35.9709C50.1859 33.6459 49.7345 31.4563 47.0573 31.4563C44.3124 31.4563 43.4095 33.7407 43.4095 35.9709V47.8986C43.4101 47.9535 43.3998 48.008 43.3792 48.0589C43.3586 48.1098 43.3281 48.1561 43.2894 48.1952C43.2508 48.2342 43.2048 48.2652 43.1541 48.2864C43.1034 48.3075 43.0491 48.3184 42.9941 48.3184H37.8068C37.6955 48.3184 37.5887 48.2742 37.5099 48.1955C37.4312 48.1167 37.387 48.0099 37.387 47.8986V25.3254C37.387 25.214 37.4312 25.1073 37.5099 25.0285C37.5887 24.9498 37.6955 24.9055 37.8068 24.9055H42.9941C43.1047 24.9067 43.2103 24.9515 43.2881 25.0301C43.3659 25.1087 43.4095 25.2148 43.4095 25.3254V27.9619C43.4095 27.9727 43.4138 27.9831 43.4214 27.9907C43.429 27.9983 43.4393 28.0026 43.4501 28.0026C43.4609 28.0026 43.4712 27.9983 43.4788 27.9907C43.4865 27.9831 43.4907 27.9727 43.4907 27.9619C44.3937 25.8717 46.958 24.3999 49.8112 24.3999C54.5832 24.3999 56.213 28.4766 56.213 33.3163Z"></path><path class="ld-dot" d="M30.6692 22.1201C29.751 22.1335 28.8646 21.7839 28.2026 21.1473C27.5407 20.5108 27.1568 19.6387 27.1343 18.7206C27.1801 17.814 27.5725 16.9596 28.2305 16.3341C28.8884 15.7087 29.7614 15.3599 30.6692 15.3599C31.577 15.3599 32.4501 15.7087 33.108 16.3341C33.7659 16.9596 34.1584 17.814 34.2042 18.7206C34.1817 19.6387 33.7977 20.5108 33.1358 21.1473C32.4739 21.7839 31.5875 22.1335 30.6692 22.1201V22.1201Z"></path></g></svg></div></sc-if>
 
 
-  <header class="th-head {{headClass}}" style="position: sticky; top: 0; z-index: 10; display: flex; justify-content: center; align-items: center; padding: 14px 40px; flex-direction: row">
+  <header class="th-head {{headClass}}" style="position: sticky; top: 0; z-index: 10; display: flex; justify-content: space-between; align-items: center; padding: 14px 150px; flex-direction: row">
     <div class="th-fade" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
     <button type="button" class="th-loop" aria-label="Tin's logo. Back to the top" onClick="{{next}}" style="position: relative; width: 96px; height: 96px; border: 0; padding: 0; background: none; cursor: pointer">
       <sc-for list="{{frames}}" as="f" hint-placeholder-count="8"><img src="{{f.src}}" alt="" style="{{f.style}}"></sc-for>
     </button>
+    <nav class="th-nav" aria-label="Main"><a class="th-navlink on" href="#work" aria-current="page">Work</a><a class="th-navlink" href="#about">About</a><button type="button" class="th-sayhi" onClick="{{copy}}" title="Copy my email">{{sayHiLabel}}</button></nav>
     
   </header>
 
@@ -294,47 +304,7 @@ sc-for, sc-if { display: contents; }
   </section>
 
 <sc-if value="{{partyOff}}" hint-placeholder-val="{{ true }}">
-  <main aria-label="Work" style="display: flex; flex-direction: column; gap: 88px; padding: 24px 40px 96px; padding-right: 150px; padding-left: 150px">
-
-    
-      <div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 20px"><div style="box-sizing: border-box; display: flex; flex-direction: row; gap: 12px"><span style="font-size: 20px; width: 100%">Windows Search Box</span>
-      <p style="margin: 0; color: #6e6e6e; font-size: 20px; width: 1161px">Design the next generation of Agentic Windows OS Search</p></div><div style="aspect-ratio: 16 / 10; border-radius: 6px; display: grid; place-items: center; background-color: #E7E7E7; width: 100%; max-width: 100%"><div style="width: 78%; aspect-ratio: 16 / 10; border-radius: 8px; background: #ffffff; display: grid; place-items: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); font-size: 12px; color: #8a8a8a; letter-spacing: 0.06em; text-transform: uppercase">Search results and map</div></div></div><div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 20px"><div style="box-sizing: border-box; display: flex; flex-direction: row; gap: 12px"><span style="font-size: 20px; width: 100%">Windows Search Box</span>
-      <p style="margin: 0; color: #6e6e6e; font-size: 20px; width: 1161px">Design the next generation of Agentic Windows OS Search</p></div><div style="aspect-ratio: 16 / 10; border-radius: 6px; display: grid; place-items: center; background-color: #E7E7E7; width: 100%; max-width: 100%"><div style="width: 78%; aspect-ratio: 16 / 10; border-radius: 8px; background: #ffffff; display: grid; place-items: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); font-size: 12px; color: #8a8a8a; letter-spacing: 0.06em; text-transform: uppercase">Search results and map</div></div></div>
-        
-        
-      
-      
-    
-
-    
-
-    <a href="#surfaces" style="display: flex; flex-direction: column; gap: 14px; text-decoration: none">
-      <div class="th-shots" style="display: grid; grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr); gap: 12px">
-        <div style="aspect-ratio: 16 / 10; border-radius: 6px; background: #17694a; display: grid; place-items: center"><div style="width: 78%; aspect-ratio: 16 / 10; border-radius: 8px; background: #ffffff; display: grid; place-items: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); font-size: 12px; color: #8a8a8a; letter-spacing: 0.06em; text-transform: uppercase">Windows calendar</div></div>
-        <div class="th-side" style="display: grid; grid-template-rows: 1fr; gap: 12px">
-          <div class="th-small" style="border-radius: 6px; background: #17694a; display: grid; place-items: center; height: 100%"><div style="height: 84%; aspect-ratio: 9 / 19; box-sizing: border-box; border: 6px solid #141414; border-radius: 26px; background: #ffffff; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18); display: flex; flex-direction: column; align-items: center; padding: 8px 8px 10px; gap: 8px"><div style="width: 34%; height: 8px; border-radius: 999px; background: #141414"></div><div style="flex: 1; width: 100%; border-radius: 14px; background: #f2f2f2; display: grid; place-items: center; font-size: 10px; color: #8a8a8a; letter-spacing: 0.06em; text-transform: uppercase; text-align: center">Edge search bar</div><div style="width: 30%; height: 4px; border-radius: 999px; background: #141414; opacity: 0.6"></div></div></div>
-        </div>
-      </div>
-      <div class="th-meta" style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) auto; gap: 16px; font-size: 15px">
-        <span>Across Windows, Edge and Bing</span><span style="color: #6e6e6e">A calendar sprint, a lock screen widget and search bar prototypes.</span><span style="color: #6e6e6e">Read ↗</span>
-      </div>
-    </a>
-
-    
-
-    <a href="#salesforce" style="display: flex; flex-direction: column; gap: 14px; text-decoration: none">
-      <div class="th-shots" style="display: grid; grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr); gap: 12px">
-        <div style="aspect-ratio: 16 / 10; border-radius: 6px; background: #f1e9d6; display: grid; place-items: center"><div style="width: 78%; aspect-ratio: 16 / 10; border-radius: 8px; background: #ffffff; display: grid; place-items: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); font-size: 12px; color: #8a8a8a; letter-spacing: 0.06em; text-transform: uppercase">Help home</div></div>
-        <div class="th-side" style="display: grid; grid-template-rows: 1fr 1fr; gap: 12px">
-          <div class="th-small" style="border-radius: 6px; background: #f1e9d6; display: grid; place-items: center"><div style="width: 72%; aspect-ratio: 16 / 10; border-radius: 8px; background: #ffffff; display: grid; place-items: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); font-size: 12px; color: #8a8a8a; letter-spacing: 0.06em; text-transform: uppercase">Manage Users</div></div>
-          <div class="th-small" style="border-radius: 6px; background: #f1e9d6; display: grid; place-items: center"><div style="width: 72%; aspect-ratio: 16 / 10; border-radius: 8px; background: #ffffff; display: grid; place-items: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); font-size: 12px; color: #8a8a8a; letter-spacing: 0.06em; text-transform: uppercase">Article</div></div>
-        </div>
-      </div>
-      <div class="th-meta" style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) auto; gap: 16px; font-size: 15px">
-        <span>Salesforce Help</span><span style="color: #6e6e6e">97% of people found their answer without filing a case.</span><span style="color: #6e6e6e">Read ↗</span>
-      </div>
-    </a>
-  </main>
+  
   </sc-if><sc-if value="{{partyOn}}" hint-placeholder-val="{{ false }}">
   <section class="th-wall" aria-label="After hours">
     <p class="th-wall-k">After hours</p>
@@ -346,8 +316,8 @@ sc-for, sc-if { display: contents; }
   
   <section id="about" aria-label="About" style="display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 64px; padding: 160px 150px 200px; padding-left: 150px; padding-bottom: 32px; padding-top: 32px">
     <div style="flex: 1 1 420px; max-width: 560px; display: flex; flex-direction: column; gap: 16px; width: 100%">
-      <h2 style="margin: 0; font-size: 32px; font-weight: 500; line-height: 1.3">Hi, I am Tin</h2>
-      <div style="display: flex; flex-direction: column; gap: 12px; line-height: 1.6"><p style="margin: 0; font-size: 16px">I'm a product designer with 9 years of experience, currently a Senior Product Designer at Microsoft AI. I studied industrial design, so I started out building physical products, and that habit of building and prototyping is still how I work every day.</p></div>
+      <h2 style="margin: 0; font-size: 32px; font-weight: 500; line-height: 1.3">Lets collaborate together!</h2>
+      <div style="display: flex; flex-direction: column; gap: 12px; line-height: 1.6"><p style="margin: 0; font-size: 16px">I'm a product designer with 9 years of experience, currently a Senior Product Designer at Microsoft AI, teaching next generation of designers, previously at Salesforce. I studied industrial design, so I started out building physical products, and that habit of building and prototyping is still how I work every day.</p></div>
     </div>
     
   </section>
@@ -423,7 +393,7 @@ sc-for, sc-if { display: contents; }
 </div></div></div></div>
       <div class="bd-hang" aria-hidden="true" style="--t: -2.5deg; --drop: 140px; --dl: -1.8s; --pin: 12px"><span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span><div class="bd-swing"><span class="bd-clip" aria-hidden="true"></span><div class="bd-card {{bdFlip7Class}}" role="button" tabindex="-1" aria-pressed="{{bdFlip7On}}" aria-label="University of Oregon · BS Industrial Design badge, flip for details" onClick="{{bdFlip7}}" onKeyDown="{{bdKey7}}"><div class="bd-face bd-front bx-face" style="padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px; width: 300px; display: flex; flex-direction: column; gap: 0px">
   <div class="bd-top"><span>2014 — 2018</span><span>BUSINESS MINOR</span></div>
-  <div class="bd-photo" style="background-color: #d5ecff; height: 260px"><img src="/_blob/4eac407aac52c547e08dbd5a341e2432" alt="Tin at his University of Oregon graduation" style="width: 100%; height: 100%; object-fit: cover; object-position: 42% 30%"></div>
+  <div class="bd-photo" style="background-color: #d5ecff; height: 260px"><img src="/_blob/54416d11bdc955c9c7fb45c9c479a828" alt="Tin with friends at University of Oregon graduation" style="width: 100%; height: 100%; object-fit: cover; object-position: 0% 40%"></div>
   <div style="box-sizing: border-box; display: flex; flex-direction: row; gap: 12px; align-items: center"><div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 2px; width: 100%; height: 75px"><p class="bd-name" style="font-weight: 400; font-size: 16px">BS Industrial Design</p><p class="bd-role" style="font-weight: 400; font-size: 14px">University of Oregon</p></div><div style="box-sizing: border-box; display: grid; place-items: center; border-radius: 8px; width: 80px; height: 52px"><img src="/_blob/00e0e1ec841a28c4e0055e4a6738e6b1" alt="University of Oregon" style="display: block; width: 46%; height: auto"></div></div>
   <div class="bd-foot"><span style="color: #6e6e6e">VIEW PROFILE</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
 </div><div class="bd-face bd-back bx-face" style="width: 300px; padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px">
@@ -500,7 +470,7 @@ sc-for, sc-if { display: contents; }
 </div></div></div></div>
       <div class="bd-hang" style="--t: -2.5deg; --drop: 140px; --dl: -1.8s; --pin: 12px"><span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span><div class="bd-swing"><span class="bd-clip" aria-hidden="true"></span><div class="bd-card {{bdFlip7Class}}" role="button" tabindex="0" aria-pressed="{{bdFlip7On}}" aria-label="University of Oregon · BS Industrial Design badge, flip for details" onClick="{{bdFlip7}}" onKeyDown="{{bdKey7}}"><div class="bd-face bd-front bx-face" style="padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px; width: 300px; display: flex; flex-direction: column; gap: 0px">
   <div class="bd-top"><span>2014 — 2018</span><span>BUSINESS MINOR</span></div>
-  <div class="bd-photo" style="background-color: #d5ecff; height: 260px"><img src="/_blob/4eac407aac52c547e08dbd5a341e2432" alt="Tin at his University of Oregon graduation" style="width: 100%; height: 100%; object-fit: cover; object-position: 42% 30%"></div>
+  <div class="bd-photo" style="background-color: #d5ecff; height: 260px"><img src="/_blob/54416d11bdc955c9c7fb45c9c479a828" alt="Tin with friends at University of Oregon graduation" style="width: 100%; height: 100%; object-fit: cover; object-position: 0% 40%"></div>
   <div style="box-sizing: border-box; display: flex; flex-direction: row; gap: 12px; align-items: center"><div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 2px; width: 100%; height: 75px"><p class="bd-name" style="font-weight: 400; font-size: 16px">BS Industrial Design</p><p class="bd-role" style="font-weight: 400; font-size: 14px">University of Oregon</p></div><div style="box-sizing: border-box; display: grid; place-items: center; border-radius: 8px; width: 80px; height: 52px"><img src="/_blob/00e0e1ec841a28c4e0055e4a6738e6b1" alt="University of Oregon" style="display: block; width: 46%; height: auto"></div></div>
   <div class="bd-foot"><span style="color: #6e6e6e">VIEW PROFILE</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
 </div><div class="bd-face bd-back bx-face" style="width: 300px; padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px">
@@ -577,7 +547,7 @@ sc-for, sc-if { display: contents; }
 </div></div></div></div>
       <div class="bd-hang" aria-hidden="true" style="--t: -2.5deg; --drop: 140px; --dl: -1.8s; --pin: 12px"><span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span><div class="bd-swing"><span class="bd-clip" aria-hidden="true"></span><div class="bd-card {{bdFlip7Class}}" role="button" tabindex="-1" aria-pressed="{{bdFlip7On}}" aria-label="University of Oregon · BS Industrial Design badge, flip for details" onClick="{{bdFlip7}}" onKeyDown="{{bdKey7}}"><div class="bd-face bd-front bx-face" style="padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px; width: 300px; display: flex; flex-direction: column; gap: 0px">
   <div class="bd-top"><span>2014 — 2018</span><span>BUSINESS MINOR</span></div>
-  <div class="bd-photo" style="background-color: #d5ecff; height: 260px"><img src="/_blob/4eac407aac52c547e08dbd5a341e2432" alt="Tin at his University of Oregon graduation" style="width: 100%; height: 100%; object-fit: cover; object-position: 42% 30%"></div>
+  <div class="bd-photo" style="background-color: #d5ecff; height: 260px"><img src="/_blob/54416d11bdc955c9c7fb45c9c479a828" alt="Tin with friends at University of Oregon graduation" style="width: 100%; height: 100%; object-fit: cover; object-position: 0% 40%"></div>
   <div style="box-sizing: border-box; display: flex; flex-direction: row; gap: 12px; align-items: center"><div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 2px; width: 100%; height: 75px"><p class="bd-name" style="font-weight: 400; font-size: 16px">BS Industrial Design</p><p class="bd-role" style="font-weight: 400; font-size: 14px">University of Oregon</p></div><div style="box-sizing: border-box; display: grid; place-items: center; border-radius: 8px; width: 80px; height: 52px"><img src="/_blob/00e0e1ec841a28c4e0055e4a6738e6b1" alt="University of Oregon" style="display: block; width: 46%; height: auto"></div></div>
   <div class="bd-foot"><span style="color: #6e6e6e">VIEW PROFILE</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
 </div><div class="bd-face bd-back bx-face" style="width: 300px; padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px">
@@ -1145,7 +1115,7 @@ class Component extends DCLogic {
       headClass: { 'On scroll': 'hf-scroll', 'Always': 'hf-always', 'Off': 'hf-off' }[this.props.headerFade ?? 'On scroll'] || 'hf-scroll',
       gradClass: this.props.heroGlow === false || !this.state.grad ? '' : 'grad-' + this.state.grad,
       introOn: this.state.intro === 'run', introClass: this.state.intro === 'run' ? 'intro-run' : '',
-      copyLabel: this.state.copied ? 'Email copied' : 'Email',
+      copyLabel: this.state.copied ? 'Email copied' : 'Email', sayHiLabel: this.state.copied ? 'Email copied' : 'Say hi',
       copy: () => { try { navigator.clipboard && navigator.clipboard.writeText('tinbacme@gmail.com'); } catch (e) {} this.setState({ copied: true }); clearTimeout(this.t2); this.t2 = setTimeout(() => this.setState({ copied: false }), 1600); },
     };
   }
