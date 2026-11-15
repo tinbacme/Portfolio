@@ -159,95 +159,112 @@ sc-for, sc-if { display: contents; }
 .v5-back .v5-k{color:#0176d3;opacity:1}
 .v5-desc{margin:12px 0 0;font-size:18px;line-height:1.5}
 .v5-back .v5-chip{margin-top:auto;align-self:flex-start;background:#eaf5fe;border-color:#cfe6fb;color:#0176d3}
+
+.bd-foot > span:first-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;margin-right:12px}
+/* V3 in color, not black and white */
+.v3-in{background:linear-gradient(165deg,#e8f6ff 0%,#f1ebff 55%,#fff3dd 100%) !important;color:#14213d !important}
+.v3-top{color:#56648a !important}.v3-top span:last-child{color:#d94fb5 !important}
+.v3-photo{background:linear-gradient(#bfe7ff,#7cc8ff) !important}
+.v3-photo img{filter:none !important}
+.v3-type{color:#56648a !important}
+.v3-stats div{background:rgba(255,255,255,.75) !important;box-shadow:0 1px 0 rgba(255,255,255,.9) inset,0 2px 6px rgba(20,33,61,.06)}
+.v3-stats div:nth-child(1) b{color:#0176d3}.v3-stats div:nth-child(2) b{color:#d94fb5}.v3-stats div:nth-child(3) b{color:#2a9d63}
+.v3-stats span{color:#56648a !important}
+.v3-k{color:#0176d3 !important}
+.v3-desc{font-size:14.5px !important;line-height:1.45 !important}
+.v3-chips span{padding:4px 9px !important;font-size:11px !important}
+.v3-chips span{border:0 !important;font-weight:500}
+.v3-chips span:nth-child(4n+1){background:#dff1ff;color:#0176d3}.v3-chips span:nth-child(4n+2){background:#fde3f4;color:#b83a93}
+.v3-chips span:nth-child(4n+3){background:#dcf5e7;color:#227a4d}.v3-chips span:nth-child(4n+4){background:#fff0cc;color:#a06a00}
 </style>
 </helmet>
 <section class="bv" style="--desk: {{desk}}; --panel: {{panel}}">
   <h1>Badge variations</h1>
   <p class="bv-sub">The Salesforce badge from the experience string, front and back. Original first, then five directions to design from.</p>
-  <div class="bv-grid"><div class="bv-pair"><p class="bv-label">Original &middot; current badge</p><div class="bv-sides row"><div class="bv-side">
+  <div class="bv-grid"><div class="bv-pair"><p class="bv-label">Original · current badge</p><div class="bv-sides row"><div class="bv-side">
 <div class="hang"><span class="thread"></span><span class="bd-clip"></span>
-<div class="bd-face o-card">
-  <div class="bd-top"><span>Experience &middot; Before</span><span>#03</span></div>
-  <div class="bd-photo" style="background-color: #d5ecff"><img src="/_blob/078fce442a609c4bff7139218f2023a2" alt="Drawing of Tin posting a letter"><span class="bd-logo"><img src="/_blob/ac43d25c19be4e522f4bd492e1c090ab" alt="Salesforce" width="22" height="16" style="display: block; object-fit: contain"></span></div>
+<div class="bd-face o-card" style="position: relative">
+  <div class="bd-top"><span>5 YRS</span></div>
+  <div class="bd-photo" style="background-color: #d5ecff"><img src="/_blob/078fce442a609c4bff7139218f2023a2" alt="Drawing of Tin posting a letter"></div>
   <p class="bd-name">Salesforce</p><p class="bd-role">Product Designer</p>
-  <div class="bd-foot"><span>2017 &mdash; 2022 &middot; 5 yrs</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-</div></div><p class="bv-cap">Front</p></div><div class="bv-side">
+  <div class="bd-foot"><span>EXPERIENCE</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+<div style="box-sizing: border-box; display: grid; place-items: center; width: 120px; height: 120px; background-color: #ffffff; border-radius: 8px; position: absolute; left: 207px; top: 313px; width: 48px; height: 53px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08)"><img src="/_blob/ac43d25c19be4e522f4bd492e1c090ab" alt="Salesforce" style="display: block; width: 72%; height: auto"></div></div></div><p class="bv-cap">Front</p></div><div class="bv-side">
 <div class="bd-face o-card o-back">
-  <div class="bd-top"><span>Experience &middot; Before</span><span>#03</span></div>
-  <p class="bd-bk">What I did there</p>
-  <p class="bd-desc">Enterprise tools and the design system behind them. I redesigned Salesforce Help so people could find answers on their own, reworked Manage Users to cut support cases, and built a back-to-work app for 75K employees.</p>
+  <div class="bd-top"><span>Product Designer At Salesforce</span></div>
+  
+  <p class="bd-desc">Three roles in five years. I redesigned search and content for Salesforce Help (support cases down 60% a month), built a back-to-work app for 75K employees, shipped 8+ Partner Community features, and added components to the C360 design system across 12 product teams.</p>
   <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-</div><p class="bv-cap">Back</p></div></div></div><div class="bv-pair"><p class="bv-label">V1 &middot; Lanyard ID</p><div class="bv-sides row"><div class="bv-side">
+</div><p class="bv-cap">Back</p></div></div></div><div class="bv-pair"><p class="bv-label">V1 · Lanyard ID</p><div class="bv-sides row"><div class="bv-side">
 <div class="hang"><span class="v1-strap"></span>
 <div class="v1">
   <div class="v1-band"><span class="v1-slot"></span><div class="v1-brand"><img src="/_blob/ac43d25c19be4e522f4bd492e1c090ab" alt="Salesforce" width="22" height="16" style="display: block; object-fit: contain"><span>Salesforce</span></div></div>
   <div class="v1-photo"><img src="/_blob/078fce442a609c4bff7139218f2023a2" alt="Drawing of Tin posting a letter"></div>
   <p class="v1-name">Tin Le</p><p class="v1-role">Product Designer</p>
   <div class="v1-meta"><div><span>From</span><b>2017</b></div><div><span>To</span><b>2022</b></div><div><span>Tenure</span><b>5 yrs</b></div></div>
-  <div class="v1-barcode"></div><p class="v1-id">ID 03 &middot; Experience</p>
+  <div class="v1-barcode"></div><p class="v1-id">ID 03 · Experience</p>
 </div></div><p class="bv-cap">Front</p></div><div class="bv-side">
 <div class="v1">
   <div class="v1-band"><span class="v1-slot"></span><div class="v1-brand"><img src="/_blob/ac43d25c19be4e522f4bd492e1c090ab" alt="Salesforce" width="22" height="16" style="display: block; object-fit: contain"><span>Salesforce</span></div></div>
   <div class="v1-body">
     <p class="v1-k">What I did there</p>
-    <p class="v1-desc">Enterprise tools and the design system behind them. I redesigned Salesforce Help so people could find answers on their own, reworked Manage Users to cut support cases, and built a back-to-work app for 75K employees.</p>
+    <p class="v1-desc">Three roles in five years. I redesigned search and content for Salesforce Help (support cases down 60% a month), built a back-to-work app for 75K employees, shipped 8+ Partner Community features, and added components to the C360 design system across 12 product teams.</p>
     <p class="v1-fine">If found, please return to Tin Le.</p>
     <p class="v1-sign">Tin Le</p>
   </div>
-</div><p class="bv-cap">Back</p></div></div></div><div class="bv-pair"><p class="bv-label">V2 &middot; Polaroid</p><div class="bv-sides row"><div class="bv-side">
+</div><p class="bv-cap">Back</p></div></div></div><div class="bv-pair"><p class="bv-label">V2 · Polaroid</p><div class="bv-sides row"><div class="bv-side">
 <div class="hang"><span class="thread"></span><span class="v2-pin"></span>
 <div class="v2">
   <div class="v2-photo"><img src="/_blob/078fce442a609c4bff7139218f2023a2" alt="Drawing of Tin posting a letter"></div>
-  <p class="v2-cap">Salesforce, 2017&ndash;22</p>
-  <p class="v2-sub">Product Designer &middot; 5 yrs</p>
+  <p class="v2-cap">Salesforce, 2017–22</p>
+  <p class="v2-sub">Product Designer · 5 yrs</p>
 </div></div><p class="bv-cap">Front</p></div><div class="bv-side">
 <div class="v2 v2-back">
   <span class="v2-tape"></span>
-  <p class="v2-hand">Enterprise tools and the design system behind them. I redesigned Salesforce Help so people could find answers on their own, reworked Manage Users to cut support cases, and built a back-to-work app for 75K employees.</p>
-  <div class="v2-stamp"><span>five</span><b>years</b><span>2017&ndash;22</span></div>
-</div><p class="bv-cap">Back</p></div></div></div><div class="bv-pair"><p class="bv-label">V3 &middot; Trading card</p><div class="bv-sides row"><div class="bv-side">
+  <p class="v2-hand">Three roles in five years. I redesigned search and content for Salesforce Help (support cases down 60% a month), built a back-to-work app for 75K employees, shipped 8+ Partner Community features, and added components to the C360 design system across 12 product teams.</p>
+  <div class="v2-stamp"><span>five</span><b>years</b><span>2017–22</span></div>
+</div><p class="bv-cap">Back</p></div></div></div><div class="bv-pair"><p class="bv-label">V3 · Trading card</p><div class="bv-sides row"><div class="bv-side">
 <div class="hang"><span class="thread"></span><span class="v3-ring"></span>
 <div class="v3"><div class="v3-in">
-  <div class="v3-top"><span>#03 &middot; Before</span><span>&#9733; Rare</span></div>
+  <div class="v3-top"><span>#03 · Before</span><span>★ Rare</span></div>
   <div class="v3-photo"><img src="/_blob/078fce442a609c4bff7139218f2023a2" alt="Drawing of Tin posting a letter"><span class="v3-logo"><img src="/_blob/ac43d25c19be4e522f4bd492e1c090ab" alt="Salesforce" width="22" height="16" style="display: block; object-fit: contain"></span></div>
   <p class="v3-name">Salesforce</p><p class="v3-type">Product Designer</p>
   <div class="v3-stats"><div><b>5</b><span>Years</span></div><div><b>2017</b><span>From</span></div><div><b>2022</b><span>To</span></div></div>
 </div></div></div><p class="bv-cap">Front</p></div><div class="bv-side">
 <div class="v3"><div class="v3-in v3-back">
-  <div class="v3-top"><span>#03 &middot; Before</span><span>&#9733; Rare</span></div>
+  <div class="v3-top"><span>#03 · Before</span><span>★ Rare</span></div>
   <p class="v3-k">Abilities</p>
-  <p class="v3-desc">Enterprise tools and the design system behind them. I redesigned Salesforce Help so people could find answers on their own, reworked Manage Users to cut support cases, and built a back-to-work app for 75K employees.</p>
+  <p class="v3-desc">Three roles in five years. I redesigned search and content for Salesforce Help (support cases down 60% a month), built a back-to-work app for 75K employees, shipped 8+ Partner Community features, and added components to the C360 design system across 12 product teams.</p>
   <div class="v3-chips"><span>Design system</span><span>Salesforce Help</span><span>Manage Users</span><span>Back-to-work app</span></div>
-</div></div><p class="bv-cap">Back</p></div></div></div><div class="bv-pair"><p class="bv-label">V4 &middot; Boarding pass</p><div class="bv-sides col"><div class="bv-side">
+</div></div><p class="bv-cap">Back</p></div></div></div><div class="bv-pair"><p class="bv-label">V4 · Boarding pass</p><div class="bv-sides col"><div class="bv-side">
 <div class="hang"><span class="thread"></span>
 <div class="v4">
   <div class="v4-main">
-    <div class="v4-head"><span class="v4-brand"><img src="/_blob/ac43d25c19be4e522f4bd492e1c090ab" alt="Salesforce" width="22" height="16" style="display: block; object-fit: contain">Salesforce</span><span>Boarding pass &middot; Experience</span></div>
-    <div class="v4-route"><div><span>From</span><b>2017</b></div><span class="v4-plane">&#9992;</span><div><span>To</span><b>2022</b></div></div>
-    <div class="v4-fields"><div><span>Passenger</span><b>Tin Le</b></div><div><span>Seat</span><b>Product Designer</b></div><div><span>Flight</span><b>SF&middot;03</b></div><div><span>Duration</span><b>5 yrs</b></div></div>
+    <div class="v4-head"><span class="v4-brand"><img src="/_blob/ac43d25c19be4e522f4bd492e1c090ab" alt="Salesforce" width="22" height="16" style="display: block; object-fit: contain">Salesforce</span><span>Boarding pass · Experience</span></div>
+    <div class="v4-route"><div><span>From</span><b>2017</b></div><span class="v4-plane">✈</span><div><span>To</span><b>2022</b></div></div>
+    <div class="v4-fields"><div><span>Passenger</span><b>Tin Le</b></div><div><span>Seat</span><b>Product Designer</b></div><div><span>Flight</span><b>SF·03</b></div><div><span>Duration</span><b>5 yrs</b></div></div>
   </div>
   <div class="v4-stub"><img src="/_blob/078fce442a609c4bff7139218f2023a2" alt="Drawing of Tin posting a letter"><div class="v4-code"></div></div>
 </div></div><p class="bv-cap">Front</p></div><div class="bv-side">
 <div class="v4 v4-back">
   <div class="v4-main">
     <div class="v4-head"><span class="v4-brand"><img src="/_blob/ac43d25c19be4e522f4bd492e1c090ab" alt="Salesforce" width="22" height="16" style="display: block; object-fit: contain">Salesforce</span><span>Itinerary notes</span></div>
-    <p class="v4-desc">Enterprise tools and the design system behind them. I redesigned Salesforce Help so people could find answers on their own, reworked Manage Users to cut support cases, and built a back-to-work app for 75K employees.</p>
-    <p class="v4-stops"><span>Stops</span> Design system &middot; Salesforce Help &middot; Manage Users &middot; Back-to-work app</p>
+    <p class="v4-desc">Three roles in five years. I redesigned search and content for Salesforce Help (support cases down 60% a month), built a back-to-work app for 75K employees, shipped 8+ Partner Community features, and added components to the C360 design system across 12 product teams.</p>
+    <p class="v4-stops"><span>Stops</span> Design system · Salesforce Help · Manage Users · Back-to-work app</p>
   </div>
   <div class="v4-stub"><p class="v4-gate">Gate<br><b>03</b></p><div class="v4-code"></div></div>
-</div><p class="bv-cap">Back</p></div></div></div><div class="bv-pair"><p class="bv-label">V5 &middot; Brand pop-out</p><div class="bv-sides row"><div class="bv-side">
+</div><p class="bv-cap">Back</p></div></div></div><div class="bv-pair"><p class="bv-label">V5 · Brand pop-out</p><div class="bv-sides row"><div class="bv-side">
 <div class="hang">
 <div class="v5">
   <img class="v5-pop" src="/_blob/078fce442a609c4bff7139218f2023a2" alt="Drawing of Tin posting a letter">
   <span class="v5-mark"><img src="/_blob/ac43d25c19be4e522f4bd492e1c090ab" alt=""></span>
-  <p class="v5-k">Experience &middot; #03</p>
+  <p class="v5-k">Experience · #03</p>
   <p class="v5-name">Salesforce</p><p class="v5-role">Product Designer</p>
-  <div class="v5-chip">2017 &mdash; 2022 &middot; 5 yrs</div>
+  <div class="v5-chip">2017 — 2022 · 5 yrs</div>
 </div></div><p class="bv-cap">Front</p></div><div class="bv-side">
 <div class="v5 v5-back">
   <p class="v5-k">What I did there</p>
-  <p class="v5-desc">Enterprise tools and the design system behind them. I redesigned Salesforce Help so people could find answers on their own, reworked Manage Users to cut support cases, and built a back-to-work app for 75K employees.</p>
-  <div class="v5-chip">Salesforce &middot; 5 yrs</div>
+  <p class="v5-desc">Three roles in five years. I redesigned search and content for Salesforce Help (support cases down 60% a month), built a back-to-work app for 75K employees, shipped 8+ Partner Community features, and added components to the C360 design system across 12 product teams.</p>
+  <div class="v5-chip">Salesforce · 5 yrs</div>
 </div><p class="bv-cap">Back</p></div></div></div></div>
 </section>
 </x-dc>
