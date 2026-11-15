@@ -240,6 +240,21 @@ sc-for, sc-if { display: contents; }
 .bd-nav-l{left:40px}.bd-nav-r{right:40px}
 .party .bd-nav{background:#f4f1ea;color:#0d0c12}
 @media (prefers-reduced-motion: reduce){.bd-track{transition:none !important}.bd-moving .bd-swing{animation:none !important}}
+
+/* carousel cards in the Box (3) design */
+.bx-face.bd-back{display:flex;flex-direction:column}
+.bx-face.bd-back .bd-foot{margin-top:auto}
+.bx-face .bd-photo{flex:none}
+.bx-face .bd-name{margin:14px 4px 0}
+.bx-face .bd-foot > span:first-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;margin-right:12px}
+.party .bx-face [style*="color: #6e6e6e"]{color:#6e6e6e !important}
+
+/* ends: blur + arrow show only while hovering that side */
+.bd-car .bd-edge,.bd-car .bd-nav{opacity:0;transition:opacity .35s ease}
+.bd-car .bd-edge{pointer-events:auto}
+.bd-car:has(.bd-edge-l:hover) .bd-edge-l,.bd-car:has(.bd-edge-l:hover) .bd-nav-l,.bd-car:has(.bd-nav-l:hover) .bd-edge-l,.bd-car:has(.bd-nav-l:hover) .bd-nav-l,.bd-car:has(.bd-nav-l:focus-visible) .bd-edge-l,.bd-car:has(.bd-nav-l:focus-visible) .bd-nav-l{opacity:1}
+.bd-car:has(.bd-edge-r:hover) .bd-edge-r,.bd-car:has(.bd-edge-r:hover) .bd-nav-r,.bd-car:has(.bd-nav-r:hover) .bd-edge-r,.bd-car:has(.bd-nav-r:hover) .bd-nav-r,.bd-car:has(.bd-nav-r:focus-visible) .bd-edge-r,.bd-car:has(.bd-nav-r:focus-visible) .bd-nav-r{opacity:1}
+@media (hover: none){.bd-car .bd-edge,.bd-car .bd-nav{opacity:1}.bd-car .bd-edge{pointer-events:none}}
 </style>
 </helmet>
 <div class="th-root {{introClass}} {{gradClass}} {{partyClass}}" style="position: relative; isolation: isolate; background: #f5f5f5; color: #141414; font-family: 'Be Vietnam Pro', system-ui, sans-serif; font-size: 16px; line-height: 1.4; min-height: 100%">
@@ -324,538 +339,250 @@ sc-for, sc-if { display: contents; }
   </sc-if>
 
   
-  <section id="about" aria-label="About" style="display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 64px; padding: 160px 150px 200px">
+  <section id="about" aria-label="About" style="display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 64px; padding: 160px 150px 200px; padding-left: 150px; padding-bottom: 32px; padding-top: 32px">
     <div style="flex: 1 1 420px; max-width: 560px; display: flex; flex-direction: column; gap: 16px; width: 100%">
       <h2 style="margin: 0; font-size: 32px; font-weight: 500; line-height: 1.3">Hi, I am Tin</h2>
-      <div style="display: flex; flex-direction: column; gap: 12px; line-height: 1.6"><p style="margin: 0; font-size: 16px">I'm a product designer with 9 years of experience, currently a Senior Product Designer at Microsoft AI. I studied industrial design, so I started out building physical products, and that habit of building and prototyping is still how I work every day.</p><p style="margin: 0; font-size: 16px">At Salesforce and Microsoft, I've designed everything from enterprise tools and design systems to search across Bing, Edge and Windows. Today that means helping people find what they need, growing Bing, and exploring what AI agents could do in search, always with a little delight and an easter egg or two.</p><p style="margin: 0; font-size: 16px">I also teach UX/UI at the University of Oregon. Outside of work, I love to travel, especially back home to Southeast Asia.</p></div>
+      <div style="display: flex; flex-direction: column; gap: 12px; line-height: 1.6"><p style="margin: 0; font-size: 16px">I'm a product designer with 9 years of experience, currently a Senior Product Designer at Microsoft AI. I studied industrial design, so I started out building physical products, and that habit of building and prototyping is still how I work every day.</p></div>
     </div>
-    <div class="ab-board {{liftClass}} {{holdClass}}" style="box-sizing: border-box; position: relative; flex: none; width: 605px; height: 431px; overflow: visible; border-radius: 32px; background-color: {{boardColor}}; --turn: {{turn}}; --dir: {{dir}}; --radius: {{radiusPx}}; --persp: {{perspPx}}; --float: {{floatPx}}; --tilt: {{tiltDeg}}; --play: {{playState}}">
-      <div class="ab-stage">
-        <div class="ab-slot" style="--a: 0deg; --y: -100px;"><div class="ab-face"><div class="ab-item" style="width: 165px; height: 192px; margin: -96px 0 0 -82px; border-radius: 8px; background-color: #b6b0a7; --r: 1; --d: 3.2s; --delay: -0.4s; overflow: hidden;"><img src="/_blob/da160242c64c297a138460aca71fda7e" alt="Plant leaves in sunlight" style="display: block; width: 100%; height: 100%; object-fit: cover;"></div></div></div>
-        <div class="ab-slot" style="--a: 45deg; --y: 70px;"><div class="ab-face"><div class="ab-item" style="width: 120px; height: 120px; margin: -60px 0 0 -60px; border-radius: 2px; background-color: #ec6526; --r: -1.4; --d: 3.8s; --delay: -1.6s; overflow: hidden;"><img src="/_blob/c64573ac38f1a52f639acbd6f13d6637" alt="Matcha bowl and whisk" style="display: block; width: 100%; height: 100%; object-fit: cover;"></div></div></div>
-        <div class="ab-slot" style="--a: 90deg; --y: -40px;"><div class="ab-face"><div class="ab-item" style="width: 165px; height: 192px; margin: -96px 0 0 -82px; border-radius: 8px; background-color: #b6b0a7; --r: -0.8; --d: 4.1s; --delay: -2.2s; overflow: hidden;"><img src="/_blob/81ebdd55c5cfbf822db09d0ea5979994" alt="Silk lanterns on a yellow wall" style="display: block; width: 100%; height: 100%; object-fit: cover;"></div></div></div>
-        <div class="ab-slot" style="--a: 135deg; --y: 115px;"><div class="ab-face"><div class="ab-item" style="width: 113px; height: 131px; margin: -65px 0 0 -56px; border-radius: 8px; background-color: #b6b0a7; --r: 1.2; --d: 3.5s; --delay: -0.9s; overflow: hidden;"><img src="/_blob/17db6e2bb7b0e2021c26e1ecc3bda47f" alt="Product sketches in a sketchbook" style="display: block; width: 100%; height: 100%; object-fit: cover;"></div></div></div>
-        <div class="ab-slot" style="--a: 180deg; --y: -120px;"><div class="ab-face"><div class="ab-item" style="width: 138px; height: 160px; margin: -80px 0 0 -69px; border-radius: 8px; background-color: #b6b0a7; --r: 0.6; --d: 4.4s; --delay: -3.1s; overflow: hidden;"><img src="/_blob/b5356d519834afcefbc6a6d64e6511d6" alt="Orange poppy against blue sky" style="display: block; width: 100%; height: 100%; object-fit: cover;"></div></div></div>
-        <div class="ab-slot" style="--a: 225deg; --y: 30px;"><div class="ab-face"><div class="ab-item" style="width: 110px; height: 130px; margin: -65px 0 0 -55px; border-radius: 2px; background-color: #3e6ee0; --r: -1; --d: 3.6s; --delay: -2.7s; overflow: hidden;"><img src="/_blob/493d7640386543da1bdedbc47e54eb3c" alt="Puppy in a party hat" style="display: block; width: 100%; height: 100%; object-fit: cover;"></div></div></div>
-        <div class="ab-slot" style="--a: 270deg; --y: 105px;"><div class="ab-face"><div class="ab-item" style="width: 113px; height: 131px; margin: -65px 0 0 -56px; border-radius: 8px; background-color: #b6b0a7; --r: 0.9; --d: 3.9s; --delay: -1.2s; overflow: hidden;"><img src="/_blob/9d447d5db4b8c8dd6afc9b5b38a4e43a" alt="Red and green paint strokes" style="display: block; width: 100%; height: 100%; object-fit: cover;"></div></div></div>
-        <div class="ab-slot" style="--a: 315deg; --y: -60px;"><div class="ab-face"><div class="ab-item" style="width: 113px; height: 131px; margin: -65px 0 0 -56px; border-radius: 8px; background-color: #b6b0a7; --r: -0.7; --d: 4.2s; --delay: -3.6s; overflow: hidden;"><img src="/_blob/c987b1a2bfa77858ecd7e812aefcfdd5" alt="Teacup in window light" style="display: block; width: 100%; height: 100%; object-fit: cover;"></div></div></div>
-      </div>
-      <button class="ab-toggle" type="button" aria-label="{{toggleLabel}}" onClick="{{toggle}}" style="position: absolute; right: 16px; bottom: 16px; z-index: 6; width: 44px; height: 44px; border-radius: 50%; border: 2px solid {{toggleInk}}; background: transparent; color: {{toggleInk}}; display: flex; align-items: center; justify-content: center; padding: 0; cursor: pointer;">
-        <sc-if value="{{isPlaying}}" hint-placeholder-val="{{ true }}"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3" y="2" width="3.5" height="12" rx="1"></rect><rect x="9.5" y="2" width="3.5" height="12" rx="1"></rect></svg></sc-if>
-        <sc-if value="{{isPaused}}" hint-placeholder-val="{{ false }}"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2.5v11a1 1 0 0 0 1.5.86l9-5.5a1 1 0 0 0 0-1.72l-9-5.5A1 1 0 0 0 4 2.5z"></path></svg></sc-if>
-      </button>
-    </div>
+    
   </section>
 
   <section class="bd-wrap bd-car {{bdSwayClass}}" onPointerEnter="{{bdHold}}" onPointerLeave="{{bdFree}}" onFocus="{{bdHold}}" onBlur="{{bdFree}}" aria-label="Experience" style="--bw: {{bdWidth}}; --br: {{bdRadius}}; --bc: {{bdColor}}; --pr: {{bdPhotoRadius}}; --tk: {{bdTilt}}; --flip: {{bdFlipMs}}; --wire: {{bdWire}}; --gap: {{bdGap}}; --edge: {{bdEdge}}; --eb: {{bdEdgeBlur}}">
     <svg class="bd-wire" viewBox="0 0 1000 {{bdWireH}}" preserveAspectRatio="none" aria-hidden="true" style="height: {{bdWireHpx}}"><path d="{{bdWirePath}}" fill="none" vector-effect="non-scaling-stroke"></path></svg>
     <div class="bd-viewport"><div class="bd-track" ref="{{bdTrackRef}}" onPointerOver="{{bdPoke}}">
-      <div class="bd-hang" aria-hidden="true" style="--t: -4deg; --drop: 70px; --dl: -0.6s; --pin: 12px">
-        <span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span>
-        <div class="bd-swing">
-          <span class="bd-clip" aria-hidden="true"></span>
-          <div class="bd-card {{bdFlip1Class}}" role="button" tabindex="-1" aria-pressed="{{bdFlip1On}}" aria-label="Microsoft AI, Senior Product Designer badge, flip for details" onClick="{{bdFlip1}}" onKeyDown="{{bdKey1}}">
-            <div class="bd-face bd-front">
-              <div class="bd-top"><span>Experience &middot; Now</span><span>#01</span></div>
-              <div class="bd-photo" style="background-color: #dfe4ff"><img src="/_blob/55d0f1cf75dfba60d11a0da3fa86a800" alt="Drawing of Tin waving"><span class="bd-logo"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><rect x="0" y="0" width="9" height="9" fill="#f25022"></rect><rect x="11" y="0" width="9" height="9" fill="#7fba00"></rect><rect x="0" y="11" width="9" height="9" fill="#00a4ef"></rect><rect x="11" y="11" width="9" height="9" fill="#ffb900"></rect></svg></span></div>
-              <p class="bd-name">Microsoft AI</p>
-              <p class="bd-role">Senior Product Designer</p>
-              <div class="bd-foot"><span>2022 &mdash; now &middot; 4 yrs</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-            <div class="bd-face bd-back">
-              <div class="bd-top"><span>Experience &middot; Now</span><span>#01</span></div>
-              <p class="bd-bk">What I do there</p>
-              <p class="bd-desc">Search across Bing, Edge and Windows. Today that means helping people find what they need, growing Bing, and exploring what AI agents could do in search.</p>
-              <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="bd-hang" aria-hidden="true" style="--t: 2.5deg; --drop: 150px; --dl: -2.1s; --pin: 12px">
-        <span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span>
-        <div class="bd-swing">
-          <span class="bd-clip" aria-hidden="true"></span>
-          <div class="bd-card {{bdFlip2Class}}" role="button" tabindex="-1" aria-pressed="{{bdFlip2On}}" aria-label="University of Oregon, Product Design Instructor badge, flip for details" onClick="{{bdFlip2}}" onKeyDown="{{bdKey2}}">
-            <div class="bd-face bd-front">
-              <div class="bd-top"><span>Teaching &middot; Now</span><span>#02</span></div>
-              <div class="bd-photo" style="background-color: #ffe68a"><img src="/_blob/437cda50f9facda7f79bbec6d67439aa" alt="Drawing of Tin in sunglasses"><span class="bd-logo"><img src="/_blob/00e0e1ec841a28c4e0055e4a6738e6b1" alt="" width="18" height="18" style="display: block; object-fit: contain"></span></div>
-              <p class="bd-name">University of Oregon</p>
-              <p class="bd-role">Product Design Instructor</p>
-              <div class="bd-foot"><span>2023 &mdash; now &middot; 3 yrs</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-            <div class="bd-face bd-back">
-              <div class="bd-top"><span>Teaching &middot; Now</span><span>#02</span></div>
-              <p class="bd-bk">What I teach</p>
-              <p class="bd-desc">UX and product design, at the same school where I studied industrial design. Students learn the way I still work: by building and prototyping.</p>
-              <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="bd-hang" aria-hidden="true" style="--t: -2deg; --drop: 100px; --dl: -3.4s; --pin: 12px">
-        <span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span>
-        <div class="bd-swing">
-          <span class="bd-clip" aria-hidden="true"></span>
-          <div class="bd-card {{bdFlip3Class}}" role="button" tabindex="-1" aria-pressed="{{bdFlip3On}}" aria-label="2U, UX/UI Bootcamp Instructor badge, flip for details" onClick="{{bdFlip3}}" onKeyDown="{{bdKey3}}">
-            <div class="bd-face bd-front">
-              <div class="bd-top"><span>Teaching</span><span>#03</span></div>
-              <div class="bd-photo" style="background-color: #ffd9cf"><img src="/_blob/e48b4cc08b5bd76952c6a06c33d07c65" alt="Drawing of Tin with his fist up"><span class="bd-logo"><span style="font: 700 13px/1 Be Vietnam Pro, system-ui, sans-serif; color: #141414">2U</span></span></div>
-              <p class="bd-name">2U</p>
-              <p class="bd-role">UX/UI Bootcamp Instructor</p>
-              <div class="bd-foot"><span>Since 2021 &middot; Remote</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-            <div class="bd-face bd-back">
-              <div class="bd-top"><span>Teaching</span><span>#03</span></div>
-              <p class="bd-bk">What I taught</p>
-              <p class="bd-desc">Led cohorts through a 24-week bootcamp in UX research, UX and UI design and front-end development, with the University of Oregon, UC Berkeley, Michigan, Minnesota, Utah and Arizona.</p>
-              <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="bd-hang" aria-hidden="true" style="--t: 3deg; --drop: 60px; --dl: -1.2s; --pin: 12px">
-        <span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span>
-        <div class="bd-swing">
-          <span class="bd-clip" aria-hidden="true"></span>
-          <div class="bd-card {{bdFlip4Class}}" role="button" tabindex="-1" aria-pressed="{{bdFlip4On}}" aria-label="Salesforce, Designer badge, flip for details" onClick="{{bdFlip4}}" onKeyDown="{{bdKey4}}">
-            <div class="bd-face bd-front">
-              <div class="bd-top"><span>Experience &middot; Before</span><span>#04</span></div>
-              <div class="bd-photo" style="background-color: #d5ecff"><img src="/_blob/078fce442a609c4bff7139218f2023a2" alt="Drawing of Tin posting a letter"><span class="bd-logo"><img src="/_blob/ac43d25c19be4e522f4bd492e1c090ab" alt="" width="22" height="16" style="display: block; object-fit: contain"></span></div>
-              <p class="bd-name">Salesforce</p>
-              <p class="bd-role">Designer</p>
-              <div class="bd-foot"><span>2020 &mdash; 2022 &middot; 2 yrs</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-            <div class="bd-face bd-back">
-              <div class="bd-top"><span>Experience &middot; Before</span><span>#04</span></div>
-              <p class="bd-bk">What I did there</p>
-              <p class="bd-desc">Redesigned search and content for Salesforce Help, cutting support cases 60% a month. Built a back-to-work app for 75K employees, shipped 8+ Partner Community features, and added components to the C360 design system across 12 product teams.</p>
-              <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="bd-hang" aria-hidden="true" style="--t: -3deg; --drop: 130px; --dl: -2.7s; --pin: 12px">
-        <span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span>
-        <div class="bd-swing">
-          <span class="bd-clip" aria-hidden="true"></span>
-          <div class="bd-card {{bdFlip5Class}}" role="button" tabindex="-1" aria-pressed="{{bdFlip5On}}" aria-label="Salesforce, Associate Designer badge, flip for details" onClick="{{bdFlip5}}" onKeyDown="{{bdKey5}}">
-            <div class="bd-face bd-front">
-              <div class="bd-top"><span>Experience &middot; Before</span><span>#05</span></div>
-              <div class="bd-photo" style="background-color: #e6f4ff"><img src="/_blob/b62d77f49157890da8c8fd946e594102" alt="Drawing of Tin"><span class="bd-logo"><img src="/_blob/ac43d25c19be4e522f4bd492e1c090ab" alt="" width="22" height="16" style="display: block; object-fit: contain"></span></div>
-              <p class="bd-name">Salesforce</p>
-              <p class="bd-role">Associate Designer</p>
-              <div class="bd-foot"><span>2018 &mdash; 2020 &middot; 1.5 yrs</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-            <div class="bd-face bd-back">
-              <div class="bd-top"><span>Experience &middot; Before</span><span>#05</span></div>
-              <p class="bd-bk">What I did there</p>
-              <p class="bd-desc">Worked with stakeholders to map customer experiences, find pain points and spot opportunities, then designed wireframe concepts with the Salesforce Lightning Design System.</p>
-              <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="bd-hang" aria-hidden="true" style="--t: 2deg; --drop: 90px; --dl: -4.0s; --pin: 12px">
-        <span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span>
-        <div class="bd-swing">
-          <span class="bd-clip" aria-hidden="true"></span>
-          <div class="bd-card {{bdFlip6Class}}" role="button" tabindex="-1" aria-pressed="{{bdFlip6On}}" aria-label="Salesforce, Summer UX Designer badge, flip for details" onClick="{{bdFlip6}}" onKeyDown="{{bdKey6}}">
-            <div class="bd-face bd-front">
-              <div class="bd-top"><span>Internship</span><span>#06</span></div>
-              <div class="bd-photo" style="background-color: #eaf0ff"><img src="/_blob/d94b44b66d55552c900a1934484677b4" alt="Drawing of Tin shaking hands"><span class="bd-logo"><img src="/_blob/ac43d25c19be4e522f4bd492e1c090ab" alt="" width="22" height="16" style="display: block; object-fit: contain"></span></div>
-              <p class="bd-name">Salesforce</p>
-              <p class="bd-role">Summer UX Designer</p>
-              <div class="bd-foot"><span>2017 &middot; Summer</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-            <div class="bd-face bd-back">
-              <div class="bd-top"><span>Internship</span><span>#06</span></div>
-              <p class="bd-bk">Where it started</p>
-              <p class="bd-desc">My first product design role, the summer before Salesforce hired me full time: onboarding improvements, and the branding for a Salesforce hackathon.</p>
-              <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="bd-hang" aria-hidden="true" style="--t: -2.5deg; --drop: 140px; --dl: -1.8s; --pin: 12px">
-        <span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span>
-        <div class="bd-swing">
-          <span class="bd-clip" aria-hidden="true"></span>
-          <div class="bd-card {{bdFlip7Class}}" role="button" tabindex="-1" aria-pressed="{{bdFlip7On}}" aria-label="Luxium Lighting, Product Designer badge, flip for details" onClick="{{bdFlip7}}" onKeyDown="{{bdKey7}}">
-            <div class="bd-face bd-front">
-              <div class="bd-top"><span>Industrial design</span><span>#07</span></div>
-              <div class="bd-photo" style="background-color: #dff3e4"><img src="/_blob/8330965c9d00ec6bc52f4f31b5e49472" alt="Drawing of Tin reaching into his jacket"><span class="bd-logo"><span style="font: 700 13px/1 Be Vietnam Pro, system-ui, sans-serif; color: #141414">L</span></span></div>
-              <p class="bd-name">Luxium Lighting</p>
-              <p class="bd-role">Product Designer</p>
-              <div class="bd-foot"><span>Sep &mdash; Dec 2017 &middot; 4 mos</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-            <div class="bd-face bd-back">
-              <div class="bd-top"><span>Industrial design</span><span>#07</span></div>
-              <p class="bd-bk">What I made</p>
-              <p class="bd-desc">An LED light, from design concept to a working prototype: 3D CAD models, studio product designs, and close work with engineers to test it against usability and quality standards.</p>
-              <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="bd-hang" aria-hidden="true" style="--t: 3.5deg; --drop: 80px; --dl: -3.1s; --pin: 12px">
-        <span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span>
-        <div class="bd-swing">
-          <span class="bd-clip" aria-hidden="true"></span>
-          <div class="bd-card {{bdFlip8Class}}" role="button" tabindex="-1" aria-pressed="{{bdFlip8On}}" aria-label="University of Oregon, BS Industrial Design badge, flip for details" onClick="{{bdFlip8}}" onKeyDown="{{bdKey8}}">
-            <div class="bd-face bd-front">
-              <div class="bd-top"><span>Education</span><span>#08</span></div>
-              <div class="bd-photo" style="background-color: #e9f1cf"><img src="/_blob/43a049ef9ca19cb2b289ae977b7001c2" alt="Drawing of Tin waving"><span class="bd-logo"><img src="/_blob/00e0e1ec841a28c4e0055e4a6738e6b1" alt="" width="18" height="18" style="display: block; object-fit: contain"></span></div>
-              <p class="bd-name">University of Oregon</p>
-              <p class="bd-role">BS Industrial Design</p>
-              <div class="bd-foot"><span>2014 &mdash; 2018 &middot; Business minor</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-            <div class="bd-face bd-back">
-              <div class="bd-top"><span>Education</span><span>#08</span></div>
-              <p class="bd-bk">What I learned</p>
-              <p class="bd-desc">How to design physical products: sketching, CAD, rendering and building prototypes by hand. Won 1st place overall at Quackhatch @UO in 2018.</p>
-              <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="bd-hang" style="--t: -4deg; --drop: 70px; --dl: -0.6s; --pin: 12px">
-        <span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span>
-        <div class="bd-swing">
-          <span class="bd-clip" aria-hidden="true"></span>
-          <div class="bd-card {{bdFlip1Class}}" role="button" tabindex="0" aria-pressed="{{bdFlip1On}}" aria-label="Microsoft AI, Senior Product Designer badge, flip for details" onClick="{{bdFlip1}}" onKeyDown="{{bdKey1}}">
-            <div class="bd-face bd-front">
-              <div class="bd-top"><span>Experience &middot; Now</span><span>#01</span></div>
-              <div class="bd-photo" style="background-color: #dfe4ff"><img src="/_blob/55d0f1cf75dfba60d11a0da3fa86a800" alt="Drawing of Tin waving"><span class="bd-logo"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><rect x="0" y="0" width="9" height="9" fill="#f25022"></rect><rect x="11" y="0" width="9" height="9" fill="#7fba00"></rect><rect x="0" y="11" width="9" height="9" fill="#00a4ef"></rect><rect x="11" y="11" width="9" height="9" fill="#ffb900"></rect></svg></span></div>
-              <p class="bd-name">Microsoft AI</p>
-              <p class="bd-role">Senior Product Designer</p>
-              <div class="bd-foot"><span>2022 &mdash; now &middot; 4 yrs</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-            <div class="bd-face bd-back">
-              <div class="bd-top"><span>Experience &middot; Now</span><span>#01</span></div>
-              <p class="bd-bk">What I do there</p>
-              <p class="bd-desc">Search across Bing, Edge and Windows. Today that means helping people find what they need, growing Bing, and exploring what AI agents could do in search.</p>
-              <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="bd-hang" style="--t: 2.5deg; --drop: 150px; --dl: -2.1s; --pin: 12px">
-        <span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span>
-        <div class="bd-swing">
-          <span class="bd-clip" aria-hidden="true"></span>
-          <div class="bd-card {{bdFlip2Class}}" role="button" tabindex="0" aria-pressed="{{bdFlip2On}}" aria-label="University of Oregon, Product Design Instructor badge, flip for details" onClick="{{bdFlip2}}" onKeyDown="{{bdKey2}}">
-            <div class="bd-face bd-front">
-              <div class="bd-top"><span>Teaching &middot; Now</span><span>#02</span></div>
-              <div class="bd-photo" style="background-color: #ffe68a"><img src="/_blob/437cda50f9facda7f79bbec6d67439aa" alt="Drawing of Tin in sunglasses"><span class="bd-logo"><img src="/_blob/00e0e1ec841a28c4e0055e4a6738e6b1" alt="" width="18" height="18" style="display: block; object-fit: contain"></span></div>
-              <p class="bd-name">University of Oregon</p>
-              <p class="bd-role">Product Design Instructor</p>
-              <div class="bd-foot"><span>2023 &mdash; now &middot; 3 yrs</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-            <div class="bd-face bd-back">
-              <div class="bd-top"><span>Teaching &middot; Now</span><span>#02</span></div>
-              <p class="bd-bk">What I teach</p>
-              <p class="bd-desc">UX and product design, at the same school where I studied industrial design. Students learn the way I still work: by building and prototyping.</p>
-              <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="bd-hang" style="--t: -2deg; --drop: 100px; --dl: -3.4s; --pin: 12px">
-        <span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span>
-        <div class="bd-swing">
-          <span class="bd-clip" aria-hidden="true"></span>
-          <div class="bd-card {{bdFlip3Class}}" role="button" tabindex="0" aria-pressed="{{bdFlip3On}}" aria-label="2U, UX/UI Bootcamp Instructor badge, flip for details" onClick="{{bdFlip3}}" onKeyDown="{{bdKey3}}">
-            <div class="bd-face bd-front">
-              <div class="bd-top"><span>Teaching</span><span>#03</span></div>
-              <div class="bd-photo" style="background-color: #ffd9cf"><img src="/_blob/e48b4cc08b5bd76952c6a06c33d07c65" alt="Drawing of Tin with his fist up"><span class="bd-logo"><span style="font: 700 13px/1 Be Vietnam Pro, system-ui, sans-serif; color: #141414">2U</span></span></div>
-              <p class="bd-name">2U</p>
-              <p class="bd-role">UX/UI Bootcamp Instructor</p>
-              <div class="bd-foot"><span>Since 2021 &middot; Remote</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-            <div class="bd-face bd-back">
-              <div class="bd-top"><span>Teaching</span><span>#03</span></div>
-              <p class="bd-bk">What I taught</p>
-              <p class="bd-desc">Led cohorts through a 24-week bootcamp in UX research, UX and UI design and front-end development, with the University of Oregon, UC Berkeley, Michigan, Minnesota, Utah and Arizona.</p>
-              <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="bd-hang" style="--t: 3deg; --drop: 60px; --dl: -1.2s; --pin: 12px">
-        <span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span>
-        <div class="bd-swing">
-          <span class="bd-clip" aria-hidden="true"></span>
-          <div class="bd-card {{bdFlip4Class}}" role="button" tabindex="0" aria-pressed="{{bdFlip4On}}" aria-label="Salesforce, Designer badge, flip for details" onClick="{{bdFlip4}}" onKeyDown="{{bdKey4}}">
-            <div class="bd-face bd-front">
-              <div class="bd-top"><span>Experience &middot; Before</span><span>#04</span></div>
-              <div class="bd-photo" style="background-color: #d5ecff"><img src="/_blob/078fce442a609c4bff7139218f2023a2" alt="Drawing of Tin posting a letter"><span class="bd-logo"><img src="/_blob/ac43d25c19be4e522f4bd492e1c090ab" alt="" width="22" height="16" style="display: block; object-fit: contain"></span></div>
-              <p class="bd-name">Salesforce</p>
-              <p class="bd-role">Designer</p>
-              <div class="bd-foot"><span>2020 &mdash; 2022 &middot; 2 yrs</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-            <div class="bd-face bd-back">
-              <div class="bd-top"><span>Experience &middot; Before</span><span>#04</span></div>
-              <p class="bd-bk">What I did there</p>
-              <p class="bd-desc">Redesigned search and content for Salesforce Help, cutting support cases 60% a month. Built a back-to-work app for 75K employees, shipped 8+ Partner Community features, and added components to the C360 design system across 12 product teams.</p>
-              <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="bd-hang" style="--t: -3deg; --drop: 130px; --dl: -2.7s; --pin: 12px">
-        <span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span>
-        <div class="bd-swing">
-          <span class="bd-clip" aria-hidden="true"></span>
-          <div class="bd-card {{bdFlip5Class}}" role="button" tabindex="0" aria-pressed="{{bdFlip5On}}" aria-label="Salesforce, Associate Designer badge, flip for details" onClick="{{bdFlip5}}" onKeyDown="{{bdKey5}}">
-            <div class="bd-face bd-front">
-              <div class="bd-top"><span>Experience &middot; Before</span><span>#05</span></div>
-              <div class="bd-photo" style="background-color: #e6f4ff"><img src="/_blob/b62d77f49157890da8c8fd946e594102" alt="Drawing of Tin"><span class="bd-logo"><img src="/_blob/ac43d25c19be4e522f4bd492e1c090ab" alt="" width="22" height="16" style="display: block; object-fit: contain"></span></div>
-              <p class="bd-name">Salesforce</p>
-              <p class="bd-role">Associate Designer</p>
-              <div class="bd-foot"><span>2018 &mdash; 2020 &middot; 1.5 yrs</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-            <div class="bd-face bd-back">
-              <div class="bd-top"><span>Experience &middot; Before</span><span>#05</span></div>
-              <p class="bd-bk">What I did there</p>
-              <p class="bd-desc">Worked with stakeholders to map customer experiences, find pain points and spot opportunities, then designed wireframe concepts with the Salesforce Lightning Design System.</p>
-              <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="bd-hang" style="--t: 2deg; --drop: 90px; --dl: -4.0s; --pin: 12px">
-        <span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span>
-        <div class="bd-swing">
-          <span class="bd-clip" aria-hidden="true"></span>
-          <div class="bd-card {{bdFlip6Class}}" role="button" tabindex="0" aria-pressed="{{bdFlip6On}}" aria-label="Salesforce, Summer UX Designer badge, flip for details" onClick="{{bdFlip6}}" onKeyDown="{{bdKey6}}">
-            <div class="bd-face bd-front">
-              <div class="bd-top"><span>Internship</span><span>#06</span></div>
-              <div class="bd-photo" style="background-color: #eaf0ff"><img src="/_blob/d94b44b66d55552c900a1934484677b4" alt="Drawing of Tin shaking hands"><span class="bd-logo"><img src="/_blob/ac43d25c19be4e522f4bd492e1c090ab" alt="" width="22" height="16" style="display: block; object-fit: contain"></span></div>
-              <p class="bd-name">Salesforce</p>
-              <p class="bd-role">Summer UX Designer</p>
-              <div class="bd-foot"><span>2017 &middot; Summer</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-            <div class="bd-face bd-back">
-              <div class="bd-top"><span>Internship</span><span>#06</span></div>
-              <p class="bd-bk">Where it started</p>
-              <p class="bd-desc">My first product design role, the summer before Salesforce hired me full time: onboarding improvements, and the branding for a Salesforce hackathon.</p>
-              <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="bd-hang" style="--t: -2.5deg; --drop: 140px; --dl: -1.8s; --pin: 12px">
-        <span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span>
-        <div class="bd-swing">
-          <span class="bd-clip" aria-hidden="true"></span>
-          <div class="bd-card {{bdFlip7Class}}" role="button" tabindex="0" aria-pressed="{{bdFlip7On}}" aria-label="Luxium Lighting, Product Designer badge, flip for details" onClick="{{bdFlip7}}" onKeyDown="{{bdKey7}}">
-            <div class="bd-face bd-front">
-              <div class="bd-top"><span>Industrial design</span><span>#07</span></div>
-              <div class="bd-photo" style="background-color: #dff3e4"><img src="/_blob/8330965c9d00ec6bc52f4f31b5e49472" alt="Drawing of Tin reaching into his jacket"><span class="bd-logo"><span style="font: 700 13px/1 Be Vietnam Pro, system-ui, sans-serif; color: #141414">L</span></span></div>
-              <p class="bd-name">Luxium Lighting</p>
-              <p class="bd-role">Product Designer</p>
-              <div class="bd-foot"><span>Sep &mdash; Dec 2017 &middot; 4 mos</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-            <div class="bd-face bd-back">
-              <div class="bd-top"><span>Industrial design</span><span>#07</span></div>
-              <p class="bd-bk">What I made</p>
-              <p class="bd-desc">An LED light, from design concept to a working prototype: 3D CAD models, studio product designs, and close work with engineers to test it against usability and quality standards.</p>
-              <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="bd-hang" style="--t: 3.5deg; --drop: 80px; --dl: -3.1s; --pin: 12px">
-        <span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span>
-        <div class="bd-swing">
-          <span class="bd-clip" aria-hidden="true"></span>
-          <div class="bd-card {{bdFlip8Class}}" role="button" tabindex="0" aria-pressed="{{bdFlip8On}}" aria-label="University of Oregon, BS Industrial Design badge, flip for details" onClick="{{bdFlip8}}" onKeyDown="{{bdKey8}}">
-            <div class="bd-face bd-front">
-              <div class="bd-top"><span>Education</span><span>#08</span></div>
-              <div class="bd-photo" style="background-color: #e9f1cf"><img src="/_blob/43a049ef9ca19cb2b289ae977b7001c2" alt="Drawing of Tin waving"><span class="bd-logo"><img src="/_blob/00e0e1ec841a28c4e0055e4a6738e6b1" alt="" width="18" height="18" style="display: block; object-fit: contain"></span></div>
-              <p class="bd-name">University of Oregon</p>
-              <p class="bd-role">BS Industrial Design</p>
-              <div class="bd-foot"><span>2014 &mdash; 2018 &middot; Business minor</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-            <div class="bd-face bd-back">
-              <div class="bd-top"><span>Education</span><span>#08</span></div>
-              <p class="bd-bk">What I learned</p>
-              <p class="bd-desc">How to design physical products: sketching, CAD, rendering and building prototypes by hand. Won 1st place overall at Quackhatch @UO in 2018.</p>
-              <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="bd-hang" aria-hidden="true" style="--t: -4deg; --drop: 70px; --dl: -0.6s; --pin: 12px">
-        <span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span>
-        <div class="bd-swing">
-          <span class="bd-clip" aria-hidden="true"></span>
-          <div class="bd-card {{bdFlip1Class}}" role="button" tabindex="-1" aria-pressed="{{bdFlip1On}}" aria-label="Microsoft AI, Senior Product Designer badge, flip for details" onClick="{{bdFlip1}}" onKeyDown="{{bdKey1}}">
-            <div class="bd-face bd-front">
-              <div class="bd-top"><span>Experience &middot; Now</span><span>#01</span></div>
-              <div class="bd-photo" style="background-color: #dfe4ff"><img src="/_blob/55d0f1cf75dfba60d11a0da3fa86a800" alt="Drawing of Tin waving"><span class="bd-logo"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><rect x="0" y="0" width="9" height="9" fill="#f25022"></rect><rect x="11" y="0" width="9" height="9" fill="#7fba00"></rect><rect x="0" y="11" width="9" height="9" fill="#00a4ef"></rect><rect x="11" y="11" width="9" height="9" fill="#ffb900"></rect></svg></span></div>
-              <p class="bd-name">Microsoft AI</p>
-              <p class="bd-role">Senior Product Designer</p>
-              <div class="bd-foot"><span>2022 &mdash; now &middot; 4 yrs</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-            <div class="bd-face bd-back">
-              <div class="bd-top"><span>Experience &middot; Now</span><span>#01</span></div>
-              <p class="bd-bk">What I do there</p>
-              <p class="bd-desc">Search across Bing, Edge and Windows. Today that means helping people find what they need, growing Bing, and exploring what AI agents could do in search.</p>
-              <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="bd-hang" aria-hidden="true" style="--t: 2.5deg; --drop: 150px; --dl: -2.1s; --pin: 12px">
-        <span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span>
-        <div class="bd-swing">
-          <span class="bd-clip" aria-hidden="true"></span>
-          <div class="bd-card {{bdFlip2Class}}" role="button" tabindex="-1" aria-pressed="{{bdFlip2On}}" aria-label="University of Oregon, Product Design Instructor badge, flip for details" onClick="{{bdFlip2}}" onKeyDown="{{bdKey2}}">
-            <div class="bd-face bd-front">
-              <div class="bd-top"><span>Teaching &middot; Now</span><span>#02</span></div>
-              <div class="bd-photo" style="background-color: #ffe68a"><img src="/_blob/437cda50f9facda7f79bbec6d67439aa" alt="Drawing of Tin in sunglasses"><span class="bd-logo"><img src="/_blob/00e0e1ec841a28c4e0055e4a6738e6b1" alt="" width="18" height="18" style="display: block; object-fit: contain"></span></div>
-              <p class="bd-name">University of Oregon</p>
-              <p class="bd-role">Product Design Instructor</p>
-              <div class="bd-foot"><span>2023 &mdash; now &middot; 3 yrs</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-            <div class="bd-face bd-back">
-              <div class="bd-top"><span>Teaching &middot; Now</span><span>#02</span></div>
-              <p class="bd-bk">What I teach</p>
-              <p class="bd-desc">UX and product design, at the same school where I studied industrial design. Students learn the way I still work: by building and prototyping.</p>
-              <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="bd-hang" aria-hidden="true" style="--t: -2deg; --drop: 100px; --dl: -3.4s; --pin: 12px">
-        <span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span>
-        <div class="bd-swing">
-          <span class="bd-clip" aria-hidden="true"></span>
-          <div class="bd-card {{bdFlip3Class}}" role="button" tabindex="-1" aria-pressed="{{bdFlip3On}}" aria-label="2U, UX/UI Bootcamp Instructor badge, flip for details" onClick="{{bdFlip3}}" onKeyDown="{{bdKey3}}">
-            <div class="bd-face bd-front">
-              <div class="bd-top"><span>Teaching</span><span>#03</span></div>
-              <div class="bd-photo" style="background-color: #ffd9cf"><img src="/_blob/e48b4cc08b5bd76952c6a06c33d07c65" alt="Drawing of Tin with his fist up"><span class="bd-logo"><span style="font: 700 13px/1 Be Vietnam Pro, system-ui, sans-serif; color: #141414">2U</span></span></div>
-              <p class="bd-name">2U</p>
-              <p class="bd-role">UX/UI Bootcamp Instructor</p>
-              <div class="bd-foot"><span>Since 2021 &middot; Remote</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-            <div class="bd-face bd-back">
-              <div class="bd-top"><span>Teaching</span><span>#03</span></div>
-              <p class="bd-bk">What I taught</p>
-              <p class="bd-desc">Led cohorts through a 24-week bootcamp in UX research, UX and UI design and front-end development, with the University of Oregon, UC Berkeley, Michigan, Minnesota, Utah and Arizona.</p>
-              <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="bd-hang" aria-hidden="true" style="--t: 3deg; --drop: 60px; --dl: -1.2s; --pin: 12px">
-        <span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span>
-        <div class="bd-swing">
-          <span class="bd-clip" aria-hidden="true"></span>
-          <div class="bd-card {{bdFlip4Class}}" role="button" tabindex="-1" aria-pressed="{{bdFlip4On}}" aria-label="Salesforce, Designer badge, flip for details" onClick="{{bdFlip4}}" onKeyDown="{{bdKey4}}">
-            <div class="bd-face bd-front">
-              <div class="bd-top"><span>Experience &middot; Before</span><span>#04</span></div>
-              <div class="bd-photo" style="background-color: #d5ecff"><img src="/_blob/078fce442a609c4bff7139218f2023a2" alt="Drawing of Tin posting a letter"><span class="bd-logo"><img src="/_blob/ac43d25c19be4e522f4bd492e1c090ab" alt="" width="22" height="16" style="display: block; object-fit: contain"></span></div>
-              <p class="bd-name">Salesforce</p>
-              <p class="bd-role">Designer</p>
-              <div class="bd-foot"><span>2020 &mdash; 2022 &middot; 2 yrs</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-            <div class="bd-face bd-back">
-              <div class="bd-top"><span>Experience &middot; Before</span><span>#04</span></div>
-              <p class="bd-bk">What I did there</p>
-              <p class="bd-desc">Redesigned search and content for Salesforce Help, cutting support cases 60% a month. Built a back-to-work app for 75K employees, shipped 8+ Partner Community features, and added components to the C360 design system across 12 product teams.</p>
-              <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="bd-hang" aria-hidden="true" style="--t: -3deg; --drop: 130px; --dl: -2.7s; --pin: 12px">
-        <span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span>
-        <div class="bd-swing">
-          <span class="bd-clip" aria-hidden="true"></span>
-          <div class="bd-card {{bdFlip5Class}}" role="button" tabindex="-1" aria-pressed="{{bdFlip5On}}" aria-label="Salesforce, Associate Designer badge, flip for details" onClick="{{bdFlip5}}" onKeyDown="{{bdKey5}}">
-            <div class="bd-face bd-front">
-              <div class="bd-top"><span>Experience &middot; Before</span><span>#05</span></div>
-              <div class="bd-photo" style="background-color: #e6f4ff"><img src="/_blob/b62d77f49157890da8c8fd946e594102" alt="Drawing of Tin"><span class="bd-logo"><img src="/_blob/ac43d25c19be4e522f4bd492e1c090ab" alt="" width="22" height="16" style="display: block; object-fit: contain"></span></div>
-              <p class="bd-name">Salesforce</p>
-              <p class="bd-role">Associate Designer</p>
-              <div class="bd-foot"><span>2018 &mdash; 2020 &middot; 1.5 yrs</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-            <div class="bd-face bd-back">
-              <div class="bd-top"><span>Experience &middot; Before</span><span>#05</span></div>
-              <p class="bd-bk">What I did there</p>
-              <p class="bd-desc">Worked with stakeholders to map customer experiences, find pain points and spot opportunities, then designed wireframe concepts with the Salesforce Lightning Design System.</p>
-              <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="bd-hang" aria-hidden="true" style="--t: 2deg; --drop: 90px; --dl: -4.0s; --pin: 12px">
-        <span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span>
-        <div class="bd-swing">
-          <span class="bd-clip" aria-hidden="true"></span>
-          <div class="bd-card {{bdFlip6Class}}" role="button" tabindex="-1" aria-pressed="{{bdFlip6On}}" aria-label="Salesforce, Summer UX Designer badge, flip for details" onClick="{{bdFlip6}}" onKeyDown="{{bdKey6}}">
-            <div class="bd-face bd-front">
-              <div class="bd-top"><span>Internship</span><span>#06</span></div>
-              <div class="bd-photo" style="background-color: #eaf0ff"><img src="/_blob/d94b44b66d55552c900a1934484677b4" alt="Drawing of Tin shaking hands"><span class="bd-logo"><img src="/_blob/ac43d25c19be4e522f4bd492e1c090ab" alt="" width="22" height="16" style="display: block; object-fit: contain"></span></div>
-              <p class="bd-name">Salesforce</p>
-              <p class="bd-role">Summer UX Designer</p>
-              <div class="bd-foot"><span>2017 &middot; Summer</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-            <div class="bd-face bd-back">
-              <div class="bd-top"><span>Internship</span><span>#06</span></div>
-              <p class="bd-bk">Where it started</p>
-              <p class="bd-desc">My first product design role, the summer before Salesforce hired me full time: onboarding improvements, and the branding for a Salesforce hackathon.</p>
-              <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="bd-hang" aria-hidden="true" style="--t: -2.5deg; --drop: 140px; --dl: -1.8s; --pin: 12px">
-        <span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span>
-        <div class="bd-swing">
-          <span class="bd-clip" aria-hidden="true"></span>
-          <div class="bd-card {{bdFlip7Class}}" role="button" tabindex="-1" aria-pressed="{{bdFlip7On}}" aria-label="Luxium Lighting, Product Designer badge, flip for details" onClick="{{bdFlip7}}" onKeyDown="{{bdKey7}}">
-            <div class="bd-face bd-front">
-              <div class="bd-top"><span>Industrial design</span><span>#07</span></div>
-              <div class="bd-photo" style="background-color: #dff3e4"><img src="/_blob/8330965c9d00ec6bc52f4f31b5e49472" alt="Drawing of Tin reaching into his jacket"><span class="bd-logo"><span style="font: 700 13px/1 Be Vietnam Pro, system-ui, sans-serif; color: #141414">L</span></span></div>
-              <p class="bd-name">Luxium Lighting</p>
-              <p class="bd-role">Product Designer</p>
-              <div class="bd-foot"><span>Sep &mdash; Dec 2017 &middot; 4 mos</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-            <div class="bd-face bd-back">
-              <div class="bd-top"><span>Industrial design</span><span>#07</span></div>
-              <p class="bd-bk">What I made</p>
-              <p class="bd-desc">An LED light, from design concept to a working prototype: 3D CAD models, studio product designs, and close work with engineers to test it against usability and quality standards.</p>
-              <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="bd-hang" aria-hidden="true" style="--t: 3.5deg; --drop: 80px; --dl: -3.1s; --pin: 12px">
-        <span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span>
-        <div class="bd-swing">
-          <span class="bd-clip" aria-hidden="true"></span>
-          <div class="bd-card {{bdFlip8Class}}" role="button" tabindex="-1" aria-pressed="{{bdFlip8On}}" aria-label="University of Oregon, BS Industrial Design badge, flip for details" onClick="{{bdFlip8}}" onKeyDown="{{bdKey8}}">
-            <div class="bd-face bd-front">
-              <div class="bd-top"><span>Education</span><span>#08</span></div>
-              <div class="bd-photo" style="background-color: #e9f1cf"><img src="/_blob/43a049ef9ca19cb2b289ae977b7001c2" alt="Drawing of Tin waving"><span class="bd-logo"><img src="/_blob/00e0e1ec841a28c4e0055e4a6738e6b1" alt="" width="18" height="18" style="display: block; object-fit: contain"></span></div>
-              <p class="bd-name">University of Oregon</p>
-              <p class="bd-role">BS Industrial Design</p>
-              <div class="bd-foot"><span>2014 &mdash; 2018 &middot; Business minor</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-            <div class="bd-face bd-back">
-              <div class="bd-top"><span>Education</span><span>#08</span></div>
-              <p class="bd-bk">What I learned</p>
-              <p class="bd-desc">How to design physical products: sketching, CAD, rendering and building prototypes by hand. Won 1st place overall at Quackhatch @UO in 2018.</p>
-              <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div class="bd-hang" aria-hidden="true" style="--t: -4deg; --drop: 70px; --dl: -0.6s; --pin: 12px"><span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span><div class="bd-swing"><span class="bd-clip" aria-hidden="true"></span><div class="bd-card {{bdFlip1Class}}" role="button" tabindex="-1" aria-pressed="{{bdFlip1On}}" aria-label="Microsoft AI · Senior Product Designer badge, flip for details" onClick="{{bdFlip1}}" onKeyDown="{{bdKey1}}"><div class="bd-face bd-front bx-face" style="padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px; width: 300px; display: flex; flex-direction: column; gap: 0px">
+  <div class="bd-top"><span>2022 — now</span><span>4 YEARS</span></div>
+  <div class="bd-photo" style="background-color: #d5ecff; height: 260px"><img src="/_blob/23c37e811ab58e300330f9e6721ba16c" alt="Photo of Tin" style="width: 100%; height: 100%; object-fit: cover; object-position: 50% 24%"></div>
+  <div style="box-sizing: border-box; display: flex; flex-direction: row; gap: 12px; align-items: center"><div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 2px; width: 100%; height: 75px"><p class="bd-name" style="font-weight: 400; font-size: 16px">Senior Product Designer</p><p class="bd-role" style="font-weight: 400; font-size: 14px">Microsoft AI</p></div><div style="box-sizing: border-box; display: grid; place-items: center; border-radius: 8px; width: 80px; height: 52px"><svg viewBox="0 0 20 20" width="30" height="30" aria-label="Microsoft" role="img" style="display: block"><rect x="0" y="0" width="9" height="9" fill="#f25022"></rect><rect x="11" y="0" width="9" height="9" fill="#7fba00"></rect><rect x="0" y="11" width="9" height="9" fill="#00a4ef"></rect><rect x="11" y="11" width="9" height="9" fill="#ffb900"></rect></svg></div></div>
+  <div class="bd-foot"><span style="color: #6e6e6e">VIEW PROFILE</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+</div><div class="bd-face bd-back bx-face" style="width: 300px; padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px">
+  <div class="bd-top"><span>Senior Product Designer at Microsoft AI</span></div>
+  
+  <p class="bd-desc" style="font-size: 16px">I design search across Bing, Edge and Windows: helping people find what they need, growing Bing, and exploring what AI agents could do in search.</p>
+  <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+</div></div></div></div>
+      <div class="bd-hang" aria-hidden="true" style="--t: 2.5deg; --drop: 150px; --dl: -2.1s; --pin: 12px"><span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span><div class="bd-swing"><span class="bd-clip" aria-hidden="true"></span><div class="bd-card {{bdFlip2Class}}" role="button" tabindex="-1" aria-pressed="{{bdFlip2On}}" aria-label="University of Oregon · Product Design Instructor badge, flip for details" onClick="{{bdFlip2}}" onKeyDown="{{bdKey2}}"><div class="bd-face bd-front bx-face" style="padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px; width: 300px; display: flex; flex-direction: column; gap: 0px">
+  <div class="bd-top"><span>2023 — now</span><span>3 YEARS</span></div>
+  <div class="bd-photo" style="background-color: #d5ecff; height: 260px"><img src="/_blob/23c37e811ab58e300330f9e6721ba16c" alt="Photo of Tin" style="width: 100%; height: 100%; object-fit: cover; object-position: 50% 24%"></div>
+  <div style="box-sizing: border-box; display: flex; flex-direction: row; gap: 12px; align-items: center"><div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 2px; width: 100%; height: 75px"><p class="bd-name" style="font-weight: 400; font-size: 16px">Product Design Instructor</p><p class="bd-role" style="font-weight: 400; font-size: 14px">University of Oregon</p></div><div style="box-sizing: border-box; display: grid; place-items: center; border-radius: 8px; width: 80px; height: 52px"><img src="/_blob/00e0e1ec841a28c4e0055e4a6738e6b1" alt="University of Oregon" style="display: block; width: 46%; height: auto"></div></div>
+  <div class="bd-foot"><span style="color: #6e6e6e">VIEW PROFILE</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+</div><div class="bd-face bd-back bx-face" style="width: 300px; padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px">
+  <div class="bd-top"><span>Product Design Instructor at University of Oregon</span></div>
+  
+  <p class="bd-desc" style="font-size: 16px">I teach UX and product design at the school where I studied industrial design. Students learn the way I still work: by building and prototyping.</p>
+  <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+</div></div></div></div>
+      <div class="bd-hang" aria-hidden="true" style="--t: -2deg; --drop: 100px; --dl: -3.4s; --pin: 12px"><span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span><div class="bd-swing"><span class="bd-clip" aria-hidden="true"></span><div class="bd-card {{bdFlip3Class}}" role="button" tabindex="-1" aria-pressed="{{bdFlip3On}}" aria-label="2U · UX/UI Bootcamp Instructor badge, flip for details" onClick="{{bdFlip3}}" onKeyDown="{{bdKey3}}"><div class="bd-face bd-front bx-face" style="padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px; width: 300px; display: flex; flex-direction: column; gap: 0px">
+  <div class="bd-top"><span>2021 —</span><span>REMOTE</span></div>
+  <div class="bd-photo" style="background-color: #d5ecff; height: 260px"><img src="/_blob/7cf40081dbe5d6b4a1824a5ac5755b57" alt="Tin teaching a bootcamp class on Zoom" style="width: 100%; height: 100%; object-fit: cover; object-position: 0% 50%"></div>
+  <div style="box-sizing: border-box; display: flex; flex-direction: row; gap: 12px; align-items: center"><div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 2px; width: 100%; height: 75px"><p class="bd-name" style="font-weight: 400; font-size: 16px">UX/UI Bootcamp Instructor</p><p class="bd-role" style="font-weight: 400; font-size: 14px">2U</p></div><div style="box-sizing: border-box; display: grid; place-items: center; border-radius: 8px; width: 80px; height: 52px"><span style="font-weight: 700; font-size: 20px; color: #141414; letter-spacing: -0.02em">2U</span></div></div>
+  <div class="bd-foot"><span style="color: #6e6e6e">VIEW PROFILE</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+</div><div class="bd-face bd-back bx-face" style="width: 300px; padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px">
+  <div class="bd-top"><span>UX/UI Bootcamp Instructor at 2U</span></div>
+  
+  <p class="bd-desc" style="font-size: 16px">I led cohorts through a 24-week bootcamp in UX research, UX and UI design and front-end development, teaching with the University of Oregon, UC Berkeley, Michigan, Minnesota, Utah and Arizona.</p>
+  <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+</div></div></div></div>
+      <div class="bd-hang" aria-hidden="true" style="--t: 3deg; --drop: 60px; --dl: -1.2s; --pin: 12px"><span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span><div class="bd-swing"><span class="bd-clip" aria-hidden="true"></span><div class="bd-card {{bdFlip4Class}}" role="button" tabindex="-1" aria-pressed="{{bdFlip4On}}" aria-label="Salesforce · Designer badge, flip for details" onClick="{{bdFlip4}}" onKeyDown="{{bdKey4}}"><div class="bd-face bd-front bx-face" style="padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px; width: 300px; display: flex; flex-direction: column; gap: 0px">
+  <div class="bd-top"><span>2020 — 2022</span><span>2 YEARS</span></div>
+  <div class="bd-photo" style="background-color: #d5ecff; height: 260px"><img src="/_blob/8bd998ead1110dbdb0a707cdb0cb6c60" alt="Tin with his Salesforce team" style="width: 100%; height: 100%; object-fit: cover"></div>
+  <div style="box-sizing: border-box; display: flex; flex-direction: row; gap: 12px; align-items: center"><div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 2px; width: 100%; height: 75px"><p class="bd-name" style="font-weight: 400; font-size: 16px">Designer</p><p class="bd-role" style="font-weight: 400; font-size: 14px">Salesforce</p></div><div style="box-sizing: border-box; display: grid; place-items: center; border-radius: 8px; width: 80px; height: 52px"><img src="/_blob/ac43d25c19be4e522f4bd492e1c090ab" alt="Salesforce" style="display: block; width: 72%; height: auto"></div></div>
+  <div class="bd-foot"><span style="color: #6e6e6e">VIEW PROFILE</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+</div><div class="bd-face bd-back bx-face" style="width: 300px; padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px">
+  <div class="bd-top"><span>Designer at Salesforce</span></div>
+  
+  <p class="bd-desc" style="font-size: 16px">I redesigned search and content for Salesforce Help, which cut support cases by 60% per month, built a back-to-work app for 75K employees, shipped more than 8 Partner Community features, and added components to the C360 design system across 12 product teams.</p>
+  <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+</div></div></div></div>
+      <div class="bd-hang" aria-hidden="true" style="--t: -3deg; --drop: 130px; --dl: -2.7s; --pin: 12px"><span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span><div class="bd-swing"><span class="bd-clip" aria-hidden="true"></span><div class="bd-card {{bdFlip5Class}}" role="button" tabindex="-1" aria-pressed="{{bdFlip5On}}" aria-label="Salesforce · Associate Designer badge, flip for details" onClick="{{bdFlip5}}" onKeyDown="{{bdKey5}}"><div class="bd-face bd-front bx-face" style="padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px; width: 300px; display: flex; flex-direction: column; gap: 0px">
+  <div class="bd-top"><span>2018 — 2020</span><span>1.5 YEARS</span></div>
+  <div class="bd-photo" style="background-color: #d5ecff; height: 260px"><img src="/_blob/4094fbcab61c10292b1c2b76357bd090" alt="Photo of Tin" style="width: 100%; height: 100%; object-fit: cover; object-position: 50% 28%"></div>
+  <div style="box-sizing: border-box; display: flex; flex-direction: row; gap: 12px; align-items: center"><div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 2px; width: 100%; height: 75px"><p class="bd-name" style="font-weight: 400; font-size: 16px">Associate Designer</p><p class="bd-role" style="font-weight: 400; font-size: 14px">Salesforce</p></div><div style="box-sizing: border-box; display: grid; place-items: center; border-radius: 8px; width: 80px; height: 52px"><img src="/_blob/ac43d25c19be4e522f4bd492e1c090ab" alt="Salesforce" style="display: block; width: 72%; height: auto"></div></div>
+  <div class="bd-foot"><span style="color: #6e6e6e">VIEW PROFILE</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+</div><div class="bd-face bd-back bx-face" style="width: 300px; padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px">
+  <div class="bd-top"><span>Associate Designer at Salesforce</span></div>
+  
+  <p class="bd-desc" style="font-size: 16px">I worked with stakeholders to map customer experiences, find pain points and spot opportunities, then designed wireframe concepts with the Salesforce Lightning Design System.</p>
+  <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+</div></div></div></div>
+      <div class="bd-hang" aria-hidden="true" style="--t: 2deg; --drop: 90px; --dl: -4.0s; --pin: 12px"><span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span><div class="bd-swing"><span class="bd-clip" aria-hidden="true"></span><div class="bd-card {{bdFlip6Class}}" role="button" tabindex="-1" aria-pressed="{{bdFlip6On}}" aria-label="Salesforce · Product Design Intern badge, flip for details" onClick="{{bdFlip6}}" onKeyDown="{{bdKey6}}"><div class="bd-face bd-front bx-face" style="padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px; width: 300px; display: flex; flex-direction: column; gap: 0px">
+  <div class="bd-top"><span>2017</span><span>SUMMER</span></div>
+  <div class="bd-photo" style="background-color: #d5ecff; height: 260px"><img src="/_blob/23c37e811ab58e300330f9e6721ba16c" alt="Photo of Tin" style="width: 100%; height: 100%; object-fit: cover; object-position: 50% 24%"></div>
+  <div style="box-sizing: border-box; display: flex; flex-direction: row; gap: 12px; align-items: center"><div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 2px; width: 100%; height: 75px"><p class="bd-name" style="font-weight: 400; font-size: 16px">Product Design Intern</p><p class="bd-role" style="font-weight: 400; font-size: 14px">Salesforce</p></div><div style="box-sizing: border-box; display: grid; place-items: center; border-radius: 8px; width: 80px; height: 52px"><img src="/_blob/ac43d25c19be4e522f4bd492e1c090ab" alt="Salesforce" style="display: block; width: 72%; height: auto"></div></div>
+  <div class="bd-foot"><span style="color: #6e6e6e">VIEW PROFILE</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+</div><div class="bd-face bd-back bx-face" style="width: 300px; padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px">
+  <div class="bd-top"><span>Product Design Intern at Salesforce</span></div>
+  
+  <p class="bd-desc" style="font-size: 16px">I redesigned the onboarding experience for new employees at Salesforce by creating an onboarding portal where they could access information, search for benefits, and manage their profiles as they started working at the company. I also designed the branding for a Salesforce hackathon.</p>
+  <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+</div></div></div></div>
+      <div class="bd-hang" aria-hidden="true" style="--t: -2.5deg; --drop: 140px; --dl: -1.8s; --pin: 12px"><span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span><div class="bd-swing"><span class="bd-clip" aria-hidden="true"></span><div class="bd-card {{bdFlip7Class}}" role="button" tabindex="-1" aria-pressed="{{bdFlip7On}}" aria-label="University of Oregon · BS Industrial Design badge, flip for details" onClick="{{bdFlip7}}" onKeyDown="{{bdKey7}}"><div class="bd-face bd-front bx-face" style="padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px; width: 300px; display: flex; flex-direction: column; gap: 0px">
+  <div class="bd-top"><span>2014 — 2018</span><span>BUSINESS MINOR</span></div>
+  <div class="bd-photo" style="background-color: #d5ecff; height: 260px"><img src="/_blob/4eac407aac52c547e08dbd5a341e2432" alt="Tin at his University of Oregon graduation" style="width: 100%; height: 100%; object-fit: cover; object-position: 42% 30%"></div>
+  <div style="box-sizing: border-box; display: flex; flex-direction: row; gap: 12px; align-items: center"><div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 2px; width: 100%; height: 75px"><p class="bd-name" style="font-weight: 400; font-size: 16px">BS Industrial Design</p><p class="bd-role" style="font-weight: 400; font-size: 14px">University of Oregon</p></div><div style="box-sizing: border-box; display: grid; place-items: center; border-radius: 8px; width: 80px; height: 52px"><img src="/_blob/00e0e1ec841a28c4e0055e4a6738e6b1" alt="University of Oregon" style="display: block; width: 46%; height: auto"></div></div>
+  <div class="bd-foot"><span style="color: #6e6e6e">VIEW PROFILE</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+</div><div class="bd-face bd-back bx-face" style="width: 300px; padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px">
+  <div class="bd-top"><span>BS Industrial Design at University of Oregon</span></div>
+  
+  <p class="bd-desc" style="font-size: 16px">I studied industrial design with a business minor: sketching, CAD, rendering and building prototypes by hand. I won 1st place overall at Quackhatch @UO in 2018.</p>
+  <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+</div></div></div></div>
+      <div class="bd-hang" style="--t: -4deg; --drop: 70px; --dl: -0.6s; --pin: 12px"><span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span><div class="bd-swing"><span class="bd-clip" aria-hidden="true"></span><div class="bd-card {{bdFlip1Class}}" role="button" tabindex="0" aria-pressed="{{bdFlip1On}}" aria-label="Microsoft AI · Senior Product Designer badge, flip for details" onClick="{{bdFlip1}}" onKeyDown="{{bdKey1}}"><div class="bd-face bd-front bx-face" style="padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px; width: 300px; display: flex; flex-direction: column; gap: 0px">
+  <div class="bd-top"><span>2022 — now</span><span>4 YEARS</span></div>
+  <div class="bd-photo" style="background-color: #d5ecff; height: 260px"><img src="/_blob/23c37e811ab58e300330f9e6721ba16c" alt="Photo of Tin" style="width: 100%; height: 100%; object-fit: cover; object-position: 50% 24%"></div>
+  <div style="box-sizing: border-box; display: flex; flex-direction: row; gap: 12px; align-items: center"><div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 2px; width: 100%; height: 75px"><p class="bd-name" style="font-weight: 400; font-size: 16px">Senior Product Designer</p><p class="bd-role" style="font-weight: 400; font-size: 14px">Microsoft AI</p></div><div style="box-sizing: border-box; display: grid; place-items: center; border-radius: 8px; width: 80px; height: 52px"><svg viewBox="0 0 20 20" width="30" height="30" aria-label="Microsoft" role="img" style="display: block"><rect x="0" y="0" width="9" height="9" fill="#f25022"></rect><rect x="11" y="0" width="9" height="9" fill="#7fba00"></rect><rect x="0" y="11" width="9" height="9" fill="#00a4ef"></rect><rect x="11" y="11" width="9" height="9" fill="#ffb900"></rect></svg></div></div>
+  <div class="bd-foot"><span style="color: #6e6e6e">VIEW PROFILE</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+</div><div class="bd-face bd-back bx-face" style="width: 300px; padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px">
+  <div class="bd-top"><span>Senior Product Designer at Microsoft AI</span></div>
+  
+  <p class="bd-desc" style="font-size: 16px">I design search across Bing, Edge and Windows: helping people find what they need, growing Bing, and exploring what AI agents could do in search.</p>
+  <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+</div></div></div></div>
+      <div class="bd-hang" style="--t: 2.5deg; --drop: 150px; --dl: -2.1s; --pin: 12px"><span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span><div class="bd-swing"><span class="bd-clip" aria-hidden="true"></span><div class="bd-card {{bdFlip2Class}}" role="button" tabindex="0" aria-pressed="{{bdFlip2On}}" aria-label="University of Oregon · Product Design Instructor badge, flip for details" onClick="{{bdFlip2}}" onKeyDown="{{bdKey2}}"><div class="bd-face bd-front bx-face" style="padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px; width: 300px; display: flex; flex-direction: column; gap: 0px">
+  <div class="bd-top"><span>2023 — now</span><span>3 YEARS</span></div>
+  <div class="bd-photo" style="background-color: #d5ecff; height: 260px"><img src="/_blob/23c37e811ab58e300330f9e6721ba16c" alt="Photo of Tin" style="width: 100%; height: 100%; object-fit: cover; object-position: 50% 24%"></div>
+  <div style="box-sizing: border-box; display: flex; flex-direction: row; gap: 12px; align-items: center"><div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 2px; width: 100%; height: 75px"><p class="bd-name" style="font-weight: 400; font-size: 16px">Product Design Instructor</p><p class="bd-role" style="font-weight: 400; font-size: 14px">University of Oregon</p></div><div style="box-sizing: border-box; display: grid; place-items: center; border-radius: 8px; width: 80px; height: 52px"><img src="/_blob/00e0e1ec841a28c4e0055e4a6738e6b1" alt="University of Oregon" style="display: block; width: 46%; height: auto"></div></div>
+  <div class="bd-foot"><span style="color: #6e6e6e">VIEW PROFILE</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+</div><div class="bd-face bd-back bx-face" style="width: 300px; padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px">
+  <div class="bd-top"><span>Product Design Instructor at University of Oregon</span></div>
+  
+  <p class="bd-desc" style="font-size: 16px">I teach UX and product design at the school where I studied industrial design. Students learn the way I still work: by building and prototyping.</p>
+  <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+</div></div></div></div>
+      <div class="bd-hang" style="--t: -2deg; --drop: 100px; --dl: -3.4s; --pin: 12px"><span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span><div class="bd-swing"><span class="bd-clip" aria-hidden="true"></span><div class="bd-card {{bdFlip3Class}}" role="button" tabindex="0" aria-pressed="{{bdFlip3On}}" aria-label="2U · UX/UI Bootcamp Instructor badge, flip for details" onClick="{{bdFlip3}}" onKeyDown="{{bdKey3}}"><div class="bd-face bd-front bx-face" style="padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px; width: 300px; display: flex; flex-direction: column; gap: 0px">
+  <div class="bd-top"><span>2021 —</span><span>REMOTE</span></div>
+  <div class="bd-photo" style="background-color: #d5ecff; height: 260px"><img src="/_blob/7cf40081dbe5d6b4a1824a5ac5755b57" alt="Tin teaching a bootcamp class on Zoom" style="width: 100%; height: 100%; object-fit: cover; object-position: 0% 50%"></div>
+  <div style="box-sizing: border-box; display: flex; flex-direction: row; gap: 12px; align-items: center"><div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 2px; width: 100%; height: 75px"><p class="bd-name" style="font-weight: 400; font-size: 16px">UX/UI Bootcamp Instructor</p><p class="bd-role" style="font-weight: 400; font-size: 14px">2U</p></div><div style="box-sizing: border-box; display: grid; place-items: center; border-radius: 8px; width: 80px; height: 52px"><span style="font-weight: 700; font-size: 20px; color: #141414; letter-spacing: -0.02em">2U</span></div></div>
+  <div class="bd-foot"><span style="color: #6e6e6e">VIEW PROFILE</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+</div><div class="bd-face bd-back bx-face" style="width: 300px; padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px">
+  <div class="bd-top"><span>UX/UI Bootcamp Instructor at 2U</span></div>
+  
+  <p class="bd-desc" style="font-size: 16px">I led cohorts through a 24-week bootcamp in UX research, UX and UI design and front-end development, teaching with the University of Oregon, UC Berkeley, Michigan, Minnesota, Utah and Arizona.</p>
+  <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+</div></div></div></div>
+      <div class="bd-hang" style="--t: 3deg; --drop: 60px; --dl: -1.2s; --pin: 12px"><span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span><div class="bd-swing"><span class="bd-clip" aria-hidden="true"></span><div class="bd-card {{bdFlip4Class}}" role="button" tabindex="0" aria-pressed="{{bdFlip4On}}" aria-label="Salesforce · Designer badge, flip for details" onClick="{{bdFlip4}}" onKeyDown="{{bdKey4}}"><div class="bd-face bd-front bx-face" style="padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px; width: 300px; display: flex; flex-direction: column; gap: 0px">
+  <div class="bd-top"><span>2020 — 2022</span><span>2 YEARS</span></div>
+  <div class="bd-photo" style="background-color: #d5ecff; height: 260px"><img src="/_blob/8bd998ead1110dbdb0a707cdb0cb6c60" alt="Tin with his Salesforce team" style="width: 100%; height: 100%; object-fit: cover"></div>
+  <div style="box-sizing: border-box; display: flex; flex-direction: row; gap: 12px; align-items: center"><div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 2px; width: 100%; height: 75px"><p class="bd-name" style="font-weight: 400; font-size: 16px">Designer</p><p class="bd-role" style="font-weight: 400; font-size: 14px">Salesforce</p></div><div style="box-sizing: border-box; display: grid; place-items: center; border-radius: 8px; width: 80px; height: 52px"><img src="/_blob/ac43d25c19be4e522f4bd492e1c090ab" alt="Salesforce" style="display: block; width: 72%; height: auto"></div></div>
+  <div class="bd-foot"><span style="color: #6e6e6e">VIEW PROFILE</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+</div><div class="bd-face bd-back bx-face" style="width: 300px; padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px">
+  <div class="bd-top"><span>Designer at Salesforce</span></div>
+  
+  <p class="bd-desc" style="font-size: 16px">I redesigned search and content for Salesforce Help, which cut support cases by 60% per month, built a back-to-work app for 75K employees, shipped more than 8 Partner Community features, and added components to the C360 design system across 12 product teams.</p>
+  <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+</div></div></div></div>
+      <div class="bd-hang" style="--t: -3deg; --drop: 130px; --dl: -2.7s; --pin: 12px"><span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span><div class="bd-swing"><span class="bd-clip" aria-hidden="true"></span><div class="bd-card {{bdFlip5Class}}" role="button" tabindex="0" aria-pressed="{{bdFlip5On}}" aria-label="Salesforce · Associate Designer badge, flip for details" onClick="{{bdFlip5}}" onKeyDown="{{bdKey5}}"><div class="bd-face bd-front bx-face" style="padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px; width: 300px; display: flex; flex-direction: column; gap: 0px">
+  <div class="bd-top"><span>2018 — 2020</span><span>1.5 YEARS</span></div>
+  <div class="bd-photo" style="background-color: #d5ecff; height: 260px"><img src="/_blob/4094fbcab61c10292b1c2b76357bd090" alt="Photo of Tin" style="width: 100%; height: 100%; object-fit: cover; object-position: 50% 28%"></div>
+  <div style="box-sizing: border-box; display: flex; flex-direction: row; gap: 12px; align-items: center"><div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 2px; width: 100%; height: 75px"><p class="bd-name" style="font-weight: 400; font-size: 16px">Associate Designer</p><p class="bd-role" style="font-weight: 400; font-size: 14px">Salesforce</p></div><div style="box-sizing: border-box; display: grid; place-items: center; border-radius: 8px; width: 80px; height: 52px"><img src="/_blob/ac43d25c19be4e522f4bd492e1c090ab" alt="Salesforce" style="display: block; width: 72%; height: auto"></div></div>
+  <div class="bd-foot"><span style="color: #6e6e6e">VIEW PROFILE</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+</div><div class="bd-face bd-back bx-face" style="width: 300px; padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px">
+  <div class="bd-top"><span>Associate Designer at Salesforce</span></div>
+  
+  <p class="bd-desc" style="font-size: 16px">I worked with stakeholders to map customer experiences, find pain points and spot opportunities, then designed wireframe concepts with the Salesforce Lightning Design System.</p>
+  <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+</div></div></div></div>
+      <div class="bd-hang" style="--t: 2deg; --drop: 90px; --dl: -4.0s; --pin: 12px"><span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span><div class="bd-swing"><span class="bd-clip" aria-hidden="true"></span><div class="bd-card {{bdFlip6Class}}" role="button" tabindex="0" aria-pressed="{{bdFlip6On}}" aria-label="Salesforce · Product Design Intern badge, flip for details" onClick="{{bdFlip6}}" onKeyDown="{{bdKey6}}"><div class="bd-face bd-front bx-face" style="padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px; width: 300px; display: flex; flex-direction: column; gap: 0px">
+  <div class="bd-top"><span>2017</span><span>SUMMER</span></div>
+  <div class="bd-photo" style="background-color: #d5ecff; height: 260px"><img src="/_blob/23c37e811ab58e300330f9e6721ba16c" alt="Photo of Tin" style="width: 100%; height: 100%; object-fit: cover; object-position: 50% 24%"></div>
+  <div style="box-sizing: border-box; display: flex; flex-direction: row; gap: 12px; align-items: center"><div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 2px; width: 100%; height: 75px"><p class="bd-name" style="font-weight: 400; font-size: 16px">Product Design Intern</p><p class="bd-role" style="font-weight: 400; font-size: 14px">Salesforce</p></div><div style="box-sizing: border-box; display: grid; place-items: center; border-radius: 8px; width: 80px; height: 52px"><img src="/_blob/ac43d25c19be4e522f4bd492e1c090ab" alt="Salesforce" style="display: block; width: 72%; height: auto"></div></div>
+  <div class="bd-foot"><span style="color: #6e6e6e">VIEW PROFILE</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+</div><div class="bd-face bd-back bx-face" style="width: 300px; padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px">
+  <div class="bd-top"><span>Product Design Intern at Salesforce</span></div>
+  
+  <p class="bd-desc" style="font-size: 16px">I redesigned the onboarding experience for new employees at Salesforce by creating an onboarding portal where they could access information, search for benefits, and manage their profiles as they started working at the company. I also designed the branding for a Salesforce hackathon.</p>
+  <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+</div></div></div></div>
+      <div class="bd-hang" style="--t: -2.5deg; --drop: 140px; --dl: -1.8s; --pin: 12px"><span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span><div class="bd-swing"><span class="bd-clip" aria-hidden="true"></span><div class="bd-card {{bdFlip7Class}}" role="button" tabindex="0" aria-pressed="{{bdFlip7On}}" aria-label="University of Oregon · BS Industrial Design badge, flip for details" onClick="{{bdFlip7}}" onKeyDown="{{bdKey7}}"><div class="bd-face bd-front bx-face" style="padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px; width: 300px; display: flex; flex-direction: column; gap: 0px">
+  <div class="bd-top"><span>2014 — 2018</span><span>BUSINESS MINOR</span></div>
+  <div class="bd-photo" style="background-color: #d5ecff; height: 260px"><img src="/_blob/4eac407aac52c547e08dbd5a341e2432" alt="Tin at his University of Oregon graduation" style="width: 100%; height: 100%; object-fit: cover; object-position: 42% 30%"></div>
+  <div style="box-sizing: border-box; display: flex; flex-direction: row; gap: 12px; align-items: center"><div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 2px; width: 100%; height: 75px"><p class="bd-name" style="font-weight: 400; font-size: 16px">BS Industrial Design</p><p class="bd-role" style="font-weight: 400; font-size: 14px">University of Oregon</p></div><div style="box-sizing: border-box; display: grid; place-items: center; border-radius: 8px; width: 80px; height: 52px"><img src="/_blob/00e0e1ec841a28c4e0055e4a6738e6b1" alt="University of Oregon" style="display: block; width: 46%; height: auto"></div></div>
+  <div class="bd-foot"><span style="color: #6e6e6e">VIEW PROFILE</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+</div><div class="bd-face bd-back bx-face" style="width: 300px; padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px">
+  <div class="bd-top"><span>BS Industrial Design at University of Oregon</span></div>
+  
+  <p class="bd-desc" style="font-size: 16px">I studied industrial design with a business minor: sketching, CAD, rendering and building prototypes by hand. I won 1st place overall at Quackhatch @UO in 2018.</p>
+  <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+</div></div></div></div>
+      <div class="bd-hang" aria-hidden="true" style="--t: -4deg; --drop: 70px; --dl: -0.6s; --pin: 12px"><span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span><div class="bd-swing"><span class="bd-clip" aria-hidden="true"></span><div class="bd-card {{bdFlip1Class}}" role="button" tabindex="-1" aria-pressed="{{bdFlip1On}}" aria-label="Microsoft AI · Senior Product Designer badge, flip for details" onClick="{{bdFlip1}}" onKeyDown="{{bdKey1}}"><div class="bd-face bd-front bx-face" style="padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px; width: 300px; display: flex; flex-direction: column; gap: 0px">
+  <div class="bd-top"><span>2022 — now</span><span>4 YEARS</span></div>
+  <div class="bd-photo" style="background-color: #d5ecff; height: 260px"><img src="/_blob/23c37e811ab58e300330f9e6721ba16c" alt="Photo of Tin" style="width: 100%; height: 100%; object-fit: cover; object-position: 50% 24%"></div>
+  <div style="box-sizing: border-box; display: flex; flex-direction: row; gap: 12px; align-items: center"><div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 2px; width: 100%; height: 75px"><p class="bd-name" style="font-weight: 400; font-size: 16px">Senior Product Designer</p><p class="bd-role" style="font-weight: 400; font-size: 14px">Microsoft AI</p></div><div style="box-sizing: border-box; display: grid; place-items: center; border-radius: 8px; width: 80px; height: 52px"><svg viewBox="0 0 20 20" width="30" height="30" aria-label="Microsoft" role="img" style="display: block"><rect x="0" y="0" width="9" height="9" fill="#f25022"></rect><rect x="11" y="0" width="9" height="9" fill="#7fba00"></rect><rect x="0" y="11" width="9" height="9" fill="#00a4ef"></rect><rect x="11" y="11" width="9" height="9" fill="#ffb900"></rect></svg></div></div>
+  <div class="bd-foot"><span style="color: #6e6e6e">VIEW PROFILE</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+</div><div class="bd-face bd-back bx-face" style="width: 300px; padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px">
+  <div class="bd-top"><span>Senior Product Designer at Microsoft AI</span></div>
+  
+  <p class="bd-desc" style="font-size: 16px">I design search across Bing, Edge and Windows: helping people find what they need, growing Bing, and exploring what AI agents could do in search.</p>
+  <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+</div></div></div></div>
+      <div class="bd-hang" aria-hidden="true" style="--t: 2.5deg; --drop: 150px; --dl: -2.1s; --pin: 12px"><span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span><div class="bd-swing"><span class="bd-clip" aria-hidden="true"></span><div class="bd-card {{bdFlip2Class}}" role="button" tabindex="-1" aria-pressed="{{bdFlip2On}}" aria-label="University of Oregon · Product Design Instructor badge, flip for details" onClick="{{bdFlip2}}" onKeyDown="{{bdKey2}}"><div class="bd-face bd-front bx-face" style="padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px; width: 300px; display: flex; flex-direction: column; gap: 0px">
+  <div class="bd-top"><span>2023 — now</span><span>3 YEARS</span></div>
+  <div class="bd-photo" style="background-color: #d5ecff; height: 260px"><img src="/_blob/23c37e811ab58e300330f9e6721ba16c" alt="Photo of Tin" style="width: 100%; height: 100%; object-fit: cover; object-position: 50% 24%"></div>
+  <div style="box-sizing: border-box; display: flex; flex-direction: row; gap: 12px; align-items: center"><div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 2px; width: 100%; height: 75px"><p class="bd-name" style="font-weight: 400; font-size: 16px">Product Design Instructor</p><p class="bd-role" style="font-weight: 400; font-size: 14px">University of Oregon</p></div><div style="box-sizing: border-box; display: grid; place-items: center; border-radius: 8px; width: 80px; height: 52px"><img src="/_blob/00e0e1ec841a28c4e0055e4a6738e6b1" alt="University of Oregon" style="display: block; width: 46%; height: auto"></div></div>
+  <div class="bd-foot"><span style="color: #6e6e6e">VIEW PROFILE</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+</div><div class="bd-face bd-back bx-face" style="width: 300px; padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px">
+  <div class="bd-top"><span>Product Design Instructor at University of Oregon</span></div>
+  
+  <p class="bd-desc" style="font-size: 16px">I teach UX and product design at the school where I studied industrial design. Students learn the way I still work: by building and prototyping.</p>
+  <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+</div></div></div></div>
+      <div class="bd-hang" aria-hidden="true" style="--t: -2deg; --drop: 100px; --dl: -3.4s; --pin: 12px"><span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span><div class="bd-swing"><span class="bd-clip" aria-hidden="true"></span><div class="bd-card {{bdFlip3Class}}" role="button" tabindex="-1" aria-pressed="{{bdFlip3On}}" aria-label="2U · UX/UI Bootcamp Instructor badge, flip for details" onClick="{{bdFlip3}}" onKeyDown="{{bdKey3}}"><div class="bd-face bd-front bx-face" style="padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px; width: 300px; display: flex; flex-direction: column; gap: 0px">
+  <div class="bd-top"><span>2021 —</span><span>REMOTE</span></div>
+  <div class="bd-photo" style="background-color: #d5ecff; height: 260px"><img src="/_blob/7cf40081dbe5d6b4a1824a5ac5755b57" alt="Tin teaching a bootcamp class on Zoom" style="width: 100%; height: 100%; object-fit: cover; object-position: 0% 50%"></div>
+  <div style="box-sizing: border-box; display: flex; flex-direction: row; gap: 12px; align-items: center"><div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 2px; width: 100%; height: 75px"><p class="bd-name" style="font-weight: 400; font-size: 16px">UX/UI Bootcamp Instructor</p><p class="bd-role" style="font-weight: 400; font-size: 14px">2U</p></div><div style="box-sizing: border-box; display: grid; place-items: center; border-radius: 8px; width: 80px; height: 52px"><span style="font-weight: 700; font-size: 20px; color: #141414; letter-spacing: -0.02em">2U</span></div></div>
+  <div class="bd-foot"><span style="color: #6e6e6e">VIEW PROFILE</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+</div><div class="bd-face bd-back bx-face" style="width: 300px; padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px">
+  <div class="bd-top"><span>UX/UI Bootcamp Instructor at 2U</span></div>
+  
+  <p class="bd-desc" style="font-size: 16px">I led cohorts through a 24-week bootcamp in UX research, UX and UI design and front-end development, teaching with the University of Oregon, UC Berkeley, Michigan, Minnesota, Utah and Arizona.</p>
+  <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+</div></div></div></div>
+      <div class="bd-hang" aria-hidden="true" style="--t: 3deg; --drop: 60px; --dl: -1.2s; --pin: 12px"><span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span><div class="bd-swing"><span class="bd-clip" aria-hidden="true"></span><div class="bd-card {{bdFlip4Class}}" role="button" tabindex="-1" aria-pressed="{{bdFlip4On}}" aria-label="Salesforce · Designer badge, flip for details" onClick="{{bdFlip4}}" onKeyDown="{{bdKey4}}"><div class="bd-face bd-front bx-face" style="padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px; width: 300px; display: flex; flex-direction: column; gap: 0px">
+  <div class="bd-top"><span>2020 — 2022</span><span>2 YEARS</span></div>
+  <div class="bd-photo" style="background-color: #d5ecff; height: 260px"><img src="/_blob/8bd998ead1110dbdb0a707cdb0cb6c60" alt="Tin with his Salesforce team" style="width: 100%; height: 100%; object-fit: cover"></div>
+  <div style="box-sizing: border-box; display: flex; flex-direction: row; gap: 12px; align-items: center"><div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 2px; width: 100%; height: 75px"><p class="bd-name" style="font-weight: 400; font-size: 16px">Designer</p><p class="bd-role" style="font-weight: 400; font-size: 14px">Salesforce</p></div><div style="box-sizing: border-box; display: grid; place-items: center; border-radius: 8px; width: 80px; height: 52px"><img src="/_blob/ac43d25c19be4e522f4bd492e1c090ab" alt="Salesforce" style="display: block; width: 72%; height: auto"></div></div>
+  <div class="bd-foot"><span style="color: #6e6e6e">VIEW PROFILE</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+</div><div class="bd-face bd-back bx-face" style="width: 300px; padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px">
+  <div class="bd-top"><span>Designer at Salesforce</span></div>
+  
+  <p class="bd-desc" style="font-size: 16px">I redesigned search and content for Salesforce Help, which cut support cases by 60% per month, built a back-to-work app for 75K employees, shipped more than 8 Partner Community features, and added components to the C360 design system across 12 product teams.</p>
+  <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+</div></div></div></div>
+      <div class="bd-hang" aria-hidden="true" style="--t: -3deg; --drop: 130px; --dl: -2.7s; --pin: 12px"><span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span><div class="bd-swing"><span class="bd-clip" aria-hidden="true"></span><div class="bd-card {{bdFlip5Class}}" role="button" tabindex="-1" aria-pressed="{{bdFlip5On}}" aria-label="Salesforce · Associate Designer badge, flip for details" onClick="{{bdFlip5}}" onKeyDown="{{bdKey5}}"><div class="bd-face bd-front bx-face" style="padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px; width: 300px; display: flex; flex-direction: column; gap: 0px">
+  <div class="bd-top"><span>2018 — 2020</span><span>1.5 YEARS</span></div>
+  <div class="bd-photo" style="background-color: #d5ecff; height: 260px"><img src="/_blob/4094fbcab61c10292b1c2b76357bd090" alt="Photo of Tin" style="width: 100%; height: 100%; object-fit: cover; object-position: 50% 28%"></div>
+  <div style="box-sizing: border-box; display: flex; flex-direction: row; gap: 12px; align-items: center"><div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 2px; width: 100%; height: 75px"><p class="bd-name" style="font-weight: 400; font-size: 16px">Associate Designer</p><p class="bd-role" style="font-weight: 400; font-size: 14px">Salesforce</p></div><div style="box-sizing: border-box; display: grid; place-items: center; border-radius: 8px; width: 80px; height: 52px"><img src="/_blob/ac43d25c19be4e522f4bd492e1c090ab" alt="Salesforce" style="display: block; width: 72%; height: auto"></div></div>
+  <div class="bd-foot"><span style="color: #6e6e6e">VIEW PROFILE</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+</div><div class="bd-face bd-back bx-face" style="width: 300px; padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px">
+  <div class="bd-top"><span>Associate Designer at Salesforce</span></div>
+  
+  <p class="bd-desc" style="font-size: 16px">I worked with stakeholders to map customer experiences, find pain points and spot opportunities, then designed wireframe concepts with the Salesforce Lightning Design System.</p>
+  <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+</div></div></div></div>
+      <div class="bd-hang" aria-hidden="true" style="--t: 2deg; --drop: 90px; --dl: -4.0s; --pin: 12px"><span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span><div class="bd-swing"><span class="bd-clip" aria-hidden="true"></span><div class="bd-card {{bdFlip6Class}}" role="button" tabindex="-1" aria-pressed="{{bdFlip6On}}" aria-label="Salesforce · Product Design Intern badge, flip for details" onClick="{{bdFlip6}}" onKeyDown="{{bdKey6}}"><div class="bd-face bd-front bx-face" style="padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px; width: 300px; display: flex; flex-direction: column; gap: 0px">
+  <div class="bd-top"><span>2017</span><span>SUMMER</span></div>
+  <div class="bd-photo" style="background-color: #d5ecff; height: 260px"><img src="/_blob/23c37e811ab58e300330f9e6721ba16c" alt="Photo of Tin" style="width: 100%; height: 100%; object-fit: cover; object-position: 50% 24%"></div>
+  <div style="box-sizing: border-box; display: flex; flex-direction: row; gap: 12px; align-items: center"><div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 2px; width: 100%; height: 75px"><p class="bd-name" style="font-weight: 400; font-size: 16px">Product Design Intern</p><p class="bd-role" style="font-weight: 400; font-size: 14px">Salesforce</p></div><div style="box-sizing: border-box; display: grid; place-items: center; border-radius: 8px; width: 80px; height: 52px"><img src="/_blob/ac43d25c19be4e522f4bd492e1c090ab" alt="Salesforce" style="display: block; width: 72%; height: auto"></div></div>
+  <div class="bd-foot"><span style="color: #6e6e6e">VIEW PROFILE</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+</div><div class="bd-face bd-back bx-face" style="width: 300px; padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px">
+  <div class="bd-top"><span>Product Design Intern at Salesforce</span></div>
+  
+  <p class="bd-desc" style="font-size: 16px">I redesigned the onboarding experience for new employees at Salesforce by creating an onboarding portal where they could access information, search for benefits, and manage their profiles as they started working at the company. I also designed the branding for a Salesforce hackathon.</p>
+  <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+</div></div></div></div>
+      <div class="bd-hang" aria-hidden="true" style="--t: -2.5deg; --drop: 140px; --dl: -1.8s; --pin: 12px"><span class="bd-pin" aria-hidden="true"></span><span class="bd-thread" aria-hidden="true"></span><div class="bd-swing"><span class="bd-clip" aria-hidden="true"></span><div class="bd-card {{bdFlip7Class}}" role="button" tabindex="-1" aria-pressed="{{bdFlip7On}}" aria-label="University of Oregon · BS Industrial Design badge, flip for details" onClick="{{bdFlip7}}" onKeyDown="{{bdKey7}}"><div class="bd-face bd-front bx-face" style="padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px; width: 300px; display: flex; flex-direction: column; gap: 0px">
+  <div class="bd-top"><span>2014 — 2018</span><span>BUSINESS MINOR</span></div>
+  <div class="bd-photo" style="background-color: #d5ecff; height: 260px"><img src="/_blob/4eac407aac52c547e08dbd5a341e2432" alt="Tin at his University of Oregon graduation" style="width: 100%; height: 100%; object-fit: cover; object-position: 42% 30%"></div>
+  <div style="box-sizing: border-box; display: flex; flex-direction: row; gap: 12px; align-items: center"><div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 2px; width: 100%; height: 75px"><p class="bd-name" style="font-weight: 400; font-size: 16px">BS Industrial Design</p><p class="bd-role" style="font-weight: 400; font-size: 14px">University of Oregon</p></div><div style="box-sizing: border-box; display: grid; place-items: center; border-radius: 8px; width: 80px; height: 52px"><img src="/_blob/00e0e1ec841a28c4e0055e4a6738e6b1" alt="University of Oregon" style="display: block; width: 46%; height: auto"></div></div>
+  <div class="bd-foot"><span style="color: #6e6e6e">VIEW PROFILE</span><span class="bd-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+</div><div class="bd-face bd-back bx-face" style="width: 300px; padding-top: 20px; padding-right: 20px; padding-bottom: 12px; padding-left: 20px">
+  <div class="bd-top"><span>BS Industrial Design at University of Oregon</span></div>
+  
+  <p class="bd-desc" style="font-size: 16px">I studied industrial design with a business minor: sketching, CAD, rendering and building prototypes by hand. I won 1st place overall at Quackhatch @UO in 2018.</p>
+  <div class="bd-foot"><span>Flip back</span><span class="bd-arrow bd-arrow-back"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+</div></div></div></div>
     </div></div>
-    <div class="bd-edge bd-edge-l" aria-hidden="true"><i></i><i></i><i></i><i></i></div><div class="bd-edge bd-edge-r" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="bd-edge bd-edge-l" aria-hidden="true"><i></i><i></i><i></i><i></i></div><div class="bd-edge bd-edge-r" aria-hidden="true" style="width: 150px"><i></i><i></i><i></i><i></i></div>
     <button type="button" class="bd-nav bd-nav-l" aria-label="Previous job" onClick="{{bdPrev}}"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true"><path d="M15 5 8 12l7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><button type="button" class="bd-nav bd-nav-r" aria-label="Next job" onClick="{{bdNext}}"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true"><path d="m9 5 7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
   </section>
 
@@ -1298,12 +1025,12 @@ class Component extends DCLogic {
     const reduce = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
     this.bdTw = { from: this.bdPos ?? this.bdTarget(this.bdIdx - d), to: this.bdTarget(this.bdIdx), t0: performance.now(), dur: reduce ? 1 : this.tp('slideMs', 1100) };
   }
-  bdTarget(i) { return this.tp('carouselStart', 150) - (8 + i) * (this.tp('badgeWidth', 300) + this.tp('badgeGap', 64)); }
+  bdTarget(i) { return this.tp('carouselStart', 150) - (7 + i) * (this.tp('badgeWidth', 300) + this.tp('badgeGap', 64)); }
   bdStart() {
     clearInterval(this.tBdAuto); cancelAnimationFrame(this.bdRaf);
     const reduce = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
     this.bdIdx = 0; this.bdPos = null; this.bdTh = []; this.bdOm = []; this.bdT = performance.now(); this.bdVel = 0;
-    const n = 8, ease = (u) => (u < 0.5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2);
+    const n = 7, ease = (u) => (u < 0.5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2);
     const tick = (now) => {
       this.bdRaf = requestAnimationFrame(tick);
       const tr = this.bdTrackEl; if (!tr || !tr.isConnected) return;
@@ -1380,7 +1107,7 @@ class Component extends DCLogic {
       ppSketch: () => this.trailForm('ph_sketch'), ppMatcha: () => this.trailForm('ph_matcha'), ppPoppy: () => this.trailForm('ph_poppy'), ppPup: () => this.trailForm('ph_pup'), ppLeave: () => this.trailRelease(),
       bdWidth: this.tp('badgeWidth', 300) + 'px', bdRadius: this.tp('badgeRadius', 22) + 'px', bdColor: this.tp('badgeColor', '#f2f2f2'), bdPhotoRadius: this.tp('photoRadius', 14) + 'px',
       bdTilt: String(this.tp('badgeTilt', 1)), bdFlipMs: this.tp('flipMs', 700) + 'ms', bdWire: this.tp('stringColor', '#9d9d9d'), bdGap: this.tp('badgeGap', 64) + 'px', bdEdge: this.tp('edgeWidth', 220) + 'px', bdEdgeBlur: this.tp('edgeBlur', 12) + 'px',
-      bdX: `translate3d(${this.tp('carouselStart', 150) - (8 + (this.state.bdI || 0)) * (this.tp('badgeWidth', 300) + this.tp('badgeGap', 64))}px, 0, 0)`,
+      bdX: `translate3d(${this.tp('carouselStart', 150) - (7 + (this.state.bdI || 0)) * (this.tp('badgeWidth', 300) + this.tp('badgeGap', 64))}px, 0, 0)`,
       bdTrans: this.state.bdAnim ? `transform ${this.tp('slideMs', 900)}ms cubic-bezier(.65, 0, .25, 1)` : 'none', bdMovingClass: this.state.bdMoving ? 'bd-moving' : '',
       bdPrev: () => this.bdGo(-1), bdNext: () => this.bdGo(1), bdTrackRef: (el) => { this.bdTrackEl = el; },
       bdPoke: (e) => { const h = e.target && e.target.closest && e.target.closest('.bd-hang'); if (!h || h === this.bdLastPoke || !this.bdTrackEl) return; this.bdLastPoke = h; const j = Array.prototype.indexOf.call(this.bdTrackEl.children, h); if (j >= 0) this.bdOm[j] = (this.bdOm[j] || 0) + 26 * this.tp('swingAmount', 1) * (Math.random() < 0.5 ? -1 : 1); }, bdHold: () => { this.bdHeld = true; }, bdFree: () => { this.bdHeld = false; }, bdSwayClass: this.tp('badgeSway', true) === false ? '' : 'bd-sway',
