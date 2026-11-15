@@ -228,11 +228,11 @@
     },
     "Piece-46el.dc.html": {
       "frameless": true,
-      "h": 622,
+      "h": 2608,
       "page": "page-vmnxsd",
       "title": "Box (3)",
-      "w": 683,
-      "x": 13909,
+      "w": 1406,
+      "x": 15460,
       "y": 18174
     },
     "Piece-4wk9.dc.html": {
@@ -731,6 +731,16 @@
       "x": 13651,
       "y": 17137
     },
+    "image-tinclean": {
+      "alt": "Tin photo, cleaned up (arms removed, higher resolution)",
+      "h": 618,
+      "kind": "image",
+      "page": "page-vmnxsd",
+      "src": "/_blob/23c37e811ab58e300330f9e6721ba16c",
+      "w": 494,
+      "x": 14630,
+      "y": 18827
+    },
     "image-umye47": {
       "alt": "Microsoft Edge Canary •2026-11-14 at 23.37",
       "h": 604,
@@ -793,16 +803,6 @@
       "w": 240,
       "x": 9120,
       "y": 2600
-    },
-    "image-tinclean": {
-      "alt": "Tin photo, cleaned up (arms removed, higher resolution)",
-      "h": 618,
-      "kind": "image",
-      "page": "page-vmnxsd",
-      "src": "/_blob/23c37e811ab58e300330f9e6721ba16c",
-      "w": 494,
-      "x": 14630,
-      "y": 18827
     }
   },
   "order": [
