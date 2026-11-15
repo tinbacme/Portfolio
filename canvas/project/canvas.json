@@ -353,6 +353,16 @@
       "x": 3985,
       "y": 4240
     },
+    "TinHome-About.dc.html": {
+      "expand": "fill",
+      "h": 1800,
+      "is_interactive": true,
+      "page": "page-vmnxsd",
+      "title": "Tin Le · About",
+      "w": 1440,
+      "x": 12016,
+      "y": 13880
+    },
     "TinHome-Mobile-A.dc.html": {
       "expand": "fill",
       "h": 4600,
@@ -412,16 +422,6 @@
       "w": 390,
       "x": 4979,
       "y": 9080
-    },
-    "TinHome-Party-Desktop-fx15.dc.html": {
-      "expand": "fill",
-      "h": 2090,
-      "is_interactive": true,
-      "page": "page-vmnxsd",
-      "title": "Tin Le · Homepage · Party mode · desktop (tap the corner button) copy",
-      "w": 1440,
-      "x": 12080,
-      "y": 13880
     },
     "TinHome-Party-Desktop.dc.html": {
       "expand": "fill",
@@ -680,15 +680,15 @@
       "x": 19760,
       "y": 0
     },
-    "TinHome-About.dc.html": {
+    "TinHome-Stuart.dc.html": {
       "expand": "fill",
-      "h": 1800,
+      "h": 9100,
       "is_interactive": true,
       "page": "page-vmnxsd",
-      "title": "Tin Le · About",
+      "title": "Tin Le · Portfolio in the stuart.re style",
       "w": 1440,
-      "x": 10305,
-      "y": 16170
+      "x": 0,
+      "y": 13880
     }
   },
   "createdOnFiles": {
@@ -946,7 +946,7 @@
     "Piece-46el.dc.html",
     "Piece-4wk9.dc.html",
     "Piece-fmcq.dc.html",
-    "TinHome-Party-Desktop-fx15.dc.html"
+    "TinHome-Stuart.dc.html"
   ],
   "pages": [
     {
