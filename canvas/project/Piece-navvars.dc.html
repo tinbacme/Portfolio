@@ -112,11 +112,11 @@ sc-for, sc-if { display: contents; }
 .st-soft{background:#fbfbfb;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)}
 .l9-blob{position:absolute;border-radius:50%;filter:blur(28px);opacity:.85;pointer-events:none}
 .l9{position:absolute;left:28px;top:44px;display:flex;flex-direction:column;gap:8px}
-.l9-spine{position:absolute;left:0;top:22px;bottom:22px;width:1.5px;border-radius:1px;background:rgba(0,0,0,.12)}
-.l9-mark{position:absolute;left:-1px;top:4px;width:3.5px;height:36px;border-radius:2px;background:#141414;transition:transform .45s cubic-bezier(.6,0,.2,1)}
+.l9-spine{position:absolute;left:0;top:22px;bottom:22px;width:2px;border-radius:999px;background:rgba(0,0,0,.12)}
+.l9-mark{position:absolute;left:-1px;top:4px;width:4px;height:36px;border-radius:999px;background:#141414;transition:transform .45s cubic-bezier(.6,0,.2,1)}
 .l9 a{position:relative;display:flex;align-items:center;height:44px}
-.l9-br{position:relative;flex:none;width:18px;height:1.5px;background:rgba(0,0,0,.12);overflow:hidden}
-.l9-br::after{content:"";position:absolute;inset:0;background:#141414;transform:scaleX(0);transform-origin:left;transition:transform .18s ease}
+.l9-br{position:relative;flex:none;width:18px;height:2px;margin-left:1px;border-radius:999px;background:rgba(0,0,0,.12);overflow:hidden}
+.l9-br::after{content:"";position:absolute;inset:0;border-radius:inherit;background:#141414;transform:scaleX(0);transform-origin:left;transition:transform .18s ease}
 .l9 a.on .l9-br::after{transform:scaleX(1);transition:transform .28s cubic-bezier(.3,.8,.3,1) .42s}
 .l9-tile{position:relative;flex:none;display:grid;place-items:center;width:40px;height:40px;border-radius:12px;isolation:isolate;box-shadow:inset 1.5px 1.5px 1px rgba(255,255,255,.9),inset -1px -1px 1px rgba(255,255,255,.55),inset 0 0 0 1px rgba(0,0,0,.06),0 6px 16px -8px rgba(0,0,0,.25);transition:box-shadow .3s .5s}
 .l9-fx{position:absolute;inset:0;z-index:-1;border-radius:inherit;background:rgba(255,255,255,.5);-webkit-backdrop-filter:blur(8px) saturate(1.7);backdrop-filter:blur(8px) saturate(1.7);backdrop-filter:url(#nv-glass) blur(8px) saturate(1.7);transition:background-color .3s ease .5s}
