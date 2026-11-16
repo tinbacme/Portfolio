@@ -1,10 +1,39 @@
 """Signature options board: 10 'Tin Le' signatures made with gpt-image-2.5-flare, on white and on dark, with a size preview."""
 import sys, json, math
 SIGDIR = '/tmp/claude-0/-home-user-Portfolio/981b70c2-10b1-51ba-9954-e71e8ead3214/scratchpad/sig/'
+ONE_LINE = {0}  # S1: the whole name in one continuous stroke first, the T crossbar dashed on at the end
+def one_line_svg(i, blob, alt, t, total=2.6):
+    W, H, sw = t['w'], t['h'], t['sw']
+    st = [list(map(tuple, x)) for x in t['strokes']]
+    ln = lambda x: sum(math.dist(a, b) for a, b in zip(x, x[1:]))
+    # the crossbar: the long stroke that sits highest
+    bar = min((k for k in range(len(st)) if ln(st[k]) > 0.3 * W), key=lambda k: sum(p[1] for p in st[k]) / len(st[k]))
+    rest = [x for k, x in enumerate(st) if k != bar]
+    # start at the top of the T stem (highest endpoint left of center), then chain nearest ends like one pen line
+    cand = [(x, False) for x in rest] + [(x, True) for x in rest]
+    first, rev = min(cand, key=lambda c: (c[0][-1] if c[1] else c[0][0])[1] + (0 if (c[0][-1] if c[1] else c[0][0])[0] < W * 0.5 else 1e4))
+    order = [list(reversed(first)) if rev else list(first)]; left = [x for x in rest if x is not first]
+    while left:
+        tip = order[-1][-1]
+        best = min(((x, r) for x in left for r in (False, True)), key=lambda c: math.dist(tip, c[0][-1] if c[1] else c[0][0]))
+        x, r = best; order.append(list(reversed(x)) if r else list(x)); left = [y for y in left if y is not x]
+    # one continuous path (dashes restart per subpath, so joining keeps it a single pen line drawn in order)
+    body = 'M' + ' L'.join(f'{x:g} {y:g}' for seg in order for x, y in seg)
+    barpts = st[bar] if st[bar][0][0] < st[bar][-1][0] else list(reversed(st[bar]))  # dash it left to right
+    bd = 'M' + ' L'.join(f'{x:g} {y:g}' for x, y in barpts)
+    Lb, Lr = ln(barpts), sum(ln(x) for x in order)
+    tb = max(0.35, total * Lb / (Lb + Lr) * 0.7); tr = total - tb
+    paths = (f'<path d="{body}" pathLength="1" style="animation-duration: {tr:.3f}s; animation-delay: calc(var(--cd, 0s) + 0s)"></path>'
+             f'<path d="{bd}" pathLength="1" style="animation-duration: {tb:.3f}s; animation-delay: calc(var(--cd, 0s) + {tr + 0.12:.3f}s); animation-timing-function: cubic-bezier(.2,.7,.3,1)"></path>')
+    sc = min(440 / W, 170 / H)
+    return (f'<svg class="sg-sign" viewBox="0 0 {W} {H}" width="{W * sc:.0f}" height="{H * sc:.0f}" role="img" aria-label="{alt}">'
+            f'<defs><mask id="sgm{i}" maskUnits="userSpaceOnUse" x="0" y="0" width="{W}" height="{H}"><g fill="none" stroke="#fff" stroke-width="{sw}" stroke-linecap="round" stroke-linejoin="round">{paths}</g></mask></defs>'
+            f'<image href="{blob}" x="0" y="0" width="{W}" height="{H}" mask="url(#sgm{i})"></image></svg>')
 def signing_svg(i, blob, alt, total=2.6, lift=0.12):
     """The original ink, revealed through a mask whose strokes follow the traced pen path in order."""
     t = json.load(open(SIGDIR + 'tr%02d.json' % (i + 1)))
     W, H, sw = t['w'], t['h'], t['sw']
+    if i in ONE_LINE: return one_line_svg(i, blob, alt, t, total)
     lens = [sum(math.dist(a, b) for a, b in zip(st, st[1:])) for st in t['strokes']]
     L = sum(lens) or 1; avail = max(0.6, total - lift * (len(lens) - 1))
     paths, at = [], 0.0
