@@ -217,6 +217,14 @@
    "x": 13680,
    "y": 4360
   },
+  "PhotoDotsLab.dc.html": {
+   "h": 2180,
+   "page": "page-vmnxsd",
+   "title": "Photo dots lab",
+   "w": 1440,
+   "x": -1600,
+   "y": 15300
+  },
   "Piece-0w09.dc.html": {
    "frameless": true,
    "h": 412,
@@ -462,7 +470,7 @@
   },
   "TinHome-Stuart.dc.html": {
    "expand": "fill",
-   "h": 9400,
+   "h": 8000,
    "is_interactive": true,
    "page": "page-vmnxsd",
    "title": "Tin Le · Portfolio in the stuart.re style",
@@ -707,13 +715,13 @@
    "x": 19760,
    "y": 0
   },
-  "PhotoDotsLab.dc.html": {
-   "h": 2180,
+  "NavHeaderVariations.dc.html": {
+   "h": 1780,
    "page": "page-vmnxsd",
-   "title": "Photo dots lab",
+   "title": "Header nav · 5 variations",
    "w": 1440,
-   "x": -1600,
-   "y": 15300
+   "x": 4397,
+   "y": 15863
   }
  },
  "createdOnFiles": {
@@ -974,7 +982,8 @@
   "TinHome-Stuart.dc.html",
   "Piece-y8f4.dc.html",
   "Piece-navvars.dc.html",
-  "PhotoDotsLab.dc.html"
+  "PhotoDotsLab.dc.html",
+  "NavHeaderVariations.dc.html"
  ],
  "pages": [
   {
