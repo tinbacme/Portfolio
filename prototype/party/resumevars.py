@@ -349,6 +349,280 @@ def v10():
             + '</div>')
 
 
+# ================================================================ round 3: Awwwards / Codrops-inspired V12-V17
+import json, math
+
+SR = lambda txt: f'<span class="sr">{txt}</span>'
+
+
+def plain_list():
+    """static text version used under the playful variations."""
+    li = ''.join(f'<li><b>{h(r["org"])}</b> &#183; {T(r, ", ")} <span>{h(r["dates"])}</span></li>' for r in R)
+    li += f'<li><b>{h(EDU["title"])}</b> &#183; {h(EDU["org"])} <span>{h(EDU["dates"])}</span></li>'
+    return f'<ul class="plain">{li}</ul>'
+
+
+# ---------------------------------------------------------------- V12 terminal
+T12_CMDS = [('whoami', 'whoami'), ('history', 'history'), ('teach', 'teach'), ('ls', 'ls ./microsoft-ai'), ('edu', 'cat education.txt')]
+T12_OUT = {
+    'whoami': 'Tin Le — Senior Product Designer at Microsoft AI.\nI also teach product design at the University of Oregon.\n9 years designing products.',
+    'history': ('YEARS      ORG                   ROLE\n'
+                '2022–      Microsoft AI          Senior Product Designer\n'
+                '2023–      University of Oregon  Product Design Instructor\n'
+                '2021–      2U                    UX/UI Bootcamp Instructor\n'
+                '2017–2022  Salesforce            Designer\n'
+                '                                 Associate Designer\n'
+                '                                 Summer UX Designer (intern)\n'
+                '2017       Luxium Lighting       Product Designer'),
+    'teach': ('uo  Product Design Instructor, University of Oregon, 2023–\n'
+              '    12-week course: UX research, UX/UI design, prototyping\n'
+              '2u  UX/UI Bootcamp Instructor, 2U, 2021–\n'
+              '    24-week cohorts with UO, UC Berkeley, Michigan,\n'
+              '    Minnesota, Utah and Arizona'),
+    'ls': ('scope.txt   Search across Bing, Edge and Windows, and what\n'
+           '            AI agents could do in search.\n'
+           'work/       [redacted — ask me in person]'),
+    'edu': 'BS Industrial Design, Business minor\nUniversity of Oregon, 2014–2018\n1st place overall, Quackhatch @UO 2018',
+}
+T12_LABEL = dict(T12_CMDS)
+
+
+def v12():
+    chips = ''.join(f'<button type="button" class="v12-chip" onClick="{{{{t12f{k}}}}}">{lab}</button>' for k, lab in T12_CMDS)
+    chips += '<button type="button" class="v12-chip ghost" onClick="{{t12fclear}}">clear</button>'
+    return (f'<div class="v12"><div class="v12-bar" aria-hidden="true"><i></i><i></i><i></i><span>tin --history</span></div>'
+            f'<div class="v12-scr" ref="{{{{r12}}}}"><pre class="v12-out" aria-hidden="true">{{{{t12vis}}}}<span class="v12-cur {{{{t12cur}}}}"></span></pre>'
+            f'<div class="sr" aria-live="polite">{{{{t12sr}}}}</div></div>'
+            f'<div class="v12-cmds" role="group" aria-label="Run a command"><span class="v12-ps" aria-hidden="true">$ tin</span>{chips}</div></div>'
+            f'<details class="v12-det"><summary>Plain {h("résumé")} text</summary>{plain_list()}</details>' + foot())
+
+
+# ---------------------------------------------------------------- V13 ask my resume
+Q13 = [('What do you do at Microsoft?',
+        'I\'m a Senior Product Designer at Microsoft AI, working on search across Bing, Edge and Windows, and what AI agents could do in search. '
+        'The work is under NDA — happy to walk you through it in person.', [2, 1]),
+       ('Where do you teach?',
+        'At the University of Oregon since 2023: a 12-week course in UX research, UX/UI design and prototyping. Since 2021 I\'ve also led '
+        '24-week UX/UI bootcamp cohorts with 2U, with UO, UC Berkeley, Michigan, Minnesota, Utah and Arizona.', [3, 0]),
+       ('Biggest Salesforce win?',
+        'Redesigning search and content for Salesforce Help, which cut support cases 60% a month. I also built a back-to-work app for 75K '
+        'employees, shipped 8+ Partner Community features, and added components to the C360 design system across 12 product teams.', [4, 3]),
+       ('Why industrial design?',
+        'It\'s where I started: a BS in Industrial Design with a Business minor at the University of Oregon, 2014–2018 — sketching, CAD, '
+        'rendering and prototyping by hand. I took 1st place overall at Quackhatch @UO 2018, and at Luxium Lighting I took an LED light '
+        'from concept to working prototype.', [0, 2]),
+       ('How did Salesforce start?',
+        'As a Summer UX Designer intern in 2017: onboarding improvements and branding for a Salesforce hackathon. Then Associate Designer, '
+        '2018–2020, and Designer, 2020–2022.', [1, 0])]
+
+
+def v13():
+    qa = ''.join(
+        f'<div class="v13-qa {{{{q13c{i}}}}}" style="order: {{{{q13o{i}}}}}"><p class="v13-u">{h(q)}</p>'
+        f'<p class="v13-a"><span aria-hidden="true">{{{{q13v{i}}}}}<span class="v13-cur {{{{q13cur{i}}}}}"></span></span>{SR(h(a))}</p></div>'
+        for i, (q, a, _) in enumerate(Q13))
+    chips = ''.join(f'<button type="button" class="v13-chip {{{{q13k{i}}}}}" onClick="{{{{q13f{i}}}}}">{h(q)}</button>' for i, (q, a, _) in enumerate(Q13))
+    chips += '<button type="button" class="v13-chip ghost {{q13rk}}" onClick="{{q13r}}">Start over</button>'
+    return (f'<div class="v13"><div class="v13-hd"><span class="v13-av" aria-hidden="true">t</span><div><p class="v13-n">Ask my {h("résumé")}</p>'
+            f'<p class="v13-st">Pre-written answers from my {h("résumé")} &#183; no live AI</p></div></div>'
+            f'<div class="v13-log" role="log" aria-live="polite" ref="{{{{r13}}}}"><div class="v13-qa on" style="order: 0"><p class="v13-a">Hi, I&#8217;m Tin. '
+            f'Pick a question below and I&#8217;ll answer from my {h("résumé")}.</p></div>{qa}</div>'
+            f'<div class="v13-chips" role="group" aria-label="Suggested questions">{chips}</div></div>' + foot())
+
+
+# ---------------------------------------------------------------- V14 workbench
+def v14_svg():
+    ink, g1, g2, g3, acc, acc2 = '#141414', '#f4f4f4', '#e4e4e4', '#cfcfcf', '#0099ff', '#e0f3ff'
+    desk = (f'<polygon points="40,230 380,90 720,230 380,370" fill="#ffffff" stroke="{ink}" stroke-width="1.5" stroke-linejoin="round"></polygon>'
+            f'<polygon points="40,230 380,370 380,386 40,246" fill="{g2}" stroke="{ink}" stroke-width="1.5" stroke-linejoin="round"></polygon>'
+            f'<polygon points="380,370 720,230 720,246 380,386" fill="{g3}" stroke="{ink}" stroke-width="1.5" stroke-linejoin="round"></polygon>'
+            f'<path d="M56 252v80M380 386v66M704 252v80" stroke="{ink}" stroke-width="1.5" stroke-linecap="round"></path>')
+    shadow = lambda cx, cy, rx, ry: f'<ellipse cx="{cx}" cy="{cy}" rx="{rx}" ry="{ry}" fill="#000" opacity=".07"></ellipse>'
+    o = []
+    # 0 envelope (Microsoft, sealed)
+    o.append(shadow(222, 268, 74, 20) +
+             f'<polygon points="150,262 238,226 296,252 208,288" fill="#fff" stroke="{ink}" stroke-width="1.5" stroke-linejoin="round"></polygon>'
+             f'<path d="M150 262l74 -6l14 -30M224 256l72 -4" fill="none" stroke="{ink}" stroke-width="1.2" stroke-linejoin="round"></path>'
+             f'<circle cx="224" cy="256" r="12" fill="{acc}"></circle><text x="224" y="259" text-anchor="middle" font-family="IBM Plex Mono, monospace" '
+             f'font-size="8" font-weight="600" fill="#fff">NDA</text>')
+    # 1 chalkboard on easel + chalk (UO teaching)
+    o.append(shadow(158, 222, 60, 12) +
+             f'<path d="M120 222l22 -120M196 222l-22 -120M158 108v116" stroke="{ink}" stroke-width="1.5" stroke-linecap="round"></path>'
+             f'<rect x="100" y="104" width="116" height="78" rx="4" fill="#2b2b2d" stroke="{ink}" stroke-width="1.5"></rect>'
+             f'<path d="M114 122h40M114 134h62M114 146h30M168 160c8 -10 18 -10 26 0" stroke="#f4f4f4" stroke-width="2" stroke-linecap="round" fill="none" opacity=".85"></path>'
+             f'<rect x="186" y="214" width="20" height="5" rx="2" fill="#fff" stroke="{ink}" stroke-width="1" transform="rotate(-18 196 216)"></rect>')
+    # 2 laptop with cohort sticky notes (2U)
+    notes = ''.join(f'<rect x="{x}" y="{y}" width="17" height="17" rx="2" fill="{c}" stroke="{acc}" stroke-width="1" transform="rotate({r} {x + 8} {y + 8})"></rect>'
+                    for x, y, c, r in [(318, 98, acc2, -6), (340, 92, '#fff', 4), (362, 86, acc2, -3), (384, 80, '#fff', 6), (406, 74, acc2, -5), (428, 70, '#fff', 3)])
+    o.append(shadow(392, 214, 92, 22) +
+             f'<polygon points="312,196 446,142 446,72 312,126" fill="{ink}" stroke="{ink}" stroke-width="1.5" stroke-linejoin="round"></polygon>'
+             f'<polygon points="320,186 438,138 438,82 320,130" fill="#3a3a3c"></polygon>'
+             f'<polygon points="312,196 446,142 496,166 362,220" fill="{g1}" stroke="{ink}" stroke-width="1.5" stroke-linejoin="round"></polygon>'
+             f'<polygon points="350,196 440,160 466,172 376,208" fill="{g2}"></polygon>' + notes)
+    # 3 three stacked ID badges (Salesforce: three titles)
+    badges = ''
+    for j, (dx, dy, rot) in enumerate([(0, 0, -8), (14, -6, 0), (28, -12, 8)]):
+        x, y = 556 + dx, 128 + dy
+        top = acc if j == 2 else g3
+        badges += (f'<g transform="rotate({rot} {x + 26} {y + 40})"><rect x="{x}" y="{y}" width="52" height="76" rx="6" fill="#fff" stroke="{ink}" stroke-width="1.4"></rect>'
+                   f'<rect x="{x}" y="{y}" width="52" height="16" rx="6" fill="{top}"></rect><rect x="{x + 19}" y="{y + 4}" width="14" height="4" rx="2" fill="#fff"></rect>'
+                   f'<circle cx="{x + 26}" cy="{y + 34}" r="9" fill="{g2}"></circle><path d="M{x + 12} {y + 54}h28M{x + 16} {y + 62}h20" stroke="{g3}" stroke-width="3" stroke-linecap="round"></path></g>')
+    o.append(shadow(606, 224, 56, 12) + badges)
+    # 4 foam model + marker (industrial design / Luxium)
+    o.append(shadow(488, 316, 70, 16) +
+             f'<polygon points="440,286 488,266 536,286 488,306" fill="#fff" stroke="{ink}" stroke-width="1.4" stroke-linejoin="round"></polygon>'
+             f'<polygon points="440,286 488,306 488,338 440,318" fill="{g2}" stroke="{ink}" stroke-width="1.4" stroke-linejoin="round"></polygon>'
+             f'<polygon points="488,306 536,286 536,318 488,338" fill="{g3}" stroke="{ink}" stroke-width="1.4" stroke-linejoin="round"></polygon>'
+             f'<ellipse cx="488" cy="262" rx="18" ry="8" fill="#fff" stroke="{ink}" stroke-width="1.4"></ellipse>'
+             f'<path d="M470 262v-26a18 8 0 0 0 36 0v26" fill="#fff" stroke="{ink}" stroke-width="1.4"></path>'
+             f'<ellipse cx="488" cy="236" rx="18" ry="8" fill="{acc2}" stroke="{ink}" stroke-width="1.4"></ellipse>'
+             f'<g transform="rotate(-24 560 330)"><rect x="530" y="324" width="66" height="11" rx="5" fill="#fff" stroke="{ink}" stroke-width="1.4"></rect>'
+             f'<rect x="530" y="324" width="20" height="11" rx="5" fill="{ink}"></rect></g>')
+    gs = ''.join(f'<g class="v14-o v14-o{i} {{{{w14c{i}}}}}">{s}</g>' for i, s in enumerate(o))
+    return f'<svg class="v14-svg" viewBox="0 0 760 460" aria-hidden="true" focusable="false">{desk}{gs}</svg>'
+
+
+W14 = [  # label, box (x, y, w, h) in svg units, role key
+    ('Sealed NDA envelope', (146, 220, 156, 76), 'ms'),
+    ('Chalkboard and chalk', (96, 96, 128, 132), 'uo'),
+    ('Laptop with cohort notes', (306, 64, 194, 160), '2u'),
+    ('Three badges', (548, 104, 112, 124), 'sf'),
+    ('Marker and foam model', (436, 226, 168, 120), 'id'),
+]
+
+
+def v14():
+    btns = ''
+    for i, (lab, (x, y, w, hh), k) in enumerate(W14):
+        st = f'left: {x / 7.6:.2f}%; top: {y / 4.6:.2f}%; width: {w / 7.6:.2f}%; height: {hh / 4.6:.2f}%'
+        btns += (f'<button type="button" class="v14-b v14-b{i} {{{{w14c{i}}}}}" style="{st}" aria-pressed="{{{{w14x{i}}}}}" aria-controls="v14-card" '
+                 f'onClick="{{{{w14f{i}}}}}"><span class="v14-lab">{h(lab)}</span></button>')
+    cards = ''
+    for i, (lab, _, k) in enumerate(W14):
+        if k == 'id':
+            body = (f'<p class="v14-k">Industrial design</p><p class="v14-t">{h(EDU["title"])}</p><p class="v14-or">{h(EDU["org"])} &#183; {h(EDU["dates"])}</p>'
+                    f'<p class="v14-s">Sketching, CAD, rendering and prototyping by hand. {h(EDU["note"])}.</p>'
+                    f'<p class="v14-t sm">Product Designer &#183; Luxium Lighting &#183; 2017</p><p class="v14-s">{h(BY["lux"]["scope"])}</p>')
+        else:
+            r = BY[k]
+            kind = {'ms': 'Design &#183; now', 'uo': 'Teaching &#183; now', '2u': 'Teaching &#183; now', 'sf': 'Design &#183; past'}[k]
+            body = (f'<p class="v14-k">{kind}</p><p class="v14-t">{"<br>".join(h(t) for t in r["titles"])}</p>'
+                    f'<p class="v14-or">{h(r["org"])} &#183; {h(r["dates"])}</p><p class="v14-s">{h(r["scope"])}</p>{extra(r)}')
+        cards += f'<div class="v14-cd {{{{w14c{i}}}}}"><p class="v14-obj">{h(lab)}</p>{body}</div>'
+    return (f'<div class="v14"><div class="v14-scene">{v14_svg()}{btns}</div>'
+            f'<div class="v14-side"><div id="v14-card" aria-live="polite">{cards}</div>'
+            f'<details class="v12-det v14-det"><summary>Plain list</summary>{plain_list()}</details>{foot()}</div></div>')
+
+
+# ---------------------------------------------------------------- V15 sketch -> render
+SK_ICON = {
+    'ms': '<path d="M14 22h52v36H14z M14 22l26 20l26 -20"></path><circle cx="40" cy="44" r="6"></circle>',
+    'uo': '<path d="M12 16h56v38H12z M22 64l8 -10M58 64l-8 -10 M20 28h22M20 36h32M20 44h14"></path>',
+    '2u': '<path d="M18 18h44v30H18z M10 56h60l-6 -8H16z M24 24h8v8h-8z M36 24h8v8h-8z M48 24h8v8h-8z"></path>',
+    'sf': '<path d="M14 20h22v32H14z M30 16h22v32H30z M46 12h22v32H46z"></path>',
+    'lux': '<path d="M40 14a14 14 0 0 1 8 26v8h-16v-8a14 14 0 0 1 8 -26z M34 54h12M36 60h8"></path>',
+    'edu': '<path d="M40 14l24 12l-24 12l-24 -12z M16 26v24l24 12l24 -12v-24 M40 38v24"></path>',
+}
+SK_TINT = {'uo': '#e4f3eb', '2u': '#141414', 'sf': '#e2f4fb', 'lux': '#f6f2ea', 'edu': '#e4f3eb'}
+
+
+def v15():
+    items = [(r['k'], r) for r in R] + [('edu', None)]
+    cards = ''
+    for i, (k, r) in enumerate(items):
+        if r:
+            ttl = '<br>'.join(h(t) for t in r['titles']); org = f'{h(r["org"])} &#183; {h(r["dates"])}'; sc = h(r['scope']); lg = r['logo']
+        else:
+            ttl = h(EDU['title']); org = f'{h(EDU["org"])} &#183; {h(EDU["dates"])}'; sc = h(EDU['note']); lg = 'uo'
+        icon = f'<svg viewBox="0 0 80 72" width="80" height="72" aria-hidden="true" fill="none" stroke="#3a3a3a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">{SK_ICON[k]}</svg>'
+        sk = (f'<span class="v15-th sk">{icon}</span><span class="v15-t">{ttl}</span><span class="v15-o">{org}</span><span class="v15-s">{sc}</span>')
+        if k == 'ms':
+            cards += (f'<div class="v15-c ms"><span class="v15-sk">{sk}<span class="v15-note">NDA sketch &#8212; happy to walk you through it</span></span></div>')
+            continue
+        rd = (f'<span class="v15-th rd" style="background: {SK_TINT[k]}">{logo(lg, 30 if lg == "lux" else 26, "inv" if k == "2u" else "")}</span>'
+              f'<span class="v15-t">{ttl}</span><span class="v15-o">{org}</span><span class="v15-s">{sc}</span>')
+        cards += (f'<button type="button" class="v15-c{"" if (r and r["now"]) else " past"} {{{{r15c{i}}}}}" aria-pressed="{{{{r15x{i}}}}}" onClick="{{{{r15f{i}}}}}">'
+                  f'<span class="v15-sk">{sk}</span><span class="v15-rd" aria-hidden="true">{rd}</span></button>')
+    return (f'<div class="v15-top"><p class="v15-h">Marker sketch first, render on hover, focus or tap.</p>'
+            f'<button type="button" class="v15-all {{{{all15c}}}}" aria-pressed="{{{{all15x}}}}" onClick="{{{{all15f}}}}">'
+            f'<span class="t-off">Render all</span><span class="t-on">Back to sketch</span></button></div>'
+            f'<div class="v15 {{{{all15cls}}}}">{cards}</div>' + foot())
+
+
+# ---------------------------------------------------------------- V16 badge deck
+B16_BACK = {
+    'ms': 'Scope: search across Bing, Edge and Windows, and what AI agents could do in search. Under NDA — happy to walk you through it.',
+    'uo': 'What I teach: a 12-week course in UX research, UX/UI design and prototyping, at the school where I studied industrial design.',
+    '2u': '24-week cohorts in UX research, UX and UI design and front-end development, with UO, UC Berkeley, Michigan, Minnesota, Utah and Arizona.',
+    'sf': '60% fewer support cases a month on Salesforce Help · a back-to-work app for 75K employees · 8+ Partner Community features · C360 components for 12 product teams.',
+    'lux': 'An LED light from concept to working prototype: 3D CAD, studio product design, and testing with engineers.',
+}
+
+
+def v16():
+    cards = ''
+    for i, r in enumerate(R):
+        k = r['k']
+        band = {'ms': '#141414', 'uo': '#0099ff', '2u': '#0099ff'}.get(k, '#cfcfcf')
+        front = (f'<div class="v16-face front"><span class="v16-slot" aria-hidden="true"></span><span class="v16-band" style="background: {band}"></span>'
+                 f'<span class="v16-lg">{logo(r["logo"], 22) if k != "2u" else ""}</span><p class="v16-org">{h(r["org"])}</p><p class="v16-t">{"<br>".join(h(t) for t in r["titles"])}</p>'
+                 f'<p class="v16-y">{h(r["dates"])}{" &#183; NOW" if r["now"] else ""}</p></div>')
+        back = (f'<div class="v16-face back"><p class="v16-bk">{"Under NDA" if k == "ms" else "On the back"}</p><p class="v16-bt">{h(B16_BACK[k])}</p></div>')
+        cards += (f'<div class="v16-card{"" if r["now"] else " past"} {{{{f16c{i}}}}}" style="--i: {i}; --a: {abs(i - 2)}; z-index: {N - i}">'
+                  f'<div class="v16-in">{front}{back}</div><button type="button" class="v16-flip" aria-pressed="{{{{f16x{i}}}}}" onClick="{{{{f16f{i}}}}}">'
+                  f'<span class="sr">{h(r["org"])}: </span>Flip</button></div>')
+    return (f'<div class="v15-top"><p class="v15-h">Hover the stack, or fan it out; flip a badge for its back.</p>'
+            f'<button type="button" class="v15-all {{{{fan16c}}}}" aria-pressed="{{{{fan16x}}}}" onClick="{{{{fan16f}}}}">'
+            f'<span class="t-off">Fan out</span><span class="t-on">Stack</span></button></div>'
+            f'<div class="v16-deck {{{{fan16cls}}}}">{cards}</div>' + edu_line('v16-edu') + foot())
+
+
+# ---------------------------------------------------------------- V17 era dial
+E17 = [
+    dict(name='Industrial design student', years='2014–2018', bg='#f4efe6', ink='#3d3326', acc='#75582f', ang=-120,
+         rows=[(EDU['title'], f'{EDU["org"]} · {EDU["dates"]}', f'Sketching, CAD, rendering and prototyping by hand. {EDU["note"]}.', ''),
+               ('Product Designer', 'Luxium Lighting · 2017', BY['lux']['scope'], '')]),
+    dict(name='Salesforce', years='2017–2022', bg='#e8efe9', ink='#23342a', acc='#3f5e4a', ang=-40,
+         rows=[('Designer · Associate Designer · Summer UX Designer (intern)', 'Salesforce · 2017–2022', BY['sf']['scope'], 'sf')]),
+    dict(name='Bootcamp instructor', years='2021–', bg='#eeeaf6', ink='#2e2740', acc='#5a4a8a', ang=40,
+         rows=[('UX/UI Bootcamp Instructor', '2U · 2021–', BY['2u']['scope'], '')]),
+    dict(name='Microsoft AI + UO teaching', years='2022– / 2023–', bg='#e0f3ff', ink='#0b2b40', acc='#0069b4', ang=120,
+         rows=[('Senior Product Designer', 'Microsoft AI · 2022–', BY['ms']['scope'], 'ms'),
+               ('Product Design Instructor', 'University of Oregon · 2023–', BY['uo']['scope'], '')]),
+]
+
+
+def v17():
+    ticks = ''
+    for j, e in enumerate(E17):
+        a = math.radians(e['ang']); x, y = 50 + 62 * math.sin(a), 50 - 62 * math.cos(a)
+        ticks += f'<span class="v17-lb {{{{e17c{j}}}}}" style="left: {x:.1f}%; top: {y:.1f}%">{e["years"][:4]}</span>'
+        tx, ty = 50 + 44 * math.sin(a), 50 - 44 * math.cos(a)
+        ticks += f'<i class="v17-tk" style="left: {tx:.1f}%; top: {ty:.1f}%; transform: translate(-50%, -50%) rotate({e["ang"]}deg)"></i>'
+    lst = ''.join(f'<button type="button" class="{{{{e17c{j}}}}}" aria-pressed="{{{{e17x{j}}}}}" onClick="{{{{e17f{j}}}}}"><b>{h(e["years"])}</b> {h(e["name"])}</button>'
+                  for j, e in enumerate(E17))
+    panels = ''
+    for j, e in enumerate(E17):
+        rows = ''.join(f'<div class="v17-r"><p class="v17-rt">{h(t)}</p><p class="v17-ro">{h(o)}</p><p class="v17-rs">{h(s)}</p>'
+                       + (nda('nda sm') if x == 'ms' else f'<p class="nums">{h(SF_NUMS)}</p>' if x == 'sf' else '') + '</div>'
+                       for t, o, s, x in e['rows'])
+        panels += f'<div class="v17-p {{{{e17c{j}}}}}"><p class="v17-era">Era {j + 1} of 4</p><p class="v17-n">{h(e["name"])}</p><p class="v17-y">{h(e["years"])}</p>{rows}</div>'
+    return (f'<div class="v17" style="--bg: {{{{e17bg}}}}; --ink: {{{{e17ink}}}}; --acc: {{{{e17acc}}}}">'
+            f'<div class="v17-dial"><div class="v17-ring">{ticks}'
+            f'<div class="v17-knob" role="slider" tabindex="0" aria-label="Career era" aria-valuemin="0" aria-valuemax="3" aria-valuenow="{{{{e17}}}}" '
+            f'aria-valuetext="{{{{e17t}}}}" onKeyDown="{{{{e17k}}}}" onPointerDown="{{{{e17pd}}}}" onPointerMove="{{{{e17pm}}}}" onPointerUp="{{{{e17pu}}}}" '
+            f'onPointerCancel="{{{{e17pu}}}}" style="transform: rotate({{{{e17a}}}})"><i class="v17-ptr"></i></div></div>'
+            f'<p class="v17-hint">Drag the knob, or use the arrow keys</p><div class="v17-list" role="group" aria-label="Eras">{lst}</div></div>'
+            f'<div class="v17-panel" aria-live="polite">{panels}{foot("v17-foot")}</div></div>')
+
+
+JS_DATA = json.dumps({
+    't12': {k: dict(cmd=T12_LABEL[k], out=T12_OUT[k]) for k in T12_OUT},
+    'q13': [dict(a=a, f=f) for q, a, f in Q13],
+    'e17': [dict(t=f'{e["years"]}: {e["name"]}', bg=e['bg'], ink=e['ink'], acc=e['acc'], ang=e['ang']) for e in E17],
+}, ensure_ascii=True)
+
+
 # ---------------------------------------------------------------- assemble
 SECS = [
     ('V11', 'Recommended', 'Based on research across 40 designer portfolios (daneden.me, davidhoang.com, jonyablonski.com, haydenbleasel.com, tarng.com…): '
@@ -363,6 +637,12 @@ SECS = [
     ('V8', 'Big type, photo preview', 'Inspired by Locomotive on Mobbin: huge org names that go black on hover, with a photo card sliding to the row you are on.', v8, True, ''),
     ('V9', 'Bento grid', 'Inspired by Analogue Agency on Mobbin: photos, roles, a big number and a small skills strip in one grid. The Salesforce tile switches between its three titles.', v9, True, ''),
     ('V10', 'Resume sheet', 'Inspired by the Square client view on Mobbin: a printable page on gray with a length toggle, LinkedIn, and a R&#233;sum&#233; (PDF) placeholder that is not wired up yet.', v10, True, 'st-gray'),
+    ('V12', 'tin --history', "Inspired by Vlad Burca's CLI portfolio and the 1-bit Pixel Art Dev Portfolio on Awwwards: command chips print a short answer, and ls ./microsoft-ai stays redacted.", v12, False, ''),
+    ('V13', 'Ask my résumé', "Inspired by My Ha's Portfolio and the Conversational AI Portfolio on Awwwards: suggested questions with pre-written answers and follow-ups. No live AI.", v13, False, ''),
+    ('V14', 'Workbench', 'Inspired by ULTRAGRID on Awwwards (making-of on Codrops): a flat isometric desk where each object opens a chapter. The Microsoft envelope stays sealed.', v14, True, ''),
+    ('V15', 'Sketch to render', "Inspired by Codrops' Sketching the impossible and Mr. Pandas Paper Portfolio on Awwwards: cards start as marker sketches and render in color. Microsoft stays a sketch.", v15, True, ''),
+    ('V16', 'Badge deck', "Inspired by Eduard Bodak's card flip (Awwwards, Codrops) and Carl Gordon's stacking cards: ID badges that fan out and flip to an NDA-safe back.", v16, True, ''),
+    ('V17', 'Era dial', "Inspired by Brandon Yasin (Codrops) and Future Record's rotary knobs on Awwwards: turn the dial through four eras; the panel re-tints and shows that era's roles.", v17, True, ''),
 ]
 
 body = ''
@@ -725,16 +1005,212 @@ article.v9-t:hover{transform:translateY(-2px)}
 .v10-paper.compact .v10-es{display:none}
 .v10-paper.compact .v10-e{margin-bottom:8px}
 
-@media (prefers-reduced-motion: reduce){.rv-root *{transition:none !important}}
+/* shared: screen-reader-only, plain list */
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.plain{list-style:none;padding:0;margin:10px 0 0}
+.plain li{display:flex;gap:6px;padding:7px 0;border-bottom:1px solid #f2f2f2;font:400 13px/1.45 Inter,sans-serif;color:#4d4d4d}
+.plain li b{font-weight:500;color:#141414}
+.plain li span{margin-left:auto;padding-left:12px;white-space:nowrap;font:400 11.5px/1.6 'IBM Plex Mono',ui-monospace,monospace;color:#9a9a9a}
+@keyframes rvblink{50%{opacity:0}}
+
+/* V12 terminal */
+.s-v12,.s-v13{display:flex;flex-direction:column}
+.v12{border-radius:14px;background:#141414;color:#e6e6e6;overflow:hidden;box-shadow:0 22px 44px -26px rgba(0,0,0,.55)}
+.v12-bar{position:relative;display:flex;align-items:center;gap:6px;padding:12px 14px;border-bottom:1px solid #2b2b2d}
+.v12-bar i{width:9px;height:9px;border-radius:50%;background:#3a3a3c}
+.v12-bar span{position:absolute;left:0;right:0;text-align:center;font:500 11px/1 'IBM Plex Mono',ui-monospace,monospace;color:#9a9a9a}
+.v12-scr{position:relative;height:330px;overflow:auto;padding:16px 18px;box-sizing:border-box}
+.v12-out{margin:0;font:400 12px/1.6 'IBM Plex Mono',ui-monospace,monospace;white-space:pre-wrap;color:#e6e6e6}
+.v12-cur{display:inline-block;width:7px;height:14px;vertical-align:-2px;background:#7cc4ff;opacity:0}
+.v12-cur.on{opacity:1;animation:rvblink 1s steps(1) infinite}
+.v12-cmds{display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:12px 14px;border-top:1px solid #2b2b2d}
+.v12-ps{margin-right:4px;font:500 12px/1 'IBM Plex Mono',ui-monospace,monospace;color:#7cc4ff}
+.rv-root .v12-chip{padding:7px 10px;border-radius:8px;background:#2b2b2d;color:#e6e6e6;font:500 12px/1 'IBM Plex Mono',ui-monospace,monospace;transition:background-color .2s}
+.rv-root .v12-chip:hover{background:#3a3a3c}
+.rv-root .v12-chip.ghost{background:none;color:#9a9a9a;box-shadow:inset 0 0 0 1px #3a3a3c}
+.v12-det{margin-top:18px;font:400 13.5px/1.5 Inter,sans-serif}
+.v12-det summary{cursor:pointer;font-weight:500;color:#141414}
+.v12-det summary:focus-visible{outline:2px solid #0099ff;outline-offset:2px;border-radius:6px}
+
+/* V13 ask my resume */
+.v13{display:flex;flex-direction:column;border-radius:16px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08);overflow:hidden}
+.v13-hd{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid #f0f0f0}
+.v13-av{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#141414;color:#fff;font:400 22px/1 Caveat,cursive}
+.v13-n{font:600 14.5px/1.3 Inter,sans-serif}
+.v13-st{font:400 12px/1.3 Inter,sans-serif;color:#9a9a9a}
+.v13-log{display:flex;flex-direction:column;gap:12px;height:318px;overflow:auto;padding:16px;box-sizing:border-box;background:#fafafa}
+.v13-qa{display:none;flex-direction:column;gap:8px}.v13-qa.on{display:flex}
+.v13-u{align-self:flex-end;max-width:80%;padding:9px 13px;border-radius:16px 16px 4px 16px;background:#141414;color:#fff;font:500 13.5px/1.4 Inter,sans-serif}
+.v13-a{align-self:flex-start;max-width:88%;padding:10px 14px;border-radius:16px 16px 16px 4px;background:#fff;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06);font:400 13.5px/1.55 Inter,sans-serif;color:#333}
+.v13-cur{display:inline-block;width:6px;height:6px;margin-left:4px;border-radius:50%;background:#0099ff;opacity:0}
+.v13-cur.on{opacity:1;animation:rvblink .8s steps(1) infinite}
+.v13-chips{display:flex;flex-wrap:wrap;gap:6px;padding:12px 14px;border-top:1px solid #f0f0f0;min-height:34px}
+.rv-root .v13-chip{padding:8px 12px;border-radius:999px;background:#e0f3ff;color:#0069b4;font:500 13px/1 Inter,sans-serif;transition:background-color .2s}
+.rv-root .v13-chip:hover{background:#cceaff}
+.rv-root .v13-chip.off{display:none}
+.rv-root .v13-chip.ghost{background:none;color:#666;box-shadow:inset 0 0 0 1px #e0e0e0}
+
+/* V14 workbench */
+.v14{display:grid;grid-template-columns:1fr 360px;gap:32px;align-items:start}
+.v14-scene{position:relative;aspect-ratio:760/460;border-radius:16px;background:#fafafa}
+.v14-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.v14-o{transition:transform .4s cubic-bezier(.3,1.5,.5,1)}
+.v14-o.on{transform:translateY(-10px)}
+.v14-scene:has(.v14-b0:hover) .v14-o0,.v14-scene:has(.v14-b1:hover) .v14-o1,.v14-scene:has(.v14-b2:hover) .v14-o2,
+.v14-scene:has(.v14-b3:hover) .v14-o3,.v14-scene:has(.v14-b4:hover) .v14-o4,
+.v14-scene:has(.v14-b0:focus-visible) .v14-o0,.v14-scene:has(.v14-b1:focus-visible) .v14-o1,.v14-scene:has(.v14-b2:focus-visible) .v14-o2,
+.v14-scene:has(.v14-b3:focus-visible) .v14-o3,.v14-scene:has(.v14-b4:focus-visible) .v14-o4{transform:translateY(-10px)}
+.rv-root .v14-b{position:absolute;border-radius:14px}
+.v14-lab{position:absolute;left:50%;top:100%;transform:translate(-50%,2px);padding:6px 10px;border-radius:999px;background:#141414;color:#fff;white-space:nowrap;font:500 12px/1 Inter,sans-serif;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}
+.v14-b:hover .v14-lab,.v14-b:focus-visible .v14-lab{opacity:1;transform:translate(-50%,6px)}
+.v14-b.on .v14-lab{opacity:1;transform:translate(-50%,6px);background:#0099ff}
+@media (hover: none){.v14-lab{opacity:1}}
+.v14-cd{display:none;padding:22px 24px;border-radius:16px;background:#fff;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08),0 18px 36px -24px rgba(0,0,0,.3)}.v14-cd.on{display:block}
+.v14-obj{font:500 11px/1 'IBM Plex Mono',ui-monospace,monospace;letter-spacing:.06em;text-transform:uppercase;color:#0069b4}
+.v14-k{margin-top:14px;font:500 11px/1 'IBM Plex Mono',ui-monospace,monospace;letter-spacing:.06em;text-transform:uppercase;color:#9a9a9a}
+.v14-t{margin-top:8px;font:600 19px/1.25 Inter,sans-serif;letter-spacing:-.01em;color:#141414}
+.v14-t.sm{margin-top:18px;font-size:15px}
+.v14-or{margin-top:4px;font:400 13px/1.3 Inter,sans-serif;color:#7a7a7a}
+.v14-s{margin-top:10px;font:400 14px/1.55 Inter,sans-serif;color:#4d4d4d}
+.v14-det{margin-top:16px}
+
+/* V15 sketch -> render */
+.v15-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+.v15-h{font:600 18px/1.3 Inter,sans-serif;letter-spacing:-.01em}
+.rv-root .v15-all{padding:10px 16px;border-radius:999px;background:#141414;color:#fff;font:500 13px/1 Inter,sans-serif;transition:background-color .2s}
+.rv-root .v15-all:hover{background:#333}
+.rv-root .v15-all.on{background:#0099ff}
+.v15{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.rv-root .v15-c{position:relative;display:block;width:100%;height:312px;border-radius:14px}
+.v15-sk,.v15-rd{position:absolute;inset:0;display:flex;flex-direction:column;padding:20px;border-radius:14px;box-sizing:border-box}
+.v15-sk{background:#fff;box-shadow:inset 0 0 0 1.5px #3a3a3a;transform:rotate(-.3deg)}
+.v15-sk::after{content:"";position:absolute;inset:3px -3px -3px 3px;border:1px solid #b3b3b3;border-radius:16px 12px 15px 13px;transform:rotate(.6deg);pointer-events:none}
+.v15-th{display:grid;place-items:center;flex:none;height:84px;margin-bottom:16px;border-radius:10px}
+.v15-th.sk{background:repeating-linear-gradient(-45deg,#d6d6d6 0 1px,transparent 1px 7px);box-shadow:inset 0 0 0 1.5px #3a3a3a}
+.v15-t,.v15-o,.v15-s,.v15-note{display:block}
+.v15-sk .v15-t{font:600 25px/1 Caveat,cursive;color:#2b2b2b}
+.v15-sk .v15-o{margin-top:6px;font:500 19px/1.1 Caveat,cursive;color:#666}
+.v15-sk .v15-s{margin-top:8px;font:400 13px/1.5 Inter,sans-serif;color:#7a7a7a}
+.v15-note{margin-top:auto;font:600 19px/1.1 Caveat,cursive;color:#0069b4}
+.v15-rd{background:#fff;box-shadow:inset 0 0 0 1px rgba(0,0,0,.07),0 18px 36px -22px rgba(0,0,0,.35);clip-path:inset(0 100% 0 0 round 14px);transition:clip-path .75s cubic-bezier(.65,0,.25,1)}
+.v15-rd .v15-th .inv{filter:brightness(0) invert(1)}
+.v15-th.rd[style*="#141414"] .mk-2u{color:#fff}
+.v15-rd .v15-t{font:600 17px/1.3 Inter,sans-serif;color:#141414}
+.v15-rd .v15-o{margin-top:4px;font:400 13px/1.3 Inter,sans-serif;color:#7a7a7a}
+.v15-rd .v15-s{margin-top:8px;font:400 13px/1.5 Inter,sans-serif;color:#4d4d4d}
+.v15-c.past .v15-rd .v15-t{color:#4d4d4d}
+.v15-c.past .v15-rd .v15-th{filter:saturate(.35)}
+.v15-c:hover .v15-rd,.v15-c:focus-visible .v15-rd,.v15-c.on .v15-rd,.v15.all .v15-rd{clip-path:inset(0 0 0 0 round 14px)}
+.v15-c.ms .v15-sk{cursor:default}
+
+/* V16 badge deck */
+.v16-deck{position:relative;height:410px}
+.v16-card{position:absolute;left:calc(50% - 110px);top:34px;width:220px;height:330px;perspective:1100px;transform:translate(calc(var(--i) * 7px),calc(var(--i) * -6px)) rotate(calc((var(--i) - 2) * 2deg));transition:transform .65s cubic-bezier(.3,1.25,.4,1)}
+.v16-deck.fan .v16-card,.v16-deck:hover .v16-card,.v16-deck:focus-within .v16-card{transform:translateX(calc((var(--i) - 2) * 252px)) translateY(calc(var(--a) * 10px)) rotate(calc((var(--i) - 2) * 2.5deg))}
+.v16-in{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .65s cubic-bezier(.3,1.2,.4,1)}
+.v16-card.on .v16-in{transform:rotateY(180deg)}
+.v16-face{position:absolute;inset:0;display:flex;flex-direction:column;padding:18px 20px 52px;border-radius:16px;box-sizing:border-box;-webkit-backface-visibility:hidden;backface-visibility:hidden}
+.v16-face.front{background:#fff;box-shadow:inset 0 0 0 1px rgba(0,0,0,.09),0 18px 36px -20px rgba(0,0,0,.35)}
+.v16-face.back{background:#141414;color:#fff;transform:rotateY(180deg);box-shadow:0 18px 36px -20px rgba(0,0,0,.45)}
+.v16-slot{align-self:center;flex:none;width:46px;height:8px;border-radius:4px;background:#f0f0f0;box-shadow:inset 0 0 0 1px rgba(0,0,0,.14)}
+.v16-band{flex:none;height:6px;margin:14px 0 18px;border-radius:3px}
+.v16-lg{display:flex;align-items:center;height:28px}
+.v16-org{margin-top:12px;font:600 20px/1.15 Inter,sans-serif;letter-spacing:-.02em;color:#141414}
+.v16-t{margin-top:8px;font:400 14px/1.4 Inter,sans-serif;color:#4d4d4d}
+.v16-y{margin-top:auto;font:500 11px/1 'IBM Plex Mono',ui-monospace,monospace;letter-spacing:.06em;color:#7a7a7a}
+.v16-card.past .v16-org{color:#7a7a7a}.v16-card.past .v16-lg{filter:grayscale(1);opacity:.55}
+.v16-bk{font:500 10.5px/1 'IBM Plex Mono',ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:#7cc4ff}
+.v16-bt{margin-top:14px;font:400 14px/1.55 Inter,sans-serif;color:#e6e6e6}
+.rv-root .v16-flip{position:absolute;left:50%;bottom:14px;z-index:2;transform:translateX(-50%);padding:7px 14px;border-radius:999px;background:#f0f0f0;color:#141414;font:500 12px/1 Inter,sans-serif;transition:background-color .2s,color .2s}
+.rv-root .v16-flip:hover{background:#e0e0e0}
+.rv-root .v16-card.on .v16-flip{background:#2b2b2d;color:#fff}
+.v16-edu{padding-top:8px}
+@media (prefers-reduced-motion: reduce){
+  .v16-deck{height:auto;display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+  .v16-card{position:relative;left:auto;top:auto;width:auto;height:auto;transform:none !important}
+  .v16-in{display:grid;gap:8px;transform:none !important}
+  .v16-face{position:relative;min-height:240px}.v16-face.back{transform:none}
+  .rv-root .v16-flip{display:none}}
+
+/* V17 era dial */
+.v17{display:grid;grid-template-columns:360px 1fr;gap:44px;padding:36px 40px;border-radius:16px;background:var(--bg);color:var(--ink);transition:background-color .5s,color .5s}
+.v17-dial{display:flex;flex-direction:column;align-items:center}
+.v17-ring{position:relative;width:270px;height:270px}
+.v17-lb{position:absolute;transform:translate(-50%,-50%);font:500 12px/1 'IBM Plex Mono',ui-monospace,monospace;color:var(--ink);opacity:.55;transition:opacity .3s,color .3s}
+.v17-lb.on{opacity:1;font-weight:600;color:var(--acc)}
+.v17-tk{position:absolute;width:2px;height:10px;border-radius:1px;background:var(--ink);opacity:.35}
+.v17-knob{position:absolute;left:50%;top:50%;width:156px;height:156px;margin:-78px 0 0 -78px;border-radius:50%;background:radial-gradient(circle at 35% 28%,#ffffff,#f4f4f4 55%,#dcdcdc);box-shadow:0 16px 30px -12px rgba(0,0,0,.35),inset 0 -3px 6px rgba(0,0,0,.08),0 0 0 7px rgba(255,255,255,.55);cursor:grab;touch-action:none;transition:transform .5s cubic-bezier(.3,1.5,.5,1)}
+.v17-knob:active{cursor:grabbing}
+.rv-root .v17-knob:focus-visible{outline:2px solid #0099ff;outline-offset:8px;border-radius:50%}
+.v17-knob::before{content:"";position:absolute;inset:22px;border-radius:50%;background:repeating-conic-gradient(rgba(0,0,0,.05) 0 4deg,transparent 4deg 8deg)}
+.v17-ptr{position:absolute;left:50%;top:12px;width:4px;height:28px;margin-left:-2px;border-radius:2px;background:var(--acc);transition:background-color .4s}
+.v17-hint{margin-top:16px;font:400 12.5px/1.3 Inter,sans-serif;opacity:.75}
+.v17-list{display:flex;flex-direction:column;gap:4px;width:100%;margin-top:20px}
+.rv-root .v17-list button{display:flex;align-items:baseline;gap:10px;padding:9px 12px;border-radius:10px;font:400 13.5px/1.3 Inter,sans-serif;color:var(--ink);transition:background-color .2s}
+.v17-list button b{min-width:104px;font:500 11.5px/1 'IBM Plex Mono',ui-monospace,monospace;color:var(--acc)}
+.rv-root .v17-list button:hover{background:rgba(255,255,255,.45)}
+.rv-root .v17-list button.on{background:rgba(255,255,255,.8);font-weight:500}
+.v17-panel{display:flex;flex-direction:column;min-width:0}
+.v17-p{display:none}.v17-p.on{display:block}
+.v17-era{font:500 11px/1 'IBM Plex Mono',ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--acc)}
+.v17-n{margin-top:12px;font:600 36px/1.1 Inter,sans-serif;letter-spacing:-.03em}
+.v17-y{margin-top:8px;font:500 13px/1 'IBM Plex Mono',ui-monospace,monospace;color:var(--acc)}
+.v17-r{margin-top:20px;padding:18px 20px;border-radius:14px;background:rgba(255,255,255,.7)}
+.v17-rt{font:600 16px/1.35 Inter,sans-serif}
+.v17-ro{margin-top:3px;font:400 13px/1.3 Inter,sans-serif;opacity:.8}
+.v17-rs{margin-top:8px;font:400 14px/1.55 Inter,sans-serif}
+.v17 .nums{color:var(--ink);opacity:.8}
+.v17-foot{margin-top:auto;padding-top:16px;border-top-color:rgba(0,0,0,.1)}
+.v17-foot .lk{color:var(--ink);border-bottom-color:rgba(0,0,0,.25)}
+.v17-foot .lk-ph{color:var(--ink);opacity:.6}
+@media (prefers-reduced-motion: reduce){.rv-root *{transition:none !important;animation:none !important}}
 '''
 
 JS = r'''class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { v11: false, t1: 0, l2: 0, a3: { 0: true }, g4: 0, c5: false, s6: false, f7: 'all', h8: 0, b9: 0, m10: 'd' };
+    this.D = __DATA__;
+    this.state = { v11: false, t1: 0, l2: 0, a3: { 0: true }, g4: 0, c5: false, s6: false, f7: 'all', h8: 0, b9: 0, m10: 'd',
+      t12: ['history'], t12n: 100000, q13: [], q13n: 0, w14: 0, r15: {}, all15: false, fan16: false, f16: {}, e17: 3 };
+    this.timers = {};
+  }
+  componentWillUnmount() { for (const k in this.timers) clearInterval(this.timers[k]); }
+  componentDidUpdate() {
+    for (const el of [this.el12, this.el13]) if (el) el.scrollTop = el.scrollHeight;
+  }
+  calm() { try { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; } }
+  type(key, total) {
+    clearInterval(this.timers[key]);
+    if (this.calm()) { this.setState({ [key]: total }); return; }
+    let n = 0;
+    this.setState({ [key]: 0 });
+    this.timers[key] = setInterval(() => {
+      n = Math.min(total, n + 3);
+      this.setState({ [key]: n });
+      if (n >= total) clearInterval(this.timers[key]);
+    }, 14);
+  }
+  run12(c) {
+    if (c === 'clear') { clearInterval(this.timers.t12n); this.setState({ t12: [], t12n: 0 }); return; }
+    this.setState({ t12: this.state.t12.concat([c]).slice(-3) });
+    this.type('t12n', this.D.t12[c].out.length);
+  }
+  ask13(i) {
+    if (this.state.q13.indexOf(i) >= 0) return;
+    this.setState({ q13: this.state.q13.concat([i]) });
+    this.type('q13n', this.D.q13[i].a.length);
+  }
+  era17(j) { const e = Math.max(0, Math.min(3, j)); if (e !== this.state.e17) this.setState({ e17: e }); }
+  dial17(ev) {
+    const r = ev.currentTarget.getBoundingClientRect();
+    const dx = ev.clientX - (r.left + r.width / 2), dy = ev.clientY - (r.top + r.height / 2);
+    const ang = Math.atan2(dx, -dy) * 180 / Math.PI;
+    let best = 0, bd = 999;
+    this.D.e17.forEach((e, j) => { const d = Math.abs(e.ang - ang); if (d < bd) { bd = d; best = j; } });
+    this.era17(best);
   }
   renderVals() {
-    const st = this.state, v = {};
+    const st = this.state, v = {}, D = this.D;
     const flip = (key, i) => () => { const o = Object.assign({}, this.state[key]); o[i] = !o[i]; this.setState({ [key]: o }); };
     v.v11c = st.v11 ? 'on' : ''; v.v11x = String(st.v11); v.v11cls = st.v11 ? 'all' : '';
     v.v11f = () => this.setState({ v11: !this.state.v11 });
@@ -753,6 +1229,11 @@ JS = r'''class Component extends DCLogic {
       const o8 = st.h8 === i;
       v['h8c' + i] = o8 ? 'on' : ''; v['h8x' + i] = String(o8);
       v['h8f' + i] = () => { if (this.state.h8 !== i) this.setState({ h8: i }); };
+      const o14 = st.w14 === i;
+      v['w14c' + i] = o14 ? 'on' : ''; v['w14x' + i] = String(o14);
+      v['w14f' + i] = () => this.setState({ w14: i });
+      const o16 = !!st.f16[i];
+      v['f16c' + i] = o16 ? 'on' : ''; v['f16x' + i] = String(o16); v['f16f' + i] = flip('f16', i);
     }
     v.c5c = st.c5 ? 'on' : ''; v.c5x = String(st.c5);
     v.c5f = () => this.setState({ c5: !this.state.c5 });
@@ -773,9 +1254,62 @@ JS = r'''class Component extends DCLogic {
       v['m10f' + k] = () => this.setState({ m10: k });
     }
     v.m10cls = st.m10 === 'c' ? 'compact' : '';
+    // V12 terminal
+    const last12 = st.t12.length - 1;
+    v.t12vis = st.t12.map((c, i) => {
+      const out = D.t12[c].out;
+      return '$ tin ' + D.t12[c].cmd + '\n' + (i === last12 ? out.slice(0, st.t12n) : out) + '\n';
+    }).join('\n') + (st.t12.length ? '\n' : '') + '$ ';
+    v.t12cur = 'on';
+    v.t12sr = last12 >= 0 ? D.t12[st.t12[last12]].out : 'Cleared.';
+    for (const c of Object.keys(D.t12).concat(['clear'])) v['t12f' + c] = () => this.run12(c);
+    v.r12 = (el) => { this.el12 = el; };
+    // V13 chat
+    const asked = st.q13, lastQ = asked[asked.length - 1];
+    let offer = lastQ === undefined ? [0, 1, 2, 3] : D.q13[lastQ].f.filter((q) => asked.indexOf(q) < 0);
+    if (!offer.length) offer = [0, 1, 2, 3, 4].filter((q) => asked.indexOf(q) < 0);
+    for (let i = 0; i < 5; i++) {
+      const k = asked.indexOf(i);
+      v['q13c' + i] = k >= 0 ? 'on' : '';
+      v['q13o' + i] = String(k + 1);
+      v['q13v' + i] = i === lastQ ? D.q13[i].a.slice(0, st.q13n) : D.q13[i].a;
+      v['q13cur' + i] = i === lastQ && st.q13n < D.q13[i].a.length ? 'on' : '';
+      v['q13k' + i] = offer.indexOf(i) >= 0 ? '' : 'off';
+      v['q13f' + i] = () => this.ask13(i);
+    }
+    v.q13rk = asked.length ? '' : 'off';
+    v.q13r = () => { clearInterval(this.timers.q13n); this.setState({ q13: [], q13n: 0 }); };
+    v.r13 = (el) => { this.el13 = el; };
+    // V15 sketch -> render
+    for (let i = 0; i < 6; i++) {
+      const o = !!st.r15[i];
+      v['r15c' + i] = o ? 'on' : ''; v['r15x' + i] = String(o); v['r15f' + i] = flip('r15', i);
+    }
+    v.all15c = st.all15 ? 'on' : ''; v.all15x = String(st.all15); v.all15cls = st.all15 ? 'all' : '';
+    v.all15f = () => this.setState({ all15: !this.state.all15 });
+    // V16 badges
+    v.fan16c = st.fan16 ? 'on' : ''; v.fan16x = String(st.fan16); v.fan16cls = st.fan16 ? 'fan' : '';
+    v.fan16f = () => this.setState({ fan16: !this.state.fan16 });
+    // V17 era dial
+    const E = D.e17[st.e17];
+    v.e17 = String(st.e17); v.e17t = E.t; v.e17a = E.ang + 'deg';
+    v.e17bg = E.bg; v.e17ink = E.ink; v.e17acc = E.acc;
+    for (let j = 0; j < 4; j++) {
+      v['e17c' + j] = st.e17 === j ? 'on' : ''; v['e17x' + j] = String(st.e17 === j);
+      v['e17f' + j] = () => this.era17(j);
+    }
+    v.e17k = (ev) => {
+      const k = ev.key, e = this.state.e17;
+      const to = k === 'ArrowRight' || k === 'ArrowUp' ? e + 1 : k === 'ArrowLeft' || k === 'ArrowDown' ? e - 1 : k === 'Home' ? 0 : k === 'End' ? 3 : null;
+      if (to === null) return;
+      ev.preventDefault(); this.era17(to);
+    };
+    v.e17pd = (ev) => { this.drag17 = true; try { ev.currentTarget.setPointerCapture(ev.pointerId); } catch (e) {} this.dial17(ev); };
+    v.e17pm = (ev) => { if (this.drag17) this.dial17(ev); };
+    v.e17pu = () => { this.drag17 = false; };
     return v;
   }
-}'''
+}'''.replace('__DATA__', JS_DATA)
 assert all(ord(c) < 128 for c in JS)
 
 doc = f'''<!doctype html>
