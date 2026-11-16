@@ -6,8 +6,9 @@ out = sys.argv[1]
 PHOTOS = [('effff208332abe411e27c82aaa87e30d', 'Tin with his Microsoft team', '50% 72%', 'Microsoft AI'),
           ('155942c7f1c522f9aec7d43d1c1d0d0d', 'Tin teaching a product design class', '50% 50%', 'University of Oregon'),
           ('8bd998ead1110dbdb0a707cdb0cb6c60', 'Tin with his Salesforce team', '50% 45%', 'Salesforce')]
+OPEN = '<a class="dl-open" href="#" aria-label="Open {cap}" onClick="{{{{noop}}}}"><span class="dl-open-fx" aria-hidden="true"></span><span class="dl-open-tint" aria-hidden="true"></span><span class="dl-open-shine" aria-hidden="true"></span><svg class="dl-open-ic" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="dl-open-tx">Open</span></a>'
 figs = ''.join(
-    f'<figure class="dl-fig"><canvas class="dl-cv" ref="{{{{cv{i}}}}}" data-src="/_blob/{b}" data-pos="{pos}" role="img" aria-label="{alt}, drawn in dots"></canvas>'
+    f'<figure class="dl-fig"><div class="dl-frame"><canvas class="dl-cv" ref="{{{{cv{i}}}}}" data-src="/_blob/{b}" data-pos="{pos}" role="img" aria-label="{alt}, drawn in dots"></canvas>' + OPEN.format(cap=cap) + '</div>'
     f'<figcaption class="dl-cap">{cap}</figcaption></figure>' for i, (b, alt, pos, cap) in enumerate(PHOTOS))
 CSS = r'''
 body{margin:0}
@@ -23,24 +24,41 @@ sc-for, sc-if { display: contents; }
 .dl-stack{display:flex;flex-direction:column;gap:48px;margin-top:48px}
 .dl-fig{margin:0}
 .dl-cv{display:block;width:848px;height:524px;border-radius:var(--mr,6px);background:var(--bg,#fff);touch-action:pan-y;cursor:crosshair}
+.dl-frame{position:relative;width:848px}
+/* Open button: a dark-gray liquid-glass circle in the middle of each photo */
+.dl-open{position:absolute;left:50%;top:50%;width:var(--ob,104px);height:var(--ob,104px);margin:calc(var(--ob,104px) / -2) 0 0 calc(var(--ob,104px) / -2);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:#fff;text-decoration:none;isolation:isolate;box-shadow:0 12px 30px -10px rgba(0,0,0,.45),0 2px 6px rgba(0,0,0,.18);opacity:0;transform:scale(.7);pointer-events:none;transition:opacity .25s ease,transform .45s cubic-bezier(.3,1.5,.5,1)}
+/* only shows while the photo is hovered (or the button has keyboard focus) */
+.dl-frame:hover .dl-open,.dl-open:focus-visible{opacity:1;transform:scale(1);pointer-events:auto}
+.dl-open:hover{transform:scale(1.06)!important}
+.dl-open:active{transform:scale(.97)}
+.dl-open:focus-visible{outline:2px solid #0099ff;outline-offset:4px}
+.dl-open-fx,.dl-open-tint,.dl-open-shine{position:absolute;inset:0;border-radius:inherit;pointer-events:none}
+.dl-open-fx{z-index:-3;-webkit-backdrop-filter:blur(6px) saturate(1.6);backdrop-filter:blur(6px) saturate(1.6);backdrop-filter:url(#dl-glass) blur(6px) saturate(1.6)}
+.dl-open-tint{z-index:-2;background:rgba(43,43,45,var(--ot,.62))}
+.dl-open-shine{z-index:-1;box-shadow:inset 1.5px 1.5px 1px rgba(255,255,255,.5),inset -1px -1px 1px rgba(255,255,255,.22),inset 0 0 18px rgba(255,255,255,.1)}
+.dl-open-ic{display:block;filter:drop-shadow(0 1px 1px rgba(0,0,0,.3))}
+.dl-open-tx{font:600 14px/1 Inter,sans-serif;letter-spacing:.01em;text-shadow:0 1px 1px rgba(0,0,0,.25)}
+.dl-defs{position:absolute;width:0;height:0;overflow:hidden}
 .dl-cap{margin-top:12px;font:500 13px/1 Inter,sans-serif;color:#b3b3b3}
 '''
 JS = r'''
 class Component extends DCLogic {
-  constructor(props) { super(props); this.state = {}; this.P = []; }
+  constructor(props) { super(props); this.state = {}; this.P = []; this.refFns = [0, 1, 2].map((i) => (el) => this.attach(i, el)); }
   componentWillUnmount() { cancelAnimationFrame(this.raf); if (this.io) this.io.disconnect(); this.P.forEach((p) => p.off && p.off()); }
   tp(k, d) { const v = this.props[k]; return v === undefined || v === null ? d : v; }
   sig() { return ['dotDetail', 'dotSize', 'dotShape', 'sizeByShade', 'formFrom'].map((k) => this.tp(k, '')).join('|'); }
   attach(i, cv) {
     if (!cv || (this.P[i] && this.P[i].cv === cv)) return;
-    const P = { cv, img: new Image(), mx: -1e4, my: -1e4, dots: [], t0: 0, seen: false };
+    const prev = this.P[i], carry = !!(prev && prev.seen); // canvas re-mounted: keep it formed, no replay, no blank frame
+    if (prev) { if (prev.off) prev.off(); if (this.io && prev.cv) this.io.unobserve(prev.cv); }
+    const P = { cv, img: new Image(), mx: -1e4, my: -1e4, dots: [], t0: 0, seen: carry, imgA: carry ? 1 : 0 };
     this.P[i] = P;
-    P.img.onload = () => { this.build(P); this.kick(); };
+    P.img.onload = () => { this.build(P); if (carry) P.t0 = performance.now() - 1e6; else if (P.wantForm) { P.wantForm = false; P.t0 = performance.now(); } this.kick(); };
     P.img.src = cv.dataset.src;
     const move = (e) => { const r = cv.getBoundingClientRect(); P.mx = e.clientX - r.left; P.my = e.clientY - r.top; this.kick(); };
     const leave = () => { P.mx = P.my = -1e4; this.kick(); };
-    cv.addEventListener('pointermove', move); cv.addEventListener('pointerleave', leave);
-    P.off = () => { cv.removeEventListener('pointermove', move); cv.removeEventListener('pointerleave', leave); };
+    const host = cv.parentElement || cv; host.addEventListener('pointermove', move); host.addEventListener('pointerleave', leave);
+    P.off = () => { host.removeEventListener('pointermove', move); host.removeEventListener('pointerleave', leave); };
     if (typeof IntersectionObserver === 'function') {
       this.io = this.io || new IntersectionObserver((es) => es.forEach((e) => { const Q = this.P.find((q) => q && q.cv === e.target); if (Q && e.isIntersecting && !Q.seen) { Q.seen = true; this.form(Q); } }), { threshold: 0.25 });
       this.io.observe(cv);
@@ -50,15 +68,15 @@ class Component extends DCLogic {
     const { cv, img } = P; if (!img.naturalWidth) return;
     const W = cv.clientWidth || 848, H = cv.clientHeight || 524, dpr = Math.min(2, window.devicePixelRatio || 1);
     cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
-    const cols = Math.max(20, Math.round(this.tp('dotDetail', 96))), cell = W / cols, rows = Math.ceil(H / cell);
+    const cols = Math.max(20, Math.round(this.tp('dotDetail', 114))), cell = W / cols, rows = Math.ceil(H / cell);
     const pos = (cv.dataset.pos || '50% 50%').split(' ').map((v) => parseFloat(v) / 100);
     const sc = Math.max(W / img.naturalWidth, H / img.naturalHeight), sw = W / sc, sh = H / sc;
     const sx = (img.naturalWidth - sw) * pos[0], sy = (img.naturalHeight - sh) * pos[1];
     const t = document.createElement('canvas'); t.width = cols; t.height = rows;
     const x = t.getContext('2d', { willReadFrequently: true }); x.drawImage(img, sx, sy, sw, sh, 0, 0, cols, rows);
     let d; try { d = x.getImageData(0, 0, cols, rows).data; } catch (e) { return; }
-    const size = this.tp('dotSize', 0.92), shade = this.tp('sizeByShade', 0.35), from = this.tp('formFrom', 'Scatter');
-    P.W = W; P.H = H; P.dpr = dpr; P.cell = cell; P.dots = []; P.crop = [sx, sy, sw, sh]; P.imgA = 0; P.maxDl = 0;
+    const size = this.tp('dotSize', 0.52), shade = this.tp('sizeByShade', 0.1), from = this.tp('formFrom', 'Center');
+    P.W = W; P.H = H; P.dpr = dpr; P.cell = cell; P.dots = []; P.crop = [sx, sy, sw, sh]; P.imgA = P.seen ? (P.imgA || 0) : 0; P.maxDl = 0; P.still = 0;
     for (let j = 0; j < rows; j++) for (let i = 0; i < cols; i++) {
       const o = (j * cols + i) * 4, r = d[o], g = d[o + 1], b = d[o + 2], l = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
       const tx = (i + 0.5) * cell, ty = (j + 0.5) * cell;
@@ -72,11 +90,11 @@ class Component extends DCLogic {
     }
     if (!P.seen) P.t0 = Infinity;
   }
-  form(P) { if (!P.dots.length) return; P.t0 = performance.now(); this.kick(); }
+  form(P) { if (!P.dots.length) { P.wantForm = true; return; } P.t0 = performance.now(); this.kick(); }
   kick() { if (this.running) return; this.running = true; const tick = (now) => { const busy = this.step(now); if (busy) this.raf = requestAnimationFrame(tick); else this.running = false; }; this.raf = requestAnimationFrame(tick); }
   step(now) {
     const reduce = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const dur = this.tp('formTime', 1100), R = this.tp('pushReach', 110), F = this.tp('pushForce', 1.6), back = this.tp('springBack', 0.1), damp = this.tp('damping', 0.82);
+    const dur = this.tp('formTime', 1100), R = this.tp('pushReach', 300), F = this.tp('pushForce', 1.75), back = this.tp('springBack', 0.1), damp = this.tp('damping', 0.82);
     const shape = this.tp('dotShape', 'Circle'); let busy = false;
     for (const P of this.P) {
       if (!P || !P.dots.length) continue;
@@ -99,39 +117,42 @@ class Component extends DCLogic {
       }
       ctx.globalAlpha = 1;
       // once every dot has landed (and nothing is pushed), the dots melt into the full photo; hovering breaks it back into dots
-      const formed = reduce || el > P.maxDl + dur + 150, want = formed && !hover && !P.moving && this.tp('settleToPhoto', true) !== false ? 1 : 0;
+      P.still = P.moving ? 0 : (P.still || 0) + 1; // hysteresis: only melt into the photo after ~10 calm frames
+      const formed = reduce || el > P.maxDl + dur + 150, want = formed && !hover && (P.still > 10 || P.imgA > 0.5) && this.tp('settleToPhoto', true) !== false ? 1 : 0;
       const dt = Math.min(50, Math.max(0, now - (P.last || now))), fade = Math.max(60, this.tp('photoFade', 600)); P.last = now;
       P.imgA = want > P.imgA ? Math.min(1, P.imgA + dt / fade) : Math.max(0, P.imgA - dt / (fade * 0.35));
       if (P.imgA > 0.001) { ctx.globalAlpha = P.imgA; ctx.drawImage(P.img, P.crop[0], P.crop[1], P.crop[2], P.crop[3], 0, 0, P.W, P.H); ctx.globalAlpha = 1; }
-      if (P.imgA !== want) busy = true;
+      if (P.imgA !== want || (this.tp('settleToPhoto', true) !== false && !hover && P.imgA < 1)) busy = true; // keep ticking until it has melted into the photo
       if (hover) busy = true;
     }
     return busy;
   }
   renderVals() {
     const s = this.sig();
-    if (s !== this.lastSig) { const first = this.lastSig === undefined; this.lastSig = s; if (!first) setTimeout(() => { this.P.forEach((P) => P && P.img.complete && (this.build(P), P.seen && (P.t0 = performance.now() - 1e5))); this.kick(); }, 0); }
+    if (s !== this.lastSig) { const first = this.lastSig === undefined; this.lastSig = s; if (!first) setTimeout(() => { this.P.forEach((P) => P && P.img.complete && (this.build(P), P.seen && (P.t0 = performance.now() - 1e6))); this.kick(); }, 0); }
     else setTimeout(() => this.kick(), 0);
-    const v = { bg: this.tp('background', '#ffffff'), mr: this.tp('radius', 6) + 'px',
+    const v = { bg: this.tp('background', '#ffffff'), mr: this.tp('radius', 6) + 'px', ob: this.tp('openSize', 104) + 'px', ot: String(this.tp('openTint', 0.62)), noop: (e) => { if (e && e.preventDefault) e.preventDefault(); },
       replay: () => this.P.forEach((P) => { if (!P) return; this.build(P); P.seen = true; this.form(P); }) };
-    for (let i = 0; i < 3; i++) v['cv' + i] = (el) => this.attach(i, el);
+    for (let i = 0; i < 3; i++) v['cv' + i] = this.refFns[i];
     return v;
   }
 }
 '''
 PROPS = {
-    'dotDetail': {"editor": "range", "default": 96, "min": 30, "max": 180, "step": 2, "section": "Dots"},
-    'dotSize': {"editor": "range", "default": 0.92, "min": 0.3, "max": 1.4, "step": 0.02, "unit": "×", "section": "Dots"},
-    'sizeByShade': {"editor": "range", "default": 0.35, "min": 0, "max": 0.9, "step": 0.05, "section": "Dots"},
+    'dotDetail': {"editor": "range", "default": 114, "min": 30, "max": 180, "step": 2, "section": "Dots"},
+    'dotSize': {"editor": "range", "default": 0.52, "min": 0.3, "max": 1.4, "step": 0.02, "unit": "×", "section": "Dots"},
+    'sizeByShade': {"editor": "range", "default": 0.1, "min": 0, "max": 0.9, "step": 0.05, "section": "Dots"},
     'dotShape': {"editor": "enum", "options": ["Circle", "Rounded square", "Square"], "default": "Circle", "section": "Dots"},
-    'formFrom': {"editor": "enum", "options": ["Scatter", "Bottom", "Center"], "default": "Scatter", "section": "Form in"},
+    'formFrom': {"editor": "enum", "options": ["Scatter", "Bottom", "Center"], "default": "Center", "section": "Form in"},
     'formTime': {"editor": "int", "default": 1100, "min": 200, "max": 3000, "step": 50, "unit": "ms", "section": "Form in"},
-    'pushReach': {"editor": "int", "default": 110, "min": 20, "max": 300, "unit": "px", "section": "Hover push"},
-    'pushForce': {"editor": "range", "default": 1.6, "min": 0, "max": 4, "step": 0.05, "section": "Hover push"},
+    'pushReach': {"editor": "int", "default": 300, "min": 20, "max": 300, "unit": "px", "section": "Hover push"},
+    'pushForce': {"editor": "range", "default": 1.75, "min": 0, "max": 4, "step": 0.05, "section": "Hover push"},
     'springBack': {"editor": "range", "default": 0.1, "min": 0.02, "max": 0.4, "step": 0.01, "section": "Hover push"},
     'damping': {"editor": "range", "default": 0.82, "min": 0.5, "max": 0.97, "step": 0.01, "section": "Hover push"},
     'settleToPhoto': {"editor": "boolean", "default": True, "section": "Form in"},
     'photoFade': {"editor": "int", "default": 600, "min": 100, "max": 2000, "step": 50, "unit": "ms", "section": "Form in"},
+    'openSize': {"editor": "int", "default": 104, "min": 64, "max": 180, "unit": "px", "section": "Open button"},
+    'openTint': {"editor": "range", "default": 0.62, "min": 0, "max": 1, "step": 0.01, "section": "Open button"},
     'background': {"editor": "color", "default": "#ffffff", "section": "Look"},
     'radius': {"editor": "int", "default": 6, "min": 0, "max": 40, "unit": "px", "section": "Look"},
 }
@@ -148,7 +169,7 @@ HTML = f'''<!doctype html>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&amp;display=swap">
 <style>{CSS}</style>
   </helmet>
-<div class="dl-root" style="--bg: {{{{bg}}}}; --mr: {{{{mr}}}}">
+<div class="dl-root" style="--bg: {{{{bg}}}}; --mr: {{{{mr}}}}; --ob: {{{{ob}}}}; --ot: {{{{ot}}}}"><svg class="dl-defs" width="0" height="0" aria-hidden="true" focusable="false"><filter id="dl-glass" x="0%" y="0%" width="100%" height="100%" filterUnits="objectBoundingBox"><feTurbulence type="fractalNoise" baseFrequency="0.02 0.02" numOctaves="2" seed="7" result="noise"></feTurbulence><feGaussianBlur in="noise" stdDeviation="2" result="soft"></feGaussianBlur><feDisplacementMap in="SourceGraphic" in2="soft" scale="40" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap></filter></svg>
   <p class="dl-k">LAB</p>
   <h1 class="dl-h">Photo dots</h1>
   <p class="dl-p">Each photo is drawn as dots, like the homepage hero. The dots fly in and form the picture when it scrolls into view, then melt into the full photo. Hover and it breaks back into dots that push away from your cursor; move off and it becomes the photo again. Tune it in Tweaks, then we&#8217;ll move it onto the stuart.re-style page.</p>
