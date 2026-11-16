@@ -377,8 +377,8 @@
    "page": "page-vmnxsd",
    "title": "Tin Le · About",
    "w": 1440,
-   "x": 12016,
-   "y": 13880
+   "x": 2837,
+   "y": 15863
   },
   "TinHome-Mobile-A.dc.html": {
    "expand": "fill",
@@ -462,7 +462,7 @@
   },
   "TinHome-Stuart.dc.html": {
    "expand": "fill",
-   "h": 8000,
+   "h": 9400,
    "is_interactive": true,
    "page": "page-vmnxsd",
    "title": "Tin Le · Portfolio in the stuart.re style",
