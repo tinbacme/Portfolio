@@ -706,6 +706,14 @@
    "w": 1440,
    "x": 19760,
    "y": 0
+  },
+  "PhotoDotsLab.dc.html": {
+   "h": 2180,
+   "page": "page-vmnxsd",
+   "title": "Photo dots lab",
+   "w": 1440,
+   "x": -1600,
+   "y": 15300
   }
  },
  "createdOnFiles": {
@@ -965,7 +973,8 @@
   "Piece-fmcq.dc.html",
   "TinHome-Stuart.dc.html",
   "Piece-y8f4.dc.html",
-  "Piece-navvars.dc.html"
+  "Piece-navvars.dc.html",
+  "PhotoDotsLab.dc.html"
  ],
  "pages": [
   {
