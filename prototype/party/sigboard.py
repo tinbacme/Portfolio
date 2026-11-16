@@ -15,7 +15,7 @@ NAMES = [('Fine pen', 'One fluid stroke, long T bar that sweeps into the name.')
          ('Connected T and L', 'T and L joined into one monogram-like stroke.')]
 cards = ''.join(
     f'<section class="sg-card"><div class="sg-top"><span class="sg-k">S{i+1}</span><span class="sg-t">{n}</span></div>'
-    f'<div class="sg-stage"><img src="/_blob/{b}" alt="Tin Le signature, option {i+1}: {n}"></div>'
+    f'<div class="sg-stage"><img src="/_blob/{b}" alt="Tin Le signature, option {i+1}: {n}" style="animation-delay: {i * 0.18:.2f}s"></div>'
     f'<div class="sg-row"><div class="sg-mini sg-light"><img src="/_blob/{b}" alt=""></div><div class="sg-mini sg-dark"><img src="/_blob/{b}" alt=""></div>'
     f'<p class="sg-d">{d}</p></div></section>' for i, (b, (n, d)) in enumerate(zip(IDS, NAMES)))
 HTML = f'''<!doctype html>
@@ -41,7 +41,12 @@ body{{margin:0}}
 .sg-k{{font:600 12px/1 Inter,sans-serif;letter-spacing:.08em;color:#b3b3b3}}
 .sg-t{{font:600 17px/1 Inter,sans-serif}}
 .sg-stage{{display:grid;place-items:center;height:200px;margin-top:12px}}
-.sg-stage img{{max-width:440px;max-height:170px;display:block}}
+.sg-stage img{{max-width:440px;max-height:170px;display:block;-webkit-mask-image:linear-gradient(90deg,#000 47%,transparent 57%);mask-image:linear-gradient(90deg,#000 47%,transparent 57%);-webkit-mask-size:220% 100%;mask-size:220% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:0 0;mask-position:0 0;animation:sgWrite var(--wr,2.4s) cubic-bezier(.45,.05,.35,1) both}}
+/* signs itself left to right: a soft-edged mask sweeps across; hovering a card signs it again */
+@keyframes sgWrite{{from{{-webkit-mask-position:100% 0;mask-position:100% 0}}to{{-webkit-mask-position:0 0;mask-position:0 0}}}}
+@keyframes sgWrite2{{from{{-webkit-mask-position:100% 0;mask-position:100% 0}}to{{-webkit-mask-position:0 0;mask-position:0 0}}}}
+.sg-card:hover .sg-stage img{{animation-name:sgWrite2;animation-delay:0s!important}}
+@media (prefers-reduced-motion: reduce){{.sg-stage img{{animation:none}}}}
 .sg-row{{display:flex;align-items:center;gap:10px;margin-top:6px}}
 .sg-mini{{flex:none;display:grid;place-items:center;width:120px;height:52px;border-radius:10px}}
 .sg-mini img{{max-width:96px;max-height:36px;display:block}}
@@ -50,16 +55,16 @@ body{{margin:0}}
 .sg-d{{margin:0 0 0 6px;font:400 14px/1.45 Inter,sans-serif;color:#7a7a7a}}
 </style>
   </helmet>
-<div class="sg-root">
+<div class="sg-root" style="--wr: {{{{wr}}}}">
   <p class="sg-k0">SIGNATURE</p>
   <h1 class="sg-h">Tin Le &#183; 10 signature options</h1>
-  <p class="sg-p">Made with GPT image 2.5 flare, cleaned to transparent ink so each works on light and dark. Small swatches show them at nav or footer size. Pick one and I&#8217;ll swap it in for the &#8220;Tin&#8221; signature on the stuart.re-style page.</p>
+  <p class="sg-p">Made with GPT image 2.5 flare, cleaned to transparent ink so each works on light and dark. Small swatches show them at nav or footer size. Each one signs itself left to right; hover a card to watch it again. Pick one and I&#8217;ll swap it in for the &#8220;Tin&#8221; signature on the stuart.re-style page.</p>
   <div class="sg-grid">{cards}</div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{{}}'>
+<script type="text/x-dc" data-dc-script data-props='{{"writeTime": {{"editor": "range", "default": 2.4, "min": 0.6, "max": 6, "step": 0.1, "unit": "s", "section": "Animation"}}}}'>
 class Component extends DCLogic {{
-  renderVals() {{ return {{}}; }}
+  renderVals() {{ return {{ wr: (this.props.writeTime ?? 2.4) + 's' }}; }}
 }}
 </script>
 </body>
