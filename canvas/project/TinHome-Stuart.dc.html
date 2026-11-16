@@ -19,6 +19,12 @@ sc-for, sc-if { display: contents; }
 .st-g-shine{z-index:2;box-shadow:inset 1.5px 1.5px 1px rgba(255,255,255,.45),inset -1px -1px 1px rgba(255,255,255,.2),inset 0 0 18px rgba(255,255,255,.08)}
 .st-dock .st-dk{position:relative;z-index:3}
 .st-defs{position:absolute;width:0;height:0;overflow:hidden}
+/* logo + nav sit as one group centered vertically on the screen (like stuart.re's dock); on the design canvas the whole board is one tall view, so they keep their top spots */
+@media (max-height: 1600px){
+  .st-toplogo{top:calc(50vh - 183px)!important}
+  .sv-nav{--navTop:calc(50vh - 78px)}
+}
+
 /* signature: signs itself on load (one stroke, then the T bar); hover to sign again */
 .st-sign-svg{top:178px;right:-8px;width:190px;font:inherit;transform:rotate(-6deg);opacity:.55}
 .st-sign-svg svg{display:block;width:100%;height:auto;overflow:visible}
@@ -137,6 +143,7 @@ class Component extends DCLogic {
   }
   svSpy() { // the nav follows the page: whichever role is in the middle of the screen is current
     if (this.svIO || typeof IntersectionObserver !== 'function' || !this.rootEl) return;
+    if (window.innerHeight > 1600) return; // whole board shown at once (design canvas): no real scrolling, so keep Home selected
     const ids = ["microsoft", "salesforce", "uo-teach", "2u", "uo-bs", "top"];
     this.svIO = new IntersectionObserver((es) => es.forEach((e) => { if (!e.isIntersecting) return; const k = ids.indexOf(e.target.id); if (k >= 0 && this.state.nav !== k) this.setState({ nav: k }); }), { rootMargin: '-45% 0px -50% 0px' });
     ids.forEach((id) => { const el = this.rootEl.querySelector('#' + CSS.escape(id)); if (el) this.svIO.observe(el); });
