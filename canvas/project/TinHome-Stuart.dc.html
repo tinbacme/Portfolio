@@ -19,11 +19,9 @@ sc-for, sc-if { display: contents; }
 .st-g-shine{z-index:2;box-shadow:inset 1.5px 1.5px 1px rgba(255,255,255,.45),inset -1px -1px 1px rgba(255,255,255,.2),inset 0 0 18px rgba(255,255,255,.08)}
 .st-dock .st-dk{position:relative;z-index:3}
 .st-defs{position:absolute;width:0;height:0;overflow:hidden}
-/* logo + nav sit as one group centered vertically on the screen (like stuart.re's dock); on the design canvas the whole board is one tall view, so they keep their top spots */
-@media (max-height: 1600px){
-  .st-toplogo{top:calc(50vh - 183px)!important}
-  .sv-nav{--navTop:calc(50vh - 78px)}
-}
+/* logo + nav form one group whose vertical center lines up with the intro (photo to buttons, 248-502px) on load, then stays put while scrolling */
+.st-toplogo{top:193px!important}
+.sv-nav{--navTop:298px}
 
 /* signature: signs itself on load (one stroke, then the T bar); hover to sign again */
 .st-sign-svg{top:178px;right:-8px;width:190px;font:inherit;transform:rotate(-6deg);opacity:.55}
