@@ -58,7 +58,7 @@ class Component extends DCLogic {
     const x = t.getContext('2d', { willReadFrequently: true }); x.drawImage(img, sx, sy, sw, sh, 0, 0, cols, rows);
     let d; try { d = x.getImageData(0, 0, cols, rows).data; } catch (e) { return; }
     const size = this.tp('dotSize', 0.92), shade = this.tp('sizeByShade', 0.35), from = this.tp('formFrom', 'Scatter');
-    P.W = W; P.H = H; P.dpr = dpr; P.cell = cell; P.dots = [];
+    P.W = W; P.H = H; P.dpr = dpr; P.cell = cell; P.dots = []; P.crop = [sx, sy, sw, sh]; P.imgA = 0; P.maxDl = 0;
     for (let j = 0; j < rows; j++) for (let i = 0; i < cols; i++) {
       const o = (j * cols + i) * 4, r = d[o], g = d[o + 1], b = d[o + 2], l = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
       const tx = (i + 0.5) * cell, ty = (j + 0.5) * cell;
@@ -68,6 +68,7 @@ class Component extends DCLogic {
       else { fx = Math.random() * W * 1.4 - W * 0.2; fy = Math.random() * H * 1.4 - H * 0.2; }
       const dist = Math.hypot(tx - fx, ty - fy);
       P.dots.push({ tx, ty, fx, fy, ox: 0, oy: 0, vx: 0, vy: 0, r: (cell / 2) * size * (1 - shade * l), c: `rgb(${r},${g},${b})`, dl: Math.random() * 420 + Math.min(500, dist * 0.35) });
+      P.maxDl = Math.max(P.maxDl, P.dots[P.dots.length - 1].dl);
     }
     if (!P.seen) P.t0 = Infinity;
   }
@@ -81,21 +82,28 @@ class Component extends DCLogic {
       if (!P || !P.dots.length) continue;
       const ctx = P.cv.getContext('2d'); ctx.setTransform(P.dpr, 0, 0, P.dpr, 0, 0); ctx.clearRect(0, 0, P.W, P.H);
       if (P.t0 === Infinity) continue; // not on screen yet: stays empty until it scrolls in
-      const el = now - P.t0, R2 = R * R, hover = P.mx > -1e3;
+      const el = now - P.t0, R2 = R * R, hover = P.mx > -1e3; P.moving = false;
+      const dotsA = 1 - (P.imgA || 0);
       for (const q of P.dots) {
         let u = reduce ? 1 : Math.max(0, Math.min(1, (el - q.dl) / dur)); if (u < 1) busy = true;
         const e = u < 0.5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2;
         const bx = q.fx + (q.tx - q.fx) * e, by = q.fy + (q.ty - q.fy) * e;
         if (hover && !reduce) { const dx = bx + q.ox - P.mx, dy = by + q.oy - P.my, d2 = dx * dx + dy * dy; if (d2 < R2) { const dd = Math.sqrt(d2) || 1, f = (1 - dd / R) * F; q.vx += (dx / dd) * f * 2; q.vy += (dy / dd) * f * 2; } }
         q.vx = (q.vx - q.ox * back) * damp; q.vy = (q.vy - q.oy * back) * damp; q.ox += q.vx; q.oy += q.vy;
-        if (Math.abs(q.ox) + Math.abs(q.oy) > 0.2) busy = true;
+        if (Math.abs(q.ox) + Math.abs(q.oy) > 0.2) { busy = true; P.moving = true; }
         const x = bx + q.ox, y = by + q.oy, rr = q.r * (0.25 + 0.75 * e);
-        if (rr < 0.3) continue;
-        ctx.fillStyle = q.c; ctx.globalAlpha = Math.min(1, 0.15 + u * 1.2);
+        if (rr < 0.3 || dotsA <= 0.001) continue;
+        ctx.fillStyle = q.c; ctx.globalAlpha = Math.min(1, 0.15 + u * 1.2) * dotsA;
         if (shape === 'Square') ctx.fillRect(x - rr, y - rr, rr * 2, rr * 2);
         else { ctx.beginPath(); if (shape === 'Rounded square' && ctx.roundRect) ctx.roundRect(x - rr, y - rr, rr * 2, rr * 2, rr * 0.45); else ctx.arc(x, y, rr, 0, 6.2832); ctx.fill(); }
       }
       ctx.globalAlpha = 1;
+      // once every dot has landed (and nothing is pushed), the dots melt into the full photo; hovering breaks it back into dots
+      const formed = reduce || el > P.maxDl + dur + 150, want = formed && !hover && !P.moving && this.tp('settleToPhoto', true) !== false ? 1 : 0;
+      const dt = Math.min(50, Math.max(0, now - (P.last || now))), fade = Math.max(60, this.tp('photoFade', 600)); P.last = now;
+      P.imgA = want > P.imgA ? Math.min(1, P.imgA + dt / fade) : Math.max(0, P.imgA - dt / (fade * 0.35));
+      if (P.imgA > 0.001) { ctx.globalAlpha = P.imgA; ctx.drawImage(P.img, P.crop[0], P.crop[1], P.crop[2], P.crop[3], 0, 0, P.W, P.H); ctx.globalAlpha = 1; }
+      if (P.imgA !== want) busy = true;
       if (hover) busy = true;
     }
     return busy;
@@ -122,6 +130,8 @@ PROPS = {
     'pushForce': {"editor": "range", "default": 1.6, "min": 0, "max": 4, "step": 0.05, "section": "Hover push"},
     'springBack': {"editor": "range", "default": 0.1, "min": 0.02, "max": 0.4, "step": 0.01, "section": "Hover push"},
     'damping': {"editor": "range", "default": 0.82, "min": 0.5, "max": 0.97, "step": 0.01, "section": "Hover push"},
+    'settleToPhoto': {"editor": "boolean", "default": True, "section": "Form in"},
+    'photoFade': {"editor": "int", "default": 600, "min": 100, "max": 2000, "step": 50, "unit": "ms", "section": "Form in"},
     'background': {"editor": "color", "default": "#ffffff", "section": "Look"},
     'radius': {"editor": "int", "default": 6, "min": 0, "max": 40, "unit": "px", "section": "Look"},
 }
@@ -141,7 +151,7 @@ HTML = f'''<!doctype html>
 <div class="dl-root" style="--bg: {{{{bg}}}}; --mr: {{{{mr}}}}">
   <p class="dl-k">LAB</p>
   <h1 class="dl-h">Photo dots</h1>
-  <p class="dl-p">Each photo is drawn as dots, like the homepage hero. The dots fly in and form the picture when it scrolls into view, then push away from your cursor and spring back. Tune it in Tweaks, then we&#8217;ll move it onto the stuart.re-style page.</p>
+  <p class="dl-p">Each photo is drawn as dots, like the homepage hero. The dots fly in and form the picture when it scrolls into view, then melt into the full photo. Hover and it breaks back into dots that push away from your cursor; move off and it becomes the photo again. Tune it in Tweaks, then we&#8217;ll move it onto the stuart.re-style page.</p>
   <div class="dl-bar"><button type="button" class="dl-btn" onClick="{{{{replay}}}}">Replay</button></div>
   <div class="dl-stack">{figs}</div>
 </div>
