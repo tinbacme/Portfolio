@@ -181,6 +181,9 @@ sc-for, sc-if { display: contents; }
 
 /* ===== experience badges on a string ===== */
 .bd-wrap{position:relative;padding:40px 150px 140px;display:flex;flex-direction:column;gap:var(--rowgap,56px)}
+/* cards are things you click and flip, not text to select: no selection highlight, no tap flash, no mouse-click focus ring */
+.bd-wrap,.bd-wrap *{-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+.bd-wrap :focus:not(:focus-visible){outline:none}
 .bd-line{position:relative}
 .bd-wire{position:absolute;left:0;right:0;top:0;width:100%;overflow:visible}
 .bd-wire path{stroke:var(--wire,#9d9d9d);stroke-width:1.5}
