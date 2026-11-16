@@ -22,7 +22,7 @@ sc-for, sc-if { display: contents; }
 .dl-btn:focus-visible{outline:2px solid #0099ff;outline-offset:3px}
 .dl-stack{display:flex;flex-direction:column;gap:48px;margin-top:48px;overflow:visible}
 .dl-fig{margin:0;overflow:visible}
-.dl-cv{position:relative;display:block;width:848px;height:524px;overflow:visible;border-radius:var(--mr,6px);background-color:var(--bg,#fff);background-repeat:no-repeat;background-size:cover;touch-action:pan-y;cursor:crosshair}
+.dl-cv{position:relative;display:block;width:848px;height:524px;overflow:visible;border-radius:var(--mr,32px);background-color:var(--bg,#fff);background-repeat:no-repeat;background-size:cover;touch-action:pan-y;cursor:crosshair}
 /* the particle canvas bleeds past the frame so dots can fly outside it; it never takes pointer events */
 .dl-cv canvas{position:absolute;left:calc(-1 * var(--bl,140px));top:calc(-1 * var(--bl,140px));width:calc(100% + 2 * var(--bl,140px));height:calc(100% + 2 * var(--bl,140px));display:block;pointer-events:none}
 .dl-frame{position:relative;width:848px;overflow:visible}
@@ -63,6 +63,7 @@ sc-for, sc-if { display: contents; }
 .dl-page-s{margin:10px 0 0;font:400 17px/1.4 Inter,sans-serif;opacity:.85}
 .dl-page.is-instant .dl-page-ui{transition:none}
 /* the bang: a short bloom in the photo's own color plus a thin shock ring */
+.dl-vortex{position:absolute;left:0;top:0;display:none;pointer-events:none;z-index:25}
 .dl-flash{position:absolute;left:0;top:0;width:260px;height:260px;margin:-130px 0 0 -130px;border-radius:50%;pointer-events:none;z-index:30;opacity:0;background:radial-gradient(circle,rgba(255,255,255,.95) 0,rgba(var(--fc,255,255,255),.85) 18%,rgba(var(--fc,255,255,255),.25) 42%,rgba(var(--fc,255,255,255),0) 70%)}
 .dl-flash::after{content:"";position:absolute;left:0;top:0;right:0;bottom:0;border-radius:50%;box-shadow:0 0 0 1.5px rgba(var(--fc,255,255,255),.55)}
 .dl-flash.go{animation:dl-flash .7s cubic-bezier(.2,.7,.2,1) forwards}
@@ -79,7 +80,7 @@ sc-for, sc-if { display: contents; }
   <div class="dl-stack"><figure class="dl-fig"><div class="dl-frame"><div class="dl-cv" ref="{{cv0}}" data-src="/_blob/effff208332abe411e27c82aaa87e30d" data-pos="50% 72%" style="background-position: 50% 72%" role="img" aria-label="Tin with his Microsoft team"></div><a class="dl-open" href="#" aria-label="Open Microsoft AI" onClick="{{open0}}"><span class="dl-open-fx" aria-hidden="true"></span><span class="dl-open-tint" aria-hidden="true"></span><span class="dl-open-shine" aria-hidden="true"></span><svg class="dl-open-ic" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="dl-open-tx">Open</span></a></div><figcaption class="dl-cap">Microsoft AI</figcaption></figure><figure class="dl-fig"><div class="dl-frame"><div class="dl-cv" ref="{{cv1}}" data-src="/_blob/155942c7f1c522f9aec7d43d1c1d0d0d" data-pos="50% 50%" style="background-position: 50% 50%" role="img" aria-label="Tin teaching a product design class"></div><a class="dl-open" href="#" aria-label="Open University of Oregon" onClick="{{open1}}"><span class="dl-open-fx" aria-hidden="true"></span><span class="dl-open-tint" aria-hidden="true"></span><span class="dl-open-shine" aria-hidden="true"></span><svg class="dl-open-ic" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="dl-open-tx">Open</span></a></div><figcaption class="dl-cap">University of Oregon</figcaption></figure><figure class="dl-fig"><div class="dl-frame"><div class="dl-cv" ref="{{cv2}}" data-src="/_blob/8bd998ead1110dbdb0a707cdb0cb6c60" data-pos="50% 45%" style="background-position: 50% 45%" role="img" aria-label="Tin with his Salesforce team"></div><a class="dl-open" href="#" aria-label="Open Salesforce" onClick="{{open2}}"><span class="dl-open-fx" aria-hidden="true"></span><span class="dl-open-tint" aria-hidden="true"></span><span class="dl-open-shine" aria-hidden="true"></span><svg class="dl-open-ic" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="dl-open-tx">Open</span></a></div><figcaption class="dl-cap">Salesforce</figcaption></figure></div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"density": {"editor": "int", "default": 200, "min": 60, "max": 280, "step": 4, "unit": "cols", "section": "Particles"}, "dotSize": {"editor": "range", "default": 0.78, "min": 0.3, "max": 1.6, "step": 0.02, "unit": "\u00d7", "section": "Particles"}, "sizeByLuma": {"editor": "range", "default": 0.1, "min": -1, "max": 1, "step": 0.05, "section": "Particles"}, "darkCut": {"editor": "range", "default": 0, "min": 0, "max": 0.5, "step": 0.01, "section": "Particles"}, "brightCut": {"editor": "range", "default": 1, "min": 0.5, "max": 1, "step": 0.01, "section": "Particles"}, "drift": {"editor": "range", "default": 0.8, "min": 0, "max": 4, "step": 0.1, "unit": "px", "section": "Particles"}, "introTime": {"editor": "int", "default": 1800, "min": 400, "max": 4000, "step": 50, "unit": "ms", "section": "Form in"}, "introFrom": {"editor": "enum", "options": ["Center", "Scatter"], "default": "Center", "section": "Form in"}, "introOrder": {"editor": "enum", "options": ["Center out", "Top down", "Left to right", "Random"], "default": "Center out", "section": "Form in"}, "introOvershoot": {"editor": "range", "default": 2.2, "min": 0, "max": 5, "step": 0.1, "section": "Form in"}, "introDepth": {"editor": "range", "default": 2.5, "min": 0, "max": 6, "step": 0.1, "section": "Form in"}, "settleToPhoto": {"editor": "boolean", "default": true, "section": "Form in"}, "photoFade": {"editor": "int", "default": 600, "min": 100, "max": 2000, "step": 50, "unit": "ms", "section": "Form in"}, "trailRadius": {"editor": "int", "default": 220, "min": 40, "max": 400, "unit": "px", "section": "Hover"}, "trailStrength": {"editor": "range", "default": 1.75, "min": 0, "max": 4, "step": 0.05, "section": "Hover"}, "velocity": {"editor": "range", "default": 0.6, "min": 0, "max": 1, "step": 0.05, "section": "Hover"}, "swirl": {"editor": "range", "default": 0.8, "min": 0, "max": 2, "step": 0.05, "section": "Hover"}, "healTime": {"editor": "int", "default": 550, "min": 200, "max": 3000, "step": 50, "unit": "ms", "section": "Hover"}, "returnFade": {"editor": "int", "default": 250, "min": 60, "max": 1500, "step": 20, "unit": "ms", "section": "Hover"}, "hoverReveal": {"editor": "enum", "options": ["Whole photo", "Around cursor"], "default": "Whole photo", "section": "Hover"}, "restAfter": {"editor": "int", "default": 3000, "min": 0, "max": 10000, "step": 250, "unit": "ms", "section": "Hover"}, "openSize": {"editor": "int", "default": 104, "min": 64, "max": 180, "unit": "px", "section": "Open button"}, "openTint": {"editor": "range", "default": 0.62, "min": 0, "max": 1, "step": 0.01, "section": "Open button"}, "clearMargin": {"editor": "int", "default": 3, "min": 0, "max": 30, "unit": "px", "section": "Open button"}, "clearBand": {"editor": "int", "default": 90, "min": 30, "max": 240, "unit": "px", "section": "Open button"}, "collapseTime": {"editor": "int", "default": 850, "min": 300, "max": 2000, "step": 50, "unit": "ms", "section": "Big bang"}, "bangTime": {"editor": "int", "default": 1500, "min": 500, "max": 4000, "step": 50, "unit": "ms", "section": "Big bang"}, "bangSwirl": {"editor": "range", "default": 2.4, "min": 0, "max": 6, "step": 0.1, "unit": "rad", "section": "Big bang"}, "bangOvershoot": {"editor": "range", "default": 1.2, "min": 0, "max": 4, "step": 0.1, "section": "Big bang"}, "background": {"editor": "color", "default": "#ffffff", "section": "Look"}, "radius": {"editor": "int", "default": 6, "min": 0, "max": 40, "unit": "px", "section": "Look"}, "bleed": {"editor": "int", "default": 140, "min": 0, "max": 240, "unit": "px", "section": "Look"}, "renderer": {"editor": "enum", "options": ["Auto", "WebGL 1", "Canvas 2D"], "default": "Auto", "section": "Look"}}'>
+<script type="text/x-dc" data-dc-script data-props='{"density": {"editor": "int", "default": 200, "min": 60, "max": 280, "step": 4, "unit": "cols", "section": "Particles"}, "dotSize": {"editor": "range", "default": 0.78, "min": 0.3, "max": 1.6, "step": 0.02, "unit": "\u00d7", "section": "Particles"}, "sizeByLuma": {"editor": "range", "default": 0.1, "min": -1, "max": 1, "step": 0.05, "section": "Particles"}, "darkCut": {"editor": "range", "default": 0, "min": 0, "max": 0.5, "step": 0.01, "section": "Particles"}, "brightCut": {"editor": "range", "default": 1, "min": 0.5, "max": 1, "step": 0.01, "section": "Particles"}, "drift": {"editor": "range", "default": 0.8, "min": 0, "max": 4, "step": 0.1, "unit": "px", "section": "Particles"}, "introTime": {"editor": "int", "default": 1800, "min": 400, "max": 4000, "step": 50, "unit": "ms", "section": "Form in"}, "introFrom": {"editor": "enum", "options": ["Center", "Scatter"], "default": "Center", "section": "Form in"}, "introOrder": {"editor": "enum", "options": ["Center out", "Top down", "Left to right", "Random"], "default": "Center out", "section": "Form in"}, "introOvershoot": {"editor": "range", "default": 2.2, "min": 0, "max": 5, "step": 0.1, "section": "Form in"}, "introDepth": {"editor": "range", "default": 2.5, "min": 0, "max": 6, "step": 0.1, "section": "Form in"}, "settleToPhoto": {"editor": "boolean", "default": true, "section": "Form in"}, "photoFade": {"editor": "int", "default": 600, "min": 100, "max": 2000, "step": 50, "unit": "ms", "section": "Form in"}, "trailRadius": {"editor": "int", "default": 220, "min": 40, "max": 400, "unit": "px", "section": "Hover"}, "trailStrength": {"editor": "range", "default": 1.75, "min": 0, "max": 4, "step": 0.05, "section": "Hover"}, "velocity": {"editor": "range", "default": 0.6, "min": 0, "max": 1, "step": 0.05, "section": "Hover"}, "swirl": {"editor": "range", "default": 0.8, "min": 0, "max": 2, "step": 0.05, "section": "Hover"}, "healTime": {"editor": "int", "default": 550, "min": 200, "max": 3000, "step": 50, "unit": "ms", "section": "Hover"}, "returnFade": {"editor": "int", "default": 250, "min": 60, "max": 1500, "step": 20, "unit": "ms", "section": "Hover"}, "hoverReveal": {"editor": "enum", "options": ["Whole photo", "Around cursor"], "default": "Whole photo", "section": "Hover"}, "restAfter": {"editor": "int", "default": 3000, "min": 0, "max": 10000, "step": 250, "unit": "ms", "section": "Hover"}, "openSize": {"editor": "int", "default": 104, "min": 64, "max": 180, "unit": "px", "section": "Open button"}, "openTint": {"editor": "range", "default": 0.62, "min": 0, "max": 1, "step": 0.01, "section": "Open button"}, "clearMargin": {"editor": "int", "default": 3, "min": 0, "max": 30, "unit": "px", "section": "Open button"}, "clearBand": {"editor": "int", "default": 90, "min": 30, "max": 240, "unit": "px", "section": "Open button"}, "collapseTime": {"editor": "int", "default": 850, "min": 300, "max": 2000, "step": 50, "unit": "ms", "section": "Big bang"}, "bangTime": {"editor": "int", "default": 1500, "min": 500, "max": 4000, "step": 50, "unit": "ms", "section": "Big bang"}, "bangSwirl": {"editor": "range", "default": 2.4, "min": 0, "max": 6, "step": 0.1, "unit": "rad", "section": "Big bang"}, "bangOvershoot": {"editor": "range", "default": 1.2, "min": 0, "max": 4, "step": 0.1, "section": "Big bang"}, "background": {"editor": "color", "default": "#ffffff", "section": "Look"}, "radius": {"editor": "int", "default": 32, "min": 0, "max": 40, "unit": "px", "section": "Look"}, "bleed": {"editor": "int", "default": 140, "min": 0, "max": 240, "unit": "px", "section": "Look"}, "renderer": {"editor": "enum", "options": ["Auto", "WebGL 1", "Canvas 2D"], "default": "Auto", "section": "Look"}}'>
 // Particle shader: one point sprite per grid cell. Color comes from a small cols x rows copy of the photo, size from its
 // luminance. Intro (form-in or big bang), drift, collapse and the clear disk under the Open circle are computed here;
 // the cursor disturbance arrives as a per-particle offset from the CPU spring simulation (aOff).
@@ -96,6 +97,7 @@ void main() {
   vec2 uv = aCell / uView;
   vec3 c = texture2D(uColor, uv).rgb;
   float l = dot(c, vec3(0.2126, 0.7152, 0.0722));
+  if (aIntro.z < 0.0) { gl_Position = vec4(2.0, 2.0, 0.0, 1.0); gl_PointSize = 1.0; vCol = vec4(0.0); vShape = vec3(1.0); return; }
   float dl = uBang > 0.5 ? clamp(length(aCell - uOrigin) / uMaxD, 0.0, 1.0) * 0.65 + aRnd.w * 0.35 : aIntro.z;
   float p = clamp((uIntroT - dl * uIntroSpan) / uIntroDur, 0.0, 1.0);
   float q = 1.0 - p, e = 1.0 - q * q * q * q, ie = 1.0 - e;
@@ -162,6 +164,35 @@ void main() {
   float a = uA * clamp(0.5 - sd * uDpr, 0.0, 1.0) * (1.0 - uMask * smoothstep(0.02, 0.3, texture2D(uTouch, vUv).b));
   gl_FragColor = vec4(c * a, a);
 }`;
+// Vortex shader: one draw for every dot (photos and page elements), spiralling into (uOut 0) or out of (uOut 1) the clicked circle.
+// Per dot: its own delay and duration (ripple + crumble + jitter), ease-in acceleration with a tiny anticipation, a swirl that
+// tightens near the core, and a curl-like wobble on the way; reverse bursts out with an overshoot and settles.
+const PD_VVS = `
+precision highp float;
+attribute vec2 aP; attribute vec4 aC; attribute vec2 aD; attribute vec2 aE;
+uniform vec2 uC, uOff, uView, uT; uniform float uOut, uSw, uDpr, uMaxPt;
+varying vec4 vCol; varying vec3 vShape;
+vec2 rot(vec2 v, float a) { float c = cos(a), s = sin(a); return vec2(c * v.x - s * v.y, s * v.x + c * v.y); }
+void main() {
+  vec2 rel0 = aP - uOff - uC; float l0 = max(length(rel0), 0.001), vr = 0.85 + 0.3 * aD.y;
+  float t = clamp((uT.x - aD.x) / aE.x, 0.0, 1.0), bump = sin(3.1416 * t), e, k, an, s, al; vec3 col = aC.rgb;
+  if (uOut < 0.5) {
+    e = t * t * t; k = 1.0 - e + 0.05 * bump * (1.0 - t); an = uSw * vr * (e + 1.2 * e * e); s = 1.0 - 0.7 * e;
+    al = max(smoothstep(3.0, 36.0, l0 * (1.0 - e)), 1.0 - smoothstep(0.85, 1.0, t)); col = mix(col, vec3(1.0), e * e * 0.5);
+  } else {
+    float u1 = t - 1.0; k = 1.0 + 2.6 * u1 * u1 * u1 + 1.6 * u1 * u1; float em = min(k, 1.0);
+    an = uSw * vr * ((1.0 - em) + 1.2 * (1.0 - em) * (1.0 - em)); s = 0.3 + 0.7 * em; al = smoothstep(0.0, 0.12, t);
+    if (aE.y > 0.5) al *= 1.0 - smoothstep(uT.y - 220.0, uT.y, uT.x); // page-element dots hand back to the real text
+    col = mix(col, vec3(1.0), (1.0 - t) * (1.0 - t) * 0.5); e = 1.0 - em;
+  }
+  float w = sin(aP.x * 0.031 + uT.x * 0.004 + aD.y * 6.28) * sin(aP.y * 0.027 - uT.x * 0.003) * 14.0 * bump * (1.0 - e);
+  vec2 pos = uC + rot(rel0, an) * k + vec2(-rel0.y, rel0.x) / l0 * w;
+  float rpx = max(0.6, 0.5 * aC.a * s * uDpr), ps = min(2.0 * rpx + 2.5, uMaxPt);
+  vShape = vec3(ps, min(rpx, 0.5 * ps - 0.4), 0.75); vCol = vec4(col * al, al);
+  vec2 ndc = pos / uView * 2.0 - 1.0;
+  gl_Position = al < 0.004 ? vec4(2.0, 2.0, 0.0, 1.0) : vec4(ndc.x, -ndc.y, 0.0, 1.0);
+  gl_PointSize = ps;
+}`;
 const PD_STRIDE = 9; // aCell(2) aRnd(4) aIntro(3)
 const PD_K = 0.09, PD_DAMP = 0.78; // spring per 60fps frame: settles a 50px push in about 0.65s with one soft overshoot
 
@@ -191,11 +222,12 @@ class Component extends DCLogic {
     if (this.H) { if (this.H.R) this.freeR(this.H.R, true); this.H = null; }
     if (this.pg) { this.setInert(this.pg.root, false); this.pg.wrap.remove(); this.pg.flash.remove(); this.pg = null; }
     this.releaseDom(); this.P = []; this.seq = null;
+    if (this.V && this.V.cv) { if (this.V.gl) { const x = this.V.gl.getExtension('WEBGL_lose_context'); if (x) x.loseContext(); } this.V.cv.remove(); } this.V = null;
     if (this.io) { this.io.disconnect(); this.io = null; }
   }
   tp(k, d) { const v = this.props[k]; return v === undefined || v === null ? d : v; }
   bleed() { return Math.max(0, Math.round(this.tp('bleed', 140))); }
-  sig() { return ['density', 'introFrom', 'introOrder', 'renderer', 'bleed'].map((k) => this.tp(k, '')).join('|'); }
+  sig() { return ['density', 'introFrom', 'introOrder', 'renderer', 'bleed', 'radius'].map((k) => this.tp(k, '')).join('|'); }
   reduced() { return !!(this.mq && this.mq.matches); }
   all() { return this.H ? this.P.concat([this.H]) : this.P; }
 
@@ -338,10 +370,11 @@ class Component extends DCLogic {
       pg.wrap.classList.add('is-open', 'is-formed', 'is-instant'); pg.btn.focus({ preventScroll: true });
       this.kick(); return;
     }
-    // every photo dissolves and spirals into its own center; the other photos' frames are then carried into the circle (pullDom)
-    this.P.forEach((Q) => { if (!Q || !Q.ready) return; Q.col = { t0: now, dur: this.colTime(), x: Q.W / 2, y: Q.H / 2 }; Q.trail.length = 0; Q.touchLive = true; Q.hover = false; Q.dirty = true; });
+    // every photo hands its particles to one vortex that pulls them, and the page elements, into this circle's exact center
+    this.P.forEach((Q) => { if (!Q || !Q.ready) return; Q.trail.length = 0; Q.touchLive = true; Q.hover = false; Q.dirty = true; if (Q.t0 !== Infinity) Q.vortex = true; });
+    this.vortexStart('in', g, P);
     if (P.frame) { P.frame.style.setProperty('--ct', this.colTime() + 'ms'); P.frame.classList.add('is-bang'); }
-    this.pullDom(g, P);
+    if (this.V && this.V.els) this.hideDom(this.V.els, true, 160); // text crossfades into its dots, which then crumble
     this.kick();
   }
   closePage() {
@@ -361,13 +394,15 @@ class Component extends DCLogic {
     if (P) {
       this.setInert(s.g.root, false);
       if (P.frame) P.frame.classList.remove('is-bang', 'is-away');
-      this.P.forEach((Q) => { // everything bursts back out of the point
-        if (!Q || !Q.ready) return; Q.col = null; Q.away = false; Q.dirty = true;
-        if (!Q.seen) { Q.t0 = Infinity; Q.formed = false; Q.photoA = 0; return; } // never scrolled into view: keep its own form-in for later
-        if (instant) { Q.photoA = 1; Q.formed = true; Q.t0 = -1e9; } else { Q.ox = Q.W / 2; Q.oy = Q.H / 2; this.startIntro(Q, true); }
+      this.P.forEach((Q) => { // home state: settled particles that will fade into the sharp photo
+        if (!Q || !Q.ready) return; Q.col = null; Q.vortex = false; Q.dirty = true; Q.trail.length = 0;
+        if (Q.offs) { Q.offs.fill(0); Q.vel.fill(0); Q.offDirty = true; Q.awake = false; Q.holeW = 0; Q.maxO = 0; }
+        if (!Q.seen) { Q.t0 = Infinity; Q.formed = false; Q.photoA = 0; Q.away = false; return; } // never scrolled into view: keep its own form-in for later
+        Q.formed = true; Q.t0 = -1e9; Q.bangIntro = false; Q.disturbed = false;
+        if (instant) { Q.photoA = 1; Q.away = false; } else { Q.photoA = 0; Q.away = true; } // hidden until the burst lands
       });
-      if (instant) { this.releaseDom(); this.seq = null; }
-      else { this.pushDom(); s.phase = 'return'; s.open = false; this.flashAt(s.g.cx, s.g.cy, P.avg); }
+      if (instant) { this.vortexStop(); this.releaseDom(); this.seq = null; }
+      else { this.vortexStart('out', s.g, P); s.domIn = false; this.domBusy = true; s.phase = 'return'; s.open = false; this.flashAt(s.g.cx, s.g.cy, P.avg); }
       const a = P.frame && P.frame.querySelector('.dl-open'); if (a) a.focus({ preventScroll: true });
     } else this.seq = null;
     this.kick();
@@ -375,56 +410,17 @@ class Component extends DCLogic {
   colTime() { return Math.max(200, this.tp('collapseTime', 850)); }
   setInert(root, on) { // the collapsed page is hidden from keyboard and screen readers while the next page is open
     Array.from(root.children).forEach((c) => {
-      if (c.classList.contains('dl-page') || c.classList.contains('dl-flash') || c.classList.contains('dl-defs')) return;
+      if (c.classList.contains('dl-page') || c.classList.contains('dl-flash') || c.classList.contains('dl-defs') || c.classList.contains('dl-vortex')) return;
       if (on) { c.setAttribute('inert', ''); c.setAttribute('aria-hidden', 'true'); } else { c.removeAttribute('inert'); c.removeAttribute('aria-hidden'); }
     });
   }
-  // keyframes that pull an element along a tightening spiral into (tx, ty): gravity-like acceleration, shrink, spin, blur, fade
-  spiralFrames(dx0, dy0, sw) {
-    const F = [], N = 10;
-    for (let i = 0; i <= N; i++) {
-      const t = i / N, e = t * t * t, a = sw * e, c = Math.cos(a), sn = Math.sin(a);
-      const rx = (dx0 * c - dy0 * sn) * (1 - e), ry = (dx0 * sn + dy0 * c) * (1 - e);
-      F.push({ offset: t, transform: 'translate(' + (rx - dx0).toFixed(1) + 'px,' + (ry - dy0).toFixed(1) + 'px) rotate(' + (a * 34).toFixed(1) + 'deg) scale(' + Math.max(0.001, 1 - e).toFixed(3) + ')', filter: 'blur(' + (7 * e).toFixed(2) + 'px)', opacity: t < 0.7 ? 1 : Math.max(0, 1 - (t - 0.7) / 0.3) });
-    }
-    return F;
-  }
-  domTargets(root, P) {
-    const els = Array.from(root.querySelectorAll('.dl-k, .dl-h, .dl-p, .dl-bar, .dl-cap, .dl-frame')).filter((e) => e !== P.frame);
-    const rr = root.getBoundingClientRect(), sc = rr.width / (root.offsetWidth || rr.width) || 1;
-    return els.map((el) => { const r = el.getBoundingClientRect(); return { el, x: (r.left - rr.left + r.width / 2) / sc, y: (r.top - rr.top + r.height / 2) / sc }; });
-  }
-  pullDom(g, P) {
-    this.releaseDom();
-    if (typeof Element === 'undefined' || !Element.prototype.animate) return;
-    const T = this.domTargets(g.root, P), dur = this.colTime(), sw = this.tp('bangSwirl', 2.4) * 0.8;
-    const maxD = Math.max(1, ...T.map((t) => Math.hypot(t.x - g.cx, t.y - g.cy)));
-    this.dom = T.map((t) => {
-      const dx0 = t.x - g.cx, dy0 = t.y - g.cy, delay = (Math.hypot(dx0, dy0) / maxD) * 0.4 * dur; // nearer things go first
-      t.frames = this.spiralFrames(dx0, dy0, sw);
-      t.anim = t.el.animate(t.frames, { duration: dur - delay, delay, fill: 'forwards', easing: 'linear' }); // ends in sync with the particles
-      return t;
-    });
-  }
-  pushDom() { // reverse: spring back out of the point into the original layout, then remove every trace
-    if (!this.dom) return;
-    const dur = Math.max(400, this.tp('bangTime', 1500) * 0.6), maxD = Math.max(1, ...this.dom.map((t) => Math.hypot(t.x - this.seq.g.cx, t.y - this.seq.g.cy)));
-    let left = this.dom.length; this.domBusy = left > 0;
-    this.dom.forEach((t) => {
-      const back = t.frames.slice().reverse().map((f, i, a) => Object.assign({}, f, { offset: i / (a.length - 1) }));
-      const delay = (Math.hypot(t.x - this.seq.g.cx, t.y - this.seq.g.cy) / maxD) * 0.25 * dur, old = t.anim;
-      t.anim = t.el.animate(back, { duration: dur, delay, fill: 'both', easing: 'cubic-bezier(.2,1.18,.4,1)' });
-      if (old) old.cancel();
-      t.anim.onfinish = () => { if (--left <= 0) this.releaseDom(); };
-    });
-  }
-  releaseDom() { if (this.dom) this.dom.forEach((t) => t.anim && t.anim.cancel()); this.dom = null; this.domBusy = false; } // no inline styles left behind
   seqStep(now) { // advances the open/close sequence in step with rendering
     const s = this.seq; if (!s) return;
     const P = this.P[s.i], H = this.H, pg = this.pg;
     if (!P || !pg) { this.seq = null; return; }
     if (s.phase === 'collapse' && now - s.t0 >= this.colTime()) {
-      this.P.forEach((Q) => { if (Q && Q.ready) { Q.away = true; Q.col = null; Q.dirty = true; } });
+      this.P.forEach((Q) => { if (Q && Q.ready) { Q.away = true; Q.vortex = false; Q.col = null; Q.dirty = true; } });
+      this.vortexStop();
       if (P.frame) { P.frame.classList.remove('is-bang'); P.frame.classList.add('is-away'); }
       this.setInert(s.g.root, true);
       H.away = false; H.ox = s.g.cx; H.oy = s.g.cy - s.top; this.startIntro(H, true); H.vis = true;
@@ -433,8 +429,161 @@ class Component extends DCLogic {
       s.phase = 'bang'; s.t0 = now;
     } else if (s.phase === 'bang' && H.formed && H.photoA >= 1) { pg.wrap.classList.add('is-formed'); s.phase = 'page'; }
     else if (s.phase === 'uncollapse' && now - s.t0 >= this.colTime()) this.finishClose(false);
-    else if (s.phase === 'return' && P.formed && P.photoA >= 1 && !this.domBusy) this.seq = null;
+    else if (s.phase === 'return' && this.V && !s.domIn && now - this.V.t0 >= this.V.total - 220) { s.domIn = true; this.hideDom(null, false, 220); } // real text fades back in as its dots land
+    if (s.phase === 'return' && this.V && now - this.V.t0 >= this.V.total) { // the burst has landed: hand the dots back
+      this.P.forEach((Q) => { if (Q && Q.ready && Q.away) { Q.away = false; Q.dirty = true; Q.last = 0; } });
+      this.vortexStop(); this.releaseDom(); s.phase = 'settle';
+    } else if (s.phase === 'settle' && P.photoA >= 1 && !this.domBusy) this.seq = null;
   }
+
+  // ---------- page elements as dots: redraw their text and fills into a canvas, then sample it ----------
+  domDots(root, rr, sc, top, Hh, Ww, step) {
+    const els = Array.from(root.querySelectorAll('.dl-k, .dl-h, .dl-p, .dl-bar, .dl-cap'));
+    const cv = document.createElement('canvas'); cv.width = Ww; cv.height = Hh;
+    const x = cv.getContext('2d', { willReadFrequently: true }); if (!x) return { els, dots: [] };
+    const box = (r) => ({ l: (r.left - rr.left) / sc, t: (r.top - rr.top) / sc - top, w: r.width / sc, h: r.height / sc });
+    const groups = [];
+    els.forEach((el) => {
+      const eb = box(el.getBoundingClientRect()); if (eb.t > Hh || eb.t + eb.h < 0) return;
+      const gi = groups.push(eb) - 1; eb.id = gi;
+      [el].concat(Array.from(el.querySelectorAll('*'))).forEach((n) => { // fills (e.g. the Replay button)
+        const cs = getComputedStyle(n), bg = cs.backgroundColor; if (!bg || /rgba\(.*,\s*0\)$|transparent/.test(bg)) return;
+        const b = box(n.getBoundingClientRect()), rad = Math.min(parseFloat(cs.borderTopLeftRadius) || 0, b.h / 2);
+        x.fillStyle = bg; x.beginPath(); if (x.roundRect) x.roundRect(b.l, b.t, b.w, b.h, rad); else x.rect(b.l, b.t, b.w, b.h); x.fill();
+      });
+      const walk = document.createTreeWalker(el, NodeFilter.SHOW_TEXT); let tn;
+      while ((tn = walk.nextNode())) { // every word, where the browser laid it out, in the element's own font and color
+        const cs = getComputedStyle(tn.parentNode); x.font = cs.fontStyle + ' ' + cs.fontWeight + ' ' + cs.fontSize + ' ' + cs.fontFamily; x.fillStyle = cs.color; x.textBaseline = 'middle';
+        if ('letterSpacing' in x) x.letterSpacing = cs.letterSpacing === 'normal' ? '0px' : cs.letterSpacing;
+        const re = /\S+/g, rg = document.createRange(); let m;
+        while ((m = re.exec(tn.data))) { rg.setStart(tn, m.index); rg.setEnd(tn, m.index + m[0].length); const rs = rg.getClientRects(); if (!rs.length) continue; const b = box(rs[0]); x.fillText(m[0], b.l, b.t + b.h / 2); }
+      }
+    });
+    const d = x.getImageData(0, 0, Ww, Hh).data, dots = [];
+    groups.forEach((g) => {
+      const x0 = Math.max(0, Math.floor(g.l)), x1 = Math.min(Ww - 1, Math.ceil(g.l + g.w)), y0 = Math.max(0, Math.floor(g.t)), y1 = Math.min(Hh - 1, Math.ceil(g.t + g.h));
+      for (let yy = y0; yy <= y1; yy += step) for (let xx = x0; xx <= x1; xx += step) {
+        const o = (yy * Ww + xx) * 4, a = d[o + 3]; if (a < 80) continue;
+        const ed = Math.min(xx - g.l, g.l + g.w - xx, yy - g.t, g.t + g.h - yy), en = Math.max(0, Math.min(1, ed / Math.max(4, 0.5 * Math.min(g.w, g.h))));
+        dots.push([xx, yy + top, d[o] / a, d[o + 1] / a, d[o + 2] / a, step * 0.95, en]);
+      }
+    });
+    return { els, dots };
+  }
+  // ---------- one vortex: every particle of every photo, and the page's elements as dots, stream into (or out of) one point ----------
+  vortexStart(mode, g, P0) {
+    const root = g.root, rr = root.getBoundingClientRect(), sc = rr.width / (root.offsetWidth || rr.width) || 1;
+    const vh = (typeof window !== 'undefined' && window.innerHeight) || 900, Ww = root.offsetWidth || 1440;
+    let top = Math.max(0, -rr.top / sc), bot = Math.min(g.rootH, (vh - rr.top) / sc); // the part of the board on screen
+    if (bot - top < 50) { top = g.cy - 450; bot = g.cy + 450; }
+    top = Math.max(0, Math.min(top, g.cy - 40)); bot = Math.min(g.rootH, Math.max(bot, g.cy + 40));
+    if (bot - top > 2600) { top = Math.max(top, g.cy - 1300); bot = top + 2600; }
+    top = Math.floor(top); const Hh = Math.max(1, Math.ceil(bot - top));
+    const V = this.V || (this.V = {});
+    const kind = this.pickKind(), dpr = Math.min(2, (typeof window !== 'undefined' && window.devicePixelRatio) || 1);
+    if (!V.cv || V.root !== root || (V.kind === '2d') !== (kind === '2d')) this.vortexInit(root, kind);
+    const cv = V.cv; cv.style.top = top + 'px'; cv.style.width = Ww + 'px'; cv.style.height = Hh + 'px';
+    const cw = Math.round(Ww * dpr), ch = Math.round(Hh * dpr); if (cv.width !== cw) cv.width = cw; if (cv.height !== ch) cv.height = ch;
+    const is2d = V.kind === '2d', cap = is2d ? 14000 : 40000, dot = this.tp('dotSize', 0.78), lumaK = this.tp('sizeByLuma', 0.1);
+    const dd = this.domDots(root, rr, sc, top, Hh, Ww, is2d ? 3 : 2); // page text and the Replay button, as dots
+    const budget = Math.max(4000, cap - dd.dots.length);
+    const list = this.P.filter((Q) => Q && Q.ready && Q.inst && Q.t0 !== Infinity);
+    const others = list.reduce((a, Q) => a + (Q === P0 ? 0 : Q.n), 0), mine = P0 && list.indexOf(P0) >= 0 ? P0.n : 0;
+    let sMine = 1; while (mine / (sMine * sMine) > budget * 0.65) sMine++;
+    let sOth = 1; while (others / (sOth * sOth) > Math.max(1, budget - mine / (sMine * sMine))) sOth++;
+    const out = []; let maxD = 1;
+    const push = (x, y, r, gg, bb, size, en, dom, rnd) => { out.push(x, y, r, gg, bb, size, en, rnd, 0, dom); const dd2 = Math.hypot(x - g.cx, y - g.cy); if (dd2 > maxD) maxD = dd2; };
+    list.forEach((Q) => {
+      const fr = Q.el.getBoundingClientRect(), ox = (fr.left - rr.left) / sc, oy = (fr.top - rr.top) / sc;
+      const s = Q === P0 ? sMine : sOth, grow = s > 1 ? 0.55 + 0.45 * s : 1, D = Q.inst, O = Q.offs, C = Q.cdata, half = 0.5 * Math.min(Q.W, Q.H);
+      for (let j = 0; j < Q.rows; j += s) for (let i = 0; i < Q.cols; i += s) {
+        const k = j * Q.cols + i, b = k * PD_STRIDE; if (D[b + 8] < 0) continue;
+        const lx = D[b] + (mode === 'in' && O ? O[2 * k] : 0), ly = D[b + 1] + (mode === 'in' && O ? O[2 * k + 1] : 0);
+        const r = C[k * 4] / 255, gg = C[k * 4 + 1] / 255, bb = C[k * 4 + 2] / 255, l = 0.2126 * r + 0.7152 * gg + 0.0722 * bb;
+        const f = lumaK >= 0 ? 1 - l * lumaK : 1 + (l - 1) * -lumaK, en = Math.max(0, Math.min(1, Math.min(D[b], Q.W - D[b], D[b + 1], Q.H - D[b + 1]) / half));
+        push(ox + lx, oy + ly, r, gg, bb, Q.cell * dot * Math.max(f, 0.1) * grow, en, 0, D[b + 3]);
+      }
+    });
+    let sd = 0x2545f491; const rnd = () => { sd ^= sd << 13; sd ^= sd >>> 17; sd ^= sd << 5; return ((sd >>> 0) % 100000) / 100000; };
+    dd.dots.forEach((p) => push(p[0], p[1], p[2], p[3], p[4], p[5], p[6], 1, rnd()));
+    const dur = mode === 'in' ? this.colTime() : Math.max(400, this.tp('bangTime', 1500) * 0.6);
+    const A = Float32Array.from(out), n = A.length / 10; let total = 0;
+    for (let k = 0, b = 0; k < n; k++, b += 10) { // ripple: outer dots later, edges of each element crumble first, plus jitter
+      const dn = Math.hypot(A[b] - g.cx, A[b + 1] - g.cy) / maxD, en = A[b + 6], r = A[b + 7], r2 = (r * 7.31) % 1;
+      const delay = mode === 'in' ? dur * (0.3 * dn + 0.14 * en + 0.1 * r2) : dur * (0.22 * dn + 0.08 * (1 - en) + 0.06 * r2);
+      const pd = mode === 'in' ? (dur - delay) * (0.8 + 0.2 * ((r * 3.7) % 1)) : dur * (0.8 + 0.2 * ((r * 3.7) % 1));
+      A[b + 6] = delay; A[b + 8] = pd; if (delay + pd > total) total = delay + pd;
+    }
+    Object.assign(V, { on: true, mode, t0: performance.now(), dur, total: mode === 'in' ? Math.max(total, dur) : total, n, data: A, top, W: Ww, H: Hh, dpr, cx: g.cx, cy: g.cy - top, sw: this.tp('bangSwirl', 2.4) * 0.8, els: dd.els });
+    if (V.gl) { const gl = V.gl; gl.bindBuffer(gl.ARRAY_BUFFER, V.buf); gl.bufferData(gl.ARRAY_BUFFER, A, gl.STATIC_DRAW); }
+    cv.style.display = 'block';
+    this.vortexDraw(performance.now());
+  }
+  vortexInit(root, kind) {
+    const V = this.V; if (V.cv) { if (V.gl) { const x = V.gl.getExtension('WEBGL_lose_context'); if (x) x.loseContext(); } V.cv.remove(); }
+    const cv = document.createElement('canvas'); cv.className = 'dl-vortex'; cv.setAttribute('aria-hidden', 'true');
+    root.appendChild(cv); V.cv = cv; V.root = root; V.gl = null; V.ctx = null; V.kind = '2d';
+    if (kind !== '2d') {
+      let gl = null; try { gl = cv.getContext(kind, { alpha: true, premultipliedAlpha: true, antialias: false, depth: false, stencil: false }); } catch (e) { gl = null; }
+      const sh = (t, src) => { const s = gl.createShader(t); gl.shaderSource(s, src); gl.compileShader(s); return gl.getShaderParameter(s, gl.COMPILE_STATUS) ? s : null; };
+      if (gl) {
+        const v = sh(gl.VERTEX_SHADER, PD_VVS), f = sh(gl.FRAGMENT_SHADER, PD_FS), p = v && f && gl.createProgram();
+        if (p) { gl.attachShader(p, v); gl.attachShader(p, f); gl.linkProgram(p); }
+        if (p && gl.getProgramParameter(p, gl.LINK_STATUS)) {
+          V.gl = gl; V.kind = kind; V.p = p; V.buf = gl.createBuffer(); V.u = {}; V.a = {};
+          ['uC', 'uOff', 'uView', 'uT', 'uOut', 'uSw', 'uDpr', 'uMaxPt'].forEach((n) => (V.u[n] = gl.getUniformLocation(p, n)));
+          ['aP', 'aC', 'aD', 'aE'].forEach((n) => (V.a[n] = gl.getAttribLocation(p, n)));
+          V.maxPt = gl.getParameter(gl.ALIASED_POINT_SIZE_RANGE)[1] || 64;
+          gl.disable(gl.DEPTH_TEST); gl.enable(gl.BLEND); gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+        }
+      }
+    }
+    if (!V.gl) { // a canvas that tried WebGL cannot fall back to 2D: start a fresh one
+      if (kind !== '2d') { cv.remove(); const c2 = document.createElement('canvas'); c2.className = 'dl-vortex'; c2.setAttribute('aria-hidden', 'true'); root.appendChild(c2); V.cv = c2; }
+      V.ctx = V.cv.getContext('2d'); V.kind = '2d';
+    }
+  }
+  vortexDraw(now) {
+    const V = this.V; if (!V || !V.on) return false;
+    const T = now - V.t0, cw = V.cv.width, ch = V.cv.height;
+    if (V.gl) {
+      const gl = V.gl, u = V.u; gl.viewport(0, 0, cw, ch); gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT); gl.useProgram(V.p);
+      gl.uniform2f(u.uC, V.cx, V.cy); gl.uniform2f(u.uOff, 0, V.top); gl.uniform2f(u.uView, V.W, V.H); gl.uniform2f(u.uT, T, V.total);
+      gl.uniform1f(u.uOut, V.mode === 'in' ? 0 : 1); gl.uniform1f(u.uSw, V.sw); gl.uniform1f(u.uDpr, V.dpr); gl.uniform1f(u.uMaxPt, V.maxPt);
+      gl.bindBuffer(gl.ARRAY_BUFFER, V.buf);
+      const AT = [['aP', 2, 0], ['aC', 4, 2], ['aD', 2, 6], ['aE', 2, 8]];
+      AT.forEach(([n, sz, off]) => { const l = V.a[n]; if (l < 0) return; gl.enableVertexAttribArray(l); gl.vertexAttribPointer(l, sz, gl.FLOAT, false, 40, off * 4); });
+      gl.drawArrays(gl.POINTS, 0, V.n);
+      AT.forEach(([n]) => { const l = V.a[n]; if (l >= 0) gl.disableVertexAttribArray(l); });
+    } else {
+      const x = V.ctx, A = V.data, dpr = V.dpr; x.setTransform(1, 0, 0, 1, 0, 0); x.clearRect(0, 0, cw, ch); x.setTransform(dpr, 0, 0, dpr, 0, 0);
+      for (let k = 0, b = 0; k < V.n; k++, b += 10) {
+        const s = this.vortexAt(A, b, T, V); if (!s) continue;
+        x.globalAlpha = s[3]; x.fillStyle = 'rgb(' + ((A[b + 2] * 255) | 0) + ',' + ((A[b + 3] * 255) | 0) + ',' + ((A[b + 4] * 255) | 0) + ')';
+        x.beginPath(); x.arc(s[0], s[1], Math.max(0.3, s[2]), 0, 6.2832); x.fill();
+      }
+      x.globalAlpha = 1;
+    }
+    return T < V.total;
+  }
+  vortexAt(A, b, T, V) { // the 2D twin of PD_VVS
+    const rx0 = A[b] - V.cx, ry0 = A[b + 1] - V.top - V.cy, l0 = Math.hypot(rx0, ry0) || 0.001, vr = 0.85 + 0.3 * A[b + 7];
+    const t = Math.min(1, Math.max(0, (T - A[b + 6]) / A[b + 8])), bump = Math.sin(3.1416 * t);
+    let e, k, an, s, al;
+    if (V.mode === 'in') { e = t * t * t; k = 1 - e + 0.05 * bump * (1 - t); an = V.sw * vr * (e + 1.2 * e * e); s = 1 - 0.7 * e; const rem = l0 * (1 - e), q1 = Math.min(1, Math.max(0, (rem - 3) / 33)); al = Math.max(q1 * q1 * (3 - 2 * q1), t < 0.85 ? 1 : 1 - (t - 0.85) / 0.15); }
+    else { const u1 = t - 1; e = 1 + 2.6 * u1 * u1 * u1 + 1.6 * u1 * u1; const em = Math.min(e, 1); k = e; an = V.sw * vr * ((1 - em) + 1.2 * (1 - em) * (1 - em)); s = 0.3 + 0.7 * em; al = Math.min(1, t / 0.12); if (A[b + 9] > 0.5) al *= 1 - Math.min(1, Math.max(0, (T - V.total + 220) / 220)); e = 1 - em; }
+    if (al <= 0.01) return null;
+    const c = Math.cos(an), sn = Math.sin(an), w = Math.sin(A[b] * 0.031 + T * 0.004 + A[b + 7] * 6.28) * Math.sin(A[b + 1] * 0.027 - T * 0.003) * 14 * bump * (1 - e);
+    const px = (rx0 * c - ry0 * sn) * k - (ry0 / l0) * w, py = (rx0 * sn + ry0 * c) * k + (rx0 / l0) * w;
+    return [V.cx + px, V.cy + py, 0.5 * A[b + 5] * s, al];
+  }
+  vortexStop() { const V = this.V; if (!V || !V.on) return; V.on = false; if (V.cv) V.cv.style.display = 'none'; }
+  hideDom(els, on, ms) { // page elements hand over to (or take back from) their dots; animations only, nothing left inline afterwards
+    if (typeof Element === 'undefined' || !Element.prototype.animate) return;
+    if (on) { this.releaseDom(); this.dom = els.map((el) => ({ el, anim: el.animate([{ opacity: 1 }, { opacity: 0 }], { duration: ms, fill: 'forwards' }) })); }
+    else if (this.dom) { this.dom.forEach((t) => { const old = t.anim; t.anim = t.el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: ms, fill: 'forwards' }); if (old) old.cancel(); }); }
+  }
+  releaseDom() { if (this.dom) this.dom.forEach((t) => t.anim && t.anim.cancel()); this.dom = null; this.domBusy = false; } // no inline styles left behind
 
   // ---------- renderer ----------
   caps(kind) {
@@ -494,6 +643,7 @@ class Component extends DCLogic {
     P.cdata = cd;
     let s = 0x9e3779b9 ^ (cols * 7919 + (P.hero ? 7 : P.i) * 104729); // seeded so a rebuild keeps the same pattern
     const rnd = () => { s |= 0; s = (s + 0x6d2b79f5) | 0; let t = Math.imul(s ^ (s >>> 15), 1 | s); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+    const rad = P.hero ? 0 : Math.min(this.tp('radius', 32), W / 2, H / 2);
     const fromC = this.tp('introFrom', 'Center') !== 'Scatter', order = this.tp('introOrder', 'Center out'), D = new Float32Array(P.n * PD_STRIDE);
     for (let j = 0, k = 0; j < rows; j++) for (let i = 0; i < cols; i++, k += PD_STRIDE) {
       const x = (i + 0.5) * cw, y = (j + 0.5) * ch, r0 = rnd(), r1 = rnd(), r2 = rnd(), r3 = rnd();
@@ -507,6 +657,7 @@ class Component extends DCLogic {
       if (fromC) { const q = 36 * Math.sqrt(rnd()); D[k + 6] = W / 2 + Math.cos(a) * q - x; D[k + 7] = H / 2 + Math.sin(a) * q - y; } // burst out of the middle
       else { D[k + 6] = (x - W / 2) * zoom + Math.cos(a) * mag; D[k + 7] = (y - H / 2) * zoom + Math.sin(a) * mag; } // fall in from a soft scatter
       D[k + 8] = o;
+      if (rad > 0) { const cxr = Math.max(rad - x, 0, x - (W - rad)), cyr = Math.max(rad - y, 0, y - (H - rad)); if (cxr > 0 && cyr > 0 && cxr * cxr + cyr * cyr > rad * rad) D[k + 8] = -1; } // outside the rounded corner: no dot
     }
     P.inst = D;
     P.offs = new Float32Array(P.n * 2); P.vel = new Float32Array(P.n * 2); P.offDirty = true; P.awake = false; P.maxO = 0;
@@ -703,6 +854,7 @@ class Component extends DCLogic {
     this.running = false; if (this.dead) return;
     this.seqStep(now);
     let busy = !!(this.seq && this.seq.phase !== 'page');
+    if (this.V && this.V.on) this.vortexDraw(now);
     for (const P of this.all()) {
       if (!P || !P.ready || P.dead) continue;
       if (!P.vis && !P.dirty && !P.col) continue; // off-screen photos cost nothing
@@ -714,6 +866,11 @@ class Component extends DCLogic {
     const R = P.R; if (!R || R.lost) return false;
     const dt = P.last ? Math.min(64, Math.max(0, now - P.last)) : 16; P.last = now;
     if (P.away) { if (P.dirty) { this.clear(P); P.dirty = false; } this.photoLayer(P, false); return false; }
+    if (P.vortex) { // its particles now live in the vortex overlay: only the sharp photo fades out here
+      this.photoLayer(P, false); P.photoA = Math.max(0, P.photoA - dt / 150);
+      if (P.photoA > 0) { this.draw(P, now, false, 0, 0, -1, 0, true); return true; }
+      P.vortex = false; P.away = true; this.clear(P); return false;
+    }
     if (this.reduced() && !P.col) { // plain photo, no particles
       P.trail.length = 0; P.photoA = 1; P.formed = true;
       if (P.dirty) { this.draw(P, now, true, 0, 0, -1); P.dirty = false; }
@@ -756,15 +913,15 @@ class Component extends DCLogic {
       col: P.col, colSwirl: this.tp('bangSwirl', 2.4) * 0.8,
     };
   }
-  draw(P, now, photoOnly, mask, introEl, colEl, introTime) {
+  draw(P, now, photoOnly, mask, introEl, colEl, introTime, noDots) {
     const R = P.R, introT = introTime || Math.max(100, this.tp('introTime', 1800)), o = this.uni(P, now, introT);
-    if (R.kind === '2d') return this.draw2d(P, photoOnly, introEl, colEl, o);
+    if (R.kind === '2d') return this.draw2d(P, photoOnly, introEl, colEl, o, noDots);
     const gl = R.gl, cw = R.cv.width, ch = R.cv.height;
     gl.viewport(0, 0, cw, ch); gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
     if (introEl < 0) return; // not scrolled into view yet
     if (P.touchDirty && P.tc) { gl.bindTexture(gl.TEXTURE_2D, R.tTouch); gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, P.tc); P.touchDirty = false; }
     gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, R.tTouch);
-    if (!photoOnly) {
+    if (!photoOnly && !noDots) {
       const pr = R.pp, u = pr.u; gl.useProgram(pr.p);
       gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, R.tColor); gl.uniform1i(u.uColor, 0);
       gl.uniform2f(u.uView, P.W, P.H); gl.uniform2f(u.uCut, o.cut[0], o.cut[1]);
@@ -791,27 +948,29 @@ class Component extends DCLogic {
       gl.activeTexture(gl.TEXTURE2); gl.bindTexture(gl.TEXTURE_2D, R.tPhoto);
       gl.uniform1i(u.uPhoto, 2); gl.uniform1i(u.uTouch, 1); gl.uniform1f(u.uA, P.photoA); gl.uniform1f(u.uMask, mask);
       gl.uniform2f(u.uScale, P.W / (P.W + 2 * P.B), P.H / (P.H + 2 * P.B)); gl.uniform2f(u.uView, P.W, P.H);
-      gl.uniform1f(u.uRad, P.hero ? 0 : Math.min(this.tp('radius', 6), P.W / 2, P.H / 2)); gl.uniform1f(u.uDpr, P.dpr);
+      gl.uniform1f(u.uRad, P.hero ? 0 : Math.min(this.tp('radius', 32), P.W / 2, P.H / 2)); gl.uniform1f(u.uDpr, P.dpr);
       gl.bindBuffer(gl.ARRAY_BUFFER, R.quad); gl.enableVertexAttribArray(q.a.aPos); gl.vertexAttribPointer(q.a.aPos, 2, gl.FLOAT, false, 0, 0);
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); gl.disableVertexAttribArray(q.a.aPos);
     }
     gl.activeTexture(gl.TEXTURE0);
   }
-  draw2d(P, photoOnly, introEl, colEl, o) { // Canvas 2D fallback: same math as the shader, fewer particles, no color glow
+  draw2d(P, photoOnly, introEl, colEl, o, noDots) { // Canvas 2D fallback: same math as the shader, fewer particles, no color glow
     const R = P.R, x = R.ctx, cw = R.cv.width, ch = R.cv.height, dpr = P.dpr, B = P.B, fadeE = Math.min(40, B);
     const photo = (al) => { // the sharp photo, clipped to the frame's rounded rect
       x.save(); x.setTransform(dpr, 0, 0, dpr, B * dpr, B * dpr); x.beginPath();
-      const rr = P.hero ? 0 : Math.min(this.tp('radius', 6), P.W / 2, P.H / 2); if (x.roundRect) x.roundRect(0, 0, P.W, P.H, rr); else x.rect(0, 0, P.W, P.H);
+      const rr = P.hero ? 0 : Math.min(this.tp('radius', 32), P.W / 2, P.H / 2); if (x.roundRect) x.roundRect(0, 0, P.W, P.H, rr); else x.rect(0, 0, P.W, P.H);
       x.clip(); x.globalAlpha = al; x.drawImage(P.photo, 0, 0, P.W, P.H); x.restore();
     };
     x.setTransform(1, 0, 0, 1, 0, 0); x.clearRect(0, 0, cw, ch);
     if (introEl < 0) return;
     if (photoOnly) { photo(1); return; }
+    if (noDots) { if (P.photoA > 0) photo(P.photoA); return; }
     const D = P.inst, O = P.offs, span = o.introT * 0.45, dur = o.introT * 0.55, W = P.W, H = P.H, ox = o.ox, oy = o.oy;
     const maxD = Math.max(Math.hypot(ox, oy), Math.hypot(W - ox, oy), Math.hypot(ox, H - oy), Math.hypot(W - ox, H - oy));
     const col = o.col;
     x.setTransform(dpr, 0, 0, dpr, B * dpr, B * dpr);
     for (let k = 0, b = 0; k < P.n; k++, b += PD_STRIDE) {
+      if (D[b + 8] < 0) continue;
       const cx = D[b], cy = D[b + 1], r0 = D[b + 2], r1 = D[b + 3], r2 = D[b + 4], r3 = D[b + 5], l = P.l2[k];
       const dl = o.bang ? Math.min(1, Math.hypot(cx - ox, cy - oy) / maxD) * 0.65 + r3 * 0.35 : D[b + 8];
       const p = Math.min(1, Math.max(0, (introEl - dl * span) / dur)), q = 1 - p, ie = q * q * q * q;
@@ -847,7 +1006,7 @@ class Component extends DCLogic {
     if (this.lastSig !== undefined && s !== this.lastSig) setTimeout(() => this.P.forEach((P) => P && this.rebuild(P)), 0);
     if (this.lastPs !== undefined && ps !== this.lastPs) setTimeout(() => { this.all().forEach((P) => P && (P.dirty = true)); this.kick(); }, 0);
     this.lastSig = s; this.lastPs = ps;
-    return { bg: this.tp('background', '#ffffff'), mr: this.tp('radius', 6) + 'px', ob: this.tp('openSize', 104) + 'px', ot: String(this.tp('openTint', 0.62)), bl: this.bleed() + 'px',
+    return { bg: this.tp('background', '#ffffff'), mr: this.tp('radius', 32) + 'px', ob: this.tp('openSize', 104) + 'px', ot: String(this.tp('openTint', 0.62)), bl: this.bleed() + 'px',
       replay: this.onReplay, open0: this.openFns[0], open1: this.openFns[1], open2: this.openFns[2], cv0: this.cvRefs[0], cv1: this.cvRefs[1], cv2: this.cvRefs[2] };
   }
 }
