@@ -616,7 +616,45 @@ def v17():
             f'<div class="v17-panel" aria-live="polite">{panels}{foot("v17-foot")}</div></div>')
 
 
+
+# ---------------------------------------------------------------- V18 era timeline (V17 as a line)
+E18_SPAN = [(2014, 2018, False), (2017, 2022, False), (2021, NOW, True), (2022, NOW, True)]
+E18_ANCHOR = [2016, 2019.5, 2021.6, 2024.4]
+E18_EVENTS = [(2017.7, 'Luxium Lighting, 2017', 'r'), (2018.25, '1st place, Quackhatch 2018', 'l')]
+
+
+def yp(y): return f'{(y - 2014) / 13 * 100:.3f}%'
+
+
+def v18():
+    segs = ''
+    for j, (e, (a, b, op)) in enumerate(zip(E17, E18_SPAN)):
+        notch = ''
+        segs += (f'<span class="v18-seg{" open" if op else ""} {{{{e18c{j}}}}}" style="left: {yp(a)}; width: {(b - a) / 13 * 100:.3f}%; top: {j * 36}px; '
+                 f'--ink: {e["ink"]}">{notch}<b>{h(e["name"])}</b><em>{h(e["years"])}</em></span>')
+    ticks = ''.join(f'<span class="v18-tk" style="left: {yp(y)}"><b>{y}</b></span>' for y in range(2014, 2027))
+    ticks += f'<span class="v18-now" style="left: {yp(NOW)}"><b>Now</b></span>'
+    evs = ''.join(f'<span class="v18-ev {side}" style="left: {yp(y)}"><i></i><b>{h(t)}</b></span>' for y, t, side in E18_EVENTS)
+    panels = ''
+    for j, e in enumerate(E17):
+        rows = ''.join(f'<div class="v17-r"><p class="v17-rt">{h(t)}</p><p class="v17-ro">{h(o)}</p><p class="v17-rs">{h(s_)}</p>'
+                       + (nda('nda sm') if x == 'ms' else '') + '</div>' for t, o, s_, x in e['rows'])
+        panels += (f'<div class="v18-p {{{{e18c{j}}}}}"><div><p class="v17-era">Era {j + 1} of 4</p><p class="v17-n">{h(e["name"])}</p>'
+                   f'<p class="v17-y">{h(e["years"])}</p></div><div class="v18-rows">{rows}</div></div>')
+    lst = ''.join(f'<button type="button" class="{{{{e18c{j}}}}}" aria-pressed="{{{{e18x{j}}}}}" onClick="{{{{e18f{j}}}}}"><b>{h(e["years"])}</b> {h(e["name"])}</button>'
+                  for j, e in enumerate(E17))
+    return (f'<div class="v18-top"><p class="v15-h">Drag the playhead, click the line, or use the arrow keys.</p></div>'
+            f'<div class="v18-tl" onPointerDown="{{{{e18pd}}}}" onPointerMove="{{{{e18pm}}}}" onPointerUp="{{{{e18pu}}}}" onPointerCancel="{{{{e18pu}}}}">'
+            f'<div class="v18-lanes" aria-hidden="true">{segs}</div>'
+            f'<div class="v18-axis" aria-hidden="true"><span class="v18-line"></span>{ticks}{evs}</div>'
+            f'<div class="v18-ph" style="left: {{{{e18x}}}}"><span class="v18-stem" aria-hidden="true"></span>'
+            f'<span class="v18-hd" role="slider" tabindex="0" aria-label="Career era" aria-valuemin="0" aria-valuemax="3" aria-valuenow="{{{{e18}}}}" '
+            f'aria-valuetext="{{{{e18t}}}}" onKeyDown="{{{{e18k}}}}"></span></div></div>'
+            f'<div class="v18-panel" aria-live="polite" style="--bg: {{{{e18bg}}}}; --ink: {{{{e18ink}}}}; --acc: {{{{e18acc}}}}">{panels}</div>'
+            f'<div class="v18-list" role="group" aria-label="Eras">{lst}</div>' + edu_line('v18-edu') + foot())
+
 JS_DATA = json.dumps({
+    'e18': E18_ANCHOR,
     't12': {k: dict(cmd=T12_LABEL[k], out=T12_OUT[k]) for k in T12_OUT},
     'q13': [dict(a=a, f=f) for q, a, f in Q13],
     'e17': [dict(t=f'{e["years"]}: {e["name"]}', bg=e['bg'], ink=e['ink'], acc=e['acc'], ang=e['ang']) for e in E17],
@@ -643,6 +681,7 @@ SECS = [
     ('V15', 'Sketch to render', "Inspired by Codrops' Sketching the impossible and Mr. Pandas Paper Portfolio on Awwwards: cards start as marker sketches and render in color. Microsoft stays a sketch.", v15, True, ''),
     ('V16', 'Badge deck', "Inspired by Eduard Bodak's card flip (Awwwards, Codrops) and Carl Gordon's stacking cards: ID badges that fan out and flip to an NDA-safe back.", v16, True, ''),
     ('V17', 'Era dial', "Inspired by Brandon Yasin (Codrops) and Future Record's rotary knobs on Awwwards: turn the dial through four eras; the panel re-tints and shows that era's roles.", v17, True, ''),
+    ('V18', 'Era timeline', 'A variation of V17 after Tin asked for the dial as a line: the same four eras on a year line, with overlapping eras on stacked lanes and single events as dots. The playhead snaps to the nearest era and the panel re-tints.', v18, True, ''),
 ]
 
 body = ''
@@ -1163,6 +1202,42 @@ article.v9-t:hover{transform:translateY(-2px)}
 .v17-foot{margin-top:auto;padding-top:16px;border-top-color:rgba(0,0,0,.1)}
 .v17-foot .lk{color:var(--ink);border-bottom-color:rgba(0,0,0,.25)}
 .v17-foot .lk-ph{color:var(--ink);opacity:.6}
+/* V18 era timeline */
+.v18-top{margin-bottom:22px}
+.v18-tl{position:relative;margin:0 28px;padding-top:6px;touch-action:none;cursor:pointer;-webkit-user-select:none;user-select:none}
+.v18-lanes{position:relative;z-index:1;height:138px}
+.v18-seg{position:absolute;height:28px;box-sizing:border-box;display:flex;align-items:center;gap:8px;padding:0 10px;border-radius:7px;background:#fff;box-shadow:inset 0 0 0 1.5px #c4c4c4;color:#7a7a7a;overflow:hidden;white-space:nowrap;transition:background-color .45s,box-shadow .45s,color .45s}
+.v18-seg.open{-webkit-mask-image:linear-gradient(90deg,#000 88%,rgba(0,0,0,.35));mask-image:linear-gradient(90deg,#000 88%,rgba(0,0,0,.35))}
+.v18-seg b{font:500 12.5px/1 Inter,sans-serif}
+.v18-seg em{font:400 11px/1 'IBM Plex Mono',ui-monospace,monospace;font-style:normal;opacity:.8}
+.v18-seg.on{background:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink);color:#fff}
+.v18-tl:hover .v18-seg:not(.on){box-shadow:inset 0 0 0 1.5px #9a9a9a}
+.v18-notch{position:absolute;top:6px;bottom:6px;width:2px;margin-left:-1px;border-radius:1px;background:currentColor;opacity:.45}
+.v18-axis{position:relative;height:86px}
+.v18-line{position:absolute;left:0;right:0;top:12px;height:2px;border-radius:1px;background:#dcdcdc}
+.v18-tk{position:absolute;top:8px;width:1px;height:10px;background:#c4c4c4}
+.v18-tk b,.v18-now b{position:absolute;top:27px;left:0;transform:translateX(-50%);font:400 11px/1 'IBM Plex Mono',ui-monospace,monospace;color:#9a9a9a}
+.v18-now{position:absolute;top:6px;width:2px;height:14px;margin-left:-1px;background:#0099ff}
+.v18-now b{color:#0069b4;font-weight:600}
+.v18-ev{position:absolute;top:13px}
+.v18-ev i{position:absolute;left:-5px;top:-5px;width:10px;height:10px;border-radius:50%;background:#fff;box-shadow:inset 0 0 0 2px #141414}
+.v18-ev b{position:absolute;top:46px;font:500 11.5px/1 Inter,sans-serif;color:#4d4d4d;white-space:nowrap}
+.v18-ev.r b{right:4px}.v18-ev.l b{left:-4px}
+.v18-ev::after{content:"";position:absolute;left:-.5px;top:6px;width:1px;height:36px;background:#dcdcdc}
+.v18-ph{position:absolute;z-index:0;top:0;bottom:74px;width:0;transition:left .55s cubic-bezier(.3,1.25,.4,1)}
+.v18-stem{position:absolute;left:-1px;top:0;bottom:0;width:2px;border-radius:1px;background:#141414}
+.v18-hd{position:absolute;z-index:2;left:-12px;bottom:-12px;width:24px;height:24px;border-radius:50%;background:#141414;box-shadow:0 0 0 4px #fff,0 6px 14px -4px rgba(0,0,0,.45);cursor:grab}
+.v18-hd:active{cursor:grabbing}
+.rv-root .v18-hd:focus-visible{outline:2px solid #0099ff;outline-offset:5px;border-radius:50%}
+.v18-panel{display:grid;margin-top:16px;padding:32px 36px;border-radius:16px;background:var(--bg);color:var(--ink);transition:background-color .5s,color .5s}
+.v18-p{grid-area:1/1;display:grid;grid-template-columns:320px 1fr;gap:40px;opacity:0;visibility:hidden;transform:translateY(6px);transition:opacity .4s,transform .45s,visibility .4s}
+.v18-p.on{opacity:1;visibility:visible;transform:none}
+.v18-rows .v17-r:first-child{margin-top:0}
+.v18-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.rv-root .v18-list button{display:flex;align-items:baseline;gap:8px;padding:9px 13px;border-radius:999px;box-shadow:inset 0 0 0 1px #e0e0e0;font:400 13px/1.2 Inter,sans-serif;color:#141414;transition:background-color .2s,box-shadow .2s}
+.v18-list button b{font:500 11px/1 'IBM Plex Mono',ui-monospace,monospace;color:#7a7a7a}
+.rv-root .v18-list button:hover{box-shadow:inset 0 0 0 1px #9a9a9a}
+.rv-root .v18-list button.on{background:#141414;color:#fff;box-shadow:none}.v18-list button.on b{color:#c4c4c4}
 @media (prefers-reduced-motion: reduce){.rv-root *{transition:none !important;animation:none !important}}
 '''
 
@@ -1171,7 +1246,7 @@ JS = r'''class Component extends DCLogic {
     super(props);
     this.D = __DATA__;
     this.state = { v11: false, t1: 0, l2: 0, a3: { 0: true }, g4: 0, c5: false, s6: false, f7: 'all', h8: 0, b9: 0, m10: 'd',
-      t12: ['history'], t12n: 100000, q13: [], q13n: 0, w14: 0, r15: {}, all15: false, fan16: false, f16: {}, e17: 3 };
+      t12: ['history'], t12n: 100000, q13: [], q13n: 0, w14: 0, r15: {}, all15: false, fan16: false, f16: {}, e17: 3, e18: 3 };
     this.timers = {};
   }
   componentWillUnmount() { for (const k in this.timers) clearInterval(this.timers[k]); }
@@ -1199,6 +1274,14 @@ JS = r'''class Component extends DCLogic {
     if (this.state.q13.indexOf(i) >= 0) return;
     this.setState({ q13: this.state.q13.concat([i]) });
     this.type('q13n', this.D.q13[i].a.length);
+  }
+  era18(j) { const e = Math.max(0, Math.min(3, j)); if (e !== this.state.e18) this.setState({ e18: e }); }
+  line18(ev) {
+    const r = ev.currentTarget.getBoundingClientRect();
+    const y = 2014 + Math.max(0, Math.min(1, (ev.clientX - r.left) / r.width)) * 13;
+    let best = 0, bd = 999;
+    this.D.e18.forEach((a, j) => { const d = Math.abs(a - y); if (d < bd) { bd = d; best = j; } });
+    this.era18(best);
   }
   era17(j) { const e = Math.max(0, Math.min(3, j)); if (e !== this.state.e17) this.setState({ e17: e }); }
   dial17(ev) {
@@ -1307,6 +1390,27 @@ JS = r'''class Component extends DCLogic {
     v.e17pd = (ev) => { this.drag17 = true; try { ev.currentTarget.setPointerCapture(ev.pointerId); } catch (e) {} this.dial17(ev); };
     v.e17pm = (ev) => { if (this.drag17) this.dial17(ev); };
     v.e17pu = () => { this.drag17 = false; };
+    // V18 era timeline
+    const E8 = D.e17[st.e18];
+    v.e18 = String(st.e18); v.e18t = E8.t; v.e18x = ((D.e18[st.e18] - 2014) / 13 * 100).toFixed(3) + '%';
+    v.e18bg = E8.bg; v.e18ink = E8.ink; v.e18acc = E8.acc;
+    for (let j = 0; j < 4; j++) {
+      v['e18c' + j] = st.e18 === j ? 'on' : ''; v['e18x' + j] = String(st.e18 === j);
+      v['e18f' + j] = () => this.era18(j);
+    }
+    v.e18k = (ev) => {
+      const k = ev.key, e = this.state.e18;
+      const to = k === 'ArrowRight' || k === 'ArrowUp' ? e + 1 : k === 'ArrowLeft' || k === 'ArrowDown' ? e - 1 : k === 'Home' ? 0 : k === 'End' ? 3 : null;
+      if (to === null) return;
+      ev.preventDefault(); this.era18(to);
+    };
+    v.e18pd = (ev) => {
+      if (ev.button !== undefined && ev.button !== 0) return;
+      this.drag18 = true; try { ev.currentTarget.setPointerCapture(ev.pointerId); } catch (e) {}
+      this.line18(ev);
+    };
+    v.e18pm = (ev) => { if (this.drag18) this.line18(ev); };
+    v.e18pu = () => { this.drag18 = false; };
     return v;
   }
 }'''.replace('__DATA__', JS_DATA)
