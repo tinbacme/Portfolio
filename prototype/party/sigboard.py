@@ -1,5 +1,22 @@
 """Signature options board: 10 'Tin Le' signatures made with gpt-image-2.5-flare, on white and on dark, with a size preview."""
-import sys
+import sys, json, math
+SIGDIR = '/tmp/claude-0/-home-user-Portfolio/981b70c2-10b1-51ba-9954-e71e8ead3214/scratchpad/sig/'
+def signing_svg(i, blob, alt, total=2.6, lift=0.12):
+    """The original ink, revealed through a mask whose strokes follow the traced pen path in order."""
+    t = json.load(open(SIGDIR + 'tr%02d.json' % (i + 1)))
+    W, H, sw = t['w'], t['h'], t['sw']
+    lens = [sum(math.dist(a, b) for a, b in zip(st, st[1:])) for st in t['strokes']]
+    L = sum(lens) or 1; avail = max(0.6, total - lift * (len(lens) - 1))
+    paths, at = [], 0.0
+    for st, ln in zip(t['strokes'], lens):
+        dur = max(0.05, avail * ln / L)
+        d = 'M' + ' L'.join(f'{x:g} {y:g}' for x, y in st)
+        paths.append(f'<path d="{d}" pathLength="1" style="animation-duration: {dur:.3f}s; animation-delay: calc(var(--cd, 0s) + {at:.3f}s)"></path>')
+        at += dur + lift
+    sc = min(440 / W, 170 / H)
+    return (f'<svg class="sg-sign" viewBox="0 0 {W} {H}" width="{W * sc:.0f}" height="{H * sc:.0f}" role="img" aria-label="{alt}">'
+            f'<defs><mask id="sgm{i}" maskUnits="userSpaceOnUse" x="0" y="0" width="{W}" height="{H}"><g fill="none" stroke="#fff" stroke-width="{sw}" stroke-linecap="round" stroke-linejoin="round">{"".join(paths)}</g></mask></defs>'
+            f'<image href="{blob}" x="0" y="0" width="{W}" height="{H}" mask="url(#sgm{i})"></image></svg>')
 out = sys.argv[1]
 IDS = ['b50ab447ec0cca3f6303a8901bde60d6', '1e6cd943c48f78f7ff61c8d603097c89', '19c77e986ec7f059e207a98279bd2013', 'd316bb421b3af01517904a93bf1aa6b0', '19fcf8ee6e0cfc7132cb5d51e636d320',
        '99b598f8e16ca0aebaa9e2ed60b823a9', '3751c3469bdc0fb7ccca0c535518f0a7', '3f1ccfd5c2f251b4e6297e0fb52084b3', '5ef54d00b163e9f0d6875bf59f10f151', '1324962addb5ed35403c73efd43757fa']
@@ -15,7 +32,7 @@ NAMES = [('Fine pen', 'One fluid stroke, long T bar that sweeps into the name.')
          ('Connected T and L', 'T and L joined into one monogram-like stroke.')]
 cards = ''.join(
     f'<section class="sg-card"><div class="sg-top"><span class="sg-k">S{i+1}</span><span class="sg-t">{n}</span></div>'
-    f'<div class="sg-stage"><img src="/_blob/{b}" alt="Tin Le signature, option {i+1}: {n}" style="animation-delay: {i * 0.18:.2f}s"></div>'
+    f'<div class="sg-stage" style="--cd: {i * 0.25:.2f}s">' + signing_svg(i, '/_blob/' + b, f'Tin Le signature, option {i+1}: {n}') + '</div>'
     f'<div class="sg-row"><div class="sg-mini sg-light"><img src="/_blob/{b}" alt=""></div><div class="sg-mini sg-dark"><img src="/_blob/{b}" alt=""></div>'
     f'<p class="sg-d">{d}</p></div></section>' for i, (b, (n, d)) in enumerate(zip(IDS, NAMES)))
 HTML = f'''<!doctype html>
@@ -41,12 +58,13 @@ body{{margin:0}}
 .sg-k{{font:600 12px/1 Inter,sans-serif;letter-spacing:.08em;color:#b3b3b3}}
 .sg-t{{font:600 17px/1 Inter,sans-serif}}
 .sg-stage{{display:grid;place-items:center;height:200px;margin-top:12px}}
-.sg-stage img{{max-width:440px;max-height:170px;display:block;-webkit-mask-image:linear-gradient(90deg,#000 47%,transparent 57%);mask-image:linear-gradient(90deg,#000 47%,transparent 57%);-webkit-mask-size:220% 100%;mask-size:220% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:0 0;mask-position:0 0;animation:sgWrite var(--wr,2.4s) cubic-bezier(.45,.05,.35,1) both}}
-/* signs itself left to right: a soft-edged mask sweeps across; hovering a card signs it again */
-@keyframes sgWrite{{from{{-webkit-mask-position:100% 0;mask-position:100% 0}}to{{-webkit-mask-position:0 0;mask-position:0 0}}}}
-@keyframes sgWrite2{{from{{-webkit-mask-position:100% 0;mask-position:100% 0}}to{{-webkit-mask-position:0 0;mask-position:0 0}}}}
-.sg-card:hover .sg-stage img{{animation-name:sgWrite2;animation-delay:0s!important}}
-@media (prefers-reduced-motion: reduce){{.sg-stage img{{animation:none}}}}
+.sg-sign{{display:block;overflow:visible}}
+/* signs itself stroke by stroke: each traced pen stroke draws in order (dash offset), revealing the real ink under it; hover a card to sign again */
+.sg-sign path{{stroke-dasharray:1 1;stroke-dashoffset:0;animation-name:sgDraw;animation-timing-function:cubic-bezier(.4,.1,.5,1);animation-fill-mode:both}}
+@keyframes sgDraw{{from{{stroke-dashoffset:1}}to{{stroke-dashoffset:0}}}}
+@keyframes sgDraw2{{from{{stroke-dashoffset:1}}to{{stroke-dashoffset:0}}}}
+.sg-card:hover .sg-stage{{--cd:0s!important}}.sg-card:hover .sg-sign path{{animation-name:sgDraw2}}
+@media (prefers-reduced-motion: reduce){{.sg-sign path{{animation:none}}}}
 .sg-row{{display:flex;align-items:center;gap:10px;margin-top:6px}}
 .sg-mini{{flex:none;display:grid;place-items:center;width:120px;height:52px;border-radius:10px}}
 .sg-mini img{{max-width:96px;max-height:36px;display:block}}
@@ -58,7 +76,7 @@ body{{margin:0}}
 <div class="sg-root" style="--wr: {{{{wr}}}}">
   <p class="sg-k0">SIGNATURE</p>
   <h1 class="sg-h">Tin Le &#183; 10 signature options</h1>
-  <p class="sg-p">Made with GPT image 2.5 flare, cleaned to transparent ink so each works on light and dark. Small swatches show them at nav or footer size. Each one signs itself left to right; hover a card to watch it again. Pick one and I&#8217;ll swap it in for the &#8220;Tin&#8221; signature on the stuart.re-style page.</p>
+  <p class="sg-p">Made with GPT image 2.5 flare, cleaned to transparent ink so each works on light and dark. Small swatches show them at nav or footer size. Each one signs itself stroke by stroke, in pen order; hover a card to watch it sign again. Pick one and I&#8217;ll swap it in for the &#8220;Tin&#8221; signature on the stuart.re-style page.</p>
   <div class="sg-grid">{cards}</div>
 </div>
 </x-dc>
