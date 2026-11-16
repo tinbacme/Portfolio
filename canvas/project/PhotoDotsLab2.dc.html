@@ -12,7 +12,7 @@
 <style>
 body{margin:0}
 sc-for, sc-if { display: contents; }
-.dl-root{width:1440px;box-sizing:border-box;padding:72px 296px 120px;background:var(--bg,#fff);color:#000;font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.dl-root{width:1440px;box-sizing:border-box;overflow-x:clip;padding:72px 296px 120px;background:var(--bg,#fff);color:#000;font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
 .dl-k{margin:0;font:600 12px/1 Inter,sans-serif;letter-spacing:.08em;color:#b3b3b3}
 .dl-h{margin:10px 0 0;font:600 24px/36px Inter,sans-serif;letter-spacing:-.01em}
 .dl-p{margin:6px 0 0;max-width:640px;font:400 15px/22px Inter,sans-serif;color:#666}
@@ -20,15 +20,18 @@ sc-for, sc-if { display: contents; }
 .dl-btn{border:0;border-radius:10px;padding:8px 16px;font:600 15px/22.5px Inter,sans-serif;cursor:pointer;background:#000;color:#fff}
 .dl-btn:hover{filter:brightness(1.6)}
 .dl-btn:focus-visible{outline:2px solid #0099ff;outline-offset:3px}
-.dl-stack{display:flex;flex-direction:column;gap:48px;margin-top:48px}
-.dl-fig{margin:0}
-.dl-cv{position:relative;display:block;width:848px;height:524px;overflow:hidden;border-radius:var(--mr,6px);background-color:var(--bg,#fff);background-repeat:no-repeat;background-size:cover;touch-action:pan-y;cursor:crosshair}
-.dl-cv canvas{position:absolute;left:0;top:0;width:100%;height:100%;display:block}
-.dl-frame{position:relative;width:848px}
+.dl-stack{display:flex;flex-direction:column;gap:48px;margin-top:48px;overflow:visible}
+.dl-fig{margin:0;overflow:visible}
+.dl-cv{position:relative;display:block;width:848px;height:524px;overflow:visible;border-radius:var(--mr,6px);background-color:var(--bg,#fff);background-repeat:no-repeat;background-size:cover;touch-action:pan-y;cursor:crosshair}
+/* the particle canvas bleeds past the frame so dots can fly outside it; it never takes pointer events */
+.dl-cv canvas{position:absolute;left:calc(-1 * var(--bl,140px));top:calc(-1 * var(--bl,140px));width:calc(100% + 2 * var(--bl,140px));height:calc(100% + 2 * var(--bl,140px));display:block;pointer-events:none}
+.dl-frame{position:relative;width:848px;overflow:visible}
 /* Open button: a dark-gray liquid-glass circle in the middle of each photo */
-.dl-open{position:absolute;left:50%;top:50%;width:var(--ob,104px);height:var(--ob,104px);margin:calc(var(--ob,104px) / -2) 0 0 calc(var(--ob,104px) / -2);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:#fff;text-decoration:none;isolation:isolate;box-shadow:0 12px 30px -10px rgba(0,0,0,.45),0 2px 6px rgba(0,0,0,.18);opacity:0;transform:scale(.7);pointer-events:none;transition:opacity .25s ease,transform .45s cubic-bezier(.3,1.5,.5,1)}
+.dl-open{position:absolute;left:50%;top:50%;width:var(--ob,104px);height:var(--ob,104px);margin:calc(var(--ob,104px) / -2) 0 0 calc(var(--ob,104px) / -2);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:#fff;text-decoration:none;isolation:isolate;box-shadow:0 12px 30px -10px rgba(0,0,0,.45),0 2px 6px rgba(0,0,0,.18);opacity:0;transform:scale(0);pointer-events:none;transition:opacity .2s ease .08s,transform .28s cubic-bezier(.5,0,.75,0)}
 /* only shows while the photo is hovered (or the button has keyboard focus) */
-.dl-frame:hover .dl-open,.dl-open:focus-visible{opacity:1;transform:scale(1);pointer-events:auto}
+.dl-frame:hover .dl-open,.dl-open:focus-visible{opacity:1;transform:scale(1);pointer-events:auto;transition:opacity .12s ease,transform .45s cubic-bezier(.34,1.56,.64,1)}
+/* grows out of the center with a small springy overshoot; shrinks back to nothing on leave */
+@media (prefers-reduced-motion: reduce){.dl-open,.dl-frame:hover .dl-open,.dl-open:focus-visible{transition:none}}
 .dl-open:hover{transform:scale(1.06)!important}
 .dl-open:active{transform:scale(.97)}
 .dl-open:focus-visible{outline:2px solid #0099ff;outline-offset:4px}
@@ -42,7 +45,7 @@ sc-for, sc-if { display: contents; }
 .dl-cap{margin-top:12px;font:500 13px/1 Inter,sans-serif;color:#b3b3b3}
 </style>
   </helmet>
-<div class="dl-root" style="--bg: {{bg}}; --mr: {{mr}}; --ob: {{ob}}; --ot: {{ot}}"><svg class="dl-defs" width="0" height="0" aria-hidden="true" focusable="false"><filter id="dl-glass" x="0%" y="0%" width="100%" height="100%" filterUnits="objectBoundingBox"><feTurbulence type="fractalNoise" baseFrequency="0.02 0.02" numOctaves="2" seed="7" result="noise"></feTurbulence><feGaussianBlur in="noise" stdDeviation="2" result="soft"></feGaussianBlur><feDisplacementMap in="SourceGraphic" in2="soft" scale="40" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap></filter></svg>
+<div class="dl-root" style="--bg: {{bg}}; --mr: {{mr}}; --ob: {{ob}}; --ot: {{ot}}; --bl: {{bl}}"><svg class="dl-defs" width="0" height="0" aria-hidden="true" focusable="false"><filter id="dl-glass" x="0%" y="0%" width="100%" height="100%" filterUnits="objectBoundingBox"><feTurbulence type="fractalNoise" baseFrequency="0.02 0.02" numOctaves="2" seed="7" result="noise"></feTurbulence><feGaussianBlur in="noise" stdDeviation="2" result="soft"></feGaussianBlur><feDisplacementMap in="SourceGraphic" in2="soft" scale="40" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap></filter></svg>
   <p class="dl-k">LAB</p>
   <h1 class="dl-h">Photo dots &#183; v2</h1>
   <p class="dl-p">Rebuilt on the GPU. About 25,000 soft-edged particles take their color from the photo and their size from its brightness, with a slow drift. When a photo scrolls into view they fall in from a blurred, out-of-focus depth, then melt into the sharp photo. Hover and it dissolves: your cursor paints a fading trail that pushes particles along the way you move, and the disturbance heals on its own before the photo comes back.</p>
@@ -50,14 +53,14 @@ sc-for, sc-if { display: contents; }
   <div class="dl-stack"><figure class="dl-fig"><div class="dl-frame"><div class="dl-cv" ref="{{cv0}}" data-src="/_blob/effff208332abe411e27c82aaa87e30d" data-pos="50% 72%" style="background-position: 50% 72%" role="img" aria-label="Tin with his Microsoft team"></div><a class="dl-open" href="#" aria-label="Open Microsoft AI" onClick="{{noop}}"><span class="dl-open-fx" aria-hidden="true"></span><span class="dl-open-tint" aria-hidden="true"></span><span class="dl-open-shine" aria-hidden="true"></span><svg class="dl-open-ic" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="dl-open-tx">Open</span></a></div><figcaption class="dl-cap">Microsoft AI</figcaption></figure><figure class="dl-fig"><div class="dl-frame"><div class="dl-cv" ref="{{cv1}}" data-src="/_blob/155942c7f1c522f9aec7d43d1c1d0d0d" data-pos="50% 50%" style="background-position: 50% 50%" role="img" aria-label="Tin teaching a product design class"></div><a class="dl-open" href="#" aria-label="Open University of Oregon" onClick="{{noop}}"><span class="dl-open-fx" aria-hidden="true"></span><span class="dl-open-tint" aria-hidden="true"></span><span class="dl-open-shine" aria-hidden="true"></span><svg class="dl-open-ic" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="dl-open-tx">Open</span></a></div><figcaption class="dl-cap">University of Oregon</figcaption></figure><figure class="dl-fig"><div class="dl-frame"><div class="dl-cv" ref="{{cv2}}" data-src="/_blob/8bd998ead1110dbdb0a707cdb0cb6c60" data-pos="50% 45%" style="background-position: 50% 45%" role="img" aria-label="Tin with his Salesforce team"></div><a class="dl-open" href="#" aria-label="Open Salesforce" onClick="{{noop}}"><span class="dl-open-fx" aria-hidden="true"></span><span class="dl-open-tint" aria-hidden="true"></span><span class="dl-open-shine" aria-hidden="true"></span><svg class="dl-open-ic" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="dl-open-tx">Open</span></a></div><figcaption class="dl-cap">Salesforce</figcaption></figure></div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"density": {"editor": "int", "default": 200, "min": 60, "max": 280, "step": 4, "unit": "cols", "section": "Particles"}, "dotSize": {"editor": "range", "default": 0.78, "min": 0.3, "max": 1.6, "step": 0.02, "unit": "\u00d7", "section": "Particles"}, "sizeByLuma": {"editor": "range", "default": 0.1, "min": -1, "max": 1, "step": 0.05, "section": "Particles"}, "darkCut": {"editor": "range", "default": 0, "min": 0, "max": 0.5, "step": 0.01, "section": "Particles"}, "brightCut": {"editor": "range", "default": 1, "min": 0.5, "max": 1, "step": 0.01, "section": "Particles"}, "drift": {"editor": "range", "default": 0.8, "min": 0, "max": 4, "step": 0.1, "unit": "px", "section": "Particles"}, "introTime": {"editor": "int", "default": 1800, "min": 400, "max": 4000, "step": 50, "unit": "ms", "section": "Form in"}, "introFrom": {"editor": "enum", "options": ["Center", "Scatter"], "default": "Center", "section": "Form in"}, "introOrder": {"editor": "enum", "options": ["Center out", "Top down", "Left to right", "Random"], "default": "Center out", "section": "Form in"}, "introDepth": {"editor": "range", "default": 2.5, "min": 0, "max": 6, "step": 0.1, "section": "Form in"}, "settleToPhoto": {"editor": "boolean", "default": true, "section": "Form in"}, "photoFade": {"editor": "int", "default": 600, "min": 100, "max": 2000, "step": 50, "unit": "ms", "section": "Form in"}, "trailRadius": {"editor": "int", "default": 300, "min": 20, "max": 400, "unit": "px", "section": "Hover trail"}, "trailStrength": {"editor": "range", "default": 1.75, "min": 0, "max": 4, "step": 0.05, "section": "Hover trail"}, "velocity": {"editor": "range", "default": 0.6, "min": 0, "max": 1, "step": 0.05, "section": "Hover trail"}, "healTime": {"editor": "int", "default": 1500, "min": 300, "max": 4000, "step": 50, "unit": "ms", "section": "Hover trail"}, "hoverReveal": {"editor": "enum", "options": ["Whole photo", "Around cursor"], "default": "Whole photo", "section": "Hover trail"}, "restAfter": {"editor": "int", "default": 3000, "min": 0, "max": 10000, "step": 250, "unit": "ms", "section": "Hover trail"}, "openSize": {"editor": "int", "default": 104, "min": 64, "max": 180, "unit": "px", "section": "Open button"}, "openTint": {"editor": "range", "default": 0.62, "min": 0, "max": 1, "step": 0.01, "section": "Open button"}, "background": {"editor": "color", "default": "#ffffff", "section": "Look"}, "radius": {"editor": "int", "default": 6, "min": 0, "max": 40, "unit": "px", "section": "Look"}, "renderer": {"editor": "enum", "options": ["Auto", "WebGL 1", "Canvas 2D"], "default": "Auto", "section": "Look"}}'>
+<script type="text/x-dc" data-dc-script data-props='{"density": {"editor": "int", "default": 200, "min": 60, "max": 280, "step": 4, "unit": "cols", "section": "Particles"}, "dotSize": {"editor": "range", "default": 0.78, "min": 0.3, "max": 1.6, "step": 0.02, "unit": "\u00d7", "section": "Particles"}, "sizeByLuma": {"editor": "range", "default": 0.1, "min": -1, "max": 1, "step": 0.05, "section": "Particles"}, "darkCut": {"editor": "range", "default": 0, "min": 0, "max": 0.5, "step": 0.01, "section": "Particles"}, "brightCut": {"editor": "range", "default": 1, "min": 0.5, "max": 1, "step": 0.01, "section": "Particles"}, "drift": {"editor": "range", "default": 0.8, "min": 0, "max": 4, "step": 0.1, "unit": "px", "section": "Particles"}, "introTime": {"editor": "int", "default": 1800, "min": 400, "max": 4000, "step": 50, "unit": "ms", "section": "Form in"}, "introFrom": {"editor": "enum", "options": ["Center", "Scatter"], "default": "Center", "section": "Form in"}, "introOrder": {"editor": "enum", "options": ["Center out", "Top down", "Left to right", "Random"], "default": "Center out", "section": "Form in"}, "introOvershoot": {"editor": "range", "default": 2.2, "min": 0, "max": 5, "step": 0.1, "section": "Form in"}, "introDepth": {"editor": "range", "default": 2.5, "min": 0, "max": 6, "step": 0.1, "section": "Form in"}, "settleToPhoto": {"editor": "boolean", "default": true, "section": "Form in"}, "photoFade": {"editor": "int", "default": 600, "min": 100, "max": 2000, "step": 50, "unit": "ms", "section": "Form in"}, "trailRadius": {"editor": "int", "default": 300, "min": 20, "max": 400, "unit": "px", "section": "Hover trail"}, "trailStrength": {"editor": "range", "default": 1.75, "min": 0, "max": 4, "step": 0.05, "section": "Hover trail"}, "velocity": {"editor": "range", "default": 0.6, "min": 0, "max": 1, "step": 0.05, "section": "Hover trail"}, "healTime": {"editor": "int", "default": 1500, "min": 300, "max": 4000, "step": 50, "unit": "ms", "section": "Hover trail"}, "hoverReveal": {"editor": "enum", "options": ["Whole photo", "Around cursor"], "default": "Whole photo", "section": "Hover trail"}, "restAfter": {"editor": "int", "default": 3000, "min": 0, "max": 10000, "step": 250, "unit": "ms", "section": "Hover trail"}, "openSize": {"editor": "int", "default": 104, "min": 64, "max": 180, "unit": "px", "section": "Open button"}, "openTint": {"editor": "range", "default": 0.62, "min": 0, "max": 1, "step": 0.01, "section": "Open button"}, "background": {"editor": "color", "default": "#ffffff", "section": "Look"}, "radius": {"editor": "int", "default": 6, "min": 0, "max": 40, "unit": "px", "section": "Look"}, "bleed": {"editor": "int", "default": 140, "min": 0, "max": 240, "unit": "px", "section": "Look"}, "renderer": {"editor": "enum", "options": ["Auto", "WebGL 1", "Canvas 2D"], "default": "Auto", "section": "Look"}}'>
 // Particle shader: one point sprite per grid cell. Color comes from a small cols x rows copy of the photo,
 // size from its luminance. The intro, drift and the cursor trail (touch texture) are all computed here.
 const PD_VS = `
 precision highp float;
 attribute vec2 aCell; attribute vec4 aRnd; attribute vec3 aIntro;
-uniform vec2 uView, uCut;
-uniform float uDpr, uCell, uTime, uIntroT, uIntroSpan, uIntroDur, uDot, uLuma, uDrift, uStrength, uVel, uDepth, uMaxPt;
+uniform vec2 uView, uCut; uniform float uBleed;
+uniform float uOver, uDpr, uCell, uTime, uIntroT, uIntroSpan, uIntroDur, uDot, uLuma, uDrift, uStrength, uVel, uDepth, uMaxPt;
 uniform sampler2D uColor, uTouch;
 varying vec4 vCol; varying vec3 vShape;
 void main() {
@@ -66,7 +69,9 @@ void main() {
   float l = dot(c, vec3(0.2126, 0.7152, 0.0722));
   float p = clamp((uIntroT - aIntro.z * uIntroSpan) / uIntroDur, 0.0, 1.0);
   float q = 1.0 - p, e = 1.0 - q * q * q * q, ie = 1.0 - e;
-  vec2 pos = aCell + aIntro.xy * ie;
+  float ov = uOver * (0.5 + aRnd.z), u1 = p - 1.0;
+  float eb = 1.0 + (ov + 1.0) * u1 * u1 * u1 + ov * u1 * u1; // easeOutBack: overshoot past the target (and past the frame) then settle
+  vec2 pos = aCell + aIntro.xy * (1.0 - eb);
   float depth = 1.0 + uDepth * aRnd.z * ie * ie;
   pos += uDrift * vec2(sin(aCell.y * 0.043 + uTime * (0.55 + 0.5 * aRnd.x) + aRnd.y * 6.2832),
                        cos(aCell.x * 0.037 + uTime * (0.45 + 0.5 * aRnd.y) + aRnd.x * 6.2832));
@@ -88,10 +93,13 @@ void main() {
   float ps = min(2.0 * (rpx + blur) + 1.0, uMaxPt);
   rpx = min(rpx, 0.5 * ps - blur * 0.5);
   vShape = vec3(ps, rpx, blur);
+  float ed = min(min(pos.x, uView.x - pos.x), min(pos.y, uView.y - pos.y)) + uBleed;
+  if (uBleed > 0.0) a *= smoothstep(0.0, min(40.0, uBleed), ed); // fade out before the bleed edge, never a hard clip line
+  vec2 ndc = (pos + uBleed) / (uView + 2.0 * uBleed) * 2.0 - 1.0;
   vCol = vec4(c * a, a);
-  vec2 ndc = pos / uView * 2.0 - 1.0;
-  gl_Position = a < 0.003 ? vec4(2.0, 2.0, 0.0, 1.0) : vec4(ndc.x, -ndc.y, 0.0, 1.0);
-  gl_PointSize = a < 0.003 ? 1.0 : ps;
+  if (a < 0.003) { gl_Position = vec4(2.0, 2.0, 0.0, 1.0); gl_PointSize = 1.0; return; }
+  gl_Position = vec4(ndc.x, -ndc.y, 0.0, 1.0);
+  gl_PointSize = ps;
 }`;
 const PD_FS = `
 precision mediump float;
@@ -105,13 +113,16 @@ void main() {
 // Photo quad: the sharp, pre-scaled photo drawn in the same canvas for the crossfade (optionally masked by the trail).
 const PD_QVS = `
 attribute vec2 aPos; varying vec2 vUv;
-void main() { vUv = vec2(aPos.x * 0.5 + 0.5, 0.5 - aPos.y * 0.5); gl_Position = vec4(aPos, 0.0, 1.0); }`;
+uniform vec2 uScale;
+void main() { vUv = vec2(aPos.x * 0.5 + 0.5, 0.5 - aPos.y * 0.5); gl_Position = vec4(aPos * uScale, 0.0, 1.0); }`;
 const PD_QFS = `
 precision mediump float;
-uniform sampler2D uPhoto, uTouch; uniform float uA, uMask; varying vec2 vUv;
+uniform sampler2D uPhoto, uTouch; uniform float uA, uMask, uRad, uDpr; uniform vec2 uView; varying vec2 vUv;
 void main() {
   vec3 c = texture2D(uPhoto, vUv).rgb;
-  float a = uA * (1.0 - uMask * smoothstep(0.02, 0.3, texture2D(uTouch, vUv).b));
+  vec2 q = abs(vUv * uView - 0.5 * uView) - (0.5 * uView - uRad);
+  float sd = length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - uRad; // rounded-rect distance, CSS px
+  float a = uA * clamp(0.5 - sd * uDpr, 0.0, 1.0) * (1.0 - uMask * smoothstep(0.02, 0.3, texture2D(uTouch, vUv).b));
   gl_FragColor = vec4(c * a, a);
 }`;
 const PD_STRIDE = 9; // aCell(2) aRnd(4) aIntro(3)
@@ -140,7 +151,8 @@ class Component extends DCLogic {
     if (this.io) { this.io.disconnect(); this.io = null; }
   }
   tp(k, d) { const v = this.props[k]; return v === undefined || v === null ? d : v; }
-  sig() { return ['density', 'introFrom', 'introOrder', 'renderer'].map((k) => this.tp(k, '')).join('|'); }
+  bleed() { return Math.max(0, Math.round(this.tp('bleed', 140))); }
+  sig() { return ['density', 'introFrom', 'introOrder', 'renderer', 'bleed'].map((k) => this.tp(k, '')).join('|'); }
   reduced() { return !!(this.mq && this.mq.matches); }
 
   // ---------- lifecycle of one photo ----------
@@ -252,7 +264,8 @@ class Component extends DCLogic {
   setup(P) {
     P.W = P.el.clientWidth || 848; P.H = P.el.clientHeight || 524;
     P.dpr = Math.min(2, (typeof window !== 'undefined' && window.devicePixelRatio) || 1);
-    const cw = Math.round(P.W * P.dpr), ch = Math.round(P.H * P.dpr);
+    P.B = this.bleed();
+    const cw = Math.round((P.W + 2 * P.B) * P.dpr), ch = Math.round((P.H + 2 * P.B) * P.dpr);
     let kind = this.pickKind(), R = P.R;
     if (!R || R.kind !== kind || R.lost || R.cv.width !== cw || R.cv.height !== ch) {
       if (R) this.freeR(R, false);
@@ -273,7 +286,7 @@ class Component extends DCLogic {
     const rows = Math.max(4, Math.round(H / (W / cols))), cw = W / cols, ch = H / rows;
     const pp = P.pos.split(' ').map((v) => parseFloat(v) / 100);
     const sc = Math.max(W / nw, H / nh), sw = W / sc, sh = H / sc, sx = (nw - sw) * (pp[0] || 0.5), sy = (nh - sh) * (isNaN(pp[1]) ? 0.5 : pp[1]);
-    const pw = R.cv.width, ph = R.cv.height;
+    const pw = Math.round(P.W * P.dpr), ph = Math.round(P.H * P.dpr); // the photo itself: frame size only
     if (!P.photo || P.photo.width !== pw || P.photo.height !== ph) {
       P.photo = document.createElement('canvas'); P.photo.width = pw; P.photo.height = ph;
       const x = P.photo.getContext('2d'); x.imageSmoothingQuality = 'high'; x.drawImage(img, sx, sy, sw, sh, 0, 0, pw, ph);
@@ -327,8 +340,8 @@ class Component extends DCLogic {
       const o = { p, u: {}, a: {} }; names.forEach((n) => (o.u[n] = gl.getUniformLocation(p, n))); attrs.forEach((n) => (o.a[n] = gl.getAttribLocation(p, n)));
       return o;
     };
-    R.pp = prog(PD_VS, PD_FS, ['uView', 'uCut', 'uDpr', 'uCell', 'uTime', 'uIntroT', 'uIntroSpan', 'uIntroDur', 'uDot', 'uLuma', 'uDrift', 'uStrength', 'uVel', 'uDepth', 'uMaxPt', 'uColor', 'uTouch'], ['aCell', 'aRnd', 'aIntro']);
-    R.qp = prog(PD_QVS, PD_QFS, ['uPhoto', 'uTouch', 'uA', 'uMask'], ['aPos']);
+    R.pp = prog(PD_VS, PD_FS, ['uView', 'uCut', 'uDpr', 'uCell', 'uTime', 'uIntroT', 'uIntroSpan', 'uIntroDur', 'uDot', 'uLuma', 'uDrift', 'uStrength', 'uVel', 'uDepth', 'uMaxPt', 'uColor', 'uTouch', 'uBleed', 'uOver'], ['aCell', 'aRnd', 'aIntro']);
+    R.qp = prog(PD_QVS, PD_QFS, ['uPhoto', 'uTouch', 'uA', 'uMask', 'uScale', 'uRad', 'uDpr', 'uView'], ['aPos']);
     if (!R.pp || !R.qp) return false;
     R.quad = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, R.quad); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
     R.inst = gl.createBuffer();
@@ -430,7 +443,7 @@ class Component extends DCLogic {
     const R = P.R, introT = Math.max(100, this.tp('introTime', 1800)), cut = [this.tp('darkCut', 0), this.tp('brightCut', 1)];
     const t = ((now - this.base) / 1000) % 10000, vel = this.tp('velocity', 0.6), str = this.tp('trailStrength', 1.75) * 30, dot = this.tp('dotSize', 0.78);
     const luma = this.tp('sizeByLuma', 0.1), drift = this.tp('drift', 0.8), depth = this.tp('introDepth', 2.5);
-    if (R.kind === '2d') return this.draw2d(P, photoOnly, introEl, { introT, cut, t, vel, str, dot, luma, drift, depth });
+    if (R.kind === '2d') return this.draw2d(P, photoOnly, introEl, { introT, cut, t, vel, str, dot, luma, drift, depth, over: this.tp('introOvershoot', 2.2) });
     const gl = R.gl, cw = R.cv.width, ch = R.cv.height;
     gl.viewport(0, 0, cw, ch); gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
     if (introEl < 0) return; // not scrolled into view yet
@@ -441,7 +454,7 @@ class Component extends DCLogic {
       gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, R.tColor);
       gl.uniform1i(u.uColor, 0); gl.uniform1i(u.uTouch, 1);
       gl.uniform2f(u.uView, P.W, P.H); gl.uniform2f(u.uCut, cut[0], cut[1]);
-      gl.uniform1f(u.uDpr, cw / P.W); gl.uniform1f(u.uCell, P.cell); gl.uniform1f(u.uTime, t);
+      gl.uniform1f(u.uDpr, P.dpr); gl.uniform1f(u.uBleed, P.B); gl.uniform1f(u.uOver, this.tp('introOvershoot', 2.2)); gl.uniform1f(u.uCell, P.cell); gl.uniform1f(u.uTime, t);
       gl.uniform1f(u.uIntroT, introEl); gl.uniform1f(u.uIntroSpan, introT * 0.45); gl.uniform1f(u.uIntroDur, introT * 0.55);
       gl.uniform1f(u.uDot, dot); gl.uniform1f(u.uLuma, luma); gl.uniform1f(u.uDrift, drift); gl.uniform1f(u.uStrength, str);
       gl.uniform1f(u.uVel, vel); gl.uniform1f(u.uDepth, depth); gl.uniform1f(u.uMaxPt, R.maxPt);
@@ -455,20 +468,27 @@ class Component extends DCLogic {
       const o = R.qp, u = o.u; gl.useProgram(o.p);
       gl.activeTexture(gl.TEXTURE2); gl.bindTexture(gl.TEXTURE_2D, R.tPhoto);
       gl.uniform1i(u.uPhoto, 2); gl.uniform1i(u.uTouch, 1); gl.uniform1f(u.uA, P.photoA); gl.uniform1f(u.uMask, mask);
+      gl.uniform2f(u.uScale, P.W / (P.W + 2 * P.B), P.H / (P.H + 2 * P.B)); gl.uniform2f(u.uView, P.W, P.H);
+      gl.uniform1f(u.uRad, Math.min(this.tp('radius', 6), P.W / 2, P.H / 2)); gl.uniform1f(u.uDpr, P.dpr);
       gl.bindBuffer(gl.ARRAY_BUFFER, R.quad); gl.enableVertexAttribArray(o.a.aPos); gl.vertexAttribPointer(o.a.aPos, 2, gl.FLOAT, false, 0, 0);
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); gl.disableVertexAttribArray(o.a.aPos);
     }
     gl.activeTexture(gl.TEXTURE0);
   }
   draw2d(P, photoOnly, introEl, o) { // Canvas 2D fallback: same math as the shader, fewer particles
-    const R = P.R, x = R.ctx, cw = R.cv.width, ch = R.cv.height, dpr = cw / P.W;
-    if (introEl >= 0 && photoOnly) { x.setTransform(1, 0, 0, 1, 0, 0); x.globalAlpha = 1; x.drawImage(P.photo, 0, 0); return; }
+    const R = P.R, x = R.ctx, cw = R.cv.width, ch = R.cv.height, dpr = P.dpr, B = P.B, fadeE = Math.min(40, B);
+    const photo = (al) => { // the sharp photo, clipped to the frame's rounded rect
+      x.save(); x.setTransform(dpr, 0, 0, dpr, B * dpr, B * dpr); x.beginPath();
+      const rr = Math.min(this.tp('radius', 6), P.W / 2, P.H / 2); if (x.roundRect) x.roundRect(0, 0, P.W, P.H, rr); else x.rect(0, 0, P.W, P.H);
+      x.clip(); x.globalAlpha = al; x.drawImage(P.photo, 0, 0, P.W, P.H); x.restore();
+    };
     x.setTransform(1, 0, 0, 1, 0, 0); x.clearRect(0, 0, cw, ch);
+    if (introEl >= 0 && photoOnly) { photo(1); return; }
     if (introEl < 0) return;
     if (P.touchDirty || !P.tdata) { P.tdata = P.tx.getImageData(0, 0, P.tc.width, P.tc.height).data; P.touchDirty = false; }
     const T = P.tdata, tw = P.tc.width, th = P.tc.height, D = P.inst, span = o.introT * 0.45, dur = o.introT * 0.55;
     const tex = (u, v, c) => { const fx = Math.min(tw - 1.001, Math.max(0, u * tw - 0.5)), fy = Math.min(th - 1.001, Math.max(0, v * th - 0.5)), ix = fx | 0, iy = fy | 0, ax = fx - ix, ay = fy - iy, i0 = (iy * tw + ix) * 4 + c, i1 = i0 + tw * 4; return ((T[i0] * (1 - ax) + T[i0 + 4] * ax) * (1 - ay) + (T[i1] * (1 - ax) + T[i1 + 4] * ax) * ay) / 255; };
-    x.setTransform(dpr, 0, 0, dpr, 0, 0);
+    x.setTransform(dpr, 0, 0, dpr, B * dpr, B * dpr);
     for (let k = 0, b = 0; k < P.n; k++, b += PD_STRIDE) {
       const cx = D[b], cy = D[b + 1], r0 = D[b + 2], r1 = D[b + 3], r2 = D[b + 4], r3 = D[b + 5], l = P.l2[k];
       const p = Math.min(1, Math.max(0, (introEl - D[b + 8] * span) / dur)), q = 1 - p, ie = q * q * q * q;
@@ -476,8 +496,9 @@ class Component extends DCLogic {
       if (o.cut[0] > 0) a *= Math.min(1, Math.max(0, (l - o.cut[0] + 0.03) / 0.03));
       if (o.cut[1] < 1) a *= 1 - Math.min(1, Math.max(0, (l - o.cut[1]) / 0.03));
       if (a < 0.01) continue;
-      let px = cx + D[b + 6] * ie + o.drift * Math.sin(cy * 0.043 + o.t * (0.55 + 0.5 * r0) + r1 * 6.2832);
-      let py = cy + D[b + 7] * ie + o.drift * Math.cos(cx * 0.037 + o.t * (0.45 + 0.5 * r1) + r0 * 6.2832);
+      const ov = (o.over) * (0.5 + r2), u1 = p - 1, eb = 1 + (ov + 1) * u1 * u1 * u1 + ov * u1 * u1;
+      let px = cx + D[b + 6] * (1 - eb) + o.drift * Math.sin(cy * 0.043 + o.t * (0.55 + 0.5 * r0) + r1 * 6.2832);
+      let py = cy + D[b + 7] * (1 - eb) + o.drift * Math.cos(cx * 0.037 + o.t * (0.45 + 0.5 * r1) + r0 * 6.2832);
       const u = cx / P.W, v = cy / P.H, tb = tex(u, v, 2);
       let s = 0;
       if (tb > 0.004) {
@@ -486,11 +507,12 @@ class Component extends DCLogic {
         px += (dx * o.vel * 1.6 + Math.cos(ang) * (1 - 0.55 * o.vel)) * m; py += (dy * o.vel * 1.6 + Math.sin(ang) * (1 - 0.55 * o.vel)) * m;
       }
       const f = o.luma >= 0 ? 1 + (1 - l - 1) * o.luma : 1 + (l - 1) * -o.luma;
+      if (B > 0) { const ed = Math.min(px, P.W - px, py, P.H - py) + B; if (ed <= 0) continue; if (ed < fadeE) { const u2 = ed / fadeE; x.globalAlpha = a * u2 * u2 * (3 - 2 * u2); } else x.globalAlpha = a; } else x.globalAlpha = a;
       const rad = 0.5 * P.cell * o.dot * Math.max(f, 0.1) * (1 + o.depth * r2 * ie * ie) * (1 + 0.45 * s);
-      x.globalAlpha = a; x.fillStyle = P.c2[k]; x.beginPath(); x.arc(px, py, Math.max(0.3, rad), 0, 6.2832); x.fill();
+      x.fillStyle = P.c2[k]; x.beginPath(); x.arc(px, py, Math.max(0.3, rad), 0, 6.2832); x.fill();
     }
     x.globalAlpha = 1;
-    if (P.photoA > 0) { x.setTransform(1, 0, 0, 1, 0, 0); x.globalAlpha = P.photoA; x.drawImage(P.photo, 0, 0); x.globalAlpha = 1; }
+    if (P.photoA > 0) photo(P.photoA);
   }
 
   renderVals() {
@@ -498,7 +520,7 @@ class Component extends DCLogic {
     if (this.lastSig !== undefined && s !== this.lastSig) setTimeout(() => this.P.forEach((P) => P && this.rebuild(P)), 0);
     if (this.lastPs !== undefined && ps !== this.lastPs) setTimeout(() => { this.P.forEach((P) => P && (P.dirty = true)); this.kick(); }, 0);
     this.lastSig = s; this.lastPs = ps;
-    return { bg: this.tp('background', '#ffffff'), mr: this.tp('radius', 6) + 'px', ob: this.tp('openSize', 104) + 'px', ot: String(this.tp('openTint', 0.62)), noop: this.noop, replay: this.onReplay, cv0: this.cvRefs[0], cv1: this.cvRefs[1], cv2: this.cvRefs[2] };
+    return { bg: this.tp('background', '#ffffff'), mr: this.tp('radius', 6) + 'px', ob: this.tp('openSize', 104) + 'px', bl: this.bleed() + 'px', ot: String(this.tp('openTint', 0.62)), noop: this.noop, replay: this.onReplay, cv0: this.cvRefs[0], cv1: this.cvRefs[1], cv2: this.cvRefs[2] };
   }
 }
 </script>
