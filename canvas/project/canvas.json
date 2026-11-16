@@ -208,6 +208,14 @@
    "x": 15200,
    "y": 2840
   },
+  "NavHeaderVariations.dc.html": {
+   "h": 1780,
+   "page": "page-vmnxsd",
+   "title": "Header nav · 5 variations",
+   "w": 1440,
+   "x": 4397,
+   "y": 15863
+  },
   "ParticlePlay.dc.html": {
    "h": 1020,
    "is_interactive": true,
@@ -352,6 +360,14 @@
    "x": 15200,
    "y": 4160
   },
+  "ResumeVariations.dc.html": {
+   "h": 8000,
+   "page": "page-vmnxsd",
+   "title": "Resume · 10 variations",
+   "w": 1440,
+   "x": 2837,
+   "y": 17783
+  },
   "StampCollection.dc.html": {
    "h": 640,
    "page": "page-vmnxsd",
@@ -474,8 +490,8 @@
    "is_interactive": true,
    "page": "page-vmnxsd",
    "title": "Tin Le · Portfolio in the stuart.re style",
-   "w": 1808,
-   "x": 0,
+   "w": 1440,
+   "x": -74,
    "y": 13880
   },
   "TinHome-Tablet-A.dc.html": {
@@ -715,21 +731,13 @@
    "x": 19760,
    "y": 0
   },
-  "NavHeaderVariations.dc.html": {
-   "h": 1780,
+  "PhotoDotsLab2.dc.html": {
+   "h": 2230,
    "page": "page-vmnxsd",
-   "title": "Header nav · 5 variations",
+   "title": "Photo dots lab · v2",
    "w": 1440,
-   "x": 4397,
-   "y": 15863
-  },
-  "ResumeVariations.dc.html": {
-   "h": 8450,
-   "page": "page-vmnxsd",
-   "title": "Resume · 10 variations",
-   "w": 1440,
-   "x": 2837,
-   "y": 17783
+   "x": -3200,
+   "y": 15960
   }
  },
  "createdOnFiles": {
@@ -992,7 +1000,8 @@
   "Piece-navvars.dc.html",
   "PhotoDotsLab.dc.html",
   "NavHeaderVariations.dc.html",
-  "ResumeVariations.dc.html"
+  "ResumeVariations.dc.html",
+  "PhotoDotsLab2.dc.html"
  ],
  "pages": [
   {

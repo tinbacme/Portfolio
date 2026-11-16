@@ -1,0 +1,506 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><script src="./support.js"></script></head>
+<body>
+<!-- Photo dots lab v2: GPU particles (WebGL2 / WebGL1 / Canvas 2D fallback). Photos form in from soft depth on scroll, melt into the sharp photo, and dissolve into particles that follow a fading cursor trail on hover. -->
+<x-dc>
+  <helmet>
+    <style>
+      html, body { margin: 0; height: 100%; }
+    </style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&amp;display=swap">
+<style>
+body{margin:0}
+sc-for, sc-if { display: contents; }
+.dl-root{width:1440px;box-sizing:border-box;padding:72px 296px 120px;background:var(--bg,#fff);color:#000;font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.dl-k{margin:0;font:600 12px/1 Inter,sans-serif;letter-spacing:.08em;color:#b3b3b3}
+.dl-h{margin:10px 0 0;font:600 24px/36px Inter,sans-serif;letter-spacing:-.01em}
+.dl-p{margin:6px 0 0;max-width:640px;font:400 15px/22px Inter,sans-serif;color:#666}
+.dl-bar{display:flex;gap:8px;margin-top:20px}
+.dl-btn{border:0;border-radius:10px;padding:8px 16px;font:600 15px/22.5px Inter,sans-serif;cursor:pointer;background:#000;color:#fff}
+.dl-btn:hover{filter:brightness(1.6)}
+.dl-btn:focus-visible{outline:2px solid #0099ff;outline-offset:3px}
+.dl-stack{display:flex;flex-direction:column;gap:48px;margin-top:48px}
+.dl-fig{margin:0}
+.dl-cv{position:relative;display:block;width:848px;height:524px;overflow:hidden;border-radius:var(--mr,6px);background-color:var(--bg,#fff);background-repeat:no-repeat;background-size:cover;touch-action:pan-y;cursor:crosshair}
+.dl-cv canvas{position:absolute;left:0;top:0;width:100%;height:100%;display:block}
+.dl-frame{position:relative;width:848px}
+/* Open button: a dark-gray liquid-glass circle in the middle of each photo */
+.dl-open{position:absolute;left:50%;top:50%;width:var(--ob,104px);height:var(--ob,104px);margin:calc(var(--ob,104px) / -2) 0 0 calc(var(--ob,104px) / -2);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:#fff;text-decoration:none;isolation:isolate;box-shadow:0 12px 30px -10px rgba(0,0,0,.45),0 2px 6px rgba(0,0,0,.18);opacity:0;transform:scale(.7);pointer-events:none;transition:opacity .25s ease,transform .45s cubic-bezier(.3,1.5,.5,1)}
+/* only shows while the photo is hovered (or the button has keyboard focus) */
+.dl-frame:hover .dl-open,.dl-open:focus-visible{opacity:1;transform:scale(1);pointer-events:auto}
+.dl-open:hover{transform:scale(1.06)!important}
+.dl-open:active{transform:scale(.97)}
+.dl-open:focus-visible{outline:2px solid #0099ff;outline-offset:4px}
+.dl-open-fx,.dl-open-tint,.dl-open-shine{position:absolute;inset:0;border-radius:inherit;pointer-events:none}
+.dl-open-fx{z-index:-3;-webkit-backdrop-filter:blur(6px) saturate(1.6);backdrop-filter:blur(6px) saturate(1.6);backdrop-filter:url(#dl-glass) blur(6px) saturate(1.6)}
+.dl-open-tint{z-index:-2;background:rgba(43,43,45,var(--ot,.62))}
+.dl-open-shine{z-index:-1;box-shadow:inset 1.5px 1.5px 1px rgba(255,255,255,.5),inset -1px -1px 1px rgba(255,255,255,.22),inset 0 0 18px rgba(255,255,255,.1)}
+.dl-open-ic{display:block;filter:drop-shadow(0 1px 1px rgba(0,0,0,.3))}
+.dl-open-tx{font:600 14px/1 Inter,sans-serif;letter-spacing:.01em;text-shadow:0 1px 1px rgba(0,0,0,.25)}
+.dl-defs{position:absolute;width:0;height:0;overflow:hidden}
+.dl-cap{margin-top:12px;font:500 13px/1 Inter,sans-serif;color:#b3b3b3}
+</style>
+  </helmet>
+<div class="dl-root" style="--bg: {{bg}}; --mr: {{mr}}; --ob: {{ob}}; --ot: {{ot}}"><svg class="dl-defs" width="0" height="0" aria-hidden="true" focusable="false"><filter id="dl-glass" x="0%" y="0%" width="100%" height="100%" filterUnits="objectBoundingBox"><feTurbulence type="fractalNoise" baseFrequency="0.02 0.02" numOctaves="2" seed="7" result="noise"></feTurbulence><feGaussianBlur in="noise" stdDeviation="2" result="soft"></feGaussianBlur><feDisplacementMap in="SourceGraphic" in2="soft" scale="40" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap></filter></svg>
+  <p class="dl-k">LAB</p>
+  <h1 class="dl-h">Photo dots &#183; v2</h1>
+  <p class="dl-p">Rebuilt on the GPU. About 25,000 soft-edged particles take their color from the photo and their size from its brightness, with a slow drift. When a photo scrolls into view they fall in from a blurred, out-of-focus depth, then melt into the sharp photo. Hover and it dissolves: your cursor paints a fading trail that pushes particles along the way you move, and the disturbance heals on its own before the photo comes back.</p>
+  <div class="dl-bar"><button type="button" class="dl-btn" onClick="{{replay}}">Replay</button></div>
+  <div class="dl-stack"><figure class="dl-fig"><div class="dl-frame"><div class="dl-cv" ref="{{cv0}}" data-src="/_blob/effff208332abe411e27c82aaa87e30d" data-pos="50% 72%" style="background-position: 50% 72%" role="img" aria-label="Tin with his Microsoft team"></div><a class="dl-open" href="#" aria-label="Open Microsoft AI" onClick="{{noop}}"><span class="dl-open-fx" aria-hidden="true"></span><span class="dl-open-tint" aria-hidden="true"></span><span class="dl-open-shine" aria-hidden="true"></span><svg class="dl-open-ic" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="dl-open-tx">Open</span></a></div><figcaption class="dl-cap">Microsoft AI</figcaption></figure><figure class="dl-fig"><div class="dl-frame"><div class="dl-cv" ref="{{cv1}}" data-src="/_blob/155942c7f1c522f9aec7d43d1c1d0d0d" data-pos="50% 50%" style="background-position: 50% 50%" role="img" aria-label="Tin teaching a product design class"></div><a class="dl-open" href="#" aria-label="Open University of Oregon" onClick="{{noop}}"><span class="dl-open-fx" aria-hidden="true"></span><span class="dl-open-tint" aria-hidden="true"></span><span class="dl-open-shine" aria-hidden="true"></span><svg class="dl-open-ic" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="dl-open-tx">Open</span></a></div><figcaption class="dl-cap">University of Oregon</figcaption></figure><figure class="dl-fig"><div class="dl-frame"><div class="dl-cv" ref="{{cv2}}" data-src="/_blob/8bd998ead1110dbdb0a707cdb0cb6c60" data-pos="50% 45%" style="background-position: 50% 45%" role="img" aria-label="Tin with his Salesforce team"></div><a class="dl-open" href="#" aria-label="Open Salesforce" onClick="{{noop}}"><span class="dl-open-fx" aria-hidden="true"></span><span class="dl-open-tint" aria-hidden="true"></span><span class="dl-open-shine" aria-hidden="true"></span><svg class="dl-open-ic" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="dl-open-tx">Open</span></a></div><figcaption class="dl-cap">Salesforce</figcaption></figure></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"density": {"editor": "int", "default": 200, "min": 60, "max": 280, "step": 4, "unit": "cols", "section": "Particles"}, "dotSize": {"editor": "range", "default": 0.78, "min": 0.3, "max": 1.6, "step": 0.02, "unit": "\u00d7", "section": "Particles"}, "sizeByLuma": {"editor": "range", "default": 0.1, "min": -1, "max": 1, "step": 0.05, "section": "Particles"}, "darkCut": {"editor": "range", "default": 0, "min": 0, "max": 0.5, "step": 0.01, "section": "Particles"}, "brightCut": {"editor": "range", "default": 1, "min": 0.5, "max": 1, "step": 0.01, "section": "Particles"}, "drift": {"editor": "range", "default": 0.8, "min": 0, "max": 4, "step": 0.1, "unit": "px", "section": "Particles"}, "introTime": {"editor": "int", "default": 1800, "min": 400, "max": 4000, "step": 50, "unit": "ms", "section": "Form in"}, "introFrom": {"editor": "enum", "options": ["Center", "Scatter"], "default": "Center", "section": "Form in"}, "introOrder": {"editor": "enum", "options": ["Center out", "Top down", "Left to right", "Random"], "default": "Center out", "section": "Form in"}, "introDepth": {"editor": "range", "default": 2.5, "min": 0, "max": 6, "step": 0.1, "section": "Form in"}, "settleToPhoto": {"editor": "boolean", "default": true, "section": "Form in"}, "photoFade": {"editor": "int", "default": 600, "min": 100, "max": 2000, "step": 50, "unit": "ms", "section": "Form in"}, "trailRadius": {"editor": "int", "default": 300, "min": 20, "max": 400, "unit": "px", "section": "Hover trail"}, "trailStrength": {"editor": "range", "default": 1.75, "min": 0, "max": 4, "step": 0.05, "section": "Hover trail"}, "velocity": {"editor": "range", "default": 0.6, "min": 0, "max": 1, "step": 0.05, "section": "Hover trail"}, "healTime": {"editor": "int", "default": 1500, "min": 300, "max": 4000, "step": 50, "unit": "ms", "section": "Hover trail"}, "hoverReveal": {"editor": "enum", "options": ["Whole photo", "Around cursor"], "default": "Whole photo", "section": "Hover trail"}, "restAfter": {"editor": "int", "default": 3000, "min": 0, "max": 10000, "step": 250, "unit": "ms", "section": "Hover trail"}, "openSize": {"editor": "int", "default": 104, "min": 64, "max": 180, "unit": "px", "section": "Open button"}, "openTint": {"editor": "range", "default": 0.62, "min": 0, "max": 1, "step": 0.01, "section": "Open button"}, "background": {"editor": "color", "default": "#ffffff", "section": "Look"}, "radius": {"editor": "int", "default": 6, "min": 0, "max": 40, "unit": "px", "section": "Look"}, "renderer": {"editor": "enum", "options": ["Auto", "WebGL 1", "Canvas 2D"], "default": "Auto", "section": "Look"}}'>
+// Particle shader: one point sprite per grid cell. Color comes from a small cols x rows copy of the photo,
+// size from its luminance. The intro, drift and the cursor trail (touch texture) are all computed here.
+const PD_VS = `
+precision highp float;
+attribute vec2 aCell; attribute vec4 aRnd; attribute vec3 aIntro;
+uniform vec2 uView, uCut;
+uniform float uDpr, uCell, uTime, uIntroT, uIntroSpan, uIntroDur, uDot, uLuma, uDrift, uStrength, uVel, uDepth, uMaxPt;
+uniform sampler2D uColor, uTouch;
+varying vec4 vCol; varying vec3 vShape;
+void main() {
+  vec2 uv = aCell / uView;
+  vec3 c = texture2D(uColor, uv).rgb;
+  float l = dot(c, vec3(0.2126, 0.7152, 0.0722));
+  float p = clamp((uIntroT - aIntro.z * uIntroSpan) / uIntroDur, 0.0, 1.0);
+  float q = 1.0 - p, e = 1.0 - q * q * q * q, ie = 1.0 - e;
+  vec2 pos = aCell + aIntro.xy * ie;
+  float depth = 1.0 + uDepth * aRnd.z * ie * ie;
+  pos += uDrift * vec2(sin(aCell.y * 0.043 + uTime * (0.55 + 0.5 * aRnd.x) + aRnd.y * 6.2832),
+                       cos(aCell.x * 0.037 + uTime * (0.45 + 0.5 * aRnd.y) + aRnd.x * 6.2832));
+  vec4 tc = texture2D(uTouch, uv);
+  float s = clamp((tc.b - aRnd.w * 0.15) / 0.85, 0.0, 1.0); s = s * s * (3.0 - 2.0 * s);
+  vec2 dir = tc.rg * 2.0 - 1.0;
+  float ang = aRnd.x * 6.2832;
+  vec2 push = dir * (uVel * 1.6) + vec2(cos(ang), sin(ang)) * (1.0 - 0.55 * uVel);
+  pos += push * s * uStrength * (0.55 + 0.9 * aRnd.y);
+  float f = uLuma >= 0.0 ? mix(1.0, 1.0 - l, uLuma) : mix(1.0, l, -uLuma);
+  float d = uCell * uDot * max(f, 0.1) * depth * (1.0 + 0.45 * s);
+  float a = smoothstep(0.0, 0.3, p) * mix(1.0, 0.3, ie * aRnd.z);
+  float lo = uCut.x <= 0.0 ? 1.0 : smoothstep(uCut.x - 0.03, uCut.x, l);
+  float hi = uCut.y >= 1.0 ? 1.0 : 1.0 - smoothstep(uCut.y, uCut.y + 0.03, l);
+  a *= lo * hi;
+  float rpx = 0.5 * d * uDpr;
+  if (rpx < 0.6) { a *= (rpx / 0.6) * (rpx / 0.6); rpx = 0.6; }
+  float blur = 0.75 + 3.0 * ie * aRnd.z * uDpr;
+  float ps = min(2.0 * (rpx + blur) + 1.0, uMaxPt);
+  rpx = min(rpx, 0.5 * ps - blur * 0.5);
+  vShape = vec3(ps, rpx, blur);
+  vCol = vec4(c * a, a);
+  vec2 ndc = pos / uView * 2.0 - 1.0;
+  gl_Position = a < 0.003 ? vec4(2.0, 2.0, 0.0, 1.0) : vec4(ndc.x, -ndc.y, 0.0, 1.0);
+  gl_PointSize = a < 0.003 ? 1.0 : ps;
+}`;
+const PD_FS = `
+precision mediump float;
+varying vec4 vCol; varying vec3 vShape;
+void main() {
+  float dpx = length(gl_PointCoord - 0.5) * vShape.x;
+  float m = 1.0 - smoothstep(vShape.y - vShape.z * 0.5, vShape.y + vShape.z * 0.5, dpx);
+  if (m <= 0.002) discard;
+  gl_FragColor = vCol * m;
+}`;
+// Photo quad: the sharp, pre-scaled photo drawn in the same canvas for the crossfade (optionally masked by the trail).
+const PD_QVS = `
+attribute vec2 aPos; varying vec2 vUv;
+void main() { vUv = vec2(aPos.x * 0.5 + 0.5, 0.5 - aPos.y * 0.5); gl_Position = vec4(aPos, 0.0, 1.0); }`;
+const PD_QFS = `
+precision mediump float;
+uniform sampler2D uPhoto, uTouch; uniform float uA, uMask; varying vec2 vUv;
+void main() {
+  vec3 c = texture2D(uPhoto, vUv).rgb;
+  float a = uA * (1.0 - uMask * smoothstep(0.02, 0.3, texture2D(uTouch, vUv).b));
+  gl_FragColor = vec4(c * a, a);
+}`;
+const PD_STRIDE = 9; // aCell(2) aRnd(4) aIntro(3)
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props); this.state = {}; this.P = [];
+    const w = typeof window !== 'undefined' ? window : {};
+    // shared across re-mounts of the board: loaded images and which photos already formed
+    this.G = w.__photoDotsV2 || (w.__photoDotsV2 = { imgs: {}, st: {}, caps: {} });
+    this.cvRefs = [0, 1, 2].map((i) => (el) => this.attach(i, el)); // stable identities
+    this.onReplay = () => this.replay();
+    this.noop = (e) => { if (e && e.preventDefault) e.preventDefault(); };
+    this.tick = (now) => this.loop(now);
+    this.base = typeof performance !== 'undefined' ? performance.now() : 0;
+    this.mq = typeof matchMedia === 'function' ? matchMedia('(prefers-reduced-motion: reduce)') : null;
+    this.onMQ = () => { this.P.forEach((P) => P && (P.dirty = true)); this.kick(); };
+    if (this.mq && this.mq.addEventListener) this.mq.addEventListener('change', this.onMQ);
+  }
+  componentDidMount() { this.dead = false; this.kick(); }
+  componentWillUnmount() {
+    this.dead = true; cancelAnimationFrame(this.raf); this.running = false;
+    if (this.mq && this.mq.removeEventListener) this.mq.removeEventListener('change', this.onMQ);
+    this.P.forEach((P) => P && this.detach(P));
+    this.P = [];
+    if (this.io) { this.io.disconnect(); this.io = null; }
+  }
+  tp(k, d) { const v = this.props[k]; return v === undefined || v === null ? d : v; }
+  sig() { return ['density', 'introFrom', 'introOrder', 'renderer'].map((k) => this.tp(k, '')).join('|'); }
+  reduced() { return !!(this.mq && this.mq.matches); }
+
+  // ---------- lifecycle of one photo ----------
+  attach(i, el) {
+    if (!el) return; // a null ref (re-render / unmount) keeps the current state; unmount cleans up
+    const old = this.P[i];
+    if (old && old.el === el) return;
+    const src = el.dataset.src, pos = el.dataset.pos || '50% 50%', key = src + '|' + pos;
+    if (old) this.detach(old);
+    const st = this.G.st[key] || {};
+    const P = { i, el, src, pos, key, trail: [], hover: false, lastMove: 0, photoA: 0, t0: Infinity, seen: false, formed: false, vis: true, dirty: true, layer: null };
+    if (st.formed) { P.seen = true; P.formed = true; P.t0 = -1e9; P.photoA = 1; } // already formed once: straight to the sharp photo
+    else if (st.seen && isFinite(st.t0)) { P.seen = true; P.t0 = st.t0; }        // mid-intro: keep going
+    this.P[i] = P;
+    this.photoLayer(P, P.photoA >= 1 || this.reduced()); // CSS copy of the photo under the canvas: no blank frame ever
+    const loc = (e) => { const r = el.getBoundingClientRect(); return [(e.clientX - r.left) * (P.W || r.width) / (r.width || 1), (e.clientY - r.top) * (P.H || r.height) / (r.height || 1)]; };
+    const enter = (e) => {
+      if (this.reduced()) return;
+      const [x, y] = loc(e), now = performance.now();
+      P.hover = true; P.px = x; P.py = y; P.pt = now; P.lastMove = now;
+      P.trail.push({ x, y, dx: 0, dy: 0, f: 0.3, t: now }); this.kick();
+    };
+    const move = (e) => {
+      if (this.reduced()) return;
+      if (!P.hover) return enter(e);
+      const [x, y] = loc(e), dx = x - P.px, dy = y - P.py, d = Math.hypot(dx, dy);
+      if (d < 2.5) return; // dead zone: hand tremor must not wake the photo back into dots
+      const now = performance.now(), dtE = Math.max(8, now - P.pt), sp = d / dtE;
+      const f = Math.min(1, 0.25 + sp * 0.8), ux = dx / d, uy = dy / d;
+      const step = Math.max(4, this.tp('trailRadius', 300) * 0.3), n = Math.min(24, Math.ceil(d / step));
+      for (let k = 1; k <= n; k++) P.trail.push({ x: P.px + (dx * k) / n, y: P.py + (dy * k) / n, dx: ux, dy: uy, f, t: now - ((n - k) * dtE) / n });
+      if (P.trail.length > 600) P.trail.splice(0, P.trail.length - 600);
+      P.px = x; P.py = y; P.pt = now; P.lastMove = now; this.kick();
+    };
+    const leave = () => { P.hover = false; this.kick(); };
+    // listen on the frame wrapper: hovering the Open circle still counts as hovering the photo
+    const hit = (el.closest && el.closest('.dl-frame')) || el;
+    hit.addEventListener('pointerenter', enter); hit.addEventListener('pointermove', move); hit.addEventListener('pointerleave', leave);
+    P.off = () => { hit.removeEventListener('pointerenter', enter); hit.removeEventListener('pointermove', move); hit.removeEventListener('pointerleave', leave); };
+    if (typeof IntersectionObserver === 'function') {
+      if (!this.io) this.io = new IntersectionObserver((es) => es.forEach((e) => {
+        const Q = this.P.find((q) => q && q.el === e.target); if (!Q) return;
+        const was = Q.vis; Q.vis = e.isIntersecting;
+        if (e.intersectionRatio >= 0.24 && !Q.seen) { Q.seen = true; if (Q.ready) this.startIntro(Q); }
+        if (Q.vis && !was) { Q.dirty = true; Q.last = 0; }
+        this.kick();
+      }), { threshold: [0, 0.25] });
+      this.io.observe(el);
+    } else P.seen = true;
+    let img = this.G.imgs[src];
+    if (!img) { img = new Image(); img.decoding = 'async'; img.src = src; this.G.imgs[src] = img; }
+    P.img = img;
+    if (img.complete && img.naturalWidth) this.ready(P);
+    else img.addEventListener('load', () => { if (this.P[i] === P && !P.dead) this.ready(P); }, { once: true });
+  }
+  detach(P) {
+    P.dead = true; this.save(P);
+    if (P.off) P.off();
+    if (this.io) this.io.unobserve(P.el);
+    if (P.R) this.freeR(P.R, true);
+  }
+  save(P) { this.G.st[P.key] = { seen: P.seen, t0: P.t0, formed: P.formed }; }
+  startIntro(P) { P.t0 = performance.now(); P.formed = false; P.photoA = 0; P.dirty = true; this.save(P); this.kick(); }
+  ready(P) {
+    if (P.dead) return;
+    this.setup(P);
+    P.ready = true;
+    if (P.seen && P.t0 === Infinity) this.startIntro(P);
+    P.dirty = true; P.last = 0;
+    this.frame(P, performance.now()); // draw synchronously so a new canvas never shows blank
+    this.mountCanvas(P);
+    this.kick();
+  }
+  replay() {
+    if (this.reduced()) return;
+    this.P.forEach((P) => { if (!P) return; P.seen = true; P.trail.length = 0; P.touchLive = true; if (P.ready) this.startIntro(P); else { P.t0 = Infinity; P.formed = false; P.photoA = 0; this.save(P); } });
+    this.kick();
+  }
+  rebuild(P) { if (!P.ready || P.dead) return; this.setup(P); P.dirty = true; this.frame(P, performance.now()); this.mountCanvas(P); this.kick(); }
+  photoLayer(P, on) {
+    if (P.layer === on) return; P.layer = on;
+    P.el.style.backgroundImage = on ? 'url("' + P.src + '")' : 'none';
+  }
+  mountCanvas(P) {
+    const cv = P.R && P.R.cv; if (!cv || cv.parentNode === P.el) return;
+    P.el.appendChild(cv);
+    Array.from(P.el.querySelectorAll('canvas[data-pd]')).forEach((c) => { if (c !== cv) c.remove(); });
+  }
+
+  // ---------- renderer ----------
+  caps(kind) {
+    const C = this.G.caps; if (kind in C) return C[kind];
+    let ok = false;
+    try {
+      const c = document.createElement('canvas'), gl = c.getContext(kind);
+      if (gl) {
+        ok = gl.getParameter(gl.MAX_VERTEX_TEXTURE_IMAGE_UNITS) >= 2 && gl.getParameter(gl.ALIASED_POINT_SIZE_RANGE)[1] >= 16;
+        const x = gl.getExtension('WEBGL_lose_context'); if (x) x.loseContext();
+      }
+    } catch (e) { ok = false; }
+    return (C[kind] = ok);
+  }
+  pickKind() {
+    const want = this.tp('renderer', 'Auto');
+    if (want === 'Canvas 2D') return '2d';
+    if (want !== 'WebGL 1' && this.caps('webgl2')) return 'webgl2';
+    return this.caps('webgl') ? 'webgl' : '2d';
+  }
+  setup(P) {
+    P.W = P.el.clientWidth || 848; P.H = P.el.clientHeight || 524;
+    P.dpr = Math.min(2, (typeof window !== 'undefined' && window.devicePixelRatio) || 1);
+    const cw = Math.round(P.W * P.dpr), ch = Math.round(P.H * P.dpr);
+    let kind = this.pickKind(), R = P.R;
+    if (!R || R.kind !== kind || R.lost || R.cv.width !== cw || R.cv.height !== ch) {
+      if (R) this.freeR(R, false);
+      const mk = () => { const c = document.createElement('canvas'); c.setAttribute('data-pd', ''); c.setAttribute('aria-hidden', 'true'); c.width = cw; c.height = ch; return c; };
+      R = null;
+      if (kind !== '2d') { R = this.initGL(P, mk(), kind); if (!R) kind = '2d'; }
+      if (!R) R = { kind: '2d', cv: null, ctx: null };
+      if (R.kind === '2d') { R.cv = mk(); R.ctx = R.cv.getContext('2d'); }
+      P.R = R;
+    }
+    this.sample(P);
+    this.upload(P);
+  }
+  sample(P) { // cover-crop the photo, build the colour grid, the particle attributes and the touch canvas
+    const R = P.R, img = P.img, W = P.W, H = P.H, nw = img.naturalWidth, nh = img.naturalHeight;
+    let cols = Math.max(20, Math.round(this.tp('density', 200)));
+    if (R.kind === '2d') cols = Math.min(cols, 120);
+    const rows = Math.max(4, Math.round(H / (W / cols))), cw = W / cols, ch = H / rows;
+    const pp = P.pos.split(' ').map((v) => parseFloat(v) / 100);
+    const sc = Math.max(W / nw, H / nh), sw = W / sc, sh = H / sc, sx = (nw - sw) * (pp[0] || 0.5), sy = (nh - sh) * (isNaN(pp[1]) ? 0.5 : pp[1]);
+    const pw = R.cv.width, ph = R.cv.height;
+    if (!P.photo || P.photo.width !== pw || P.photo.height !== ph) {
+      P.photo = document.createElement('canvas'); P.photo.width = pw; P.photo.height = ph;
+      const x = P.photo.getContext('2d'); x.imageSmoothingQuality = 'high'; x.drawImage(img, sx, sy, sw, sh, 0, 0, pw, ph);
+    }
+    const cc = document.createElement('canvas'); cc.width = cols; cc.height = rows;
+    const cx = cc.getContext('2d', { willReadFrequently: R.kind === '2d' }); cx.imageSmoothingQuality = 'high'; cx.drawImage(P.photo, 0, 0, pw, ph, 0, 0, cols, rows);
+    P.color = cc; P.cols = cols; P.rows = rows; P.cell = Math.min(cw, ch); P.n = cols * rows;
+    let s = 0x9e3779b9 ^ (cols * 7919 + P.i * 104729); // seeded so a rebuild keeps the same pattern
+    const rnd = () => { s |= 0; s = (s + 0x6d2b79f5) | 0; let t = Math.imul(s ^ (s >>> 15), 1 | s); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+    const fromC = this.tp('introFrom', 'Center') !== 'Scatter', order = this.tp('introOrder', 'Center out'), D = new Float32Array(P.n * PD_STRIDE);
+    for (let j = 0, k = 0; j < rows; j++) for (let i = 0; i < cols; i++, k += PD_STRIDE) {
+      const x = (i + 0.5) * cw, y = (j + 0.5) * ch, r0 = rnd(), r1 = rnd(), r2 = rnd(), r3 = rnd();
+      const a = rnd() * 6.2832, mag = 30 + 280 * Math.pow(rnd(), 1.5), zoom = 0.35 * r2;
+      let o;
+      if (order === 'Top down') o = (y / H) * 0.7 + rnd() * 0.3;
+      else if (order === 'Left to right') o = (x / W) * 0.7 + rnd() * 0.3;
+      else if (order === 'Random') o = rnd();
+      else o = Math.min(1, Math.hypot((x - W / 2) / (W / 2), (y - H / 2) / (H / 2)) / 1.4142) * 0.7 + rnd() * 0.3;
+      D[k] = x; D[k + 1] = y; D[k + 2] = r0; D[k + 3] = r1; D[k + 4] = r2; D[k + 5] = r3;
+      if (fromC) { const q = 36 * Math.sqrt(rnd()); D[k + 6] = W / 2 + Math.cos(a) * q - x; D[k + 7] = H / 2 + Math.sin(a) * q - y; } // burst out of the middle
+      else { D[k + 6] = (x - W / 2) * zoom + Math.cos(a) * mag; D[k + 7] = (y - H / 2) * zoom + Math.sin(a) * mag; } // fall in from a soft scatter
+      D[k + 8] = o;
+    }
+    P.inst = D;
+    const tw = 128, th = Math.max(8, Math.round((128 * H) / W));
+    if (!P.tc || P.tcKind !== R.kind) {
+      P.tc = document.createElement('canvas'); P.tc.width = tw; P.tc.height = th; P.tcKind = R.kind;
+      P.tx = P.tc.getContext('2d', { willReadFrequently: R.kind === '2d' });
+      P.tx.fillStyle = 'rgb(128,128,0)'; P.tx.fillRect(0, 0, tw, th); P.touchDirty = true; P.tdata = null;
+    }
+  }
+  initGL(P, cv, kind) {
+    const opts = { alpha: true, premultipliedAlpha: true, antialias: false, depth: false, stencil: false, preserveDrawingBuffer: false, powerPreference: 'low-power' };
+    let gl = null;
+    try { gl = cv.getContext(kind, opts) || (kind === 'webgl' ? cv.getContext('experimental-webgl', opts) : null); } catch (e) { gl = null; }
+    if (!gl) return null;
+    const R = { kind, cv, gl };
+    if (!this.glInit(R)) { const x = gl.getExtension('WEBGL_lose_context'); if (x) x.loseContext(); return null; }
+    R.onLost = (e) => { e.preventDefault(); R.lost = true; if (P.formed) this.photoLayer(P, true); };
+    R.onRestored = () => { R.lost = false; if (this.glInit(R)) { this.upload(P); P.dirty = true; this.kick(); } };
+    cv.addEventListener('webglcontextlost', R.onLost); cv.addEventListener('webglcontextrestored', R.onRestored);
+    return R;
+  }
+  glInit(R) {
+    const gl = R.gl;
+    const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); if (!gl.getShaderParameter(s, gl.COMPILE_STATUS) && !gl.isContextLost()) { console.warn('photo dots shader:', gl.getShaderInfoLog(s)); return null; } return s; };
+    const prog = (vs, fs, names, attrs) => {
+      const v = sh(gl.VERTEX_SHADER, vs), f = sh(gl.FRAGMENT_SHADER, fs); if (!v || !f) return null;
+      const p = gl.createProgram(); gl.attachShader(p, v); gl.attachShader(p, f); gl.linkProgram(p);
+      if (!gl.getProgramParameter(p, gl.LINK_STATUS)) return null;
+      const o = { p, u: {}, a: {} }; names.forEach((n) => (o.u[n] = gl.getUniformLocation(p, n))); attrs.forEach((n) => (o.a[n] = gl.getAttribLocation(p, n)));
+      return o;
+    };
+    R.pp = prog(PD_VS, PD_FS, ['uView', 'uCut', 'uDpr', 'uCell', 'uTime', 'uIntroT', 'uIntroSpan', 'uIntroDur', 'uDot', 'uLuma', 'uDrift', 'uStrength', 'uVel', 'uDepth', 'uMaxPt', 'uColor', 'uTouch'], ['aCell', 'aRnd', 'aIntro']);
+    R.qp = prog(PD_QVS, PD_QFS, ['uPhoto', 'uTouch', 'uA', 'uMask'], ['aPos']);
+    if (!R.pp || !R.qp) return false;
+    R.quad = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, R.quad); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+    R.inst = gl.createBuffer();
+    const tex = (filter) => { const t = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, t); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, filter); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, filter); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE); return t; };
+    R.tColor = tex(gl.NEAREST); R.tTouch = tex(gl.LINEAR); R.tPhoto = tex(gl.LINEAR);
+    R.maxPt = gl.getParameter(gl.ALIASED_POINT_SIZE_RANGE)[1] || 64;
+    gl.disable(gl.DEPTH_TEST); gl.enable(gl.BLEND); gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false); gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
+    return true;
+  }
+  upload(P) {
+    const R = P.R;
+    if (R.kind === '2d') {
+      const d = P.color.getContext('2d').getImageData(0, 0, P.cols, P.rows).data, C = new Array(P.n), L = new Float32Array(P.n);
+      for (let k = 0; k < P.n; k++) { const r = d[k * 4], g = d[k * 4 + 1], b = d[k * 4 + 2]; C[k] = 'rgb(' + r + ',' + g + ',' + b + ')'; L[k] = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255; }
+      P.c2 = C; P.l2 = L; P.touchDirty = true; return;
+    }
+    const gl = R.gl; if (R.lost) return;
+    gl.bindBuffer(gl.ARRAY_BUFFER, R.inst); gl.bufferData(gl.ARRAY_BUFFER, P.inst, gl.STATIC_DRAW);
+    gl.bindTexture(gl.TEXTURE_2D, R.tColor); gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, P.color);
+    gl.bindTexture(gl.TEXTURE_2D, R.tPhoto); gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, P.photo);
+    gl.bindTexture(gl.TEXTURE_2D, R.tTouch); gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, P.tc);
+    P.touchDirty = false;
+  }
+  freeR(R, lose) {
+    if (!R.gl) return;
+    const gl = R.gl;
+    R.cv.removeEventListener('webglcontextlost', R.onLost); R.cv.removeEventListener('webglcontextrestored', R.onRestored);
+    if (!gl.isContextLost()) {
+      [R.tColor, R.tTouch, R.tPhoto].forEach((t) => t && gl.deleteTexture(t));
+      [R.quad, R.inst].forEach((b) => b && gl.deleteBuffer(b));
+      [R.pp, R.qp].forEach((o) => o && gl.deleteProgram(o.p));
+    }
+    if (lose) { const x = gl.getExtension('WEBGL_lose_context'); if (x) x.loseContext(); }
+    R.lost = true;
+  }
+
+  // ---------- touch texture: the cursor paints a soft trail that fades over healTime ----------
+  // R,G = direction of travel (128 = none), B = strength. Repainted from the point list each frame, so it heals to exactly zero.
+  paintTouch(P, now) {
+    const heal = Math.max(100, this.tp('healTime', 1500)), tr = P.trail;
+    let n = 0; while (n < tr.length && now - tr[n].t >= heal) n++;
+    if (n) tr.splice(0, n);
+    if (!tr.length && !P.touchLive) return;
+    const x = P.tx, tw = P.tc.width, th = P.tc.height, sx = tw / P.W, sy = th / P.H, R0 = this.tp('trailRadius', 300) * sx;
+    x.globalCompositeOperation = 'source-over'; x.fillStyle = 'rgb(128,128,0)'; x.fillRect(0, 0, tw, th);
+    for (const p of tr) {
+      const a = (now - p.t) / heal;
+      const env = a < 0.08 ? Math.sin((Math.max(0, a) / 0.08) * 1.5708) : 1 - ((u) => u * u * (3 - 2 * u))((a - 0.08) / 0.92);
+      if (env <= 0.003) continue;
+      const r = R0 * (0.55 + 0.45 * p.f) * (0.7 + 0.3 * env), al = Math.min(1, 0.3 * env * (0.35 + 0.65 * p.f));
+      const c = ((128 + 127 * p.dx) | 0) + ',' + ((128 + 127 * p.dy) | 0) + ',255,', px = p.x * sx, py = p.y * sy;
+      const g = x.createRadialGradient(px, py, 0, px, py, r);
+      g.addColorStop(0, 'rgba(' + c + al + ')'); g.addColorStop(0.45, 'rgba(' + c + al * 0.55 + ')'); g.addColorStop(1, 'rgba(' + c + '0)');
+      x.fillStyle = g; x.fillRect(px - r, py - r, r * 2, r * 2);
+    }
+    P.touchLive = tr.length > 0; P.touchDirty = true; P.dirty = true;
+  }
+
+  // ---------- frame ----------
+  kick() { if (this.running || this.dead || typeof requestAnimationFrame !== 'function') return; this.running = true; this.raf = requestAnimationFrame(this.tick); }
+  loop(now) {
+    this.running = false; if (this.dead) return;
+    let busy = false;
+    for (const P of this.P) {
+      if (!P || !P.ready || P.dead) continue;
+      if (!P.vis && !P.dirty) continue;      // off-screen photos cost nothing
+      if (this.frame(P, now) && P.vis) busy = true;
+    }
+    if (busy) { this.running = true; this.raf = requestAnimationFrame(this.tick); } // settled: the loop stops
+  }
+  frame(P, now) {
+    const R = P.R; if (!R || R.lost) return false;
+    const dt = P.last ? Math.min(64, Math.max(0, now - P.last)) : 16; P.last = now;
+    if (this.reduced()) { // plain photo, no particles
+      P.trail.length = 0; P.photoA = 1; P.formed = true;
+      if (P.dirty) { this.draw(P, now, true, 0, -1); P.dirty = false; }
+      this.photoLayer(P, true); return false;
+    }
+    const introT = Math.max(100, this.tp('introTime', 1800)), fade = Math.max(60, this.tp('photoFade', 600)), dissolve = Math.max(90, fade * 0.3);
+    const settle = this.tp('settleToPhoto', true) !== false, around = this.tp('hoverReveal', 'Whole photo') === 'Around cursor' && R.kind !== '2d';
+    const drift = this.tp('drift', 0.8), restAfter = this.tp('restAfter', 3000);
+    const started = P.t0 !== Infinity, el = started ? now - P.t0 : -1, formed = started && el > introT + 120;
+    if (formed && !P.formed) { P.formed = true; this.save(P); }
+    this.paintTouch(P, now);
+    const trailOn = P.trail.length > 0 || P.touchLive;
+    const idle = restAfter > 0 && now - P.lastMove > restAfter, hoverActive = P.hover && !idle;
+    // target only flips on real events (pointer motion / leave / trail fully healed), so the crossfade cannot oscillate
+    const target = formed && settle && (around || (!hoverActive && !trailOn)) ? 1 : 0;
+    if (target > P.photoA) P.photoA = Math.min(1, P.photoA + dt / fade);
+    else if (target < P.photoA) P.photoA = Math.max(0, P.photoA - dt / dissolve);
+    const mask = around && trailOn ? 1 : 0, photoOnly = formed && P.photoA >= 1 && !mask;
+    const animating = started && (!formed || P.photoA !== target || trailOn || (!photoOnly && drift > 0) || (P.hover && restAfter > 0 && !idle));
+    if (animating || P.dirty) { this.draw(P, now, photoOnly, mask, started ? Math.min(el, introT + 1000) : -1); P.dirty = false; }
+    this.photoLayer(P, photoOnly);
+    return animating;
+  }
+  draw(P, now, photoOnly, mask, introEl) {
+    const R = P.R, introT = Math.max(100, this.tp('introTime', 1800)), cut = [this.tp('darkCut', 0), this.tp('brightCut', 1)];
+    const t = ((now - this.base) / 1000) % 10000, vel = this.tp('velocity', 0.6), str = this.tp('trailStrength', 1.75) * 30, dot = this.tp('dotSize', 0.78);
+    const luma = this.tp('sizeByLuma', 0.1), drift = this.tp('drift', 0.8), depth = this.tp('introDepth', 2.5);
+    if (R.kind === '2d') return this.draw2d(P, photoOnly, introEl, { introT, cut, t, vel, str, dot, luma, drift, depth });
+    const gl = R.gl, cw = R.cv.width, ch = R.cv.height;
+    gl.viewport(0, 0, cw, ch); gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
+    if (introEl < 0) return; // not scrolled into view yet
+    if (P.touchDirty) { gl.bindTexture(gl.TEXTURE_2D, R.tTouch); gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, P.tc); P.touchDirty = false; }
+    gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, R.tTouch);
+    if (!photoOnly) {
+      const o = R.pp, u = o.u; gl.useProgram(o.p);
+      gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, R.tColor);
+      gl.uniform1i(u.uColor, 0); gl.uniform1i(u.uTouch, 1);
+      gl.uniform2f(u.uView, P.W, P.H); gl.uniform2f(u.uCut, cut[0], cut[1]);
+      gl.uniform1f(u.uDpr, cw / P.W); gl.uniform1f(u.uCell, P.cell); gl.uniform1f(u.uTime, t);
+      gl.uniform1f(u.uIntroT, introEl); gl.uniform1f(u.uIntroSpan, introT * 0.45); gl.uniform1f(u.uIntroDur, introT * 0.55);
+      gl.uniform1f(u.uDot, dot); gl.uniform1f(u.uLuma, luma); gl.uniform1f(u.uDrift, drift); gl.uniform1f(u.uStrength, str);
+      gl.uniform1f(u.uVel, vel); gl.uniform1f(u.uDepth, depth); gl.uniform1f(u.uMaxPt, R.maxPt);
+      gl.bindBuffer(gl.ARRAY_BUFFER, R.inst);
+      const F = 4, S = PD_STRIDE * F, A = [['aCell', 2, 0], ['aRnd', 4, 2], ['aIntro', 3, 6]];
+      A.forEach(([n, sz, off]) => { const l = o.a[n]; if (l < 0) return; gl.enableVertexAttribArray(l); gl.vertexAttribPointer(l, sz, gl.FLOAT, false, S, off * F); });
+      gl.drawArrays(gl.POINTS, 0, P.n);
+      A.forEach(([n]) => { const l = o.a[n]; if (l >= 0) gl.disableVertexAttribArray(l); });
+    }
+    if (P.photoA > 0) {
+      const o = R.qp, u = o.u; gl.useProgram(o.p);
+      gl.activeTexture(gl.TEXTURE2); gl.bindTexture(gl.TEXTURE_2D, R.tPhoto);
+      gl.uniform1i(u.uPhoto, 2); gl.uniform1i(u.uTouch, 1); gl.uniform1f(u.uA, P.photoA); gl.uniform1f(u.uMask, mask);
+      gl.bindBuffer(gl.ARRAY_BUFFER, R.quad); gl.enableVertexAttribArray(o.a.aPos); gl.vertexAttribPointer(o.a.aPos, 2, gl.FLOAT, false, 0, 0);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); gl.disableVertexAttribArray(o.a.aPos);
+    }
+    gl.activeTexture(gl.TEXTURE0);
+  }
+  draw2d(P, photoOnly, introEl, o) { // Canvas 2D fallback: same math as the shader, fewer particles
+    const R = P.R, x = R.ctx, cw = R.cv.width, ch = R.cv.height, dpr = cw / P.W;
+    if (introEl >= 0 && photoOnly) { x.setTransform(1, 0, 0, 1, 0, 0); x.globalAlpha = 1; x.drawImage(P.photo, 0, 0); return; }
+    x.setTransform(1, 0, 0, 1, 0, 0); x.clearRect(0, 0, cw, ch);
+    if (introEl < 0) return;
+    if (P.touchDirty || !P.tdata) { P.tdata = P.tx.getImageData(0, 0, P.tc.width, P.tc.height).data; P.touchDirty = false; }
+    const T = P.tdata, tw = P.tc.width, th = P.tc.height, D = P.inst, span = o.introT * 0.45, dur = o.introT * 0.55;
+    const tex = (u, v, c) => { const fx = Math.min(tw - 1.001, Math.max(0, u * tw - 0.5)), fy = Math.min(th - 1.001, Math.max(0, v * th - 0.5)), ix = fx | 0, iy = fy | 0, ax = fx - ix, ay = fy - iy, i0 = (iy * tw + ix) * 4 + c, i1 = i0 + tw * 4; return ((T[i0] * (1 - ax) + T[i0 + 4] * ax) * (1 - ay) + (T[i1] * (1 - ax) + T[i1 + 4] * ax) * ay) / 255; };
+    x.setTransform(dpr, 0, 0, dpr, 0, 0);
+    for (let k = 0, b = 0; k < P.n; k++, b += PD_STRIDE) {
+      const cx = D[b], cy = D[b + 1], r0 = D[b + 2], r1 = D[b + 3], r2 = D[b + 4], r3 = D[b + 5], l = P.l2[k];
+      const p = Math.min(1, Math.max(0, (introEl - D[b + 8] * span) / dur)), q = 1 - p, ie = q * q * q * q;
+      let a = Math.min(1, Math.max(0, p / 0.3)); a = a * a * (3 - 2 * a) * (1 - 0.7 * ie * r2);
+      if (o.cut[0] > 0) a *= Math.min(1, Math.max(0, (l - o.cut[0] + 0.03) / 0.03));
+      if (o.cut[1] < 1) a *= 1 - Math.min(1, Math.max(0, (l - o.cut[1]) / 0.03));
+      if (a < 0.01) continue;
+      let px = cx + D[b + 6] * ie + o.drift * Math.sin(cy * 0.043 + o.t * (0.55 + 0.5 * r0) + r1 * 6.2832);
+      let py = cy + D[b + 7] * ie + o.drift * Math.cos(cx * 0.037 + o.t * (0.45 + 0.5 * r1) + r0 * 6.2832);
+      const u = cx / P.W, v = cy / P.H, tb = tex(u, v, 2);
+      let s = 0;
+      if (tb > 0.004) {
+        s = Math.min(1, Math.max(0, (tb - r3 * 0.15) / 0.85)); s = s * s * (3 - 2 * s);
+        const dx = tex(u, v, 0) * 2 - 1, dy = tex(u, v, 1) * 2 - 1, ang = r0 * 6.2832, m = s * o.str * (0.55 + 0.9 * r1);
+        px += (dx * o.vel * 1.6 + Math.cos(ang) * (1 - 0.55 * o.vel)) * m; py += (dy * o.vel * 1.6 + Math.sin(ang) * (1 - 0.55 * o.vel)) * m;
+      }
+      const f = o.luma >= 0 ? 1 + (1 - l - 1) * o.luma : 1 + (l - 1) * -o.luma;
+      const rad = 0.5 * P.cell * o.dot * Math.max(f, 0.1) * (1 + o.depth * r2 * ie * ie) * (1 + 0.45 * s);
+      x.globalAlpha = a; x.fillStyle = P.c2[k]; x.beginPath(); x.arc(px, py, Math.max(0.3, rad), 0, 6.2832); x.fill();
+    }
+    x.globalAlpha = 1;
+    if (P.photoA > 0) { x.setTransform(1, 0, 0, 1, 0, 0); x.globalAlpha = P.photoA; x.drawImage(P.photo, 0, 0); x.globalAlpha = 1; }
+  }
+
+  renderVals() {
+    const s = this.sig(), ps = JSON.stringify(this.props || {});
+    if (this.lastSig !== undefined && s !== this.lastSig) setTimeout(() => this.P.forEach((P) => P && this.rebuild(P)), 0);
+    if (this.lastPs !== undefined && ps !== this.lastPs) setTimeout(() => { this.P.forEach((P) => P && (P.dirty = true)); this.kick(); }, 0);
+    this.lastSig = s; this.lastPs = ps;
+    return { bg: this.tp('background', '#ffffff'), mr: this.tp('radius', 6) + 'px', ob: this.tp('openSize', 104) + 'px', ot: String(this.tp('openTint', 0.62)), noop: this.noop, replay: this.onReplay, cv0: this.cvRefs[0], cv1: this.cvRefs[1], cv2: this.cvRefs[2] };
+  }
+}
+</script>
+</body>
+</html>
