@@ -738,6 +738,14 @@
    "w": 1440,
    "x": -3200,
    "y": 15960
+  },
+  "SignatureOptions.dc.html": {
+   "h": 2030,
+   "page": "page-vmnxsd",
+   "title": "Signature · 10 options",
+   "w": 1440,
+   "x": 6086,
+   "y": 13880
   }
  },
  "createdOnFiles": {
@@ -1001,7 +1009,8 @@
   "PhotoDotsLab.dc.html",
   "NavHeaderVariations.dc.html",
   "ResumeVariations.dc.html",
-  "PhotoDotsLab2.dc.html"
+  "PhotoDotsLab2.dc.html",
+  "SignatureOptions.dc.html"
  ],
  "pages": [
   {
