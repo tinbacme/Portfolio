@@ -145,6 +145,21 @@ class Component extends DCLogic {
     const a = nav.querySelector('a.on'), lens = nav.querySelector('.sv-lens'); if (!a || !lens) return;
     lens.style.transform = 'translateY(' + a.offsetTop + 'px)'; lens.style.width = a.offsetWidth + 'px';
   }
+  svJump(e, k) { // scroll the role into view ourselves, 120px below the top, whatever is doing the scrolling (window or a preview container)
+    const a = e && e.currentTarget, id = a && a.getAttribute && (a.getAttribute('href') || '').slice(1);
+    const el = id && this.rootEl && this.rootEl.querySelector('#' + CSS.escape(id));
+    this.setState({ nav: k }); if (!el) return;
+    if (e.preventDefault) e.preventDefault();
+    let box = el.parentElement;
+    while (box && box !== document.body && box !== document.documentElement) { const o = getComputedStyle(box).overflowY; if ((o === 'auto' || o === 'scroll') && box.scrollHeight > box.clientHeight + 1) break; box = box.parentElement; }
+    const reduce = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches, gap = 120;
+    if (!box || box === document.body || box === document.documentElement) {
+      const y = el.getBoundingClientRect().top + (window.scrollY || 0) - gap; window.scrollTo({ top: Math.max(0, y), behavior: reduce ? 'auto' : 'smooth' });
+    } else {
+      const y = el.getBoundingClientRect().top - box.getBoundingClientRect().top + box.scrollTop - gap; box.scrollTo({ top: Math.max(0, y), behavior: reduce ? 'auto' : 'smooth' });
+    }
+    if (history && history.replaceState) try { history.replaceState(null, '', '#' + id); } catch (x) {}
+  }
   svSpy() { // the nav follows the page: whichever role is in the middle of the screen is current
     if (this.svIO || typeof IntersectionObserver !== 'function' || !this.rootEl) return;
     if (window.innerHeight > 1600) return; // whole board shown at once (design canvas): no real scrolling, so keep Home selected
@@ -172,7 +187,7 @@ class Component extends DCLogic {
     return {
       navRef: (el) => { this.navEl = el; },
       goHome: (e) => { if (e && e.preventDefault) e.preventDefault(); const reduce = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches; try { window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }); } catch (x) { window.scrollTo(0, 0); } this.setState({ nav: 5 }); },
-      ...Object.fromEntries(Array.from({ length: 6 }, (_, k) => { const on = (this.state.nav ?? 5) === k; return [['sv' + k, on ? 'on' : ''], ['svC' + k, on ? 'true' : 'false'], ['svGo' + k, () => this.setState({ nav: k })]]; }).flat()),
+      ...Object.fromEntries(Array.from({ length: 6 }, (_, k) => { const on = (this.state.nav ?? 5) === k; return [['sv' + k, on ? 'on' : ''], ['svC' + k, on ? 'true' : 'false'], ['svGo' + k, (e) => this.svJump(e, k)]]; }).flat()),
       ...Object.fromEntries(Array.from({ length: 8 }, (_, k) => ['lg' + k, (this.state.lg || 0) === k ? '1' : '0'])),
       rootRef: (el) => { this.rootEl = el; if (el) setTimeout(() => { this.rvStart(); this.svSpy(); }, 0); },
       accent: this.props.accent ?? '#0099ff', accentBg: this.props.accentBg ?? '#e0f3ff', mediaRadius: (this.props.mediaRadius ?? 14) + 'px',
