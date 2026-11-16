@@ -23,13 +23,15 @@ sc-for, sc-if { display: contents; }
 .dl-btn:focus-visible{outline:2px solid #0099ff;outline-offset:3px}
 .dl-stack{display:flex;flex-direction:column;gap:48px;margin-top:48px}
 .dl-fig{margin:0}
-.dl-cv{display:block;width:848px;height:524px;border-radius:var(--mr,6px);background:var(--bg,#fff);touch-action:pan-y;cursor:crosshair}
-.dl-frame{position:relative;width:848px}
+.dl-cv{position:absolute;left:calc(var(--bleed,140px) * -1);top:calc(var(--bleed,140px) * -1);width:calc(848px + var(--bleed,140px) * 2);height:calc(524px + var(--bleed,140px) * 2);pointer-events:none;z-index:1}
+.dl-frame{position:relative;width:848px;height:524px;touch-action:pan-y;cursor:crosshair}
+.dl-frame:hover{z-index:2}
 /* Open button: a dark-gray liquid-glass circle in the middle of each photo */
-.dl-open{position:absolute;left:50%;top:50%;width:var(--ob,104px);height:var(--ob,104px);margin:calc(var(--ob,104px) / -2) 0 0 calc(var(--ob,104px) / -2);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:#fff;text-decoration:none;isolation:isolate;box-shadow:0 12px 30px -10px rgba(0,0,0,.45),0 2px 6px rgba(0,0,0,.18);opacity:0;transform:scale(.7);pointer-events:none;transition:opacity .25s ease,transform .45s cubic-bezier(.3,1.5,.5,1)}
+.dl-open{z-index:3;position:absolute;left:50%;top:50%;width:var(--ob,104px);height:var(--ob,104px);margin:calc(var(--ob,104px) / -2) 0 0 calc(var(--ob,104px) / -2);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:#fff;text-decoration:none;isolation:isolate;box-shadow:0 12px 30px -10px rgba(0,0,0,.45),0 2px 6px rgba(0,0,0,.18);opacity:0;transform:scale(0);pointer-events:none;transition:opacity .18s ease,transform .5s cubic-bezier(.34,1.56,.64,1)}
 /* only shows while the photo is hovered (or the button has keyboard focus) */
 .dl-frame:hover .dl-open,.dl-open:focus-visible{opacity:1;transform:scale(1);pointer-events:auto}
 .dl-open:hover{transform:scale(1.06)!important}
+@media (prefers-reduced-motion: reduce){.dl-open{transition:none}}
 .dl-open:active{transform:scale(.97)}
 .dl-open:focus-visible{outline:2px solid #0099ff;outline-offset:4px}
 .dl-open-fx,.dl-open-tint,.dl-open-shine{position:absolute;inset:0;border-radius:inherit;pointer-events:none}
@@ -46,7 +48,7 @@ class Component extends DCLogic {
   constructor(props) { super(props); this.state = {}; this.P = []; this.refFns = [0, 1, 2].map((i) => (el) => this.attach(i, el)); }
   componentWillUnmount() { cancelAnimationFrame(this.raf); if (this.io) this.io.disconnect(); this.P.forEach((p) => p.off && p.off()); }
   tp(k, d) { const v = this.props[k]; return v === undefined || v === null ? d : v; }
-  sig() { return ['dotDetail', 'dotSize', 'dotShape', 'sizeByShade', 'formFrom'].map((k) => this.tp(k, '')).join('|'); }
+  sig() { return ['dotDetail', 'dotSize', 'dotShape', 'sizeByShade', 'formFrom', 'bleed'].map((k) => this.tp(k, '')).join('|'); }
   attach(i, cv) {
     if (!cv || (this.P[i] && this.P[i].cv === cv)) return;
     const prev = this.P[i], carry = !!(prev && prev.seen); // canvas re-mounted: keep it formed, no replay, no blank frame
@@ -55,9 +57,10 @@ class Component extends DCLogic {
     this.P[i] = P;
     P.img.onload = () => { this.build(P); if (carry) P.t0 = performance.now() - 1e6; else if (P.wantForm) { P.wantForm = false; P.t0 = performance.now(); } this.kick(); };
     P.img.src = cv.dataset.src;
-    const move = (e) => { const r = cv.getBoundingClientRect(); P.mx = e.clientX - r.left; P.my = e.clientY - r.top; this.kick(); };
+    const host = cv.parentElement || cv;
+    const move = (e) => { const r = host.getBoundingClientRect(); P.mx = e.clientX - r.left; P.my = e.clientY - r.top; this.kick(); };
     const leave = () => { P.mx = P.my = -1e4; this.kick(); };
-    const host = cv.parentElement || cv; host.addEventListener('pointermove', move); host.addEventListener('pointerleave', leave);
+    host.addEventListener('pointermove', move); host.addEventListener('pointerleave', leave);
     P.off = () => { host.removeEventListener('pointermove', move); host.removeEventListener('pointerleave', leave); };
     if (typeof IntersectionObserver === 'function') {
       this.io = this.io || new IntersectionObserver((es) => es.forEach((e) => { const Q = this.P.find((q) => q && q.cv === e.target); if (Q && e.isIntersecting && !Q.seen) { Q.seen = true; this.form(Q); } }), { threshold: 0.25 });
@@ -66,8 +69,8 @@ class Component extends DCLogic {
   }
   build(P) { // sample the photo (cover crop) into a grid; one dot per cell
     const { cv, img } = P; if (!img.naturalWidth) return;
-    const W = cv.clientWidth || 848, H = cv.clientHeight || 524, dpr = Math.min(2, window.devicePixelRatio || 1);
-    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    const fr = cv.parentElement || cv, W = fr.clientWidth || 848, H = fr.clientHeight || 524, B = Math.max(0, this.tp('bleed', 140)), dpr = Math.min(2, window.devicePixelRatio || 1);
+    cv.width = Math.round((W + 2 * B) * dpr); cv.height = Math.round((H + 2 * B) * dpr); P.B = B;
     const cols = Math.max(20, Math.round(this.tp('dotDetail', 114))), cell = W / cols, rows = Math.ceil(H / cell);
     const pos = (cv.dataset.pos || '50% 50%').split(' ').map((v) => parseFloat(v) / 100);
     const sc = Math.max(W / img.naturalWidth, H / img.naturalHeight), sw = W / sc, sh = H / sc;
@@ -98,7 +101,7 @@ class Component extends DCLogic {
     const shape = this.tp('dotShape', 'Circle'); let busy = false;
     for (const P of this.P) {
       if (!P || !P.dots.length) continue;
-      const ctx = P.cv.getContext('2d'); ctx.setTransform(P.dpr, 0, 0, P.dpr, 0, 0); ctx.clearRect(0, 0, P.W, P.H);
+      const ctx = P.cv.getContext('2d'), B = P.B || 0; ctx.setTransform(P.dpr, 0, 0, P.dpr, B * P.dpr, B * P.dpr); ctx.clearRect(-B, -B, P.W + 2 * B, P.H + 2 * B);
       if (P.t0 === Infinity) continue; // not on screen yet: stays empty until it scrolls in
       const el = now - P.t0, R2 = R * R, hover = P.mx > -1e3; P.moving = false;
       const dotsA = 1 - (P.imgA || 0);
@@ -121,7 +124,9 @@ class Component extends DCLogic {
       const formed = reduce || el > P.maxDl + dur + 150, want = formed && !hover && (P.still > 10 || P.imgA > 0.5) && this.tp('settleToPhoto', true) !== false ? 1 : 0;
       const dt = Math.min(50, Math.max(0, now - (P.last || now))), fade = Math.max(60, this.tp('photoFade', 600)); P.last = now;
       P.imgA = want > P.imgA ? Math.min(1, P.imgA + dt / fade) : Math.max(0, P.imgA - dt / (fade * 0.35));
-      if (P.imgA > 0.001) { ctx.globalAlpha = P.imgA; ctx.drawImage(P.img, P.crop[0], P.crop[1], P.crop[2], P.crop[3], 0, 0, P.W, P.H); ctx.globalAlpha = 1; }
+      if (P.imgA > 0.001) { // the settled photo stays inside the frame, with its rounded corners
+        ctx.save(); ctx.beginPath(); if (ctx.roundRect) ctx.roundRect(0, 0, P.W, P.H, this.tp('radius', 6)); else ctx.rect(0, 0, P.W, P.H); ctx.clip();
+        ctx.globalAlpha = P.imgA; ctx.drawImage(P.img, P.crop[0], P.crop[1], P.crop[2], P.crop[3], 0, 0, P.W, P.H); ctx.restore(); ctx.globalAlpha = 1; }
       if (P.imgA !== want || (this.tp('settleToPhoto', true) !== false && !hover && P.imgA < 1)) busy = true; // keep ticking until it has melted into the photo
       if (hover) busy = true;
     }
@@ -131,7 +136,7 @@ class Component extends DCLogic {
     const s = this.sig();
     if (s !== this.lastSig) { const first = this.lastSig === undefined; this.lastSig = s; if (!first) setTimeout(() => { this.P.forEach((P) => P && P.img.complete && (this.build(P), P.seen && (P.t0 = performance.now() - 1e6))); this.kick(); }, 0); }
     else setTimeout(() => this.kick(), 0);
-    const v = { bg: this.tp('background', '#ffffff'), mr: this.tp('radius', 6) + 'px', ob: this.tp('openSize', 104) + 'px', ot: String(this.tp('openTint', 0.62)), noop: (e) => { if (e && e.preventDefault) e.preventDefault(); },
+    const v = { bg: this.tp('background', '#ffffff'), mr: this.tp('radius', 6) + 'px', ob: this.tp('openSize', 104) + 'px', bleed: this.tp('bleed', 140) + 'px', ot: String(this.tp('openTint', 0.62)), noop: (e) => { if (e && e.preventDefault) e.preventDefault(); },
       replay: () => this.P.forEach((P) => { if (!P) return; this.build(P); P.seen = true; this.form(P); }) };
     for (let i = 0; i < 3; i++) v['cv' + i] = this.refFns[i];
     return v;
@@ -153,6 +158,7 @@ PROPS = {
     'photoFade': {"editor": "int", "default": 600, "min": 100, "max": 2000, "step": 50, "unit": "ms", "section": "Form in"},
     'openSize': {"editor": "int", "default": 104, "min": 64, "max": 180, "unit": "px", "section": "Open button"},
     'openTint': {"editor": "range", "default": 0.62, "min": 0, "max": 1, "step": 0.01, "section": "Open button"},
+    'bleed': {"editor": "int", "default": 140, "min": 0, "max": 300, "unit": "px", "section": "Hover push"},
     'background': {"editor": "color", "default": "#ffffff", "section": "Look"},
     'radius': {"editor": "int", "default": 6, "min": 0, "max": 40, "unit": "px", "section": "Look"},
 }
@@ -169,7 +175,7 @@ HTML = f'''<!doctype html>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&amp;display=swap">
 <style>{CSS}</style>
   </helmet>
-<div class="dl-root" style="--bg: {{{{bg}}}}; --mr: {{{{mr}}}}; --ob: {{{{ob}}}}; --ot: {{{{ot}}}}"><svg class="dl-defs" width="0" height="0" aria-hidden="true" focusable="false"><filter id="dl-glass" x="0%" y="0%" width="100%" height="100%" filterUnits="objectBoundingBox"><feTurbulence type="fractalNoise" baseFrequency="0.02 0.02" numOctaves="2" seed="7" result="noise"></feTurbulence><feGaussianBlur in="noise" stdDeviation="2" result="soft"></feGaussianBlur><feDisplacementMap in="SourceGraphic" in2="soft" scale="40" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap></filter></svg>
+<div class="dl-root" style="--bg: {{{{bg}}}}; --mr: {{{{mr}}}}; --ob: {{{{ob}}}}; --ot: {{{{ot}}}}; --bleed: {{{{bleed}}}}"><svg class="dl-defs" width="0" height="0" aria-hidden="true" focusable="false"><filter id="dl-glass" x="0%" y="0%" width="100%" height="100%" filterUnits="objectBoundingBox"><feTurbulence type="fractalNoise" baseFrequency="0.02 0.02" numOctaves="2" seed="7" result="noise"></feTurbulence><feGaussianBlur in="noise" stdDeviation="2" result="soft"></feGaussianBlur><feDisplacementMap in="SourceGraphic" in2="soft" scale="40" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap></filter></svg>
   <p class="dl-k">LAB</p>
   <h1 class="dl-h">Photo dots</h1>
   <p class="dl-p">Each photo is drawn as dots, like the homepage hero. The dots fly in and form the picture when it scrolls into view, then melt into the full photo. Hover and it breaks back into dots that push away from your cursor; move off and it becomes the photo again. Tune it in Tweaks, then we&#8217;ll move it onto the stuart.re-style page.</p>
