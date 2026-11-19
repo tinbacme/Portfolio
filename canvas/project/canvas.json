@@ -369,7 +369,7 @@
       "y": 4160
     },
     "ResumeVariations.dc.html": {
-      "h": 13800,
+      "h": 8000,
       "page": "page-vmnxsd",
       "title": "Resume · 18 variations",
       "w": 1440,
@@ -417,8 +417,8 @@
       "page": "page-vmnxsd",
       "title": "Tin Le · About",
       "w": 1440,
-      "x": 2837,
-      "y": 15863
+      "x": 1452,
+      "y": 13880
     },
     "TinHome-Mobile-A.dc.html": {
       "expand": "fill",
@@ -505,7 +505,7 @@
       "h": 8000,
       "is_interactive": true,
       "page": "page-vmnxsd",
-      "title": "Tin Le · Portfolio in the stuart.re style",
+      "title": "★ Main prototype · Tin Le Portfolio (stuart.re style)",
       "w": 1440,
       "x": -74,
       "y": 13880

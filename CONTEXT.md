@@ -20,6 +20,17 @@ Education: BS Product/Industrial Design, University of Oregon, business minor. A
 
 Positioning: product designer who is both a visual craftsperson and a systems thinker, with an industrial design background, strong prototyping, and teaching/leadership.
 
+## Main prototype (from Nov 19, 2026)
+
+The canvas board `TinHome-Stuart.dc.html` ("★ Main prototype · Tin Le Portfolio (stuart.re style)", repo copy `canvas/project/TinHome-Stuart.dc.html`) is the main prototype; new work builds from it. What it has now:
+
+- Intro (photo, "Hi, Tin Le", Get in touch / Connect on LinkedIn, animated signature), then one row per role: Microsoft AI, Salesforce, UO teaching, 2U, BS Industrial Design, then the contact form.
+- Left nav: V9 spine with white liquid-glass tiles; the current role shows its name and years; cursor light; scroll-spy and click-to-jump (120px from the top); 👋 Let's Chat goes to the contact section; the Tin logo above it goes home. On phones it becomes a liquid-glass bottom tab bar.
+- Fluid layout: the image column grows from 848px (1440 wide) up to 1200px (1792 wide), text moves above images under 1180px, one column under 760px.
+- Layout and style only are borrowed from stuart.re; all text, images and signature are Tin's.
+
+Other boards (nav variations, photo dots labs, resume variations, About page) are explorations to pull from.
+
 ## Planned case studies (in order)
 
 1. **Bing Real Estate** — hero case study; end to end, sole designer, metrics, design system, sunset story.
