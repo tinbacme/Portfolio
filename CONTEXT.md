@@ -39,6 +39,7 @@ Tell it in two phases (2-week MVP to stop the cases, then the MVP+ redesign). Op
 - Live prototypes and the Figma plugin as demos (Rauno Freiberg)
 - An Index view for the full range of work (Pentagram Archive, Webby 2026)
 - A "How I lead" section (Arin Bhowmick)
+- Growth framing (Nov 23; see `research/growth-design-portfolios.md`): outcome-first titles, an at-a-glance block plus a 3-number stat band, funnel stage and baseline, an explicit hypothesis, control vs. variation, and one "test that lost" (Windows search Test 10)
 
 ## Open to-dos
 

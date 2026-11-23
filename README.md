@@ -10,6 +10,7 @@ Working repo for Tin Le's 2026 design portfolio and interview prep. Start with `
 | `case-studies/` | Case study outlines, starting with Bing Real Estate |
 | `resume/resume-2026.md` | Draft 2026 resume (the editable copy lives in Claude Docs, linked below) |
 | `research/award-portfolios.md` | Award-winning and hiring-favorite portfolios, awards to enter, sources |
+| `research/growth-design-portfolios.md` | How growth designers structure case studies: patterns, vocabulary, writing, visuals, a template, and how it applies to Tin's case studies. Screenshots in `research/growth-refs/` |
 | `site/` | Code for the live portfolio page: `index.html` plus `assets/`. Open `site/index.html` in a browser |
 | `inspiration/index.html` | Interactive inspiration board (open in a browser) |
 | `canvas/project/` | Source files of the Claude Design canvas (moodboard, homepage concept, 2021 portfolio boards, and the editable `TinPortfolio-*` boards the site is built from) |
